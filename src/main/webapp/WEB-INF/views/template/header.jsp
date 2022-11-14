@@ -5,7 +5,7 @@ pageEncoding="UTF-8"%>
   <body>
     <nav class="navbar navbar-expand-lg header">
       <div class="container-fluid" style="padding: 0px">
-        <a class="navbar-brand" href="#" style="margin-right: 1.2em"
+        <a class="navbar-brand" href="/" style="margin-right: 1.2em"
           ><img
             src="/images/h.png"
             alt="Logo"

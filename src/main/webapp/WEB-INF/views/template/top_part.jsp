@@ -16,7 +16,7 @@
       <a href="#" type="button">고객센터</a>
       <div class="dropdown-content">
         <a href="#">사용법</a>
-        <a href="#">공지사항</a>
+        <a href="/board/board">공지사항</a>
         <a href="#">자주묻는 질문</a>
         <a href="#">1대 1문의</a>
       </div>
