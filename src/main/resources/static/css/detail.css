@@ -1,0 +1,15 @@
+html,
+body {
+  margin: 0;
+}
+
+.container {
+  flex-flow: row nowrap;
+}
+
+.sidebar {
+  height: 520px;
+  position: sticky;
+  top: 90px;
+  width: 260px;
+}

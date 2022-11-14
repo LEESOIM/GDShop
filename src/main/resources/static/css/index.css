@@ -1,0 +1,99 @@
+* {
+  margin: 0px;
+}
+/* 상단 메뉴바 */
+#top-menu a {
+  color: rgb(113, 111, 111);
+  text-decoration: none;
+  font-size: 14px;
+}
+#top-menu a:hover {
+  color: rgba(0, 0, 0, 0.685);
+  font-weight: bold;
+}
+#top-menu span {
+  color: rgba(113, 111, 111, 0.462);
+}
+
+/* 상단 메뉴바 드롭다운 css */
+.top-dropdown {
+  position: relative;
+  display: inline-block;
+  z-index: 120;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  z-index: 1; /*다른 요소들보다 앞에 배치*/
+  font-weight: 400;
+  background-color: white;
+  border-radius: 2px;
+  box-shadow: rgba(108, 107, 107, 0.2) 0px 2px 8px 0px;
+  min-width: 135px;
+}
+.dropdown-content a {
+  display: block;
+  text-decoration: none;
+  color: rgb(9, 118, 31);
+  font-size: 13.5px;
+  padding: 10px 15px;
+}
+.dropdown-content a:hover {
+  background-color: #b3eca282;
+  border-radius: 2px;
+  transition-duration: 0.5s;
+}
+.top-dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.home-sub-banner-container img {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+}
+
+/* section더보기 */
+.more {
+  padding-top: 10px;
+}
+.more:hover {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* 챗봇 */
+#chat_img {
+  width: 70px;
+  height: 70px;
+}
+#chat_bot {
+  border-radius: 100px;
+  padding: 0.7em;
+  position: fixed;
+  bottom: 20px;
+  right: 4em;
+  font-size: small;
+  outline: none;
+  border: none;
+}
+#chat_bot:hover {
+  transform: scale(1.04);
+}
+#chat_bot:focus {
+  border: none;
+  outline: none;
+}
+#chat_ev {
+  color: rgba(47, 135, 20, 0.627);
+  font-weight: 600;
+  position: fixed;
+  bottom: 155px;
+  right: 5px;
+}
+
+/* 챗봇 모달창 */
+.modal-sm {
+  position: fixed;
+  transform: translate(34%, 13%);
+}

@@ -1,0 +1,86 @@
+/* 로그인 폼 */
+#id {
+  width: 100%;
+  line-height: 1.5;
+  border-radius: 2px;
+  transition: all 0.3s;
+  height: 43px;
+  font-size: 16px;
+  position: relative;
+  outline: none;
+  border: none;
+  padding-left: 30px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+#id:hover {
+  box-shadow: rgba(18, 128, 10, 0.3) 0px 0px 0px 1.5px;
+}
+
+#pw {
+  width: 100%;
+  line-height: 1.5;
+  border-radius: 2px;
+  transition: all 0.3s;
+  height: 43px;
+  font-size: 16px;
+  position: relative;
+  outline: none;
+  border: none;
+  padding-left: 30px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+#pw:hover {
+  box-shadow: rgba(18, 128, 10, 0.511) 0px 0px 0px 1.5px;
+}
+
+#email_icon {
+  position: absolute;
+  z-index: 10;
+  font-size: 14px;
+  margin-left: 11px;
+  margin-top: 10.5px;
+  color: rgba(128, 128, 128, 0.67);
+}
+#pw_icon {
+  position: absolute;
+  z-index: 10;
+  font-size: 14px;
+  margin-left: 11px;
+  margin-top: 10.5px;
+  color: rgba(128, 128, 128, 0.67);
+}
+
+/* 로그인버튼 */
+#log_btn {
+  --bs-btn-font-weight: 600;
+  --bs-btn-font-size: 18px;
+  --bs-btn-color: var(--bs-white);
+  --bs-btn-border-color: var(--bd-green);
+  --bs-btn-active-color: var(--bs-btn-hover-color);
+  background-color: #73d639ed;
+}
+
+#log_btn:hover {
+  --bs-btn-color: var(--bs-white);
+  background-color: rgba(57, 152, 36, 0.866);
+}
+
+#id_search {
+  text-decoration: none;
+  color: rgba(57, 152, 36, 0.866);
+  font-weight: 700;
+}
+#id_search:hover {
+  color: rgba(108, 190, 90, 0.866);
+}
+
+#join_btn {
+  text-decoration: none;
+  color: rgba(41, 50, 40, 0.912);
+  font-weight: 600;
+}
+#join_btn:hover {
+  color: rgba(108, 190, 90, 0.866);
+}

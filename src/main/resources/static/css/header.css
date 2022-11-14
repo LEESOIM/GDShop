@@ -1,0 +1,62 @@
+header {
+  background-color: white;
+  z-index: 100;
+  position: sticky;
+  top: 0px;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+}
+
+/* 모달 창 */
+.modal {
+  display: none;
+  /* position: relative; */
+  pointer-events: painted;
+  /* background clickable */
+}
+
+.modal-backdrop {
+  /* display: block; 검은색레이어*/
+  display: none;
+  /* background clickable */
+}
+
+.nav-item a {
+  color: black;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16.3px;
+}
+
+.nav-item a:hover {
+  color: rgb(12, 102, 63);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16.3px;
+}
+
+.nav-item :hover {
+  padding-bottom: 11px;
+  border-bottom: 4px rgba(10, 100, 40, 0.655) solid;
+  border-color: rgba(12, 130, 59, 0.582);
+  transition-duration: 0.5s;
+}
+
+/* 로그인후 보이는 div a태그 스타일 */
+.log a {
+  color: rgb(64, 63, 63);
+  text-decoration: none;
+  font-size: 16.5px;
+}
+.log:hover {
+  transform: scale(1.05);
+}
+
+/* 이메일, 비밀번호 미입력 */
+.inp {
+  color: red;
+  font-size: 13px;
+  text-align: center;
+  font-weight: bold;
+  display: none;
+}

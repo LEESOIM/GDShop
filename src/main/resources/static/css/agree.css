@@ -1,0 +1,55 @@
+.orders {
+  padding: 14px;
+  font-size: 16px;
+  color: rgb(103, 99, 99);
+}
+#order1 {
+  color: rgb(27, 205, 54);
+  font-weight: bold;
+  border-bottom: solid 3px rgb(27, 205, 54);
+}
+#order1:hover {
+  color: rgb(145, 235, 140);
+  border-bottom: solid 3px rgb(145, 235, 140);
+}
+
+.orders:hover {
+  cursor: pointer;
+  color: rgb(27, 205, 54);
+}
+
+/* .modal {
+  transform: translate(0, 100px);
+  z-index: 1000;
+} */
+/* 약관동의 */
+.form-check1 input {
+  font-size: 25px;
+}
+.form-check1 {
+  margin-left: 15px;
+  margin-top: 21px;
+}
+.form-check-label {
+  line-height: 37px;
+  font-size: 16px;
+  color: rgba(54, 52, 52, 0.863);
+}
+.form-check-label b {
+  font-size: 17px;
+  color: black;
+}
+
+/* 상세보기 */
+.data {
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: underline;
+  line-height: 37px;
+  padding-right: 10px;
+}
+.data:hover {
+  cursor: pointer;
+  color: limegreen;
+  text-decoration: none;
+}
