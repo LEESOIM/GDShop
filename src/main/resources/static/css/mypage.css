@@ -1,0 +1,38 @@
+html,
+body {
+  margin: 0;
+}
+
+.container {
+  flex-flow: row nowrap;
+}
+
+/* 사이드바  */
+.sidebar {
+  height: 520px;
+  position: sticky;
+  top: 90px;
+  width: 300px;
+}
+
+.list_top {
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.list-group li {
+  border: none;
+  border-radius: 0;
+  color: rgb(106, 103, 103);
+  font-size: 14px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+}
+
+.list-group li:hover {
+  background-color: rgba(216, 246, 181, 0.803);
+  font-weight: 600;
+  cursor: pointer;
+  border-right: solid 3.5px green;
+}

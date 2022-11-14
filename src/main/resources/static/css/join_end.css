@@ -1,0 +1,19 @@
+.orders {
+  padding: 14px;
+  font-size: 16px;
+  color: rgb(103, 99, 99);
+}
+#order3 {
+  color: rgb(27, 205, 54);
+  font-weight: bold;
+  border-bottom: solid 3px rgb(27, 205, 54);
+}
+#order3:hover {
+  color: rgb(145, 235, 140);
+  border-bottom: solid 3px rgb(145, 235, 140);
+}
+
+.orders:hover {
+  cursor: pointer;
+  color: rgb(27, 205, 54);
+}
