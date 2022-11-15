@@ -32,6 +32,7 @@ pageEncoding="UTF-8"%>
                 --bs-btn-padding-x: 0.9rem;
                 --bs-btn-font-size: 0.86rem;
               "
+              id="member_log"
             >
               <b>로그인</b>
             </a>
@@ -148,19 +149,24 @@ pageEncoding="UTF-8"%>
                 >
                 <div class="d-flex justify-content-center pt-3">
                   <div class="pe-3">
+                  	<a href="#">
                     <img
                       src="/images/kakaotalk_logo_icon_147272.png"
                       style="width: 38px; height: 38px"
-                    />
+                    /></a>
                   </div>
                   <div class="pe-3">
+                  	<a href="#">
                     <img src="/images/naver.png" style="width: 38px; height: 38px" />
+                  	</a>
                   </div>
                   <div>
+                  	<a href="#">
                     <img
                       src="/images/facebook_logo_icon_147291.png"
                       style="width: 38px; height: 38px"
                     />
+                    </a>
                   </div>
                 </div>
               </div>

@@ -22,7 +22,7 @@ pageEncoding="UTF-8"%>
     <section class="container" style="width: 75%">
       <c:import url="./template/top_part.jsp"></c:import>
       <c:import url="./template/header.jsp"></c:import>
-
+      
       <div style="margin-top: 3em; padding-bottom: 70px">
         <div
           style="
