@@ -33,10 +33,6 @@ pageEncoding="UTF-8"%>
                   <i class="fa-solid fa-headphones ps-2 pe-3"></i>공지사항
                 </li>
                 <li class="list-group-item">
-                  <i class="fa-solid fa-circle-question ps-2 pe-3"></i
-                  >자주묻는질문
-                </li>
-                <li class="list-group-item">
                   <i class="fa-solid fa-circle-info ps-2 pe-3"></i>1대 1문의
                 </li>
               </ol>

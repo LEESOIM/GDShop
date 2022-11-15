@@ -48,9 +48,6 @@
                   <i class="fa-regular fa-circle-user ps-2 pe-3"></i>내 정보
                 </li>
                 <li class="list-group-item">
-                  <i class="fa-solid fa-people-group ps-2 pe-3"></i>내 캠페인
-                </li>
-                <li class="list-group-item">
                   <i class="fa-brands fa-product-hunt ps-2 pe-3"></i>내 포인트
                 </li>
                 <li class="list-group-item">
