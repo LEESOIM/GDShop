@@ -14,10 +14,10 @@ pageEncoding="UTF-8"%>
       integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="../css/index.css" />
-    <link rel="stylesheet" href="../css/agree.css" />
-    <link rel="stylesheet" href="../css/header.css" />
-    <link rel="stylesheet" href="../css/login.css" />
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/agree.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/login.css" />
     
   </head>
   <body>
@@ -66,9 +66,9 @@ pageEncoding="UTF-8"%>
             <!-- 약관동의 체크 -->
             <div class="p-2">
               <form action="">
-                <div class="form-check1">
+                <div class="form-check">
                   <input
-                    class="form-check-input1"
+                    class="form-check-input"
                     type="checkbox"
                     value=""
                     id="flexCheckDefault"
@@ -86,10 +86,10 @@ pageEncoding="UTF-8"%>
                   </label>
                 </div>
                 <hr />
-                <div class="d-flex form-check1 justify-content-between">
+                <div class="d-flex form-check justify-content-between">
                   <div>
                     <input
-                      class="form-check-input1"
+                      class="form-check-input"
                       type="checkbox"
                       value=""
                       id="flexCheckChecked"
@@ -107,10 +107,10 @@ pageEncoding="UTF-8"%>
                     보기
                   </div>
                 </div>
-                <div class="d-flex form-check1 justify-content-between">
+                <div class="d-flex form-check justify-content-between">
                   <div>
                     <input
-                      class="form-check-input1"
+                      class="form-check-input"
                       type="checkbox"
                       value=""
                       id="flexCheckChecked"
@@ -128,10 +128,10 @@ pageEncoding="UTF-8"%>
                     보기
                   </div>
                 </div>
-                <div class="d-flex form-check1 justify-content-between">
+                <div class="d-flex form-check justify-content-between">
                   <div>
                     <input
-                      class="form-check-input1"
+                      class="form-check-input"
                       type="checkbox"
                       value=""
                       id="flexCheckChecked"
@@ -150,10 +150,10 @@ pageEncoding="UTF-8"%>
                     보기
                   </div>
                 </div>
-                <div class="d-flex form-check1 justify-content-between">
+                <div class="d-flex form-check justify-content-between">
                   <div>
                     <input
-                      class="form-check-input1"
+                      class="form-check-input"
                       type="checkbox"
                       value=""
                       id="flexCheckChecked"
@@ -176,7 +176,7 @@ pageEncoding="UTF-8"%>
                   ※ 구디샵은 만 14세 이상만 가입 가능합니다.
                 </label>
                 <div class="mt-5 d-flex justify-content-end">
-                  <button class="btn btn-outline-success pe-4 ps-4 me-2">
+                  <button class="btn btn-outline-success pe-4 ps-4 me-2" type="button" onclick="location.href='/member/join'">
                     확인
                   </button>
                 </div>

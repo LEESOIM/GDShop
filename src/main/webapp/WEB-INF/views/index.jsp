@@ -15,6 +15,8 @@ pageEncoding="UTF-8"%>
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/login.css" />
+    <link rel="stylesheet" href="/css/header.css" />
   </head>
   <body>
     <section class="container" style="width: 75%">

@@ -12,4 +12,19 @@ public class MemberController {
 	public void getAgree() {
 		
 	}
+	
+	@GetMapping("join")
+	public void getJoin() {
+		
+	}
+	
+	@GetMapping("join_end")
+	public void getJoinEnd() {
+		
+	}
+	
+	@GetMapping("mypage")
+	public void getMypage() {
+		
+	}
 }

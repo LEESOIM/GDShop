@@ -18,3 +18,17 @@
   margin-bottom: 10px;
   color: rgb(65, 63, 63);
 }
+
+/* 파일 */
+.file_box{
+	position: relative;
+	left:50px;
+	top: -30px;
+}
+.file_box i{
+	color:skyblue;
+}
+.file_box i:hover{
+	cursor: pointer;
+	color: #0000a0;
+}
