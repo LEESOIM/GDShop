@@ -11,7 +11,7 @@
     ><span style="padding: 0px 9px 0px 14px">|</span>
     <a href="/member/agree">회원가입</a
     ><span style="padding: 0px 9px 0px 14px">|</span>
-    <a href="#">멤버십</a><span style="padding: 0px 9px 0px 14px">|</span>
+    <a href="/membership/membership">멤버십</a><span style="padding: 0px 9px 0px 14px">|</span>
     <div class="top-dropdown">
       <a href="#" type="button">고객센터</a>
       <div class="dropdown-content">

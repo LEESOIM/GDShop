@@ -43,6 +43,7 @@ pageEncoding="UTF-8"%>
                 color: #d2bf5e;
                 font-weight: bold;
               "
+              href="/membership/membership"
               >Premium</a
             >
             <!-- 로그인후 해당 블록 보이기 -->
