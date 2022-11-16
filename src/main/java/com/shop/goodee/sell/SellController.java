@@ -1,4 +1,4 @@
-package com.shop.goodee.ocr;
+package com.shop.goodee.sell;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/ocr/*")
-public class OcrController {
+@RequestMapping("/sell/*")
+public class SellController {
 
-	@Autowired
-	private OcrService ocrService;
+//	@Autowired
+//	private SellService sellService;
 	
-	@GetMapping("test")
-	@ResponseBody
-	public void test() throws Exception{
-		ocrService.getOcrCoopang();
+	@GetMapping("getSell")
+	public void sellAdd(){
+		
 	}
+	
 }
