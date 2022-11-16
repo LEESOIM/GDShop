@@ -18,48 +18,62 @@ public class OcrService {
 		tesseract.setDatapath("C:\\sts\\workspace\\GDShop\\src\\main\\resources\\Tess4J\\tessdata");
 		tesseract.setLanguage(lang);
 		
-		String tmp;
-		boolean check = true;
-		String f="";
+		boolean checkNum = true;
+		boolean checkPrice = true;
+		
+		String date;
+		String purNum="";
+		String price="";
+		
+		String reverse="";
+		int won;
 		
 		try {
-			String text1 = tesseract.doOCR(new File(path2));
-			text1 = text1.trim();
-			text1 = text1.replaceAll("\\s","");
-			System.out.println("0) 원본 :"+text1); //Ocr적용,공백제거
+			String text = tesseract.doOCR(new File(path1)); // Ocr적용
+			text = text.trim().replaceAll("[,.\\s\\[\\]\\(\\)\\|\\ㆍ\\-\\_]", ""); // 공백,특수문자 제거
+			System.out.println("0) "+text); 
 			
-			int a = text1.indexOf("주문상세")+4;
-			text1 = text1.substring(a); //0~a 인덱스문자열 소거 
+			text = text.substring(text.indexOf("주문상세")+4); //0~a 인덱스문자열 소거 
+			System.out.println("1) "+text);
 			
-			int b = text1.indexOf("주문주문번호");
-			tmp = text1.substring(0, b);
-			System.out.println("1) 주문일 :"+tmp); //주문일 
+			date = text.substring(0, text.indexOf("주문주문번호")); //주문일 추출
 			
-			int c = text1.indexOf("주문주문번호")+6;
-			text1 = text1.substring(c); 
-			System.out.println(text1); // 주문번호~전체
+			text = text.substring(text.indexOf("주문주문번호")+6); //주문번호 이전 소거
+			System.out.println("2) "+text);
 					
-			while(check) {
-				String d = text1.substring(0,1);
-				text1 = text1.substring(1);
-				if(d.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*")) {
-					check=false;
+			while(checkNum) {
+				String tmp = text.substring(0,1);
+				if(tmp.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*")) {
+					checkNum=false;
 				}else {
-					f+=d;
+					purNum+=tmp;
+					text = text.substring(1);
 				}
 			}
-			System.out.println("2) 주문번호 :"+f); //주문번호
+			System.out.println("3) "+text);
 			
+			won = text.lastIndexOf("원");
+			text = text.substring(0,won);
 			
-			text1 = text1.replaceAll("[,.]", "");
-			System.out.println(",.제거)"+text1);
+			System.out.println("4) "+text); // "원" 뒤에 자르기
 			
-			int g = text1.lastIndexOf("원");
-			System.out.println(g); //g : "원" 인덱스
+			while(checkPrice) {
+				String tmp = String.valueOf(text.charAt(text.length()-1));
+				if(tmp.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*")) {
+					checkPrice=false;
+				}else {
+					reverse+=tmp;
+					text = text.substring(0,text.length()-1);
+				}
+			}
 			
-			int h = text1.lastIndexOf(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.", g);
-			System.out.println("h):"+h);
+			for(int i=reverse.length()-1;i>=0;i--) {
+				price += reverse.charAt(i);
+			}
 			
+			System.out.println("num) "+date); //주문일 
+			System.out.println("purNum) "+purNum); //주문번호
+			System.out.println("price) "+price); //가격
 		} catch (Exception e) {
 		}
 	}
