@@ -18,6 +18,8 @@ pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="../css/header.css" />
     <link rel="stylesheet" href="../css/login.css" />
     <link rel="stylesheet" href="../css/board.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script defer src="/js/notice.js"></script>
   </head>
   <body>
     <section class="container" style="width: 75%">
@@ -42,12 +44,54 @@ pageEncoding="UTF-8"%>
               </ol>
             </div>
           </div>
-          <div style="width: 100%">
+          <div style="width: 100%;">
             <div class="board_top p-3 mt-3 mb-3">공지사항</div>
+
             <div>
-              <div class="board_list">dfggdg</div>
-              <div class="board_list">dfgdgdgg</div>
+              <div class="board_list">
+                <table class="table">
+                  <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>날짜</th>
+                    <th>조회수</th>
+                  </tr>
+                  <c:forEach items="${list}" var="noticeVO">
+                    <tr>
+                      <td>${noticeVO.noticeNum}</td>
+                      <td>${noticeVO.title}</td>
+                      <td>${noticeVO.regDate}</td>
+                      <td>${noticeVO.hit}</td>							
+                    </tr>	            	
+                  </c:forEach>
+                </table>
+              </div>
+              <div">
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination">
+                    <li class="page-item"  value="${pager.pre}" id="pre">
+                      <a class="page-link" href="./notice?page=${pager.page-1}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                    </li>
+  
+                    <c:forEach var="i" begin="${pager.startNum}" end="${pager.lastNum}">
+                      <li class="page-item ${pager.page==i? 'active':''}">
+                        <a class="page-link" href="./notice?page=${i}">${i}</a>
+                      </li>
+                    </c:forEach>
+                    
+                    <li class="page-item ${pager.next?'':'disabled'}" id="next">
+                      <a class="page-link" href="./notice?page=${pager.page+1}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+
             </div>
+
           </div>
         </div>
       </div>
