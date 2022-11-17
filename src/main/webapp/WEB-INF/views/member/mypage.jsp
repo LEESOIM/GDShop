@@ -1,24 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
+prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-      crossorigin="anonymous"
-    />
+    <title>MyPage</title>
+    
+    <c:import url="../template/library.jsp"></c:import>
     <link rel="stylesheet" href="/css/mypage.css" />
     <link rel="stylesheet" href="/css/info.css" />
     <link rel="stylesheet" href="/css/index.css" />
     <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" href="/css/login.css" />
+    <style>
+      #myinfo {
+        background-color: rgba(216, 246, 181, 0.803);
+        font-weight: 600;
+        cursor: pointer;
+        border-right: solid 3.5px green;
+      }
+    </style>
   </head>
   <body>
     <section class="container" style="width: 75%">
@@ -44,20 +48,34 @@
                 </div>
               </div>
               <ol class="list-group list-group-flush">
-                <li class="list-group-item">
-                  <i class="fa-regular fa-circle-user ps-2 pe-3"></i>내 정보
-                </li>
-                <li class="list-group-item">
-                  <i class="fa-solid fa-people-group ps-2 pe-3"></i>내 캠페인
-                </li>
-                <li class="list-group-item">
-                  <i class="fa-brands fa-product-hunt ps-2 pe-3"></i>내 포인트
-                </li>
-                <li class="list-group-item">
-                  <i class="fa-solid fa-trophy ps-2 pe-3"></i>내 등급
-                </li>
+                <form action="mypage" method="get">
+                  <a href="./mypage" style="text-decoration: none">
+                    <li class="list-group-item" id="myinfo">
+                      <i class="fa-regular fa-circle-user ps-2 pe-3"></i>내 정보
+                    </li>
+                  </a>
+                </form>
+                <form action="point" method="get">
+                  <a href="./point" style="text-decoration: none">
+                    <li class="list-group-item" id="mypoint">
+                      <i class="fa-brands fa-product-hunt ps-2 pe-3"></i>내
+                      포인트
+                    </li>
+                  </a>
+                </form>
+                <form action="grade" method="get">
+                  <a href="./grade" style="text-decoration: none">
+                    <li class="list-group-item" id="mygrade">
+                      <i class="fa-solid fa-trophy ps-2 pe-3"></i>내 등급
+                    </li>
+                  </a>
+                </form>
                 <li class="list-group-item">
                   <i class="fa-solid fa-gears ps-2 pe-3"></i>내 설정
+                </li>
+                <li class="list-group-item">
+                  <i class="fa-solid fa-triangle-exclamation ps-2 pe-3"></i>내
+                  경고상태
                 </li>
                 <li class="list-group-item">
                   <i class="fa-brands fa-shopify ps-2 pe-3"></i>내 상품
@@ -72,7 +90,7 @@
             </div>
             <div>
               <div style="text-align: center">
-                <div class="mt-3" style="height: 150px;">
+                <div class="mt-3" style="height: 150px">
                   <img
                     src="/images/user.webp"
                     style="
@@ -82,12 +100,20 @@
                       box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
                     "
                   />
-                <div class="file_box">
-	              <label for="file" class="file"
-	                ><i class="fa-solid fa-square-pen" style="font-size: 30px;"></i></label
-	              >
-	              <input type="file" name="file" id="file" style="display: none" />
-	            </div>
+                  <div class="file_box">
+                    <label for="file" class="file"
+                      ><i
+                        class="fa-solid fa-square-pen"
+                        style="font-size: 30px"
+                      ></i
+                    ></label>
+                    <input
+                      type="file"
+                      name="file"
+                      id="file"
+                      style="display: none"
+                    />
+                  </div>
                 </div>
                 <div>
                   <h4><b>tjfl</b></h4>
@@ -150,7 +176,7 @@
                 </div>
               </div>
               <!-- 정보상자2 -->
-              <div class="d-flex justify-content-between mt-5">
+              <div class="d-flex justify-content-between mt-5 mb-3">
                 <div class="board_box">
                   <div class="mt-1 mb-2" style="font-size: 17px">
                     <b>진행중인 미션</b>
@@ -170,14 +196,6 @@
       <c:import url="../template/footer.jsp"></c:import>
     </section>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://kit.fontawesome.com/6e23c67242.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="/js/info.js"></script>
   </body>
 </html>

@@ -32,3 +32,50 @@
 	cursor: pointer;
 	color: #0000a0;
 }
+
+/* 포인트 상세 */
+/* 출금신청 버튼 */
+#withdraw {
+  font-size: 14px;
+  background-color: transparent;
+  border: 1px solid lightgray;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 2px;
+}
+#withdraw:hover {
+  border: 1px solid green;
+  color: green;
+}
+/* 포인트 내역 확인 */
+.point_all {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.point_box {
+  width: 25%;
+}
+.fa-circle-info {
+  color: rgb(185, 182, 182);
+}
+.fa-circle-info:hover {
+  cursor: pointer;
+}
+.toggle_box span {
+  color: rgb(226, 33, 97);
+  font-size: 15px;
+  font-weight: bold;
+  display: block;
+  padding-bottom: 5px;
+}
+
+/* 등급 상세보기 */
+.grade_top {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.grade_top span {
+  border-bottom: solid 4px yellow;
+  font-size: 22px;
+}
+

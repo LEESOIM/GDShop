@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-  <body>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"
+prefix="c" %>
     <nav class="navbar navbar-expand-lg header">
       <div class="container-fluid" style="padding: 0px">
         <a class="navbar-brand" href="/" style="margin-right: 1.2em"
@@ -11,16 +10,16 @@ pageEncoding="UTF-8"%>
             alt="Logo"
             width="169"
             height="62"
-            class="d-inline-block align-text-top"
-        /></a>
+            class="d-inline-block align-text-top"/></a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item ps-3 pe-3"><a href="/">홈</a></li>
-            <li class="nav-item ps-3 pe-3"><a href="#">추첨형</a></li>
-            <li class="nav-item ps-3 pe-3"><a href="#">즉석추첨형</a></li>
-            <li class="nav-item ps-3 pe-3"><a href="#">초간단미션</a></li>
+            <li class="nav-item tab0  ps-3 pe-3"><a href="/">홈</a></li>
+            <li class="nav-item tab1 ps-3 pe-3"><a href="/mainTab/tab1">추첨형</a></li>
+            <li class="nav-item tab2 ps-3 pe-3"><a href="/mainTab/tab2">즉석추첨형</a></li>
+            <li class="nav-item tab3 ps-3 pe-3"><a href="/mainTab/tab3">초간단미션</a></li>
           </ul>
           <div class="d-flex">
+          <c:if test="${empty member}">
             <a
               href="#"
               class="btn btn-outline-success"
@@ -28,11 +27,11 @@ pageEncoding="UTF-8"%>
               data-bs-target="#exampleModal"
               data-bs-whatever="@mdo"
               style="
-                --bs-btn-padding-y: 0.35rem;
+                --bs-btn-padding-y: 0.5rem;
                 --bs-btn-padding-x: 0.9rem;
                 --bs-btn-font-size: 0.86rem;
               "
-            >
+              id="member_log">
               <b>로그인</b>
             </a>
             <a
@@ -40,23 +39,28 @@ pageEncoding="UTF-8"%>
               style="
                 font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman',
                   serif, Geneva, Tahoma, sans-serif;
-                color: #d2bf5e;
+                color: #d4af37;
                 font-weight: bold;
               "
               href="/membership/membership"
               >Premium</a
-            >
+            ></c:if>
             <!-- 로그인후 해당 블록 보이기 -->
-            <div class="me-3" style="display: none">
-              <b style="font-size: 17.5px; color: rgb(9, 118, 31)">설희</b>님
+            <c:if test="${not empty member}">
+            <div class="me-3">
+              <b style="font-size: 17.5px; color: rgb(9, 118, 31)">${member.id}</b>님
               환영합니다!💚
             </div>
-            <div class="me-3 log" style="display: none">
+            <div class="me-3 log">
               <a href="#"><b>내캠페인</b></a>
             </div>
-            <div class="me-3 log" style="display: none">
-              <a href="#"><b>마이페이지</b></a>
+            <div class="me-3 log">
+              <a href="/member/mypage"><b>마이페이지</b></a>
             </div>
+            <div class="me-3 log">
+              <a href="/member/logout"><b>로그아웃</b></a>
+            </div>
+            </c:if>
           </div>
         </div>
       </div>
@@ -148,19 +152,24 @@ pageEncoding="UTF-8"%>
                 >
                 <div class="d-flex justify-content-center pt-3">
                   <div class="pe-3">
+                  	<a href="#">
                     <img
                       src="/images/kakaotalk_logo_icon_147272.png"
                       style="width: 38px; height: 38px"
-                    />
+                    /></a>
                   </div>
                   <div class="pe-3">
+                  	<a href="#">
                     <img src="/images/naver.png" style="width: 38px; height: 38px" />
+                  	</a>
                   </div>
                   <div>
+                  	<a href="#">
                     <img
                       src="/images/facebook_logo_icon_147291.png"
                       style="width: 38px; height: 38px"
                     />
+                    </a>
                   </div>
                 </div>
               </div>
@@ -169,5 +178,3 @@ pageEncoding="UTF-8"%>
         </div>
       </div>
     </div>
-  </body>
-</html>

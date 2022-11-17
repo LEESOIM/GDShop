@@ -8,8 +8,13 @@
 		<typeAlias type="com.shop.goodee.board.notice.NoticeVO" alias="NoticeVO"/>
 		<typeAlias type="com.shop.goodee.util.Pager" alias="Pager"/>
 		
-		<typeAlias type="java.util.List" alias="List"/>
 		<typeAlias type="java.lang.Long" alias="Long"/>
 		<typeAlias type="java.lang.String" alias="String"/>
+		<typeAlias type="com.shop.goodee.member.MemberVO" alias="MemberVO"/>
+		<typeAlias type="com.shop.goodee.member.RoleVO" alias="RoleVO"/>
+		
+		
+		<typeAlias type="java.lang.Integer" alias="Integer"/>
+		<typeAlias type="java.util.List" alias="List"/>
 	</typeAliases>
 </configuration>
