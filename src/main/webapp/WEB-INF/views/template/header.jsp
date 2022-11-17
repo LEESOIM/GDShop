@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-  <body>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"
+prefix="c" %>
     <nav class="navbar navbar-expand-lg header">
       <div class="container-fluid" style="padding: 0px">
         <a class="navbar-brand" href="/" style="margin-right: 1.2em"
@@ -20,6 +19,7 @@ pageEncoding="UTF-8"%>
             <li class="nav-item tab3 ps-3 pe-3"><a href="/mainTab/tab3">초간단미션</a></li>
           </ul>
           <div class="d-flex">
+          <c:if test="${empty member}">
             <a
               href="#"
               class="btn btn-outline-success"
@@ -43,17 +43,24 @@ pageEncoding="UTF-8"%>
                 font-weight: bold;
               "
               href="/membership/membership"
-              >Premium</a>
+              >Premium</a
+            ></c:if>
             <!-- 로그인후 해당 블록 보이기 -->
-            <div class="me-3" style="display: none">
-              <b style="font-size: 17.5px; color: rgb(9, 118, 31)">설희</b>님 환영합니다!💚
+            <c:if test="${not empty member}">
+            <div class="me-3">
+              <b style="font-size: 17.5px; color: rgb(9, 118, 31)">${member.id}</b>님
+              환영합니다!💚
             </div>
-            <div class="me-3 log" style="display: none">
+            <div class="me-3 log">
               <a href="#"><b>내캠페인</b></a>
             </div>
-            <div class="me-3 log" style="display: none">
-              <a href="#"><b>마이페이지</b></a>
+            <div class="me-3 log">
+              <a href="/member/mypage"><b>마이페이지</b></a>
             </div>
+            <div class="me-3 log">
+              <a href="/member/logout"><b>로그아웃</b></a>
+            </div>
+            </c:if>
           </div>
         </div>
       </div>
@@ -171,5 +178,3 @@ pageEncoding="UTF-8"%>
         </div>
       </div>
     </div>
-  </body>
-</html>
