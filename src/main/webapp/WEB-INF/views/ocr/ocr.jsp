@@ -29,7 +29,7 @@
       			
       			
  	             	<form action="/ocr/setPurchase" method="post" enctype="multipart/form-data">
-		  				<input type="file" name="files">
+		  				<input type="file" name="f">
 			            <button class="btn btn-success" type="submit">
 			            <b>전송</b>
 			            </button>	              	              

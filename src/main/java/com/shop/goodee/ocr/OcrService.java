@@ -3,15 +3,23 @@ package com.shop.goodee.ocr;
 import java.io.File;
 import java.sql.Date;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import net.sourceforge.tess4j.Tesseract;
 
 @Service
 public class OcrService {
 	
-	public void setPurchaseFileAdd() throws Exception{
-		
+	@Value("${app.purchase}")
+	private String path;
+	
+	public void setPurchaseFileAdd(MultipartFile multipartFile) throws Exception{
+		File file = new File(path);
+		if(!file.exists()) {
+			file.mkdirs();
+		}
 	};
 	
 	public void getOcrCoopang() throws Exception{
