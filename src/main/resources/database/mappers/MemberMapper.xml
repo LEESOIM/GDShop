@@ -4,5 +4,16 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    
 <mapper namespace="com.shop.goodee.member.MemberMapper">
-
+	<!-- 회원가입 -->
+	<insert id="setJoin" parameterType="MemberVO">
+		INSERT INTO MEMBER VALUES (#{id},#{pw},#{name},#{email},#{birth},#{phone},0,NOW(),1,NULL)
+	</insert>
+	<!-- 회원등급부여 -->
+	<insert id="setMemberRole" parameterType="MemberVO">
+		INSERT INTO MEMBER_ROLE VALUES (#{id},'4')
+	</insert>
+	<!-- 아이디 확인 -->
+	<select id="getIdCheck" parameterType="MemberVO" resultType="Integer">
+		SELECT COUNT(id) FROM MEMBER WHERE ID=#{id}
+	</select>
 </mapper>

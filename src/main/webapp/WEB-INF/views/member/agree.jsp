@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
+prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -18,7 +18,6 @@ pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="/css/agree.css" />
     <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" href="/css/login.css" />
-    
   </head>
   <body>
     <section class="container" style="width: 75%">
@@ -65,122 +64,126 @@ pageEncoding="UTF-8"%>
             </div>
             <!-- 약관동의 체크 -->
             <div class="p-2">
-              <form action="">
-                <div class="form-check">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="all_check"
+                />
+                <label
+                  class="form-check-label"
+                  for="all_check"
+                  style="
+                    font-size: 20px;
+                    font-weight: bold;
+                    color: rgb(16, 176, 40);
+                  "
+                >
+                  전체동의
+                </label>
+              </div>
+              <hr />
+              <div class="d-flex form-check justify-content-between">
+                <div>
                   <input
-                    class="form-check-input"
+                    class="req agree_check form-check-input"
                     type="checkbox"
                     value=""
-                    id="flexCheckDefault"
+                    id="check1"
                   />
-                  <label
-                    class="form-check-label"
-                    for="flexCheckDefault"
-                    style="
-                      font-size: 20px;
-                      font-weight: bold;
-                      color: rgb(16, 176, 40);
-                    "
-                  >
-                    전체동의
+                  <label class="form-check-label" for="flexCheckChecked">
+                    <b>(필수)</b>구디샵 이용약관 동의
                   </label>
                 </div>
-                <hr />
-                <div class="d-flex form-check justify-content-between">
-                  <div>
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckChecked"
-                    />
-                    <label class="form-check-label" for="flexCheckChecked">
-                      <b>(필수)</b>구디샵 이용약관 동의
-                    </label>
-                  </div>
-                  <div
-                    class="data"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal_ag1"
-                    data-bs-whatever="@mdo"
-                  >
-                    보기
-                  </div>
+                <div
+                  class="data"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal_ag1"
+                  data-bs-whatever="@mdo"
+                >
+                  보기
                 </div>
-                <div class="d-flex form-check justify-content-between">
-                  <div>
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckChecked"
-                    />
-                    <label class="form-check-label" for="flexCheckChecked">
-                      <b>(필수)</b>개인정보 수집 및 이용 동의
-                    </label>
-                  </div>
-                  <div
-                    class="data"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal_ag2"
-                    data-bs-whatever="@mdo"
-                  >
-                    보기
-                  </div>
+              </div>
+              <div class="d-flex form-check justify-content-between">
+                <div>
+                  <input
+                    class="req agree_check form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="check2"
+                  />
+                  <label class="form-check-label" for="flexCheckChecked">
+                    <b>(필수)</b>개인정보 수집 및 이용 동의
+                  </label>
                 </div>
-                <div class="d-flex form-check justify-content-between">
-                  <div>
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckChecked"
-                    />
-                    <label class="form-check-label" for="flexCheckChecked">
-                      <b>(선택)</b>서비스·이벤트 정보 제공을 위한 개인정보 수집
-                      및 이용 동의
-                    </label>
-                  </div>
-                  <div
-                    class="data"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal_ag3"
-                    data-bs-whatever="@mdo"
-                  >
-                    보기
-                  </div>
+                <div
+                  class="data"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal_ag2"
+                  data-bs-whatever="@mdo"
+                >
+                  보기
                 </div>
-                <div class="d-flex form-check justify-content-between">
-                  <div>
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckChecked"
-                    />
-                    <label class="form-check-label" for="flexCheckChecked">
-                      <b>(선택)</b>광고성 정보
-                      수신동의(앱알림,이메일,카카오알림톡,SMS/MMS)
-                    </label>
-                  </div>
-                  <div
-                    class="data"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal_ag4"
-                    data-bs-whatever="@mdo"
-                  >
-                    보기
-                  </div>
+              </div>
+              <div class="d-flex form-check justify-content-between">
+                <div>
+                  <input
+                    class="agree_check form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="check3"
+                  />
+                  <label class="form-check-label" for="flexCheckChecked">
+                    <b>(선택)</b>서비스·이벤트 정보 제공을 위한 개인정보 수집 및
+                    이용 동의
+                  </label>
                 </div>
-                <label class="form-check-label ps-4" for="flexCheckChecked">
-                  ※ 구디샵은 만 14세 이상만 가입 가능합니다.
-                </label>
-                <div class="mt-5 d-flex justify-content-end">
-                  <button class="btn btn-outline-success pe-4 ps-4 me-2" type="button" onclick="location.href='/member/join'">
+                <div
+                  class="data"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal_ag3"
+                  data-bs-whatever="@mdo"
+                >
+                  보기
+                </div>
+              </div>
+              <div class="d-flex form-check justify-content-between">
+                <div>
+                  <input
+                    class="agree_check form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="check4"
+                  />
+                  <label class="form-check-label" for="flexCheckChecked">
+                    <b>(선택)</b>광고성 정보
+                    수신동의(앱알림,이메일,카카오알림톡,SMS/MMS)
+                  </label>
+                </div>
+                <div
+                  class="data"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal_ag4"
+                  data-bs-whatever="@mdo"
+                >
+                  보기
+                </div>
+              </div>
+              <label class="form-check-label ps-4" for="flexCheckChecked">
+                ※ 구디샵은 만 14세 이상만 가입 가능합니다.
+              </label>
+              <div class="mt-5 d-flex justify-content-end">
+                <form action="join" method="get" id="frm">
+                  <button
+                    class="btn btn-outline-success pe-4 ps-4 me-2"
+                    type="button"
+                    id="agree_btn"
+                  >
                     확인
                   </button>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -598,6 +601,54 @@ pageEncoding="UTF-8"%>
         </div>
       </div>
     </div>
+    <!-- 필수 약관동의 안내 버튼 -->
+    <button
+      type="button"
+      id="agreex"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal_agreex"
+      data-bs-whatever="@mdo"
+      style="display: none"
+    >
+      필수 약관동의 모달버튼
+    </button>
+
+    <!-- 필수 약관동의 안내 모달창 -->
+    <div
+      class="modal fade"
+      id="exampleModal_agreex"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="d-flex pt-4">
+              <div class="ps-4 pe-3" style="font-size: 28px; color: red">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+              </div>
+              <div
+                class="pt-2"
+                style="color: red; font-size: 17px; line-height: 28px"
+              >
+                <b>필수 이용약관에 대한 동의해주세요.</b>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-end pb-4 ps-4 pe-4">
+            <button
+              type="button"
+              class="btn btn-success"
+              style="border-radius: 18px; padding: 6px 18px"
+              data-bs-dismiss="modal"
+            >
+              확인
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
@@ -609,6 +660,6 @@ pageEncoding="UTF-8"%>
       crossorigin="anonymous"
     ></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-    <script src="js/agree.js"></script>
+    <script src="/js/agree.js"></script>
   </body>
 </html>
