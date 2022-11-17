@@ -21,6 +21,7 @@ pageEncoding="UTF-8"%>
     <section class="container" style="width: 75%">
       <c:import url="../template/top_part.jsp"></c:import>
       <c:import url="../template/header.jsp"></c:import>
+      <c:import url="../template/library.jsp"></c:import>
       <div class="container">
         <div class="content d-flex">
           <div class="sidebar">
