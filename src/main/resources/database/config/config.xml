@@ -5,6 +5,6 @@
 	
 <configuration>
 	<typeAliases>
-	
+		<typeAlias type="com.shop.goodee.item.ItemVO" alias="ItemVO"/>
 	</typeAliases>
 </configuration>

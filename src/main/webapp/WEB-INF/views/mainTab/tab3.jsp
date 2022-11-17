@@ -7,23 +7,24 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Home</title>
+<title>MainTab3</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
 	crossorigin="anonymous" />
 <link rel="stylesheet" href="/css/index.css" />
-<link rel="stylesheet" href="/css/login.css" />
 <link rel="stylesheet" href="/css/header.css" />
+<link rel="stylesheet" href="/css/login.css" />
+<link rel="stylesheet" href="/css/list.css" />
 
 <style type="text/css">
-.tab0 {
+.tab3 {
 	padding-bottom: 7px;
 	border-bottom: 5px rgb(139, 176, 89) solid;
 }
 
-.tab0 a {
+.tab3 a {
 	font-weight: bold;
 	color: rgb(139, 176, 89);
 }
@@ -31,10 +32,15 @@
 </head>
 <body>
 	<section class="container" style="width: 75%">
-		<c:import url="./template/top_part.jsp"></c:import>
-		<c:import url="./template/header.jsp"></c:import>
+		<c:import url="../template/top_part.jsp"></c:import>
+		<c:import url="../template/header.jsp"></c:import>
 
 		<div style="margin-top: 3em; padding-bottom: 70px">
+
+			<div class="campaign">
+				<div class="campaign-title">초간단 미션</div>
+				<div class="campaign-content">구매하기 미션 없이 참여하기 미션을 수행하고 포인트를 수령하는 방식</div>
+			</div>
 			<div
 				style="height: 40px; font-size: 22px; font-weight: 600; letter-spacing: -0.03em;">
 				우리 집 오늘부터 외식없다✋온가족 먹거리🥪</div>
@@ -130,62 +136,6 @@
 			</div>
 		</div>
 
-		<div class="home-sub-banner-container">
-			<img src="https://cdn.pugshop.co.kr/bannerImages/1666257682407" />
-		</div>
-
-		<div style="margin-top: 3em; padding-bottom: 70px">
-			<div class="d-flex justify-content-between">
-				<div
-					style="height: 40px; font-size: 22px; font-weight: 600; letter-spacing: -0.03em;">
-					MD PICK! 추천 캠페인</div>
-				<div class="more">
-					더보기 <i class="fa-solid fa-circle-chevron-right"
-						style="color: rgb(130, 203, 41)"></i>
-				</div>
-			</div>
-			<div style="height: 380px; border: solid 1px">물건넣기</div>
-		</div>
-
-		<div style="margin-top: 3em; padding-bottom: 70px">
-			<div class="d-flex justify-content-between">
-				<div
-					style="height: 40px; font-size: 22px; font-weight: 600; letter-spacing: -0.03em;">
-					실시간 인기 캠페인!</div>
-				<div class="more">
-					더보기 <i class="fa-solid fa-circle-chevron-right"
-						style="color: rgb(130, 203, 41)"></i>
-				</div>
-			</div>
-			<div style="height: 380px; border: solid 1px">물건넣기</div>
-		</div>
-
-		<div style="margin-top: 3em; padding-bottom: 70px">
-			<div class="d-flex justify-content-between">
-				<div
-					style="height: 40px; font-size: 22px; font-weight: 600; letter-spacing: -0.03em;">
-					마감 임박 캠페인, 놓치지 마세요!</div>
-				<div class="more">
-					더보기 <i class="fa-solid fa-circle-chevron-right"
-						style="color: rgb(130, 203, 41)"></i>
-				</div>
-			</div>
-			<div style="height: 380px; border: solid 1px">물건넣기</div>
-		</div>
-
-		<div style="margin-top: 3em; padding-bottom: 70px">
-			<div class="d-flex justify-content-between">
-				<div
-					style="height: 40px; font-size: 22px; font-weight: 600; letter-spacing: -0.03em;">
-					지금 당첨 확률 높은 캠페인</div>
-				<div class="more">
-					더보기 <i class="fa-solid fa-circle-chevron-right"
-						style="color: rgb(130, 203, 41)"></i>
-				</div>
-			</div>
-			<div style="height: 380px; border: solid 1px">물건넣기</div>
-		</div>
-
 		<!-- 챗봇 -->
 		<div>
 			<div id="chat_ev" style="display: none">궁금한 부분 질문주세요!</div>
@@ -195,11 +145,11 @@
 					<b>구디 챗봇</b>
 				</div> <span
 				class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-				style="font-size: 13px;">+0 <span
-					class="visually-hidden">unread messages</span></span></a>
+				style="font-size: 13px;">+0 <span class="visually-hidden">unread
+						messages</span></span></a>
 		</div>
 
-		<c:import url="./template/footer.jsp"></c:import>
+		<c:import url="../template/footer.jsp"></c:import>
 	</section>
 
 	<script
@@ -208,6 +158,6 @@
 		crossorigin="anonymous"></script>
 	<script src="https://kit.fontawesome.com/6e23c67242.js"
 		crossorigin="anonymous"></script>
-	<script src="/js/index.js"></script>
 </body>
 </html>
+
