@@ -6,6 +6,10 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.shop.goodee.member.MemberVO" alias="MemberVO"/>
+		<typeAlias type="com.shop.goodee.member.RoleVO" alias="RoleVO"/>
+		
+		
 		<typeAlias type="java.lang.Integer" alias="Integer"/>
+		<typeAlias type="java.util.List" alias="List"/>
 	</typeAliases>
 </configuration>
