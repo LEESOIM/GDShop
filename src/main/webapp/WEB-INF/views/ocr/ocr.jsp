@@ -26,51 +26,29 @@
       		<div style="margin-top: 3em; padding-bottom: 70px">
       			
       			<form action="POST" method="">
-      			<h1>판매자 상품 등록</h1>
+      			<h1>OCR</h1>
 	            <!-- 상품명 -->
 	              <div class="mt-4">
 	                <label class="mt-2 mb-2" style="font-weight: bold">
-	                <span style="color: red">＊</span>상품명</label>
+	                <span style="color: red">＊</span>인증화면</label>
 	                <input
 	                  type="text"
-	                  placeholder="상품명을 입력해주세요."
+	                  placeholder="인증화면을 업로드해주세요."
 	                  class="join_form"
 	                />
 	              </div>
 	              
-	              <!-- 상품명 -->
-	              <div class="mt-4">
-	                <label class="mt-2 mb-2" style="font-weight: bold">
-	                <span style="color: red">＊</span>상품내용</label>
-	                <input
-	                  type="text"
-	                  placeholder="상품설명을 입력해주세요."
-	                  class="join_form"
-	                />
-	              </div>
-	              
-	              <!-- 상품명 -->
-	              <div class="mt-4">
-	                <label class="mt-2 mb-2" style="font-weight: bold">
-	                <span style="color: red">＊</span>상품금액</label>
-	                <input
-	                  type="text"
-	                  placeholder="상품금액을 입력해주세요."
-	                  class="join_form"
-	                />
-	              </div>
 	              <button
 	                class="btn btn-success"
 	                type="button"
 	                style="padding-top: 13px; padding-bottom: 13px; width: 20%"
 	                onclick="location.href='/member/join_end'"
 	              >
-	                <b>등록</b>
+	                <b>OCR</b>
 	              </button>	              	              
             </form>
-            
+      			
       		</div>
-      		<c:import url="../template/footer.jsp"></c:import>
     	</section>
 	</body>
 </html>

@@ -21,6 +21,7 @@ public class CrawService {
 	private WebDriver driver;
 	private WebElement element;
 	private String url;
+	private String nickName;
 	private List<ReviewVO> reviewVOs = new ArrayList<>();
 	
  	// 드라이버 설치 경로
@@ -44,16 +45,17 @@ public class CrawService {
         
 		driver = new ChromeDriver(options);
 		
-		url = "https://www.coupang.com/vp/products/6069827772?vendorItemId=82651418206&sourceType=HOME_TRENDING_ADS&searchId=feed-80ded603807b463cbbea976ec8a8c493-trending_ads-69184&clickEventId=e40dc083-2251-45ef-8e41-77b490b4ae32&isAddedCart=";
 	}
-	public void activateBot() {
-		
+	public void activateBot(TestVO testVO) {
+		System.out.println(testVO.getUrl());
+		url = testVO.getUrl();
+		nickName = testVO.getNickName();
 		try {
 			driver.get(url); // 1. url 접속
 			Thread.sleep(1000); 
 			
 			element = driver.findElement(By.className("prod-buy-header__title"));
-			String title = element.getText();
+			String titleTmp = element.getText();
 			
 			element = driver.findElement(By.name("review"));
 			element.click();
@@ -79,7 +81,6 @@ public class CrawService {
 			boolean check = true;
 			int l=0;
 			
-			log.info("1)상품이름 : {}",title);
 			while(check) {
 				try {
 					for(int i=2;i<12;i++) {
@@ -97,37 +98,52 @@ public class CrawService {
 							int k = (i-2)*5 + (j-1)+l;
 							log.info(k+"=============");
 							
+							reviewVO.setTitle(titleTmp);
 							text=xpathCommon+j+xpathUser;
 							element = driver.findElement(By.xpath(text)); // 유저명
-							tmp = element.getText();
-							reviewVO.setId(tmp);
-							log.info("-유저명:"+tmp);
+							tmp = element.getText().trim();
+							reviewVO.setNickName(tmp);
+							log.info("유저명) "+tmp);
+							log.info("찾을닉네임) "+nickName);
+							if(tmp == nickName || tmp.equals(nickName)) {
+								log.info("============닉네임 발견==========");
+								check=false;
+							}
 							
 							text=xpathCommon+j+xpathDate;
 							element = driver.findElement(By.xpath(text)); // 날짜
 							tmp = element.getText();
 							reviewVO.setDate(tmp);
-							log.info("-날짜:"+tmp);
+							log.info("날짜) "+tmp);
 							
 							text=xpathCommon+j+xpathTitleDetail;
 							element = driver.findElement(By.xpath(text)); // 세부상품이름
 							tmp = element.getText();
 							reviewVO.setTitleDetail(tmp);
-							log.info("-세부상품명:"+tmp);
+							log.info("세부상품명) "+tmp);
 							
 							try {
 								text=xpathCommon+j+xpathReview;
 								element = driver.findElement(By.xpath(text)); // 리뷰
 								tmp = element.getText();
 								reviewVO.setReview(tmp);
-								log.info("-리뷰:"+tmp);
+								log.info("리뷰) "+tmp);
 							} catch (Exception e) {
 							}
 //							if(tmp.equals("신고하기")) {
 //								reviewVO.setReview("");
 //							}
 							reviewVOs.add(reviewVO);
+							if(check==false) {
+								break;
+							}
 						}
+						if(check==false) {
+							break;
+						}
+					}
+					if(check==false) {
+						break;
 					}
 					String tmpBtn2=xpathBtnCommon+12+xpathBtn;
 					element = driver.findElement(By.xpath(tmpBtn2)); // x페이지 이동 = button[x+1] 
@@ -138,7 +154,29 @@ public class CrawService {
 					break;
 				}
 			}
-			
+			if(check==false) {
+				log.info("===============최종 결과=========================");
+				
+				ReviewVO reviewVO = new ReviewVO();
+				reviewVO.setNickName(reviewVOs.get(reviewVOs.size()-1).getNickName());
+				reviewVO.setTitle(reviewVOs.get(reviewVOs.size()-1).getTitle());
+				reviewVO.setDate(reviewVOs.get(reviewVOs.size()-1).getDate());
+				reviewVO.setTitleDetail(reviewVOs.get(reviewVOs.size()-1).getTitleDetail());
+				reviewVO.setReview(reviewVOs.get(reviewVOs.size()-1).getReview());
+				
+				log.info("닉네임) "+reviewVO.getNickName());
+				log.info("상품명) "+reviewVO.getTitle());
+				log.info("날짜) "+reviewVO.getDate());
+				log.info("세부상품명) "+reviewVO.getTitleDetail());
+				log.info("리뷰) "+reviewVO.getReview());
+				try {
+					log.info("리뷰 글자수) "+reviewVO.getReview().length());					
+				} catch (Exception e) {
+					log.info("리뷰 글자수) 0");					
+				}
+				
+				
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
 		} finally {

@@ -71,7 +71,7 @@ public class OcrService {
 				price += reverse.charAt(i);
 			}
 			
-			System.out.println("num) "+date); //주문일 
+			System.out.println("num) "+date); //주문일
 			System.out.println("purNum) "+purNum); //주문번호
 			System.out.println("price) "+price); //가격
 		} catch (Exception e) {

@@ -18,4 +18,7 @@ public class OcrController {
 	public void test() throws Exception{
 		ocrService.getOcrCoopang();
 	}
+	@GetMapping("ocr")
+	public void ocr() throws Exception{
+	}
 }

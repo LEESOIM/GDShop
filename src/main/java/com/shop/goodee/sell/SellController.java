@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/sell/*")
 public class SellController {
 
-//	@Autowired
-//	private SellService sellService;
+	@Autowired
+	private SellService sellService;
 	
 	@GetMapping("getSell")
 	public void sellAdd(){
