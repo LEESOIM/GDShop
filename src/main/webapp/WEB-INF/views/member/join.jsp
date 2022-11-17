@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -23,6 +24,7 @@
     <section class="container" style="width: 75%">
       <c:import url="../template/top_part.jsp"></c:import>
       <c:import url="../template/header.jsp"></c:import>
+      <form:form action="./join" modelAttribute="memberVO" method="post">
       <div>
         <div class="p-3 mt-3" style="color: rgb(34, 62, 33)">
           <h3><b>회원가입</b></h3>
@@ -54,80 +56,57 @@
           style="margin-bottom: 90px"
         >
           <div style="width: 410px">
-            <form action="POST" method="">
               <!-- 아이디 입력 -->
               <div class="mt-4">
                 <label class="mt-2 mb-2" style="font-weight: bold"
                   ><span style="color: red">＊</span>아이디</label
                 >
-                <input
-                  type="text"
-                  placeholder="아이디를 입력해주세요."
-                  class="join_form"
-                />
+                <form:input path="id" placeholder="아이디를 입력해주세요." class="join_form" style="padding-left: 10px;"/>
               </div>
               <div
                 class="pt-1"
                 style="color: red; font-size: 13px; height: 23px"
               >
-                <span style="display: none"
-                  >아이디를 입력해주세요. 멋진아이디네요!,등</span
-                >
+                <form:errors path="id"></form:errors>
               </div>
               <!-- 비밀번호 입력 -->
               <div>
                 <label class="mt-1 mb-2" style="font-weight: bold"
                   ><span style="color: red">＊</span>비밀번호</label
                 >
-                <input
-                  type="password"
-                  placeholder="8~20자리 비밀번호를 입력해주세요."
-                  class="join_form"
-                />
+                <form:password path="pw" placeholder="8~20자리 비밀번호를 입력해주세요." class="join_form" style="padding-left: 10px;"/>
               </div>
               <div
                 class="pt-1"
                 style="color: red; font-size: 13px; height: 23px"
               >
-                <span style="display: none"
-                  >8~20자리 비밀번호를 입력해주세요.</span
-                >
+                <form:errors path="pw"></form:errors>
               </div>
               <!-- 비밀번호 재입력 -->
               <div>
                 <label class="mt-1 mb-2" style="font-weight: bold"
                   ><span style="color: red">＊</span>비밀번호 확인</label
                 >
-                <input
-                  type="password"
-                  placeholder="비밀번호를 재입력해주세요."
-                  class="join_form"
-                />
+                <form:password path="pwCheck" placeholder="비밀번호를 재입력해주세요." class="join_form"/>
               </div>
               <div
                 class="pt-1"
                 style="color: red; font-size: 13px; height: 23px"
               >
-                <span style="display: none">비밀번호가 틀립니다.</span>
+                <form:errors path="pwCheck"></form:errors>
               </div>
               <!-- 이름 입력 -->
               <div>
                 <label class="mt-2 mb-2" style="font-weight: bold"
                   ><span style="color: red">＊</span>이름</label
                 >
-                <input
-                  type="text"
-                  placeholder="이름을 입력해주세요."
-                  class="join_form"
-                />
+                <form:input path="name" placeholder="이름을 입력해주세요." class="join_form"/>
               </div>
               <div
                 class="pt-1"
                 style="color: red; font-size: 13px; height: 23px"
               >
-                <span style="display: none"
-                  >아이디를 입력해주세요. 멋진아이디네요!,등</span
-                >
+                <form:errors path="name"></form:errors>
               </div>
               <!-- 이메일 입력 -->
               <div>
@@ -135,39 +114,29 @@
                   ><span style="color: red">＊</span>이메일</label
                 >
                 <div class="d-flex">
-                  <input
-                    type="text"
-                    placeholder="이메일을 입력해주세요."
-                    class="join_form"
-                  />
+                <form:input path="e" placeholder="이메일을 입력해주세요." class="join_form"/>
                   <span
                     class="ps-1 pe-1"
                     style="line-height: 40px; font-size: 17px"
                     >@</span
                   >
-                  <input
-                    type="text"
-                    class="join_form"
-                    style="display: none"
-                    id="email_input"
-                  />
-                  <select class="form-select join_form" id="inputGroupSelect01">
-                    <option selected>선택</option>
-                    <option value="1">naver.com</option>
-                    <option value="2">hanmail.net</option>
-                    <option value="3">nate.com</option>
-                    <option value="4">gmail.com</option>
-                    <option value="5" id="direct">직접입력</option>
-                  </select>
+                  <form:select path="mailOption" class="form-select join_form" id="inputGroupSelect01">
+                  	<option selected hidden>선택</option>
+                    <option value="naver.com">naver.com</option>
+                    <option value="hanmail.net">hanmail.net</option>
+                    <option value="nate.com">nate.com</option>
+                    <option value="gmail.com">gmail.com</option>
+                  </form:select>
+                    
                 </div>
               </div>
               <div
                 class="pt-1"
                 style="color: red; font-size: 13px; height: 23px"
               >
-                <span style="display: none"
-                  >아이디를 입력해주세요. 멋진아이디네요!,등</span
-                >
+                <form:errors path="e"></form:errors>
+                <form:errors path="mailOption"></form:errors>
+                <form:errors path="mailText"></form:errors>
               </div>
               <!-- 생년월일 입력 -->
               <div>
@@ -175,61 +144,56 @@
                   ><span style="color: red">＊</span>생년월일</label
                 >
                 <div class="d-flex justify-content-between">
-                  <input
-                    type="text"
-                    placeholder="년(4자)"
-                    class="join_form"
-                    style="width: 32%"
-                  />
-                  <select class="form-select join_form" style="width: 32%">
-                    <option selected>월</option>
-                    <option value="1">1</option>
+                <form:input path="yy" placeholder="년(4자)" class="join_form" style="width: 32%"/>
+                  <select class="form-select join_form" name = "mm" style="width: 32%">
+                    <option value="">월</option>
+					<option value="01">1</option>
+					<option value="02">2</option>
+					<option value="03">3</option>
+					<option value="04">4</option>
+					<option value="05">5</option>
+					<option value="06">6</option>
+					<option value="07">7</option>
+					<option value="08">8</option>
+					<option value="09">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
                   </select>
-                  <input
-                    type="text"
-                    class="join_form"
-                    style="width: 32%"
-                    placeholder="일"
-                  />
+                  <form:input path="dd" class="join_form" style="width: 32%" placeholder="일"/>
                 </div>
               </div>
               <div
                 class="pt-1"
                 style="color: red; font-size: 13px; height: 23px"
               >
-                <span style="display: none"
-                  >태어난 년도 4자리를 정확하게 입력하세요.</span
-                >
+                <form:errors path="yy"></form:errors>
+                <form:errors path="mm"></form:errors>
+                <form:errors path="dd"></form:errors>
               </div>
               <!-- 휴대번호 입력 -->
               <div>
                 <label class="mt-2 mb-2" style="font-weight: bold"
                   ><span style="color: red">＊</span>휴대전화</label
                 >
-                <input
-                  type="text"
-                  placeholder="전화번호를 입력해주세요."
-                  class="join_form"
-                />
+                <form:input path="phone" placeholder="전화번호를 입력해주세요.(숫자만 입력)" class="join_form"/>
               </div>
               <div
                 class="pt-1"
                 style="color: red; font-size: 13px; height: 23px"
               >
-                <span style="display: none">형식에 맞지 않는 번호입니다.</span>
+                <form:errors path="phone"></form:errors>
               </div>
-            </form>
 
             <!-- 회원가입 버튼 -->
             <div
               class="d-grid gap-2 d-flex justify-content-center"
-              style="margin-top: 60px"
+              style="margin-top: 40px"
             >
               <button
                 class="btn btn-success"
-                type="button"
                 style="padding-top: 13px; padding-bottom: 13px; width: 80%"
-                onclick="location.href='/member/join_end'"
+                type="submit"
               >
                 <b>회원가입</b>
               </button>
@@ -237,6 +201,7 @@
           </div>
         </div>
       </div>
+      </form:form>
       <c:import url="../template/footer.jsp"></c:import>
     </section>
 

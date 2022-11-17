@@ -20,7 +20,7 @@ prefix="c" %>
     <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" href="/css/login.css" />
     <style>
-      #myinfo {
+      #mygrade {
         background-color: rgba(216, 246, 181, 0.803);
         font-weight: 600;
         cursor: pointer;
@@ -68,7 +68,7 @@ prefix="c" %>
                   </a>
                 </form>
                 <form action="grade" method="get">
-                  <a href="./grade" style="text-decoration: none">
+                  <a href="./point" style="text-decoration: none">
                     <li class="list-group-item" id="mygrade">
                       <i class="fa-solid fa-trophy ps-2 pe-3"></i>내 등급
                     </li>
@@ -88,108 +88,58 @@ prefix="c" %>
             </div>
           </div>
           <div class="ms-3 mb-2" id="info" style="width: 100%">
-            <!-- 여기부터 내정보 상세보기 -->
+            <!-- 여기부터 내등급 상세보기 -->
             <div class="info_top p-2 mt-3 mb-3">
-              <span style="color: rgb(10, 154, 10)">김OO</span>님의 정보
+              <div>
+                <span style="color: rgb(10, 154, 10)">김설희</span>님의 등급
+              </div>
             </div>
-            <div>
-              <div style="text-align: center">
-                <div class="mt-3" style="height: 150px">
-                  <img
-                    src="/images/user.webp"
-                    style="
-                      width: 135px;
-                      height: 135px;
-                      border-radius: 100px;
-                      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-                    "
-                  />
-                  <div class="file_box">
-                    <label for="file" class="file"
-                      ><i
-                        class="fa-solid fa-square-pen"
-                        style="font-size: 30px"
-                      ></i
-                    ></label>
-                    <input
-                      type="file"
-                      name="file"
-                      id="file"
-                      style="display: none"
-                    />
-                  </div>
-                </div>
+            <!-- 등급이 없는 회원의 경우 -->
+            <div
+              class="mb-5"
+              style="
+                text-align: center;
+                color: rgba(139, 139, 139, 0.737);
+                font-size: 14px;
+                padding-top: 13px;
+              "
+            >
+              <div class="mb-2 mt-5">해당 회원의 등급이 없습니다.</div>
+              <div>
+                등급에 따라 캠페인 당첨 확률에 영향을 주지는 않지만, 결정된
+                등급에 따라 참여할 수 있는 캠페인이 제한될 수 있습니다.
+              </div>
+              <div class="mt-2">
+                *멤버십 가입 시 VIP등급으로 올릴 수 있습니다. 등급제에 관한
+                자세한 내용은 아래 버튼을 클릭해 주세요.
+              </div>
+              <button type="button" class="btn btn-outline-success btn-sm mt-4">
+                멤버십가입 알아보기
+              </button>
+            </div>
+            <!-- VIP등급 회원일 경우 -->
+            <div style="display: none">
+              <div class="grade_top mt-3">
+                OOO님은 <span>VIP등급</span>입니다.
+              </div>
+              <hr />
+              <div>
                 <div>
-                  <h4><b>tjfl</b></h4>
-                </div>
-                <div style="color: gray; margin-top: -5px">
-                  tjfgml64@nate.com
-                </div>
-              </div>
-              <!-- 정보상자1 -->
-              <div class="d-flex justify-content-between mt-5">
-                <div class="board_box">
-                  <div class="mt-1 mb-2" style="font-size: 17px">
-                    <b>기본정보</b>
+                  <div style="font-size: 14px">
+                    이용기간 : <b>2020-05-22 ~ 2022-06-01</b>
                   </div>
-                  <div>이름 : 김설희</div>
-                  <div>
-                    <i class="fa-solid fa-calendar-days pe-1"></i> 1996-02-02
-                  </div>
-                  <div>
-                    <i class="fa-solid fa-mobile-screen-button pe-2"></i>
-                    010-2616-0000
-                  </div>
-                  <div>
-                    <i class="fa-regular fa-envelope pe-1"></i> tjfl@nate.com
+                  <div class="pt-1" style="font-size: 14px">
+                    해지일 : <span style="color: red">2022-06-01 해지예정</span>
                   </div>
                 </div>
-                <div class="board_box">
-                  <div class="mt-1 mb-2" style="font-size: 17px">
-                    <b>내 활동</b>
-                  </div>
-                  <div class="d-flex">
-                    <div class="me-4">
-                      <div class="mb-2">캠페인 진행수</div>
-                      <div
-                        style="
-                          text-align: center;
-                          font-size: 2.5em;
-                          padding: 11px 10px 15px 10px;
-                          background-color: rgba(220, 220, 220, 0.37);
-                          border-radius: 5px;
-                        "
-                      >
-                        10
-                      </div>
-                    </div>
-                    <div>
-                      <div><i class="fa-solid fa-chart-pie pe-2"></i>통계</div>
-                      <div
-                        style="
-                          text-align: center;
-                          width: 100%;
-                          font-size: 2.5em;
-                          padding: 11px 10px 15px 10px;
-                          background-color: rgba(220, 220, 220, 0.37);
-                          border-radius: 5px;
-                        "
-                      ></div>
-                    </div>
-                  </div>
+                <hr />
+                <div class="pb-2" style="font-size: 16px">🎁 등급 혜택</div>
+                <div class="pb-1" style="font-size: 14px">
+                  ✅ VIP회원은 등급제한 캠페인에 참여할 수 있어 남들보다 더 많은
+                  캠페인에 참여 가능!
                 </div>
-              </div>
-              <!-- 정보상자2 -->
-              <div class="d-flex justify-content-between mt-5 mb-3">
-                <div class="board_box">
-                  <div class="mt-1 mb-2" style="font-size: 17px">
-                    <b>진행중인 미션</b>
-                  </div>
-                </div>
-                <div class="board_box">
-                  <div class="mt-1 mb-2" style="font-size: 17px">
-                    <b>종료 된 미션</b>
-                  </div>
+                <div style="font-size: 14px">
+                  ✅ 등급제한 캠페인은 실제 구매가가 0원
                 </div>
               </div>
             </div>
