@@ -8,11 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Home</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-	crossorigin="anonymous" />
+<c:import url="./template/library.jsp"></c:import>
 <link rel="stylesheet" href="/css/index.css" />
 <link rel="stylesheet" href="/css/login.css" />
 <link rel="stylesheet" href="/css/header.css" />
@@ -198,16 +194,8 @@
 				style="font-size: 13px;">+0 <span
 					class="visually-hidden">unread messages</span></span></a>
 		</div>
-
 		<c:import url="./template/footer.jsp"></c:import>
 	</section>
-
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-		crossorigin="anonymous"></script>
-	<script src="https://kit.fontawesome.com/6e23c67242.js"
-		crossorigin="anonymous"></script>
 	<script src="/js/index.js"></script>
 </body>
 </html>

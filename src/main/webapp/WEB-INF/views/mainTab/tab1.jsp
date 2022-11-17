@@ -8,11 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>MainTab1</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-	crossorigin="anonymous" />
+<c:import url="../template/library.jsp"></c:import>
 <link rel="stylesheet" href="/css/index.css" />
 <link rel="stylesheet" href="/css/header.css" />
 <link rel="stylesheet" href="/css/login.css" />
@@ -43,27 +39,23 @@
 			</div>
 
 			<div class="search">
-				<div class="form-check form-switch">
-					<div class="available-box" style="float: left;">
-						<label class="ant-checkbox-wrapper"> 
-							<span class="ant-checkbox"> 
-								<input type="checkbox" class="ant-checkbox-input" value=""> 
-								<span class="ant-checkbox-inner"></span>
-							</span> 
-							<span class="available">지원 가능</span>
-						</label>
-					</div>
-					<div class="dropdown" style="float: right;">
-						<button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">최신순</button>
-						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="#">추천순</a></li>
-							<li><a class="dropdown-item" href="#">인기순</a></li>
-							<li><a class="dropdown-item" href="#">당첨률순</a></li>
-							<li><a class="dropdown-item" href="#">마감순</a></li>
-						</ul>
-					</div>
+				<div class="available">
+					<input type="checkbox" value="" id="able">
+					<label for="able">지원 가능</label> 
+				</div>
+				<div class="order">
+					<button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">최신순
+					<img src="/images/borrom-arrow.svg">
+					</button>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="#">추천순</a></li>
+						<li><a class="dropdown-item" href="#">인기순</a></li>
+						<li><a class="dropdown-item" href="#">당첨률순</a></li>
+						<li><a class="dropdown-item" href="#">마감순</a></li>
+					</ul>
 				</div>
 			</div>
+
 
 			<div
 				style="height: 40px; font-size: 22px; font-weight: 600; letter-spacing: -0.03em;">
@@ -81,8 +73,7 @@
 								<div style="color: red">
 									<b>쿠팡</b>
 								</div>
-								<div class="ps-1 pe-1" style="color: rgb(147, 143, 143)">
-									|</div>
+								<div class="ps-1 pe-1" style="color: rgb(147, 143, 143)">|</div>
 								<div style="color: rgb(147, 143, 143)">[딜]풀무원</div>
 							</div>
 							<div class="pb-1 pt-1" style="font-size: 17.5px; height: 50px">
@@ -122,8 +113,7 @@
 								<div style="color: red">
 									<b>쿠팡</b>
 								</div>
-								<div class="ps-1 pe-1" style="color: rgb(147, 143, 143)">
-									|</div>
+								<div class="ps-1 pe-1" style="color: rgb(147, 143, 143)">|</div>
 								<div style="color: rgb(147, 143, 143)">[딜]풀무원</div>
 							</div>
 							<div class="pb-1 pt-1" style="font-size: 17.5px; height: 50px">
@@ -175,14 +165,6 @@
 
 		<c:import url="../template/footer.jsp"></c:import>
 	</section>
-
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-		crossorigin="anonymous"></script>
-	<script src="https://kit.fontawesome.com/6e23c67242.js"
-		crossorigin="anonymous"></script>
-	<script src="/js/item.js"></script>
 </body>
 </html>
 
