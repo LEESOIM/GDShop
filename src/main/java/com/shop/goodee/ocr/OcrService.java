@@ -9,10 +9,16 @@ import net.sourceforge.tess4j.Tesseract;
 
 @Service
 public class OcrService {
-
-	String path1 = "src/main/java/demo/sample1.png";
-	String path2 = "src/main/java/demo/sample2.png";
+	
+	public void setPurchaseFileAdd() throws Exception{
+		
+	};
+	
 	public void getOcrCoopang() throws Exception{
+		
+		String path1 = "src/main/java/demo/sample1.png";
+		String path2 = "src/main/java/demo/sample2.png";
+		
 		Tesseract tesseract = new Tesseract();
 		String lang = "kor+eng";
 		tesseract.setDatapath("C:\\sts\\workspace\\GDShop\\src\\main\\resources\\Tess4J\\tessdata");

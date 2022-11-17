@@ -5,6 +5,9 @@
 	
 <configuration>
 	<typeAliases>
-	
+		<!-- 하준 -->
+		<typeAlias type="com.shop.goodee.ocr.PurchaseVO" alias="PurchaseVO"/>
+		<typeAlias type="com.shop.goodee.ocr.PurchaseFileVO" alias="PurchaseFileVO"/>
+		<!-- 하준 -->
 	</typeAliases>
 </configuration>

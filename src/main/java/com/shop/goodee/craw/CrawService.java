@@ -180,7 +180,7 @@ public class CrawService {
 		}catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-//			driver.close(); // 브라우저 종료
+			driver.close(); // 브라우저 종료
 		}
 	}
 }

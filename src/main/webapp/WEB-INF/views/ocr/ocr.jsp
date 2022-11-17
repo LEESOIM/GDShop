@@ -25,28 +25,15 @@
       		<c:import url="../template/header.jsp"></c:import>
       		<div style="margin-top: 3em; padding-bottom: 70px">
       			
-      			<form action="POST" method="">
       			<h1>OCR</h1>
-	            <!-- 상품명 -->
-	              <div class="mt-4">
-	                <label class="mt-2 mb-2" style="font-weight: bold">
-	                <span style="color: red">＊</span>인증화면</label>
-	                <input
-	                  type="text"
-	                  placeholder="인증화면을 업로드해주세요."
-	                  class="join_form"
-	                />
-	              </div>
-	              
-	              <button
-	                class="btn btn-success"
-	                type="button"
-	                style="padding-top: 13px; padding-bottom: 13px; width: 20%"
-	                onclick="location.href='/member/join_end'"
-	              >
-	                <b>OCR</b>
-	              </button>	              	              
-            </form>
+      			
+      			
+ 	             	<form action="/ocr/setPurchase" method="post" enctype="multipart/form-data">
+		  				<input type="file" name="files">
+			            <button class="btn btn-success" type="submit">
+			            <b>전송</b>
+			            </button>	              	              
+					</form>
       			
       		</div>
     	</section>

@@ -5,7 +5,7 @@ import java.sql.Date;
 import lombok.Data;
 
 @Data
-public class OcrVO {
+public class PurchaseVO {
 
 	private String name;
 	private Date purDate;
