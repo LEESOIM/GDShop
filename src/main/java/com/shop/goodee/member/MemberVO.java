@@ -1,6 +1,7 @@
 package com.shop.goodee.member;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.validation.constraints.NotBlank;
 
@@ -37,4 +38,9 @@ public class MemberVO {
 	private String mm;
 	@Range(min=1, max=31)
 	private String dd;
+	
+	//등급 여러개 가능
+	private List<RoleVO> roleVOs;
+	//프로필 사진 한개
+	
 }

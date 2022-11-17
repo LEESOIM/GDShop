@@ -48,8 +48,8 @@
   text-decoration: none;
   font-size: 16.5px;
 }
-.log:hover {
-  transform: scale(1.05);
+.log a:hover{
+	color: green;
 }
 
 /* 이메일, 비밀번호 미입력 */

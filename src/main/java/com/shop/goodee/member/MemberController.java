@@ -2,6 +2,7 @@ package com.shop.goodee.member;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,29 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	
+	//로그인(세션)
+	@PostMapping("login")
+	@ResponseBody
+	public int getLogin(MemberVO memberVO,HttpSession session)throws Exception{
+		memberVO = memberService.getLogin(memberVO);
+		int result = 0;
+		if(memberVO != null) {
+			session.setAttribute("member", memberVO);
+			result = 1;
+		}
+		
+		return result;
+	}
+	
+	//로그아웃(세션)
+	@GetMapping("logout")
+	public String setLogout(HttpSession session)throws Exception{
+		session.invalidate();
+		
+		return "redirect:/";
+	}
 
 	/* 약관동의 */
 	@GetMapping("agree")

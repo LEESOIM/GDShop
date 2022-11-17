@@ -14,6 +14,11 @@ public class MemberService {
 	@Autowired
 	private MemberMapper memberMapper;
 	
+	//로그인
+	public MemberVO getLogin(MemberVO memberVO)throws Exception{
+		return memberMapper.getLogin(memberVO);
+	}
+	
 	//중복 아이디 조회
 	public int getIdCheck(MemberVO memberVO)throws Exception{
 		return memberMapper.getIdCheck(memberVO);
