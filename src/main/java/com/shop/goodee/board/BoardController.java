@@ -35,5 +35,19 @@ public class BoardController {
 		mv.setViewName("/board/notice");
 		return mv;
 	}
+	
+	@GetMapping("detail")
+	public ModelAndView getDetail(NoticeVO noticeVO)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		noticeVO = noticeService.getDetail(noticeVO);
+		mv.addObject("noticeVO",noticeVO);
+		
+		return mv;
+	}
+	
+	@GetMapping("write")
+	public void setWrite()throws Exception{
+		
+	}
 
 }

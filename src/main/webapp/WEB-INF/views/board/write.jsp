@@ -20,6 +20,9 @@ pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="../css/board.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script defer src="/js/notice.js"></script>
+     <!-- include summernote css/js-->
+	 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+	 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
   </head>
   <body>
     <section class="container" style="width: 75%">
@@ -45,63 +48,27 @@ pageEncoding="UTF-8"%>
             </div>
           </div>
           <div style="width: 100%;">
-            <div class="board_top p-3 mt-3 mb-3">공지사항</div>
-
-            <div>
-              <div class="board_list">
-                <table class="table table-hover" id="list">
-                  <tr>
-                    <th>번호</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>날짜</th>
-                    <th>조회수</th>
-                  </tr>
-                  <c:forEach items="${list}" var="noticeVO">
-                    <tr>
-                      <td>${noticeVO.noticeNum}</td>
-                      <td><a href="./detail?noticeNum=${noticeVO.noticeNum}">${noticeVO.title}</a></td>
-                      <td>${noticeVO.id}</td>
-                      <td>${noticeVO.regDate}</td>
-                      <td>${noticeVO.hit}</td>							
-                    </tr>	            	
-                  </c:forEach>
-                </table>
-              </div>
-
-              <button onclick="location.href='./write'">글작성</button>
-
-              <div>
-                <nav aria-label="Page navigation example">
-                  <ul class="pagination">
-                    <li class="page-item"  value="${pager.pre}" id="pre">
-                      <a class="page-link" href="./notice?page=${pager.page-1}" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                      </a>
-                    </li>
-  
-                    <c:forEach var="i" begin="${pager.startNum}" end="${pager.lastNum}">
-                      <li class="page-item ${pager.page==i? 'active':''}">
-                        <a class="page-link" href="./notice?page=${i}">${i}</a>
-                      </li>
-                    </c:forEach>
-                    
-                    <li class="page-item ${pager.next?'':'disabled'}" id="next">
-                      <a class="page-link" href="./notice?page=${pager.page+1}" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-
-            </div>
+            <div class="board_top p-3 mt-3 mb-3">Write Page</div>
+            <form action="write" method="post">
+                <div style="width: 100%;">
+                    <input type="text" style="width: 100%;" id="title" value="제목을 입력하세요">
+                </div>
+                <textarea name="" id="summernote"></textarea>
+            </form>
 
           </div>
         </div>
       </div>
       <c:import url="../template/footer.jsp"></c:import>
     </section>
+
+    <script type="text/javascript">
+        $('#summernote').summernote({
+            tabsize:4,
+            height:250
+        })
+
+    </script>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"

@@ -8,7 +8,8 @@ import com.shop.goodee.util.Pager;
 
 @Mapper
 public interface NoticeMapper {
-	public List<NoticeVO>  getList(Pager pager) throws Exception;
 	public int setWrite(NoticeVO noticeVO)throws Exception;
+	public NoticeVO getDetail(NoticeVO noticeVO)throws Exception;
+	public List<NoticeVO>  getList(Pager pager) throws Exception;
 	public Long getTotalCount()throws Exception;
 }

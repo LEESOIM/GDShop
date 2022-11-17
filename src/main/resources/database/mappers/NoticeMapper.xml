@@ -5,14 +5,21 @@
 		    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 
 <mapper namespace="com.shop.goodee.board.notice.NoticeMapper">
+	
+	
+	<insert id="setWrite" parameterType="NoticeVO">
+		INSERT INTO NOTICE VALUES(null,#{id},#{title},#{contents},sysdate(),0,0,0,0)
+	</insert>
+
+	<select id="getDetail" parameterType="NoticeVO" resultType="NoticeVO">
+		SELECT * FROM NOTICE WHERE NOTICENUM=#{noticeNum}
+	</select>
+
 
 	<select id="getList" parameterType="Pager" resultType="NoticeVO" >
 		SELECT * FROM NOTICE ORDER BY NOTICENUM DESC LIMIT #{startRow},10 
 	</select>
 	
-	<insert id="setWrite" parameterType="NoticeVO">
-		INSERT INTO NOTICE VALUES(null,#{id},#{title},#{contents},sysdate(),0,0,0,0)
-	</insert>
 	
 	<select id="getTotalCount" resultType="Long">
 		SELECT COUNT(NOTICENUM) FROM NOTICE

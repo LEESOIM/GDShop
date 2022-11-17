@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/board/notice/*")
+@RequestMapping("notice/*")
 public class NoticeController {
 	
 	@Autowired
 	private NoticeService noticeService;
 	
-	@GetMapping("list")
-	public void getList()throws Exception{
+	@GetMapping("detail")
+	public void getDetail()throws Exception{
 		
 	}
 	

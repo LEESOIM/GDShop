@@ -29,7 +29,7 @@ class NoticeTest {
 	void setWrite()throws Exception{
 		NoticeVO noticeVO = new NoticeVO();
 		for(int i=0; i<100; i++) {
-			noticeVO.setId("test");
+			noticeVO.setId("manager");
 			noticeVO.setTitle("Title test"+i);
 			noticeVO.setContents("Contents test"+i);
 			

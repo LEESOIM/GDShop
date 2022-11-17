@@ -16,10 +16,16 @@ public class NoticeService {
 	@Autowired
 	private NoticeMapper noticeMapper;
 	
+	public int setWrite(NoticeVO noticeVO)throws Exception{
+		return noticeMapper.setWrite(noticeVO);
+	}
+	
+	public NoticeVO getDetail(NoticeVO noticeVO)throws Exception{
+		return noticeMapper.getDetail(noticeVO);
+	}
+	
 	public List<NoticeVO> getList(Pager pager)throws Exception{
-		
 		Long totalCount = noticeMapper.getTotalCount();
-		
 		pager.setRow();
 		pager.setNum(totalCount);
 		
