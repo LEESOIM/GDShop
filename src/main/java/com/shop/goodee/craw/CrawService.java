@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -17,9 +18,9 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 public class CrawService {
-
 	private WebDriver driver;
 	private WebElement element;
+	private List<WebElement> elements;
 	private String url;
 	private String nickName;
 	private List<ReviewVO> reviewVOs = new ArrayList<>();
@@ -41,7 +42,7 @@ public class CrawService {
 		options.addArguments("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36");
 		options.addArguments("--disable-blink-features=AutomationControlled");
 		options.addArguments("--disable-extensions");
-		options.addArguments("headless");
+//		options.addArguments("headless");
         
 		driver = new ChromeDriver(options);
 		
@@ -174,8 +175,6 @@ public class CrawService {
 				} catch (Exception e) {
 					log.info("리뷰 글자수) 0");					
 				}
-				
-				
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -183,4 +182,63 @@ public class CrawService {
 			driver.close(); // 브라우저 종료
 		}
 	}
+	
+	public void activateBot(InstaTestVO instaTestVO) {
+		System.out.println(instaTestVO.getUrl());
+		url = instaTestVO.getUrl();
+		String id = instaTestVO.getId();
+		try {
+			driver.get(url); // 1. url 접속
+			Thread.sleep(1000); 
+
+			element = driver.findElement(By.xpath("//*[@id=\"loginForm\"]/div/div[1]/div/label/input"));
+			element.sendKeys("junsolhee8@naver.com"); // 아이디 입력
+			log.info("아이디 입력==========");
+			Thread.sleep(1000); 
+			
+			element = driver.findElement(By.xpath("//*[@id=\"loginForm\"]/div/div[2]/div/label/input"));
+			element.sendKeys("wjsgkwns77"); // 비번 입력
+			log.info("비번 입력==========");
+			Thread.sleep(1000); 
+			
+			try {
+				element = driver.findElement(By.xpath("//*[@id=\"loginForm\"]/div/div[3]/button"));
+				
+			} catch (Exception e) {
+				element = driver.findElement(By.xpath("//*[@id=\"loginForm\"]/div/div[4]/button"));
+			}
+//			element.click(); // 2. 로그인 클릭
+			element.sendKeys(Keys.ENTER);
+			log.info("로그인 버튼==========");
+			Thread.sleep(3000); 
+			
+			// 검색 
+//			element = driver.findElement(By.xpath("//*[@id=\\\"mount_0_0_ij\\\"]/div/div/div/div[1]/div/div/div/div[1]/div[1]/div[1]/div/div/div/div/div[2]/div[2]/div/a/div"));
+//			element.sendKeys(Keys.ENTER);
+//			log.info("검색 클릭==========");
+			
+//			element = driver.findElement(By.xpath("//*[@id=\"mount_0_0_9q\"]/div/div/div/div[1]/div/div/div/div[1]/div[1]/div[1]/div/div/div/div/div[2]/div[2]"));
+//			log.info("xpath지정");
+//			element.click(); // 검색
+//			log.info("클릭");
+			
+			driver.get("https://www.instagram.com/solhyi.jeon/followers/?next=%2F"); //대상 닉네임 (.com) (/?next) 사이에 삽입
+			Thread.sleep(3000);
+			
+			//xpath 불가
+			
+			elements = driver.findElements(By.className("_abcm"));
+//			log.info(elements.size());
+			element.click();
+			
+			// 팔로워 <div class=" _ab8y  _ab94 _ab97 _ab9f _ab9k _ab9p _abcm">solhyi.jeon</div>
+			
+			
+		}catch (Exception e){
+			log.info("error) {}",e);
+		}
+		finally{
+//			driver.close();
+			}
+		}
 }
