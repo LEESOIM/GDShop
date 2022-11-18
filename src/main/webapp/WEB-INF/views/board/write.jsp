@@ -28,7 +28,7 @@ pageEncoding="UTF-8"%>
     <section class="container" style="width: 75%">
       <c:import url="../template/top_part.jsp"></c:import>
       <c:import url="../template/header.jsp"></c:import>
-      <c:import url="../template/library.jsp"></c:import>
+      
       <div class="container">
         <div class="content d-flex">
           <div class="sidebar">
@@ -50,11 +50,19 @@ pageEncoding="UTF-8"%>
           </div>
           <div style="width: 100%;">
             <div class="board_top p-3 mt-3 mb-3">Write Page</div>
-            <form action="write" method="post">
+
+            <form action="write" method="post" enctype="multipart/form-data">
                 <div style="width: 100%;">
-                    <input type="text" style="width: 100%;" id="title" value="제목을 입력하세요">
+                    <input type="text" style="width: 100%;" id="title" name="title" value="제목을 입력하세요">
+                    <input type="text" style="width: 100%;" id="id" name="id" value="manager">
                 </div>
-                <textarea name="" id="summernote"></textarea>
+                <div>
+                    <input type="file" name="files" id="" class="files" multiple>
+                </div>
+                <p class="file_drag">파일을 마우스로 끌어 오세요</p>
+                <textarea name="contents" id="summernote"></textarea>
+
+                <button type="submit">작성</button>
             </form>
 
           </div>

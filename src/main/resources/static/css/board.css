@@ -67,3 +67,20 @@ tr.colored:hover td{
   color:#303f39 !important;
 
 }
+
+.file_drag{
+  margin-top: 7px;
+  padding: 19px 10px;
+  border: 1px solid #e6e6ea;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #767678;
+  color: var(--color-sub-info-1);
+  line-height: 20px;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+#files{
+  border-bottom: solid 1px lightgray;
+}
