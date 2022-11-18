@@ -5,4 +5,13 @@
    
 <mapper namespace="com.shop.goodee.item.ItemMapper">
 
+	<insert id="setAdd" parameterType="ItemVO">
+		INSERT INTO ITEM VALUES(NULL, #{id}, #{title}, #{contents}, #{price}, #{stock}, #{count}, #{url}, SYSDATE, 0, 0)
+	</insert>
+	
+	<select id="getList" resultType="ItemVO">
+		SELECT * FROM ITEM ORDER BY ASC;
+	</select>
+	
+	
 </mapper>

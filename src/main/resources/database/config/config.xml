@@ -7,6 +7,7 @@
 	<typeAliases>
 		<typeAlias type="com.shop.goodee.member.MemberVO" alias="MemberVO"/>
 		<typeAlias type="com.shop.goodee.member.RoleVO" alias="RoleVO"/>
+		<typeAlias type="com.shop.goodee.item.ItemVO" alias="ItemVO"/>
 		
 		
 		<typeAlias type="java.lang.Integer" alias="Integer"/>

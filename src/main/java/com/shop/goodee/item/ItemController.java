@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/item/*")
 public class ItemController {
 
+	@GetMapping("add")
+	public void setAdd() {
+		
+	}
+	
 	@GetMapping("detail")
 	public void getItems() {
 		
