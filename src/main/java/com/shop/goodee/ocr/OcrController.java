@@ -32,11 +32,9 @@ public class OcrController {
 	}
 	
 	@PostMapping("setPurchase")
-	public void setPurchase(@RequestParam("f") MultipartFile file) throws Exception{
-		log.info("=============================");
-		log.info(file.getOriginalFilename());
-		
-//		ocrService.setPurchaseFileAdd(multipartFile);
+	@ResponseBody
+	public void setPurchase(MultipartFile f) throws Exception{
+		ocrService.setPurchaseFileAdd(f);
 	}
 	
 }

@@ -2,23 +2,37 @@ package com.shop.goodee.ocr;
 
 import java.io.File;
 import java.sql.Date;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import lombok.extern.slf4j.Slf4j;
 import net.sourceforge.tess4j.Tesseract;
 
+@Slf4j
 @Service
 public class OcrService {
 	
 	@Value("${app.purchase}")
-	private String path;
+	private String path;  //  D:/gdshop/purchase/
 	
-	public void setPurchaseFileAdd(MultipartFile multipartFile) throws Exception{
-		File file = new File(path);
-		if(!file.exists()) {
-			file.mkdirs();
+	public void setPurchaseFileAdd(MultipartFile f) throws Exception{
+
+		if(!f.isEmpty()) {
+			String oriName = f.getOriginalFilename(); // 원본파일명
+			String uuid = UUID.randomUUID().toString(); // asfasfasdfa
+			StringBuffer bf = new StringBuffer();
+			bf.append(uuid);
+			String ex = oriName.substring(oriName.lastIndexOf("."));
+			bf.append(ex);
+			String fileName = bf.toString(); //파일명
+			File file = new File(path,fileName);
+			if(!file.exists()) {
+				file.mkdirs();
+			}
+			f.transferTo(file);
 		}
 	};
 	
