@@ -50,6 +50,30 @@ public class MemberController {
 		
 		return "redirect:/";
 	}
+	
+	//아이디 찾기
+	@GetMapping("find_id")
+	public void getFindId()throws Exception {
+		
+	}
+	@PostMapping("find_id")
+	@ResponseBody
+	public String getFindId(MemberVO memberVO)throws Exception {
+		String id = memberService.getFindId(memberVO);
+		
+		return id;
+	}
+	//비번 찾기
+	@GetMapping("find_pw")
+	public void getFindPw()throws Exception {
+		
+	}
+	@PostMapping("find_pw")
+	@ResponseBody
+	public String getFindPw(MemberVO memberVO)throws Exception{
+		String email = memberService.getFindPw(memberVO);
+		return email;
+	}
 
 	/* 약관동의 */
 	@GetMapping("agree")

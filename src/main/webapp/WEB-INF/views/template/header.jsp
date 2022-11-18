@@ -124,7 +124,7 @@ prefix="c" %>
                     로그인 상태 유지
                   </label>
                 </div>
-                <div><a href="#" id="id_search">아이디/비밀번호 찾기</a></div>
+                <div><a href="/member/find_id" id="id_search">아이디/비밀번호 찾기</a></div>
               </div>
               <div style="height: 10%">
                 <div class="d-grid gap-2">

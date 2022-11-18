@@ -19,6 +19,15 @@ public class MemberService {
 		return memberMapper.getLogin(memberVO);
 	}
 	
+	//아이디 찾기
+	public String getFindId(MemberVO memberVO)throws Exception{
+		return memberMapper.getFindId(memberVO);
+	}
+	//비밀번호 찾기
+	public String getFindPw(MemberVO memberVO)throws Exception{
+		return memberMapper.getFindPw(memberVO);
+	}
+	
 	//중복 아이디 조회
 	public int getIdCheck(MemberVO memberVO)throws Exception{
 		return memberMapper.getIdCheck(memberVO);

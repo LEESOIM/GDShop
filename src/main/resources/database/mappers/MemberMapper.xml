@@ -17,6 +17,15 @@
 		SELECT COUNT(id) FROM MEMBER WHERE ID=#{id}
 	</select>
 	
+	<!-- 아이디 찾기 -->
+	<select id="getFindId" parameterType="MemberVO" resultType="String">
+		SELECT ID FROM MEMBER WHERE NAME=#{name} AND BIRTH=#{birth} AND PHONE=#{phone}
+	</select>
+	<!-- 비밀번호 찾기 -->
+	<select id="getFindPw" parameterType="MemberVO" resultType="String">
+		SELECT EMAIL FROM MEMBER WHERE ID =#{id} AND BIRTH=#{birth}
+	</select>
+	
 	<!-- 로그인 -->
 	<select id="getLogin" parameterType="MemberVO" resultMap="getLoginResult">
 		SELECT M.*, R.* 
@@ -27,7 +36,7 @@
 			INNER JOIN
 			ROLE R
 			ON MR.ROLENUM = R.ROLENUM
-		WHERE M.ID=#{id} AND M.PW=#{id};
+		WHERE M.ID=#{id} AND M.PW=#{pw};
 	</select>
 	
 	<resultMap type="MemberVO" id="getLoginResult">
