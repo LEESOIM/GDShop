@@ -43,7 +43,7 @@ public class OcrService {
 		
 		Tesseract tesseract = new Tesseract();
 		String lang = "kor+eng";
-		tesseract.setDatapath("C:\\sts\\workspace\\GDShop\\src\\main\\resources\\Tess4J\\tessdata");
+		tesseract.setDatapath("D:\\Tess4J\\tessdata");
 		tesseract.setLanguage(lang);
 		
 		boolean checkNum = true;

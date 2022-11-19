@@ -25,16 +25,18 @@ public class CrawService {
 	private String nickName;
 	private List<ReviewVO> reviewVOs = new ArrayList<>();
 	
+	ChromeOptions options = new ChromeOptions();
+	
  	// 드라이버 설치 경로
 	public static String WEB_DRIVER_ID = "webdriver.chrome.driver";
-	public static String WEB_DRIVER_PATH = "C:\\sts\\workspace\\GDShop\\src\\main\\resources/chromedriver.exe";
+	public static String WEB_DRIVER_PATH = "D:\\/chromedriver.exe";
 	
 	public CrawService (){
 		// WebDriver 경로 설정
+		log.info("asdasdadsd");
 		System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
 				
 		// WebDriver 옵션 설정
-		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--start-maximized");
 		options.addArguments("--disable-popup-blocking");
 		
@@ -42,12 +44,13 @@ public class CrawService {
 		options.addArguments("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36");
 		options.addArguments("--disable-blink-features=AutomationControlled");
 		options.addArguments("--disable-extensions");
-//		options.addArguments("headless");
+		options.addArguments("headless");
         
-		driver = new ChromeDriver(options);
+
 		
 	}
 	public void activateBot(TestVO testVO) {
+		driver = new ChromeDriver(options);
 		System.out.println(testVO.getUrl());
 		url = testVO.getUrl();
 		nickName = testVO.getNickName();
@@ -184,6 +187,7 @@ public class CrawService {
 	}
 	
 	public void activateBot(InstaTestVO instaTestVO) {
+//		driver = new ChromeDriver(options);
 		System.out.println(instaTestVO.getUrl());
 		url = instaTestVO.getUrl();
 		String id = instaTestVO.getId();
@@ -254,7 +258,7 @@ public class CrawService {
 			log.info("error) {}",e);
 		}
 		finally{
-//			driver.close();
+			driver.close();
 			}
 		}
 }

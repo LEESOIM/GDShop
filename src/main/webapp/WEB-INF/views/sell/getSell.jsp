@@ -26,7 +26,7 @@
       		<div style="margin-top: 3em; padding-bottom: 70px">
       			
       			<form action="POST" method="">
-      			<h1>판매자 상품 등록</h1>
+      			<h1>판매자 입점 문의</h1>
 	            <!-- 상품명 -->
 	              <div class="mt-4">
 	                <label class="mt-2 mb-2" style="font-weight: bold">
@@ -68,7 +68,9 @@
 	                <b>등록</b>
 	              </button>	              	              
             </form>
-            
+            <br>
+            <h2><a href="/craw/craw">크롤링 테스트</a></h2>
+            <h2><a href="/ocr/ocr">OCR 테스트</a></h2>
       		</div>
       		<c:import url="../template/footer.jsp"></c:import>
     	</section>
