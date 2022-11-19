@@ -193,12 +193,12 @@ public class CrawService {
 
 			element = driver.findElement(By.xpath("//*[@id=\"loginForm\"]/div/div[1]/div/label/input"));
 			element.sendKeys("junsolhee8@naver.com"); // 아이디 입력
-			log.info("아이디 입력==========");
+			log.info("아이디 입력 완료");
 			Thread.sleep(1000); 
 			
 			element = driver.findElement(By.xpath("//*[@id=\"loginForm\"]/div/div[2]/div/label/input"));
-			element.sendKeys("wjsgkwns77"); // 비번 입력
-			log.info("비번 입력==========");
+			element.sendKeys("wjsgkwns88"); // 비번 입력
+			log.info("비번 입력 완료");
 			Thread.sleep(1000); 
 			
 			try {
@@ -209,30 +209,46 @@ public class CrawService {
 			}
 //			element.click(); // 2. 로그인 클릭
 			element.sendKeys(Keys.ENTER);
-			log.info("로그인 버튼==========");
+			log.info("로그인 완료");
 			Thread.sleep(3000); 
 			
-			// 검색 
-//			element = driver.findElement(By.xpath("//*[@id=\\\"mount_0_0_ij\\\"]/div/div/div/div[1]/div/div/div/div[1]/div[1]/div[1]/div/div/div/div/div[2]/div[2]/div/a/div"));
-//			element.sendKeys(Keys.ENTER);
-//			log.info("검색 클릭==========");
-			
-//			element = driver.findElement(By.xpath("//*[@id=\"mount_0_0_9q\"]/div/div/div/div[1]/div/div/div/div[1]/div[1]/div[1]/div/div/div/div/div[2]/div[2]"));
-//			log.info("xpath지정");
-//			element.click(); // 검색
-//			log.info("클릭");
-			
 			driver.get("https://www.instagram.com/solhyi.jeon/followers/?next=%2F"); //대상 닉네임 (.com) (/?next) 사이에 삽입
+//			driver.get("https://www.instagram.com/ubdbd._.98/followers/?next=%2F"); //대상 닉네임 (.com) (/?next) 사이에 삽입
+//			driver.get("https://www.instagram.com/lotte_sweet_sta/followers/?next=%2F"); //대상 닉네임 (.com) (/?next) 사이에 삽입
 			Thread.sleep(3000);
 			
+			//- 팔로워 비공개면 크롤링 불가능
+			//- 팔로워 너무 많으면 오래걸림
+			//
+			
 			//xpath 불가
+			boolean instaCheck = true;
+			String a = "/html/body/div[1]/div/div/div/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div[2]/div/div/div[2]/div[1]/div/div[";
+			String b = "]/div[2]/div[1]/div/div/div/a/span/div";
+			String c = "";
+
+			int k = 1;
+			while(instaCheck) {
+				try {
+					c = a+k+b;
+					element = driver.findElement(By.xpath(c));
+					String followerId = element.getText();
+					log.info("{} 아이디) {}",k,followerId);
+					
+					k++;
+					Thread.sleep(100); 
+					
+				} catch (Exception e) {
+					instaCheck=false;
+				}
+			}
+			log.info("리스트추출완료");
+//			element = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div[2]/div/div/div[2]/div[1]/div/div[1]/div[2]/div[1]/div/div/div/a/span/div"));
+//			String follower = element.getText();
+//			log.info("{}",follower);
 			
-			elements = driver.findElements(By.className("_abcm"));
-//			log.info(elements.size());
-			element.click();
 			
-			// 팔로워 <div class=" _ab8y  _ab94 _ab97 _ab9f _ab9k _ab9p _abcm">solhyi.jeon</div>
-			
+			//
 			
 		}catch (Exception e){
 			log.info("error) {}",e);
