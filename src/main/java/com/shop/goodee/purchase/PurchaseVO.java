@@ -7,9 +7,9 @@ import lombok.Data;
 @Data
 public class PurchaseVO {
 
-	private String name;
-	private Date purDate;
-	private String title;
-	private Integer price;
+	private String purNum;
+	private String CamNum;
+	private String purDate;
+	private String price;
 	
 }

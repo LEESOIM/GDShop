@@ -28,13 +28,16 @@ public class PurchaseController {
 	
 	@PostMapping("setPurchase")
 	@ResponseBody
-	public void setPurchase(MultipartFile f) throws Exception{
-		purchaseService.setPurchaseFileAdd(f);
+	public PurchaseVO setPurchase(MultipartFile f) throws Exception{
+		PurchaseVO finalPurchaseVO = purchaseService.getPurchase(f);
+		
+		log.info("=========Controller==========");
+		log.info("주문일){}",finalPurchaseVO.getPurDate());
+		log.info("주문번호){}",finalPurchaseVO.getPurNum());
+		log.info("가격){}",finalPurchaseVO.getPrice());
+		log.info("=============================");
+		return finalPurchaseVO;
 	}
 	
-	@GetMapping("getPurchase")
-	@ResponseBody
-	public void getPurchase() throws Exception{
-		purchaseService.getPurchase();
-	}
+
 }

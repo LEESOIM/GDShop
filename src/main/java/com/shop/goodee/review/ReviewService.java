@@ -21,8 +21,9 @@ import lombok.extern.slf4j.Slf4j;
 public class ReviewService {
 	
 	@Value("${app.chromePath}")
-	private String chromePath;  //  application-secret.properties에 추가 
-							 	//  ex) app.chromePath=C:\sts\workspace\GDShop\src\main\resources\chromedriver.exe
+	private String chromePath;  //  application-secret.properties에 추가 (\ -> \\)
+								//  ex) app.ocrPath=C:\\sts\\workspace\\GDShop\\src\\main\\resources\\Tess4J\\tessdata
+								//  ex) app.chromePath=C:\\sts\\workspace\\GDShop\\src\\main\\resources\\chromedriver.exe
 	private String WEB_DRIVER_ID = "webdriver.chrome.driver";
 	
 	private WebDriver driver;
@@ -33,7 +34,8 @@ public class ReviewService {
 	private List<ReviewVO> reviewVOs = new ArrayList<>();
 	
 	
-	public void getReview(TestVO testVO) {
+	
+	public ReviewVO getReview(TestVO testVO) {
 		
 		System.setProperty(WEB_DRIVER_ID, chromePath);
 				
@@ -51,6 +53,7 @@ public class ReviewService {
 		
 		url = testVO.getUrl();
 		nickName = testVO.getNickName();
+		ReviewVO finalReviewVO = new ReviewVO();
 		try {
 			driver.get(url); // 1. url 접속
 			Thread.sleep(1000); 
@@ -81,7 +84,7 @@ public class ReviewService {
 			String xpathBtn ="]";
 			boolean check = true;
 			int l=0;
-			int reviewOption = 20;
+			int reviewOption = 100;
 			while(check) {
 				try {
 					for(int i=2;i<12;i++) {
@@ -104,13 +107,11 @@ public class ReviewService {
 							element = driver.findElement(By.xpath(text)); // 유저명
 							tmp = element.getText().trim();
 							reviewVO.setNickName(tmp);
-							log.info("유저명) "+tmp);
-							log.info("찾을닉네임) "+nickName);
 							if(tmp == nickName || tmp.equals(nickName)) {
 								log.info("============닉네임 발견==========");
 								check=false;
 							}
-							
+							log.info("유저명) "+tmp);
 							text=xpathCommon+j+xpathDate;
 							element = driver.findElement(By.xpath(text)); // 날짜
 							tmp = element.getText();
@@ -128,6 +129,7 @@ public class ReviewService {
 								element = driver.findElement(By.xpath(text)); // 리뷰
 								tmp = element.getText();
 								reviewVO.setReview(tmp);
+								reviewVO.setReviewLength(tmp.length());
 								log.info("리뷰) "+tmp);
 							} catch (Exception e) {
 							}
@@ -140,9 +142,9 @@ public class ReviewService {
 							}
 							reviewOption--;
 							if(reviewOption==0) {
-								log.info("{}번까지 리뷰 미발견",k);
-								driver.close();
-								break;
+								log.info("0~{}까지 리뷰 미발견",k);
+								driver.quit();
+								return finalReviewVO;
 							}
 						}
 						if(check==false) {
@@ -164,29 +166,33 @@ public class ReviewService {
 			if(check==false) {
 				log.info("===============최종 결과=========================");
 				
-				ReviewVO reviewVO = new ReviewVO();
-				reviewVO.setNickName(reviewVOs.get(reviewVOs.size()-1).getNickName());
-				reviewVO.setTitle(reviewVOs.get(reviewVOs.size()-1).getTitle());
-				reviewVO.setDate(reviewVOs.get(reviewVOs.size()-1).getDate());
-				reviewVO.setTitleDetail(reviewVOs.get(reviewVOs.size()-1).getTitleDetail());
-				reviewVO.setReview(reviewVOs.get(reviewVOs.size()-1).getReview());
+				finalReviewVO.setNickName(reviewVOs.get(reviewVOs.size()-1).getNickName());
+				finalReviewVO.setTitle(reviewVOs.get(reviewVOs.size()-1).getTitle());
+				finalReviewVO.setDate(reviewVOs.get(reviewVOs.size()-1).getDate());
+				finalReviewVO.setTitleDetail(reviewVOs.get(reviewVOs.size()-1).getTitleDetail());
+				finalReviewVO.setReview(reviewVOs.get(reviewVOs.size()-1).getReview());
+				finalReviewVO.setReviewLength(reviewVOs.get(reviewVOs.size()-1).getReviewLength());
 				
-				log.info("닉네임) "+reviewVO.getNickName());
-				log.info("상품명) "+reviewVO.getTitle());
-				log.info("날짜) "+reviewVO.getDate());
-				log.info("세부상품명) "+reviewVO.getTitleDetail());
-				log.info("리뷰) "+reviewVO.getReview());
 				try {
-					log.info("리뷰 글자수) "+reviewVO.getReview().length());					
+					log.info("리뷰 글자수) "+finalReviewVO.getReview().length());
+					return finalReviewVO;
 				} catch (Exception e) {
 					log.info("리뷰 글자수) 0");					
 				}
+			}else {
+				ReviewVO reviewVO = new ReviewVO();
+				return reviewVO;
 			}
 		}catch (Exception e) {
 //			e.printStackTrace();
 		} finally {
-			driver.close(); // 브라우저 종료
+			try {
+				driver.quit(); // 브라우저 종료
+			} catch (Exception e2) {
+			}
+			
 		}
+		return finalReviewVO;
 	}
 	
 	public void activateBot(InstaTestVO instaTestVO) {
