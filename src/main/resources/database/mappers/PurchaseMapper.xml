@@ -3,10 +3,8 @@
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    
-<mapper namespace="com.shop.goodee.ocr.OcrMapper">
+<mapper namespace="com.shop.goodee.purchase.PurchaseMapper">
 
-	<insert id="setOcrFile" parameterType="PurchaseVO" >
-		INSERT INTO PURCHASE_FILE
-		VALUES(1,1,1,1)
+	<insert id="setPurchaseFile" parameterType="PurchaseVO" >
 	</insert>
 </mapper>

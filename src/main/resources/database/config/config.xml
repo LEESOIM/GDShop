@@ -8,6 +8,7 @@
 		<!-- 하준 -->
 		<typeAlias type="com.shop.goodee.purchase.PurchaseVO" alias="PurchaseVO"/>
 		<typeAlias type="com.shop.goodee.purchase.PurchaseFileVO" alias="PurchaseFileVO"/>
+		<typeAlias type="com.shop.goodee.seller.SellerVO" alias="SellerVO"/>
 		<!-- 하준 -->
 	</typeAliases>
 </configuration>

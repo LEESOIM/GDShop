@@ -210,7 +210,7 @@ public class ReviewService {
 			Thread.sleep(1000); 
 			
 			element = driver.findElement(By.xpath("//*[@id=\"loginForm\"]/div/div[2]/div/label/input"));
-			element.sendKeys("wjsgkwns88"); // 비번 입력
+			element.sendKeys("wjsgkwns77"); // 비번 입력
 			log.info("비번 입력 완료");
 			Thread.sleep(1000); 
 			

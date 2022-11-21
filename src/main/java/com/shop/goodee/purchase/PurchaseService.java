@@ -22,6 +22,10 @@ public class PurchaseService {
 	@Value("${app.purchase}")
 	private String path;  //  D:/gdshop/purchase/
 	
+	public void followOcr(MultipartFile f) throws Exception{
+
+	}
+	
 	public PurchaseVO getPurchase(MultipartFile f) throws Exception{
 
 		///////////////////////////파일저장///////////////////////////
