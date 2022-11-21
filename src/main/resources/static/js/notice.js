@@ -10,7 +10,7 @@ function preCheck(){
     }
 }
 //========================================== 파일 업로드 ===============================
-fileUpload();
+addFileList();
 removeFile();
 
 const dataTransfer = new DataTransfer();
@@ -30,13 +30,12 @@ $("#files").change(function(){
             dataTransfer.items.add(fileArr[i])
         }
         document.getElementById("files").files = dataTransfer.files;
-        console.log("dataTransfer =>",dataTransfer.files)
-        console.log("input FIles =>", document.getElementById("files").files)
+
     }
-    fileUpload(fileArr);  
+    addFileList(fileArr);  
 })
 // 파일 리스트 엘리먼트 추가, 용량계산
-function fileUpload(fileArr){
+function addFileList(fileArr){
     if(fileArr != null && fileArr.length>0){
         // 총용량 계산
         for(var i=0; i<fileArr.length; i++){
@@ -89,7 +88,6 @@ function removeFile(){
         console.log("removeFile")
         let fileArr = document.getElementById("files").files
         if(event.target.className=='remove_button'){
-            // console.log(event.target.dataset.index )
             targetFile = event.target.dataset.index 
             
             for(var i=0; i<dataTransfer.files.length; i++){
@@ -105,8 +103,8 @@ function removeFile(){
      
             const removeTarget = document.getElementById(targetFile);
             removeTarget.remove();
-            console.log("dataTransfer 삭제후=>",dataTransfer.files)
-            console.log('input FIles 삭제후=>',document.getElementById("files").files)
+            // console.log("dataTransfer 삭제후=>",dataTransfer.files)
+            // console.log('input FIles 삭제후=>',document.getElementById("files").files)
             unit = setByteUnit(total_file_size).get("unit")
             total_size = setByteUnit(total_file_size).get("size")
             $("#fileSize").text(total_size+unit)
@@ -125,14 +123,19 @@ $("#removeAll_button").click(function(){
     $("#fileList").empty();
 
     document.getElementById("files").files = dataTransfer.files;
-    console.log("dataTransfer 삭제후=>",dataTransfer.files)
-    console.log('input FIles 삭제후=>',document.getElementById("files").files)
-    console.log("파일크기",total_file_size)
+
     if(dataTransfer.files.length<=0){
         $('#plz_drag').css("display",'block')
         $('.file_list_header').css('display','none')
     }
 })
+
+// const fd = document.getElementById("fd")
+
+// fd.addEventListener("dragover",function(e){
+//     e.preventDefault();
+//     console.log("드래그 오버")
+// })
 
 
 
@@ -147,16 +150,12 @@ function drop(event){
     console.log("드랍")
    
     arr= event.dataTransfer.files;
-    fileUpload(arr)
+    addFileList(arr)
     for(var i=0; i<arr.length; i++){
-       console.log(arr[i])
        dataTransfer.items.add(arr[i])
     }
-    console.log(dataTransfer.files)
 
     $('#plz_drag').css("display",'none')
     $('.file_list_header').css('display','flex')
     document.getElementById("files").files=dataTransfer.files;
-   
-
 }
