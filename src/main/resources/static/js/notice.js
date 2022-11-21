@@ -138,7 +138,6 @@ $("#removeAll_button").click(function(){
 // })
 
 
-
 // 파일 Drag and Drop 이벤트
 function allowDrop(event) {
     console.log("드래그 오버")
