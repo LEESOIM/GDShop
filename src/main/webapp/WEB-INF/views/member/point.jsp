@@ -30,59 +30,7 @@ prefix="c" %>
       <c:import url="../template/header.jsp"></c:import>
       <div class="container">
         <div class="content d-flex">
-          <div class="sidebar">
-            <div style="height: 260px; width: 250px">
-              <div class="list_top p-3 mt-4 d-flex">
-                <img
-                  src="/images/user.webp"
-                  style="
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 25px;
-                    margin-top: 1.9px;
-                  "
-                />
-                <div class="ms-2">
-                  <div><span style="color: green">김OO</span> 회원님,</div>
-                  <div>커피 한 잔과 구디샵!</div>
-                </div>
-              </div>
-              <ol class="list-group list-group-flush">
-                <form action="mypage" method="get">
-                  <a href="./mypage" style="text-decoration: none">
-                    <li class="list-group-item" id="myinfo">
-                      <i class="fa-regular fa-circle-user ps-2 pe-3"></i>내 정보
-                    </li>
-                  </a>
-                </form>
-                <form action="point" method="get">
-                  <a href="./point" style="text-decoration: none">
-                    <li class="list-group-item" id="mypoint">
-                      <i class="fa-brands fa-product-hunt ps-2 pe-3"></i>내
-                      포인트
-                    </li>
-                  </a>
-                </form>
-                <form action="grade" method="get">
-                  <a href="./grade" style="text-decoration: none">
-                    <li class="list-group-item" id="mygrade">
-                      <i class="fa-solid fa-trophy ps-2 pe-3"></i>내 등급
-                    </li>
-                  </a>
-                </form>
-                <li class="list-group-item">
-                  <i class="fa-solid fa-gears ps-2 pe-3"></i>내 설정
-                </li>
-                <li class="list-group-item">
-                  <i class="fa-solid fa-triangle-exclamation ps-2 pe-3"></i>내
-                  경고상태
-                </li>
-                <li class="list-group-item">
-                  <i class="fa-brands fa-shopify ps-2 pe-3"></i>내 상품
-                </li>
-              </ol>
-            </div>
-          </div>
+          <c:import url="../template/mypage_side.jsp"></c:import>
           <div class="ms-3 mb-2" id="info" style="width: 100%">
             <!-- 여기부터 내포인트 상세보기 -->
             <div class="info_top d-flex p-2 mt-3 mb-3">

@@ -36,3 +36,15 @@ body {
   cursor: pointer;
   border-right: solid 3.5px green;
 }
+
+/* 프로필 사진 변경 */
+.profile_btn{
+	border: none;
+	box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+	padding: 7px 25px;
+	background-color: transparent;
+}
+.profile_btn:hover {
+	background-color: #dcdcdc;
+	cursor: pointer;
+}

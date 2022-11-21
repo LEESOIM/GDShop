@@ -20,3 +20,29 @@ for (let i = 0; i < t_btn.length; i++) {
     }
   });
 }
+
+//프로필 사진 삭제
+$("#profile_delete").click(function () {
+  let id = $("#sessionId").val();
+  $.ajax({
+    type: "POST",
+    url: "profile_delete",
+    data: {
+      id: id,
+    },
+    success: function (data) {
+      $("#profile_image").attr("src", "/file/profile/" + data);
+      $("#profile_save").attr("onclick", "location.href='/member/profile'");
+      $("#profile_save").attr("type", "button");
+    },
+  });
+});
+
+//프로필 사진 업로드 없이 적용버튼 누를 경우, button타입으로 변경
+$("#profile_save").click(function () {
+  if ($("#file").val() == "") {
+    $("#profile_save").attr("type", "button");
+  } else {
+    $("#profile_save").attr("type", "submit");
+  }
+});

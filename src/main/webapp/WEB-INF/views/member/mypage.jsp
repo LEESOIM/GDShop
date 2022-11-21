@@ -30,69 +30,17 @@ prefix="c" %>
       <c:import url="../template/header.jsp"></c:import>
       <div class="container">
         <div class="content d-flex">
-          <div class="sidebar">
-            <div style="height: 260px; width: 250px">
-              <div class="list_top p-3 mt-4 d-flex">
-                <img
-                  src="/images/user.webp"
-                  style="
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 25px;
-                    margin-top: 1.9px;
-                  "
-                />
-                <div class="ms-2">
-                  <div><span style="color: green">김OO</span> 회원님,</div>
-                  <div>커피 한 잔과 구디샵!</div>
-                </div>
-              </div>
-              <ol class="list-group list-group-flush">
-                <form action="mypage" method="get">
-                  <a href="./mypage" style="text-decoration: none">
-                    <li class="list-group-item" id="myinfo">
-                      <i class="fa-regular fa-circle-user ps-2 pe-3"></i>내 정보
-                    </li>
-                  </a>
-                </form>
-                <form action="point" method="get">
-                  <a href="./point" style="text-decoration: none">
-                    <li class="list-group-item" id="mypoint">
-                      <i class="fa-brands fa-product-hunt ps-2 pe-3"></i>내
-                      포인트
-                    </li>
-                  </a>
-                </form>
-                <form action="grade" method="get">
-                  <a href="./grade" style="text-decoration: none">
-                    <li class="list-group-item" id="mygrade">
-                      <i class="fa-solid fa-trophy ps-2 pe-3"></i>내 등급
-                    </li>
-                  </a>
-                </form>
-                <li class="list-group-item">
-                  <i class="fa-solid fa-gears ps-2 pe-3"></i>내 설정
-                </li>
-                <li class="list-group-item">
-                  <i class="fa-solid fa-triangle-exclamation ps-2 pe-3"></i>내
-                  경고상태
-                </li>
-                <li class="list-group-item">
-                  <i class="fa-brands fa-shopify ps-2 pe-3"></i>내 상품
-                </li>
-              </ol>
-            </div>
-          </div>
+          <c:import url="../template/mypage_side.jsp"></c:import>
           <div class="ms-3 mb-2" id="info" style="width: 100%">
             <!-- 여기부터 내정보 상세보기 -->
             <div class="info_top p-2 mt-3 mb-3">
-              <span style="color: rgb(10, 154, 10)">김OO</span>님의 정보
+              <span style="color: rgb(10, 154, 10)">${memberVO.name}</span>님의 정보
             </div>
             <div>
               <div style="text-align: center">
                 <div class="mt-3" style="height: 150px">
                   <img
-                    src="/images/user.webp"
+                    src="/file/profile/${memberVO.memberFileVO.fileName}"
                     style="
                       width: 135px;
                       height: 135px;
@@ -100,26 +48,20 @@ prefix="c" %>
                       box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
                     "
                   />
-                  <div class="file_box">
-                    <label for="file" class="file"
+                  <div class="file_box" onclick="location.href='/member/profile'">
+                    <label for="file" class="file" data-bs-custom-class="custom-tooltip" data-toggle="tooltip" data-bs-placement="right" data-bs-title="프로필 사진 변경"
                       ><i
                         class="fa-solid fa-square-pen"
                         style="font-size: 30px"
                       ></i
                     ></label>
-                    <input
-                      type="file"
-                      name="file"
-                      id="file"
-                      style="display: none"
-                    />
                   </div>
                 </div>
                 <div>
-                  <h4><b>tjfl</b></h4>
+                  <h4><b>${memberVO.id}</b></h4>
                 </div>
                 <div style="color: gray; margin-top: -5px">
-                  tjfgml64@nate.com
+                  ${memberVO.email}
                 </div>
               </div>
               <!-- 정보상자1 -->
@@ -128,16 +70,16 @@ prefix="c" %>
                   <div class="mt-1 mb-2" style="font-size: 17px">
                     <b>기본정보</b>
                   </div>
-                  <div>이름 : 김설희</div>
+                  <div>이름 : ${memberVO.name}</div>
                   <div>
-                    <i class="fa-solid fa-calendar-days pe-1"></i> 1996-02-02
+                    <i class="fa-solid fa-calendar-days pe-1"></i> ${memberVO.birth}
                   </div>
                   <div>
                     <i class="fa-solid fa-mobile-screen-button pe-2"></i>
-                    010-2616-0000
+                    ${memberVO.phone}
                   </div>
                   <div>
-                    <i class="fa-regular fa-envelope pe-1"></i> tjfl@nate.com
+                    <i class="fa-regular fa-envelope pe-1"></i> ${memberVO.email}
                   </div>
                 </div>
                 <div class="board_box">
@@ -196,6 +138,12 @@ prefix="c" %>
       <c:import url="../template/footer.jsp"></c:import>
     </section>
 
+	<!-- 툴팁 활성화 -->
+	 <script>
+	  $(document).ready(function(){
+	    $('[data-toggle="tooltip"]').tooltip();   
+	  });
+	</script>
     <script src="/js/info.js"></script>
   </body>
 </html>

@@ -23,8 +23,12 @@
 	</select>
 	<!-- 비밀번호 찾기 -->
 	<select id="getFindPw" parameterType="MemberVO" resultType="String">
-		SELECT EMAIL FROM MEMBER WHERE ID =#{id} AND BIRTH=#{birth}
+		SELECT EMAIL FROM MEMBER WHERE ID =#{id} AND BIRTH=#{birth} AND PHONE=#{phone}
 	</select>
+	<!-- 임시비밀번호 변경 -->
+	<update id="setNewPw" parameterType="MemberVO">
+		UPDATE MEMBER SET pw=#{pw} WHERE email=#{email}
+	</update>
 	
 	<!-- 로그인 -->
 	<select id="getLogin" parameterType="MemberVO" resultMap="getLoginResult">
@@ -36,7 +40,7 @@
 			INNER JOIN
 			ROLE R
 			ON MR.ROLENUM = R.ROLENUM
-		WHERE M.ID=#{id} AND M.PW=#{pw};
+		WHERE M.ID=#{id} AND M.PW=#{pw}
 	</select>
 	
 	<resultMap type="MemberVO" id="getLoginResult">
@@ -55,4 +59,44 @@
 			<result column="roleName" property="roleName"/>
 		</collection>
 	</resultMap>
+	
+	<!-- 마이페이지 -->
+	<select id="getMypage" parameterType="MemberVO" resultMap="getDetailResult">
+		SELECT M.*,MF.* FROM MEMBER M
+			INNER JOIN
+			MEMBER_FILE MF
+			ON (M.ID=MF.ID)
+		WHERE M.ID=#{id}
+	</select>
+	
+	<resultMap type="MemberVO" id="getDetailResult">
+		<id column="id" property="id"/>
+		<result column="pw" property="pw"/>
+		<result column="name" property="name"/>
+		<result column="email" property="email"/>
+		<result column="birth" property="birth"/>
+		<result column="phone" property="phone"/>
+		<result column="point" property="point"/>
+		<result column="regDate" property="regDate"/>
+		<result column="status" property="status"/>
+		<result column="nickName" property="nickName"/>
+		<collection property="memberFileVO" javaType="MemberFileVO" ofType="MemberFileVO">
+			<result column="fileName" property="fileName"/>
+			<result column="oriName" property="oriName"/>
+		</collection>
+	</resultMap>
+	
+	<!-- 프로필사진 추가 -->
+	<insert id="setProfile" parameterType="MemberFileVO">
+		INSERT INTO MEMBER_FILE VALUES(NULL, #{id}, #{fileName}, #{oriName})
+	</insert>
+	<!-- 프로필사진 확인 -->
+	<select id="getProfile" parameterType="MemberFileVO" resultType="MemberFileVO">
+		SELECT * FROM MEMBER_FILE WHERE ID=#{id}
+	</select>
+	<!-- 프로필 사진 삭제 후 default이미지로 업데이트 -->
+	<update id="setProfileUpdate" parameterType="MemberFileVO">
+		UPDATE MEMBER_FILE SET FILENAME=#{fileName}, ORINAME=#{oriName} WHERE ID=#{id}
+	</update>
+
 </mapper>

@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
@@ -28,28 +30,8 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	
-	//로그인(세션)
-	@PostMapping("login")
-	@ResponseBody
-	public int getLogin(MemberVO memberVO,HttpSession session)throws Exception{
-		memberVO = memberService.getLogin(memberVO);
-		int result = 0;
-		if(memberVO != null) {
-			session.setAttribute("member", memberVO);
-			result = 1;
-		}
-		
-		return result;
-	}
-	
-	//로그아웃(세션)
-	@GetMapping("logout")
-	public String setLogout(HttpSession session)throws Exception{
-		session.invalidate();
-		
-		return "redirect:/";
-	}
+	@Autowired
+	private MailService mailService;
 	
 	//아이디 찾기
 	@GetMapping("find_id")
@@ -72,6 +54,9 @@ public class MemberController {
 	@ResponseBody
 	public String getFindPw(MemberVO memberVO)throws Exception{
 		String email = memberService.getFindPw(memberVO);
+		if(email != null) {
+			mailService.sendMail(memberVO);			
+		}
 		return email;
 	}
 
@@ -127,10 +112,88 @@ public class MemberController {
 		
 	}
 	
+	//로그인(세션)
+	@PostMapping("login")
+	@ResponseBody
+	public int getLogin(MemberVO memberVO,HttpSession session)throws Exception{
+		memberVO = memberService.getLogin(memberVO);
+		int result = 0;
+		if(memberVO != null) {
+			session.setAttribute("member", memberVO);
+			result = 1;
+		}
+		
+		return result;
+	}
+	
+	//로그아웃(세션)
+	@GetMapping("logout")
+	public String setLogout(HttpSession session)throws Exception{
+		session.invalidate();
+		
+		return "redirect:/";
+	}
+	
 	/* 마이페이지 */
 	@GetMapping("mypage")
-	public void getMypage() {
+	public ModelAndView getMypage(HttpSession session,MemberVO memberVO, ModelAndView mv)throws Exception {
+		memberVO = (MemberVO) session.getAttribute("member");
+		memberVO = memberService.getMypage(memberVO);
 		
+		mv.addObject("memberVO", memberVO);
+		mv.setViewName("/member/mypage");
+		return mv;	
+	}
+	
+	/* 마이페이지 - 프로필 수정 */
+	@GetMapping("profile")
+	public ModelAndView setProfile(HttpSession session,MemberVO memberVO, ModelAndView mv)throws Exception {
+		memberVO = (MemberVO) session.getAttribute("member");
+		if(memberVO == null) {
+			mv.setViewName("redirect:/");
+		}else {
+			//id값으로 파일 조회 후 전송
+			MemberFileVO memberFileVO = new MemberFileVO();
+			memberFileVO.setId(memberVO.getId());
+			memberFileVO = memberService.getProfile(memberFileVO);
+			mv.addObject("memberFileVO", memberFileVO);
+			
+			//회원 정보 담아서 전송
+			memberVO = memberService.getMypage(memberVO);
+			mv.addObject("memberVO", memberVO);
+			mv.setViewName("/member/profile");			
+		}
+		
+		return mv;
+	}
+	
+	@PostMapping("profile")
+	public ModelAndView setProfile(HttpSession session, MemberVO memberVO, @RequestParam("file")MultipartFile multipartFile, ModelAndView mv)throws Exception {
+		memberVO = (MemberVO) session.getAttribute("member");
+		MemberFileVO memberFileVO = memberService.setProfile(memberVO, multipartFile);
+		
+		mv.setViewName("redirect:/member/profile");
+		mv.addObject("memberFileVO", memberFileVO);
+
+		return mv;
+	}
+	
+	// 프로필사진 삭제버튼을 누르면 default이미지로 update함.
+	@PostMapping("profile_delete")
+	@ResponseBody
+	public String setProfileDelete(MemberVO memberVO, ModelAndView mv)throws Exception {
+		MemberFileVO memberFileVO = new MemberFileVO();
+		memberFileVO.setFileName("user.webp");
+		memberFileVO.setOriName("user.webp");
+		memberFileVO.setId(memberVO.getId());
+		
+		int result = memberService.setProfileUpdate(memberFileVO);
+		if(result == 1) {
+			return "user.webp";
+		}else {
+			return "업데이트 실패";
+		}
+
 	}
 	
 	/* 내포인트 */
@@ -141,6 +204,27 @@ public class MemberController {
 	/* 내등급 */
 	@GetMapping("grade")
 	public void getGrade() {
+
+	}
+	
+	/* 내 설정 - 본인확인 */
+	@GetMapping("set")
+	public void getSet() {
+
+	}
+	/* 내 설정 - 내 정보 변경*/
+	@GetMapping("set_up")
+	public void getSetUp() {
+
+	}
+	/* 내 설정 - 비밀번호 변경*/
+	@GetMapping("set_pw")
+	public void getSetPw() {
+
+	}
+	/* 내 설정 - 회원 탈퇴*/
+	@GetMapping("withdrawal")
+	public void getWithdrawal() {
 
 	}
 }
