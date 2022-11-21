@@ -63,10 +63,12 @@ pageEncoding="UTF-8"%>
                 <div class="file_drag" ondrop="drop(event)" ondragover="allowDrop(event)">
                   <div id="plz_drag">파일을 마우스로 끌어 오세요</div>
                   <div class="file_list_header" style="display: none;">
-                    <div class="file_list_header_task"><button type="button" class="button_svg_delete"><span class="blind">전체 삭제</span></button></div>
+                    <div class="file_list_header_task">
+                      <button type="button" id="removeAll_button"><span class="blind">X</span></button>
+                    </div>
                     <div class="file_list_header_title"><span class="text">파일명</span></div>
                     <!-- <div class="file_list_header_status"><span class="text">업로드 상태</span></div> -->
-                    <div class="file_list_header_volume"><span class="text">용량</span><span id="fileSize">0</span></div>
+                    <div class="file_list_header_volume"><span class="text">총용량 </span><span id="fileSize">0</span></div>
                   </div>
 
                   <ul id="fileList"></ul>

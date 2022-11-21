@@ -9,14 +9,11 @@ function preCheck(){
         $('#pre').addClass('disabled')
     }
 }
-
+//========================================== 파일 업로드 ===============================
 fileUpload();
 removeFile();
 
 const dataTransfer = new DataTransfer();
-
-
-
 let total_file_size=0
 
 //파일 업로드 변경 이벤트
@@ -120,6 +117,24 @@ function removeFile(){
         }
     })
 }
+// 파일 전체 제거
+$("#removeAll_button").click(function(){
+    console.log("전체 제거",dataTransfer.files.length)
+    dataTransfer.items.clear()
+    total_file_size=0
+    $("#fileList").empty();
+
+    document.getElementById("files").files = dataTransfer.files;
+    console.log("dataTransfer 삭제후=>",dataTransfer.files)
+    console.log('input FIles 삭제후=>',document.getElementById("files").files)
+    console.log("파일크기",total_file_size)
+    if(dataTransfer.files.length<=0){
+        $('#plz_drag').css("display",'block')
+        $('.file_list_header').css('display','none')
+    }
+})
+
+
 
 // 파일 Drag and Drop 이벤트
 function allowDrop(event) {
