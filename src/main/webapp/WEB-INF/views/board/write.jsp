@@ -60,7 +60,7 @@ pageEncoding="UTF-8"%>
                     <input  type="file" name="files" id="files" class="files form-control form-control-sm" multiple>
                 </div> 
 
-                <div class="file_drag" id="fs" >
+                <div class="file_drag" ondrop="drop(event)" ondragover="allowDrop(event)">
                   <div id="plz_drag">파일을 마우스로 끌어 오세요</div>
                   <div class="file_list_header" style="display: none;">
                     <div class="file_list_header_task">
@@ -68,7 +68,7 @@ pageEncoding="UTF-8"%>
                     </div>
                     <div class="file_list_header_title"><span class="text">파일명</span></div>
                     <!-- <div class="file_list_header_status"><span class="text">업로드 상태</span></div> -->
-                    <div class="file_list_header_volume"><span class="text">총 용량 </span><span id="fileSize">0</span></div>
+                    <div class="file_list_header_volume"><span class="text">총용량 </span><span id="fileSize">0</span></div>
                   </div>
 
                   <ul id="fileList"></ul>
