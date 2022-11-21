@@ -53,13 +53,26 @@ pageEncoding="UTF-8"%>
 
             <form action="write" method="post" enctype="multipart/form-data">
                 <div style="width: 100%;">
-                    <input type="text" style="width: 100%;" id="title" name="title" value="제목을 입력하세요">
+                    <input type="text" style="width: 100%;" id="title" name="title" placeholder="제목을 입력하세요">
                     <input type="text" style="width: 100%;" id="id" name="id" value="manager">
                 </div>
                 <div>
-                    <input type="file" name="files" id="" class="files" multiple>
+                    <input  type="file" name="files" id="files" class="files form-control form-control-sm" multiple>
+                </div> 
+
+                <div class="file_drag" ondrop="drop(event)" ondragover="allowDrop(event)">
+                  <div id="plz_drag">파일을 마우스로 끌어 오세요</div>
+                  <div class="file_list_header" style="display: none;">
+                    <div class="file_list_header_task"><button type="button" class="button_svg_delete"><span class="blind">전체 삭제</span></button></div>
+                    <div class="file_list_header_title"><span class="text">파일명</span></div>
+                    <!-- <div class="file_list_header_status"><span class="text">업로드 상태</span></div> -->
+                    <div class="file_list_header_volume"><span class="text">용량</span><span id="fileSize">0</span></div>
+                  </div>
+
+                  <ul id="fileList"></ul>
                 </div>
-                <p class="file_drag">파일을 마우스로 끌어 오세요</p>
+
+                
                 <textarea name="contents" id="summernote"></textarea>
 
                 <button type="submit">작성</button>

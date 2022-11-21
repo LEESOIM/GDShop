@@ -22,7 +22,7 @@ public class NoticeService {
 	private NoticeMapper noticeMapper;
 	@Autowired
 	private FileManager fileManager;
-	@Value("${app.notice}")
+	@Value("${app.notice}") //	D:/gdshop/notice/
 	private String path;
 	
 	
@@ -42,8 +42,10 @@ public class NoticeService {
 		for(MultipartFile f :noticeVO.getFiles()) {
 			if(!f.isEmpty()) {
 				log.info("file => {}",f.getOriginalFilename());
+				// HDD에 저장
 				String fileName = fileManager.saveFile(f, path);
 				
+				// DB에 저장
 				NoticeFileVO noticeFileVO = new NoticeFileVO();
 				noticeFileVO.setNoticeNum(noticeVO.getNoticeNum());
 				noticeFileVO.setFileName(fileName);

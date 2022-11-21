@@ -84,3 +84,14 @@ tr.colored:hover td{
 #files{
   border-bottom: solid 1px lightgray;
 }
+
+.file_list_header{
+  display: flex;
+  flex-direction: row;
+}
+
+.fileItem{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
