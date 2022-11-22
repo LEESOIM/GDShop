@@ -22,9 +22,6 @@ public class PurchaseService {
 	@Value("${app.purchase}")
 	private String path;  //  D:/gdshop/purchase/
 	
-	public void followOcr(MultipartFile f) throws Exception{
-
-	}
 	
 	public PurchaseVO getPurchase(MultipartFile f) throws Exception{
 
@@ -62,7 +59,7 @@ public class PurchaseService {
 				String abc = path+fileName;
 				String text = tesseract.doOCR(new File(abc)); // Ocr적용
 				text = text.trim().replaceAll("[,.\\s\\[\\]\\(\\)\\|\\ㆍ\\-\\_]", ""); // 공백,특수문자 제거
-				log.info("===========Service===========");//주문일
+				log.info("===========Service===========");
 				log.info("OCR){}",text);
 				
 				text = text.substring(text.indexOf("주문상세")+4); //0~a 인덱스문자열 소거 
