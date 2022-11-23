@@ -56,7 +56,7 @@
 				</div>
 			</div>
 
-
+		<a href="/item/add" class="btn btn-success">임시로 만들어 놓은 상품등록 버튼</a>
 			<div
 				style="height: 40px; font-size: 22px; font-weight: 600; letter-spacing: -0.03em;">
 				우리 집 오늘부터 외식없다✋온가족 먹거리🥪</div>
@@ -162,9 +162,9 @@
 				style="font-size: 13px;">+0 <span class="visually-hidden">unread
 						messages</span></span></a>
 		</div>
-
 		<c:import url="../template/footer.jsp"></c:import>
 	</section>
+	<script src="/js/index.js"></script>
 </body>
 </html>
 

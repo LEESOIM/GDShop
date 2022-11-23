@@ -8,11 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>MainTab2</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-	crossorigin="anonymous" />
+<c:import url="../template/library.jsp"></c:import>
 <link rel="stylesheet" href="/css/index.css" />
 <link rel="stylesheet" href="/css/header.css" />
 <link rel="stylesheet" href="/css/login.css" />
@@ -42,7 +38,24 @@
 				<div class="campaign-content">캠페인 지원 즉시 선정 결과를 확인할 수 있는 방식</div>
 			</div>
 
-
+			<div class="search">
+				<div class="available">
+					<input type="checkbox" value="" id="able">
+					<label for="able">지원 가능</label> 
+				</div>
+				<div class="order">
+					<button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">최신순
+					<img src="/images/borrom-arrow.svg">
+					</button>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="#">추천순</a></li>
+						<li><a class="dropdown-item" href="#">인기순</a></li>
+						<li><a class="dropdown-item" href="#">당첨률순</a></li>
+						<li><a class="dropdown-item" href="#">마감순</a></li>
+					</ul>
+				</div>
+			</div>
+			
 			<div
 				style="height: 40px; font-size: 22px; font-weight: 600; letter-spacing: -0.03em;">
 				우리 집 오늘부터 외식없다✋온가족 먹거리🥪</div>
@@ -153,13 +166,7 @@
 
 		<c:import url="../template/footer.jsp"></c:import>
 	</section>
-
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-		crossorigin="anonymous"></script>
-	<script src="https://kit.fontawesome.com/6e23c67242.js"
-		crossorigin="anonymous"></script>
+	<script src="/js/index.js"></script>
 </body>
 </html>
 

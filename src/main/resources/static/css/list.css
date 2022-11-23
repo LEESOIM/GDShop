@@ -21,7 +21,6 @@
 
 .campaign-content {
     font-weight: 400;
-    font-size: 16px;
     line-height: 140%;
     text-align: center;
     letter-spacing: -.03em;
@@ -30,14 +29,14 @@
 }
 
 .search {
-    padding: 50px 0 60px 0;
+    padding: 40px 15px;
     border-bottom: 1px solid #d8d8d8;
 }
 
 .search .available {
     float: left;
-    color: rgba(0,0,0,.65);
-    font-size: 18px;
+    color: #000000A6;
+    font-size: 17px;
 }
 
 
@@ -46,6 +45,6 @@
     border: 0;
     outline: 0;
     padding: 0;
-    color: rgba(0,0,0,.65);
-    font-size: 18px;
+    color: #000000A6;
+    font-size: 17px;
 }

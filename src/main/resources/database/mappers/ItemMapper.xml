@@ -5,4 +5,16 @@
    
 <mapper namespace="com.shop.goodee.item.ItemMapper">
 
+	<insert id="setAdd" parameterType="ItemVO" useGeneratedKeys="true" keyProperty="itemNum">
+		INSERT INTO ITEM VALUES(NULL, #{id}, #{itemName}, #{price}, #{title}, #{type}, #{point}, #{itemDetail}, #{stock}, IFNULL(#{count}, 0), #{url}, NOW(), 0, 0)
+	</insert>
+	<insert id="setAddFile" parameterType="ItemFileVO">
+		INSERT INTO ITEM_FILE VALUES(NULL, #{itemNum}, #{fileName}, #{oriName})
+	</insert>
+	
+	<select id="getList" resultType="ItemVO">
+		SELECT * FROM ITEM ORDER BY ASC;
+	</select>
+	
+	
 </mapper>
