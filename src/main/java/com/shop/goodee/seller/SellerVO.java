@@ -1,13 +1,14 @@
 package com.shop.goodee.seller;
 
+import com.shop.goodee.member.MemberVO;
+
 import lombok.Data;
 
 @Data
-public class SellerVO {
+public class SellerVO extends MemberVO{
 
 	private String id;
+	private Integer roleNum;
 	private String company;
-	private String card;
-	private String cardNum;
-	private String category;
+	
 }

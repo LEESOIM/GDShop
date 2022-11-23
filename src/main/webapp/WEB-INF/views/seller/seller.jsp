@@ -41,25 +41,29 @@
 									<div class="mb-3">
 										<label for="address2">ID<span class="text-muted">&nbsp;(로그인
 												필요)</span></label> <input type="text" class="form-control" id="id1"
-											placeholder="ID를 입력해주세요.">
+											value="junsolhee" disabled>
 									</div>
 									
 									<div class="mb-3">
+										<label for="address2">이름<span class="text-muted">&nbsp;(로그인
+												필요)</span></label> <input type="text" class="form-control" id="name"
+											value="전하준" disabled>
+									</div>
+									<div class="mb-3">
 										<label for="address2">이메일<span class="text-muted">&nbsp;(로그인
-												필요)</span></label> <input type="text" class="form-control" id="id1"
-											placeholder="이메일을 입력해주세요.">
+												필요)</span></label> <input type="text" class="form-control" id="email"
+											value="junsolhee7@naver.com" disabled>
 									</div>
 									
 									<div class="mb-3">
 										<label for="address2">전화번호<span class="text-muted">&nbsp;(로그인
-												필요)</span></label> <input type="text" class="form-control" id="id1"
-											placeholder="전화번호를 입력해주세요.">
+												필요)</span></label> <input type="text" class="form-control" id="phone"
+											value="01012345678" disabled>
 									</div>
 
 									<div class="mb-3">
 										<label for="name">기업명</label> <input type="text"
-											class="form-control" id="company" placeholder="기업명" value=""
-											required>
+											class="form-control" id="company" placeholder="기업명" required>
 										<div class="invalid-feedback">기업명을 입력해주세요.</div>
 									</div>
 									
@@ -79,6 +83,7 @@
 						<footer class="my-3 text-center text-small">
 							<p class="mb-1">&copy; 2022 GDShop</p>
 						</footer>
+						<a href="./sellerList">입점신청 리스트</a>
 					</div>
 				</div>
 			</div>

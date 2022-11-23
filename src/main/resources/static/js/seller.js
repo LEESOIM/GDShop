@@ -1,6 +1,4 @@
 
-$("#card").val("");
-$("#category").val("");
 
 window.addEventListener('load', () => {
 	const forms = document.getElementsByClassName('validation-form');
@@ -15,35 +13,48 @@ window.addEventListener('load', () => {
 	});
 }, false);
 
-$("#standingRequest").on("click",function(){
+$("#standingRequest").on("click",function(e){
+	e.preventDefault();
 	console.log("================================");
 	let id = $("#id1").val();
+	let name = $("#name").val();
+	let email = $("#email").val();
+	let phone = $("#phone").val();
 	let company = $("#company").val();
-	let card = $("#card").val();
-	let cardNum = $("#cardNum").val();
-	let category = $("#category").val();
+	let agree = $("#aggrement").is(':checked');
 
 	console.log("1.ID명:"+id);
-	console.log("2.기업명:"+company);
-	console.log("3.카드사:"+card);
-	console.log("4.카드번호:"+cardNum);
-	console.log("5.대표 상품 카테고리:"+category);
+	console.log("2.이름:"+name);
+	console.log("3.이메일:"+email);
+	console.log("4.전화번호:"+phone);
+	console.log("5.기업명:"+company);
+	console.log("6.동의:"+agree);
 	
-	if(id!=null && company!=null && card!=null && cardNum!=null && category!=null){
+
+	if(id!=null && name!=null && email!=null && phone!=null && company!="" && agree){
+		console.log("if문통과");
 		$.ajax({
 			type:"post",
 			url:"/seller/seller",
-			traditional:false,
-			data:{
-				id,
-				company,
-				card,
-				cardNum,
-				category
-			},
+			traditional:true,
+			contentType:'application/json',
+			data:JSON.stringify({
+				"id":id,
+				"roleNum":"4",
+				"name":name,
+				"email":email,
+				"phone":phone,
+				"company":company
+			}),
 			success:function(response){
-				console.log("===========Controller전송==========");
+				console.log("================ajax성공");
+			},
+			error:function(){
+				console.log("================ajax실패");
 			}
+			
 		})
 	}
+
+
 });

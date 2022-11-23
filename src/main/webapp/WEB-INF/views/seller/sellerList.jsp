@@ -21,6 +21,7 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="/css/header.css" />
 <link rel="stylesheet" href="/css/index.css" />
+<link rel="stylesheet" href="/css/sellerList.css" />
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 
@@ -32,7 +33,36 @@
 
 			<div class="d-flex justify-content-center mt-4">
 				<div style="width: 60%; margin-bottom: 50px">
-					<h1>SellerList</h1>
+					<h4>입점신청 현황</h4>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">아이디</th>
+								<th scope="col">이름</th>
+								<th scope="col">이메일</th>
+								<th scope="col">전화번호</th>
+								<th scope="col">기업명</th>
+								<th scope="col"></th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${requestScope.vo}" var="dto">
+								<tr>
+									<th scope="row"></th>
+									<td>${dto.id}</td>
+									<td>${dto.name}</td>
+									<td>${dto.email}</td>
+									<td>${dto.phone}</td>
+									<td>${dto.company}</td>
+									<td><a href="#">O</a></td>
+									<td><a href="#">X</a></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+
 				</div>
 			</div>
 

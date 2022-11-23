@@ -1,5 +1,7 @@
 package com.shop.goodee.seller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,12 @@ public class SellerService {
 		
 		int result = sellerMapper.setSellerAdd(sellerVO);
 		return result;
+	}
+	
+	public List<SellerVO> getSellerList() throws Exception{
+		List<SellerVO> ar = sellerMapper.getSellerList();
+		log.info("==========ㅇ=================={}",ar);
+		return ar;
 	}
 	
 }
