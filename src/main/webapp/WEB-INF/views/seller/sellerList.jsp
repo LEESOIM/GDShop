@@ -32,7 +32,7 @@
 		<div style="margin-top: 3em; padding-bottom: 70px">
 
 			<div class="d-flex justify-content-center mt-4">
-				<div style="width: 60%; margin-bottom: 50px">
+				<div style="width: 80%; margin-bottom: 50px">
 					<h4>입점신청 현황</h4>
 					<table class="table table-striped">
 						<thead>
