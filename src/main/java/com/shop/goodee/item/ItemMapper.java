@@ -7,6 +7,8 @@ public interface ItemMapper {
 
 	public int setAdd(ItemVO itemVO) throws Exception;
 	
+	public int setAddFile(ItemFileVO itemFileVO) throws Exception;
+	
 	public ItemVO getList() throws Exception;
 
 }
