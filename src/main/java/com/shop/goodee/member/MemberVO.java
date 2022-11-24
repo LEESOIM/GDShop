@@ -25,11 +25,13 @@ public class MemberVO {
 	private String phone;
 	private Long point;
 	private Date regDate;
-	private Boolean status;
+	private boolean status;
 	private String nickName;
+	private Date byeDate;
 	
 	//추가 memberVO
 	private String pwCheck;
+	private String newPwCheck;
 	@NotBlank
 	private String e;
 	private String mailText;

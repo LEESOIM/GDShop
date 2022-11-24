@@ -77,7 +77,7 @@ public class MemberController {
 		
 	}
 	@PostMapping("join")
-	public ModelAndView setJoin(@Valid MemberVO memberVO, BindingResult bindingResult, ModelAndView mv, String yy, String mm, String dd, String e, String mailText, String mailOption)throws Exception {
+	public ModelAndView setJoin(@Valid MemberVO memberVO, BindingResult bindingResult, ModelAndView mv, String yy, String mm, String dd, String e, String mailOption)throws Exception {
 		
 		//사용자 검증 메서드(id중복 체크, 이메일 입력 체크, 비번 일치 검증, 휴대번호 입력 검증)
 		boolean check = memberService.getMemberError(memberVO, bindingResult);
@@ -92,7 +92,7 @@ public class MemberController {
 			return mv;
 		}
 		
-		int result = memberService.setJoin(memberVO, yy, mm, dd, e, mailText, mailOption);
+		int result = memberService.setJoin(memberVO, yy, mm, dd, e, mailOption);
 		
 		//회원가입(등급 생성 포함) 성공 시 회원가입 성공 페이지, 실패 시 회원가입 페이지
 		if(result == 1) {
@@ -198,33 +198,121 @@ public class MemberController {
 	
 	/* 내포인트 */
 	@GetMapping("point")
-	public void getPoint() {
-
+	public ModelAndView getPoint(HttpSession session, MemberVO memberVO, ModelAndView mv)throws Exception {
+		memberVO = (MemberVO) session.getAttribute("member");
+		memberVO = memberService.getMypage(memberVO);
+		mv.addObject("memberVO", memberVO);
+		mv.setViewName("/member/point");
+		return mv;
 	}
 	/* 내등급 */
 	@GetMapping("grade")
-	public void getGrade() {
-
+	public ModelAndView getGrade(HttpSession session, MemberVO memberVO, ModelAndView mv)throws Exception {
+		memberVO = (MemberVO) session.getAttribute("member");
+		memberVO = memberService.getMypage(memberVO);
+		mv.addObject("memberVO", memberVO);
+		mv.setViewName("/member/grade");
+		return mv;
 	}
 	
 	/* 내 설정 - 본인확인 */
 	@GetMapping("set")
-	public void getSet() {
-
+	public ModelAndView getSet(HttpSession session, MemberVO memberVO, ModelAndView mv)throws Exception {
+		memberVO = (MemberVO) session.getAttribute("member");
+		memberVO = memberService.getMypage(memberVO);
+		mv.addObject("memberVO", memberVO);
+		mv.setViewName("/member/set");
+		return mv;
+	}
+	
+	/* 내 설정 - 본인확인 */
+	@PostMapping("pwCheck")
+	@ResponseBody
+	public int getPwCheck(HttpSession session, MemberVO memberVO)throws Exception{
+		MemberVO sessionMemberVO = (MemberVO) session.getAttribute("member");
+		memberVO.setId(sessionMemberVO.getId());
+		
+		return memberService.getPwCheck(memberVO);
 	}
 	/* 내 설정 - 내 정보 변경*/
 	@GetMapping("set_up")
-	public void getSetUp() {
-
+	public ModelAndView getSetUp(HttpSession session, MemberVO memberVO, ModelAndView mv)throws Exception {
+		memberVO = (MemberVO) session.getAttribute("member");
+		memberVO = memberService.getMypage(memberVO);
+		
+		mv.addObject("memberVO", memberVO);
+		mv.setViewName("/member/set_up");
+		
+		return mv;
 	}
+	
+	/* 내 설정 - 이메일 변경 */
+	@PostMapping("changeEmail")
+	@ResponseBody
+	public int setChangeEmail(MemberVO memberVO, HttpSession session, String e, String mailOption)throws Exception {
+		MemberVO sessionMemberVO = (MemberVO) session.getAttribute("member");
+		memberVO.setId(sessionMemberVO.getId());
+		memberVO.setEmail(memberVO.getEmail());
+		
+		int result = memberService.setChangeEmail(memberVO, e, mailOption);
+		
+		return result;
+	}
+	
+	/* 내 설정 - 전화번호 변경 */
+	@PostMapping("changePhone")
+	@ResponseBody
+	public int setChangePhone(MemberVO memberVO, HttpSession session)throws Exception {
+		MemberVO sessionMemberVO = (MemberVO) session.getAttribute("member");
+		memberVO.setId(sessionMemberVO.getId());
+		memberVO.setPhone(memberVO.getPhone());
+		
+		int result = memberService.setChangePhone(memberVO);
+		
+		return result;
+	}
+	
 	/* 내 설정 - 비밀번호 변경*/
 	@GetMapping("set_pw")
-	public void getSetPw() {
-
+	public ModelAndView getSetPw(MemberVO memberVO, HttpSession session, ModelAndView mv)throws Exception {
+		memberVO = (MemberVO) session.getAttribute("member");
+		memberVO = memberService.getMypage(memberVO);
+		
+		mv.addObject("memberVO", memberVO);
+		mv.setViewName("/member/set_pw");
+		
+		return mv;
 	}
+	@PostMapping("changePw")
+	@ResponseBody
+	public int setChangePw(MemberVO memberVO, HttpSession session)throws Exception {
+		MemberVO sessionMemberVO = (MemberVO) session.getAttribute("member");
+		memberVO.setId(sessionMemberVO.getId());
+		memberVO.setPw(memberVO.getPw());
+		
+		int result = memberService.setChangePw(memberVO);
+		return result;
+	}
+	
+	
 	/* 내 설정 - 회원 탈퇴*/
 	@GetMapping("withdrawal")
-	public void getWithdrawal() {
+	public ModelAndView getWithdrawal(HttpSession session, MemberVO memberVO, ModelAndView mv)throws Exception {
+		memberVO = (MemberVO) session.getAttribute("member");
+		memberVO = memberService.getMypage(memberVO);
+		
+		mv.addObject("memberVO", memberVO);
+		mv.setViewName("/member/withdrawal");
 
+		return mv;
+	}
+	
+	/* 회원 탈퇴 */
+	@PostMapping("withdrawal")
+	@ResponseBody
+	public int setWithdrawal(HttpSession session, MemberVO memberVO)throws Exception{
+		memberVO = (MemberVO) session.getAttribute("member");
+		
+		return memberService.setWithdrawal(memberVO);
 	}
 }

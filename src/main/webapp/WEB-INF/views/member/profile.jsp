@@ -57,7 +57,7 @@ prefix="c" %>
                 	<input type="file" name="file" id="file" style="display: none" onchange="setThumbnail(event)"/>
                 	<button type="button" class="profile_btn ms-1 me-2" id="profile_delete">삭제</button>
                 	<input type="text" id="sessionId" name="id" value="${sessionScope.member.id}" style="display: none"/>
-                	<button class="profile_btn ms-1" id="profile_save">적용</button>
+                	<button class="profile_btn ms-1" id="profile_save" onclick="location.href='/member/mypage'">완료</button>
                 </div>
               </div>
              </form>
@@ -81,6 +81,7 @@ prefix="c" %>
           document.querySelector("#profile_image").setAttribute("style","display:none");
           document.querySelector("#profile_change").setAttribute("style","background-color: #dcdcdc;cursor: not-allowed;"); 
           document.querySelector("#profile_change").setAttribute("style","display:none"); 
+          document.querySelector("#profile_save").innerText = "적용"; 
           document.querySelector("#profile_delete").setAttribute("style","display:none");
         };
         reader.readAsDataURL(event.target.files[0]);

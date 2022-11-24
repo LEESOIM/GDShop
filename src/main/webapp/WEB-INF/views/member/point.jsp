@@ -35,7 +35,7 @@ prefix="c" %>
             <!-- 여기부터 내포인트 상세보기 -->
             <div class="info_top d-flex p-2 mt-3 mb-3">
               <div>
-                <span style="color: rgb(10, 154, 10)">김설희</span>님의 포인트
+                <span style="color: rgb(10, 154, 10)">${memberVO.name}</span>님의 포인트
               </div>
               <button class="ms-3" id="withdraw">출금요청</button>
             </div>

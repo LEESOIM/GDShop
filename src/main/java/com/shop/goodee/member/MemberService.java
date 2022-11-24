@@ -43,7 +43,7 @@ public class MemberService {
 	}
 	
 	//회원가입(입력)
-	public int setJoin(MemberVO memberVO, String yy, String mm, String dd, String e, String mailText, String mailOption)throws Exception {
+	public int setJoin(MemberVO memberVO, String yy, String mm, String dd, String e, String mailOption)throws Exception {
 		if(dd.length() == 1) {
 			dd = '0'+dd;
 		}
@@ -136,7 +136,6 @@ public class MemberService {
 		
 		//MemberFileVO에 같은 아이디의 파일이 있다면 삭제하고 없으면 생성
 		//아이디 조회, null일경우 생성
-		
 		int success = 0;
 		MemberFileVO profileID = memberMapper.getProfile(memberFileVO);
 		if(profileID == null) {
@@ -155,6 +154,33 @@ public class MemberService {
 	
 	public int setProfileUpdate(MemberFileVO memberFileVO)throws Exception{
 		return memberMapper.setProfileUpdate(memberFileVO);
+	}
+	
+	/* 내 설정 */
+	//비밀번호 일치 확인(본인확인)
+	public int getPwCheck(MemberVO memberVO)throws Exception{
+		return memberMapper.getPwCheck(memberVO);
+	}
+	
+	/* 메일주소 변경 */
+	public int setChangeEmail(MemberVO memberVO, String e, String mailOption)throws Exception{
+		memberVO.setEmail(e+"@"+mailOption);
+		return memberMapper.setChangeEmail(memberVO);
+	}
+	
+	/* 폰번호 변경 */
+	public int setChangePhone(MemberVO memberVO)throws Exception{
+		return memberMapper.setChangePhone(memberVO);
+	}
+	
+	/* 비밀번호 변경 */
+	public int setChangePw(MemberVO memberVO)throws Exception{
+		return memberMapper.setChangePw(memberVO);
+	}
+	
+	/* 회원 탈퇴 */
+	public int setWithdrawal(MemberVO memberVO)throws Exception{
+		return memberMapper.setWithdrawal(memberVO);
 	}
 	
 

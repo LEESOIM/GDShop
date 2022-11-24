@@ -6,7 +6,7 @@
 <mapper namespace="com.shop.goodee.member.MemberMapper">
 	<!-- 회원가입 -->
 	<insert id="setJoin" parameterType="MemberVO">
-		INSERT INTO MEMBER VALUES (#{id},#{pw},#{name},#{email},#{birth},#{phone},0,NOW(),1,NULL)
+		INSERT INTO MEMBER VALUES (#{id},#{pw},#{name},#{email},#{birth},#{phone},0,NOW(),1,NULL,NOW())
 	</insert>
 	<!-- 회원등급부여 -->
 	<insert id="setMemberRole" parameterType="MemberVO">
@@ -40,7 +40,7 @@
 			INNER JOIN
 			ROLE R
 			ON MR.ROLENUM = R.ROLENUM
-		WHERE M.ID=#{id} AND M.PW=#{pw}
+		WHERE M.ID=#{id} AND M.PW=#{pw} AND M.STATUS=1
 	</select>
 	
 	<resultMap type="MemberVO" id="getLoginResult">
@@ -98,5 +98,40 @@
 	<update id="setProfileUpdate" parameterType="MemberFileVO">
 		UPDATE MEMBER_FILE SET FILENAME=#{fileName}, ORINAME=#{oriName} WHERE ID=#{id}
 	</update>
+	
+	<!-- 내 정보 확인 및 설정 -->
+	<!-- 본인확인(패스워드 일치 확인) -->
+	<select id="getPwCheck" parameterType="MemberVO" resultType="Integer">
+		SELECT COUNT(ID) FROM MEMBER WHERE ID=#{id} AND PW=#{pw}
+	</select>
+	<!-- 메일주소 변경 -->
+	<update id="setChangeEmail" parameterType="MemberVO">
+		UPDATE MEMBER SET EMAIL=#{email} WHERE ID=#{id}
+	</update>
+	<!-- 폰번호 변경 -->
+	<update id="setChangePhone" parameterType="MemberVO">
+		UPDATE MEMBER SET PHONE=#{phone} WHERE ID=#{id}
+	</update>
+	<!-- 비밀번호 변경 -->
+	<update id="setChangePw" parameterType="MemberVO">
+		UPDATE MEMBER SET PW=#{pw} WHERE ID=#{id}
+	</update>
+	<!-- 회원 탈퇴 -->
+	<update id="setWithdrawal" parameterType="MemberVO">
+		UPDATE MEMBER SET STATUS=0, POINT=0, REGDATE=NOW(), BYEDATE=DATE_ADD(REGDATE, INTERVAL 3 MONTH) WHERE ID=#{id}
+	</update>
+	<!-- 탈퇴일 +1씩 증가 (삭제날짜와 같아지면 DELETE)-->
+	<update id="setRegdateAdd" parameterType="MemberVO">
+		UPDATE MEMBER SET REGDATE=DATE_ADD(REGDATE, INTERVAL 1 DAY) WHERE id=#{id}
+	</update>
+	<!-- 탈퇴한 회원조회 -->
+	<select id="getWithdrawal" resultType="MemberVO">
+		SELECT ID, REGDATE, BYEDATE FROM MEMBER WHERE STATUS = 0
+	</select>
+	<!-- 탈퇴 회원삭제 -->
+	<delete id="setUserDelete" parameterType="MemberVO">
+		DELETE FROM MEMBER WHERE ID=#{id}
+	</delete>
+	
 
 </mapper>

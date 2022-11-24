@@ -44,7 +44,7 @@ prefix="c" %>
           <div class="ms-3 mb-2" id="info" style="width: 100%">
             <!-- 여기부터 내정보 상세보기 -->
             <div class="info_top p-2 mt-3 mb-2">
-              <span style="color: rgb(10, 154, 10)">김설희</span>님의 설정
+              <span style="color: rgb(10, 154, 10)">${memberVO.name}</span>님의 설정
             </div>
             <div
               class="setUp_menu d-flex justify-content-started"
@@ -86,10 +86,6 @@ prefix="c" %>
                   서비스 이용 기록은 개인정보처리방침에 의해 3개월 간 보관되며,
                   <span style="color: red"
                     >탈퇴 후 3개월 간 재가입이 불가능합니다.</span
-                  >
-                  부정 사용으로 이용정지 처리된 회원의 경우
-                  <span style="color: red">
-                    탈퇴 후 5년간 재가입이 불가능합니다.</span
                   ></b
                 >
               </div>
@@ -116,15 +112,14 @@ prefix="c" %>
               <div>
                 <button
                   class="btn btn-danger mb-3"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal_withdrawal"
+                  id="withdrawal_btn"
                 >
                   탈퇴하기
                 </button>
               </div>
               <div><img src="/images/with.jpg" alt="" width="100%" /></div>
             </div>
-
+			<button id="withdrawal_modal" data-bs-toggle="modal" data-bs-target="#exampleModal_withdrawal" style="display: none"></button>
             <!-- 회원탈퇴 Modal -->
             <div
               class="modal fade"
@@ -165,11 +160,13 @@ prefix="c" %>
                           type="password"
                           placeholder="비밀번호를 입력해주세요."
                           class="setUp_modal mb-2"
+                          id="withdrawal_pw"
                         />
+                        <div class="pt-1" id="withdrawal_pwCheck"></div>
                       </div>
                     </div>
                   </div>
-                  <div class="modal-footer mt-4">
+                  <div class="modal-footer mt-3">
                     <button
                       type="button pe-4 ps-4"
                       class="btn btn-outline-secondary"
@@ -182,6 +179,7 @@ prefix="c" %>
                       type="button"
                       class="btn btn-outline-danger pe-3 ps-3"
                       style="border-radius: 24px"
+                      id="withdrawal_updateBtn"
                     >
                       회원 탈퇴
                     </button>

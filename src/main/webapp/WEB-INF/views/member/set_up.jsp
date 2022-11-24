@@ -44,7 +44,7 @@ prefix="c" %>
           <div class="ms-3 mb-2" id="info" style="width: 100%">
             <!-- 여기부터 내정보 상세보기 -->
             <div class="info_top p-2 mt-3 mb-2">
-              <span style="color: rgb(10, 154, 10)">김설희</span>님의 설정
+              <span style="color: rgb(10, 154, 10)">${memberVO.name}</span>님의 설정
             </div>
             <div
               class="setUp_menu d-flex justify-content-started"
@@ -57,9 +57,9 @@ prefix="c" %>
             <div class="mt-4" style="margin-bottom: 100px">
               <div class="flex-column">
                 <div class="pb-2" style="font-size: 14.5px">아이디</div>
-                <input class="setUp_form" type="text" value="tjfl" disabled />
+                <input class="setUp_form" type="text" value="${memberVO.id}" disabled />
                 <div class="pb-2 mt-4" style="font-size: 14.5px">이름</div>
-                <input class="setUp_form" type="text" value="김설희" disabled />
+                <input class="setUp_form" type="text" value="${memberVO.name}" disabled />
                 <div style="position: relative">
                   <div class="pb-2 mt-4" style="font-size: 14.5px">
                     휴대폰번호
@@ -67,7 +67,7 @@ prefix="c" %>
                   <input
                     class="setUp_form"
                     type="text"
-                    value="0101262626"
+                    value="${memberVO.phone}"
                     disabled
                   />
                   <button
@@ -84,7 +84,7 @@ prefix="c" %>
                   <input
                     class="setUp_form"
                     type="text"
-                    value="tjfgml@djfkj"
+                    value="${memberVO.email}"
                     disabled
                   />
                   <button
@@ -103,7 +103,7 @@ prefix="c" %>
                   <input
                     class="setUp_form"
                     type="text"
-                    value="1996-03-00"
+                    value="${memberVO.birth}"
                     disabled
                   />
                 </div>
@@ -150,6 +150,7 @@ prefix="c" %>
                           path="e"
                           placeholder="이메일을 입력해주세요."
                           class="setUp_modal"
+                          id="email_e"
                         />
                         <span
                           class="ps-1 pe-1"
@@ -159,7 +160,7 @@ prefix="c" %>
                         <select
                           path="mailOption"
                           class="form-select setUp_modal"
-                          id="inputGroupSelect01"
+                          id="email_option"
                         >
                           <option selected hidden>선택</option>
                           <option value="naver.com">naver.com</option>
@@ -168,6 +169,10 @@ prefix="c" %>
                           <option value="gmail.com">gmail.com</option>
                         </select>
                       </div>
+                      <div id="emailUpdate_Check" style="display:none">
+                          <i class="fa-solid fa-circle-exclamation"></i> <b id="emailUpdate_b">정확한
+                          정보를 입력해주세요.</b>
+                       </div>
                     </div>
                   </div>
                   <div class="modal-footer">
@@ -183,6 +188,7 @@ prefix="c" %>
                       type="button"
                       class="btn btn-outline-success pe-3 ps-3"
                       style="border-radius: 24px"
+                      id="emailUpdate_btn"
                     >
                       이메일 변경
                     </button>
@@ -231,10 +237,11 @@ prefix="c" %>
                           path="phone"
                           placeholder="-제외 휴대폰 번호를 입력해주세요."
                           class="setUp_modal mb-2"
+                          id="phoneUpdate_input"
                         />
-                        <div style="color: red; font-size: 14px; display: none">
-                          <i class="fa-solid fa-circle-exclamation"></i> 정확한
-                          정보를 입력해주세요.
+                        <div style="display: none" id="phoneUpdate_Check">
+                          <i class="fa-solid fa-circle-exclamation"></i> <b id="phoneUpdate_b">정확한
+                          정보를 입력해주세요.</b>
                         </div>
                       </div>
                     </div>
@@ -249,6 +256,7 @@ prefix="c" %>
                       취소
                     </button>
                     <button
+                      id="phoneUpdate_btn"
                       type="button"
                       class="btn btn-outline-success pe-3 ps-3"
                       style="border-radius: 24px"

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
 prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -44,7 +45,7 @@ prefix="c" %>
           <div class="ms-3 mb-2" id="info" style="width: 100%">
             <!-- 여기부터 내정보 상세보기 -->
             <div class="info_top p-2 mt-3 mb-2">
-              <span style="color: rgb(10, 154, 10)">김설희</span>님의 설정
+              <span style="color: rgb(10, 154, 10)">${memberVO.name}</span>님의 설정
             </div>
             <div
               class="setUp_menu d-flex justify-content-started"
@@ -56,35 +57,124 @@ prefix="c" %>
             </div>
             <div class="mt-4" style="margin-bottom: 100px">
               <div class="flex-column">
+              <div style="height: 92px">
                 <div class="pb-2" style="font-size: 14.5px">
                   <span style="color: red">＊</span>현재 비밀번호
                 </div>
                 <input
+                  id="cur_pw"
                   class="setPw_form"
                   type="password"
                   placeholder="현재 비밀번호를 입력"
                 />
-                <div class="pb-2 mt-4" style="font-size: 14.5px">
+                <div style="display: none" id="pwText_1"></div>
+                </div>
+                <div style="height: 92px">
+                <div class="pb-2 mt-2" style="font-size: 14.5px">
                   <span style="color: red">＊</span>새 비밀번호
                 </div>
                 <input
+                  id="new_pw"
                   class="setPw_form"
                   type="password"
                   placeholder="8~20자리의 비밀번호"
                 />
-                <div class="pb-2 mt-4" style="font-size: 14.5px">
+                <div style="display: none" id="pwText_2"></div>
+                </div>
+                
+                <div class="pb-2 mt-2" style="font-size: 14.5px">
                   <span style="color: red">＊</span>새 비밀번호 확인
                 </div>
                 <div class="d-flex">
                   <input
+                    id="new_pwCheck"
                     class="setPw_form"
                     type="password"
                     placeholder="새 비밀번호와 동일하게 입력"
                   />
                   <button class="btnPw_change">비밀번호 변경</button>
                 </div>
+                <div style="display: none" id="pwText_3">비밀번호 틀렸어요</div>
               </div>
             </div>
+            
+            <button id="setPw_modal" data-bs-toggle="modal" data-bs-target="#exampleModal_setPw_input2" style="display: none"></button>
+            <!-- 비밀번호 재입력안내 -->
+		    <div
+		      class="modal fade"
+		      id="exampleModal_setPw_input2"
+		      tabindex="-1"
+		      aria-labelledby="exampleModalLabel"
+		      aria-hidden="true"
+		    >
+		      <div class="modal-dialog modal-dialog-centered">
+		        <div class="modal-content">
+		          <div class="modal-body">
+		            <div class="d-flex pt-4">
+		              <div class="ps-4 pe-3" style="font-size: 28px; color: red">
+		                <i class="fa-solid fa-triangle-exclamation"></i>
+		              </div>
+		              <div
+		                class="pt-2"
+		                style="color: red; font-size: 17px; line-height: 28px"
+		              >
+		                <b id="pwCheck_setText2">비밀번호가 일치하지 않습니다.</b>
+		              </div>
+		            </div>
+		          </div>
+		          <div class="d-flex justify-content-end pb-4 ps-4 pe-4">
+		            <button
+		              type="button"
+		              class="btn btn-success"
+		              style="border-radius: 18px; padding: 6px 18px"
+		              data-bs-dismiss="modal"
+		            >
+		              확인
+		            </button>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+		    
+		    <button id="setPw_change" data-bs-toggle="modal" data-bs-target="#exampleModal_setPw_input3" style="display: none"></button>
+            <!-- 비밀번호 변경 실패 및 성공 확인 -->
+		    <div
+		      class="modal fade"
+		      id="exampleModal_setPw_input3"
+		      tabindex="-1"
+		      aria-labelledby="exampleModalLabel"
+		      data-bs-backdrop="static"
+		      aria-hidden="true"
+		    >
+		      <div class="modal-dialog modal-dialog-centered">
+		        <div class="modal-content">
+		          <div class="modal-body">
+		            <div class="d-flex pt-4">
+		              <div class="ps-4 pe-3" style="font-size: 28px;">
+		                <i id="pwCheck_icon" class="fa-solid fa-triangle-exclamation"></i>
+		              </div>
+		              <div
+		                class="pt-2"
+		                style="font-size: 17px; line-height: 28px"
+		              >
+		                <b id="pwCheck_setText3">비밀번호가 일치하지 않습니다.</b>
+		              </div>
+		            </div>
+		          </div>
+		          <div class="d-flex justify-content-end pb-4 ps-4 pe-4">
+		            <button
+		              type="button"
+		              class="btn btn-success"
+		              style="border-radius: 18px; padding: 6px 18px"
+		              data-bs-dismiss="modal"
+		              onclick="location.href='/member/set_up'"
+		            >
+		              확인
+		            </button>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
             <!-- 여기까지!! -->
           </div>
         </div>
