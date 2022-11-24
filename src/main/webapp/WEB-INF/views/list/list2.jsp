@@ -7,7 +7,7 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>MainTab3</title>
+<title>즉석추첨형 게시판</title>
 <c:import url="../template/library.jsp"></c:import>
 <link rel="stylesheet" href="/css/index.css" />
 <link rel="stylesheet" href="/css/header.css" />
@@ -15,29 +15,29 @@
 <link rel="stylesheet" href="/css/list.css" />
 
 <style type="text/css">
-.tab3 {
+.tab2 {
 	padding-bottom: 7px;
 	border-bottom: 5px rgb(139, 176, 89) solid;
 }
 
-.tab3 a {
+.tab2 a {
 	font-weight: bold;
 	color: rgb(139, 176, 89);
 }
 </style>
 </head>
 <body>
-	<section class="container" style="width: 75%">
+	<section class="container" style="width: 65%">
 		<c:import url="../template/top_part.jsp"></c:import>
 		<c:import url="../template/header.jsp"></c:import>
 
 		<div style="margin-top: 3em; padding-bottom: 70px">
 
 			<div class="campaign">
-				<div class="campaign-title">초간단 미션</div>
-				<div class="campaign-content">구매하기 미션 없이 참여하기 미션을 수행하고 포인트를 수령하는 방식</div>
+				<div class="campaign-title">즉석 추첨형</div>
+				<div class="campaign-content">캠페인 지원 즉시 선정 결과를 확인할 수 있는 방식</div>
 			</div>
-			
+
 			<div class="search">
 				<div class="available">
 					<input type="checkbox" value="" id="able">

@@ -1,6 +1,7 @@
 package com.shop.goodee.item;
 
 import java.io.File;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,7 +21,7 @@ public class ItemService {
 	@Autowired
 	private FileManager fileManager;
 
-	@Value("${app.item}") // D:/gdshop/item/
+	@Value("${app.item}") // C:/gdshop/item/
 	private String path;
 
 	public int setAdd(ItemVO itemVO) throws Exception {
@@ -49,7 +50,7 @@ public class ItemService {
 		return result;
 	}
 
-	public ItemVO getList() throws Exception {
+	public List<ItemVO> getList() throws Exception {
 		return itemMapper.getList();
 	}
 }

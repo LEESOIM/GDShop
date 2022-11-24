@@ -56,6 +56,10 @@ $("#type2").click(function () {
   $("#camCount").hide();
 })
 
+$("#type3").click(function () {
+  $("#camCount").hide();
+})
+
 
 
 //파일 등록
@@ -80,23 +84,26 @@ $("#fileAdd").click(function () {
 })
 
 
-//이미지 미리보기 함수
+//이미지 썸네일
 function setThumbnail(event) {
   let reader = new FileReader();
   reader.readAsDataURL(event.target.files[0]);
 
   reader.onload = function (event) {
+    let div = document.createElement("div");
+    div.setAttribute("style", "position : relative; margin-right: 20px;");
+
     let img = document.createElement("img");
     img.setAttribute("src", event.target.result);
     img.setAttribute("style", "width:135px; height:135px;");
-    console.log(event);
-    $("#fileBox div:last").append(img);
+    div.append(img);
+    $("#fileBox div:last").append(div);
     
     //<i class="del fa-solid fa-xmark"></i>
     let i = document.createElement("i");
-    i.setAttribute("class", "del me-4 fa-solid fa-xmark");
-    i.setAttribute("style", "position: static");
-    $("#fileBox div:last").append(i);
+    i.setAttribute("class", "del fa-solid fa-xmark");
+    i.setAttribute("style", "position: absolute; right:0");
+    div.append(i);
 
     count++;
     $("#count").text(count);
@@ -112,7 +119,7 @@ function setThumbnail(event) {
 //파일 삭제
 //$("부모선택자").on("이벤트명", "자식선택자", callback function) -이벤트 위임
 $("#fileBox").on("click", ".del", function () {
-  $(this).parent().remove(); //선택자 포함, 하위 자식들 까지 모두 삭제
+  $(this).parent().parent().remove(); //선택자 포함, 하위 자식들 까지 모두 삭제
   count--;
   $("#count").text(count);
   

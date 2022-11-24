@@ -7,7 +7,7 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>MainTab2</title>
+<title>추첨형 게시판</title>
 <c:import url="../template/library.jsp"></c:import>
 <link rel="stylesheet" href="/css/index.css" />
 <link rel="stylesheet" href="/css/header.css" />
@@ -15,27 +15,27 @@
 <link rel="stylesheet" href="/css/list.css" />
 
 <style type="text/css">
-.tab2 {
+.tab1 {
 	padding-bottom: 7px;
 	border-bottom: 5px rgb(139, 176, 89) solid;
 }
 
-.tab2 a {
+.tab1 a {
 	font-weight: bold;
 	color: rgb(139, 176, 89);
 }
 </style>
 </head>
 <body>
-	<section class="container" style="width: 75%">
+	<section class="container" style="width: 65%">
 		<c:import url="../template/top_part.jsp"></c:import>
 		<c:import url="../template/header.jsp"></c:import>
 
 		<div style="margin-top: 3em; padding-bottom: 70px">
 
 			<div class="campaign">
-				<div class="campaign-title">즉석 추첨형</div>
-				<div class="campaign-content">캠페인 지원 즉시 선정 결과를 확인할 수 있는 방식</div>
+				<div class="campaign-title">추첨형</div>
+				<div class="campaign-content">지원한 참여자 중 매일 정해진 추첨 인원만큼 랜덤으로 선정되는 무작위 선정 방식</div>
 			</div>
 
 			<div class="search">
@@ -55,7 +55,8 @@
 					</ul>
 				</div>
 			</div>
-			
+
+		
 			<div
 				style="height: 40px; font-size: 22px; font-weight: 600; letter-spacing: -0.03em;">
 				우리 집 오늘부터 외식없다✋온가족 먹거리🥪</div>
@@ -72,8 +73,7 @@
 								<div style="color: red">
 									<b>쿠팡</b>
 								</div>
-								<div class="ps-1 pe-1" style="color: rgb(147, 143, 143)">
-									|</div>
+								<div class="ps-1 pe-1" style="color: rgb(147, 143, 143)">|</div>
 								<div style="color: rgb(147, 143, 143)">[딜]풀무원</div>
 							</div>
 							<div class="pb-1 pt-1" style="font-size: 17.5px; height: 50px">
@@ -113,8 +113,7 @@
 								<div style="color: red">
 									<b>쿠팡</b>
 								</div>
-								<div class="ps-1 pe-1" style="color: rgb(147, 143, 143)">
-									|</div>
+								<div class="ps-1 pe-1" style="color: rgb(147, 143, 143)">|</div>
 								<div style="color: rgb(147, 143, 143)">[딜]풀무원</div>
 							</div>
 							<div class="pb-1 pt-1" style="font-size: 17.5px; height: 50px">
@@ -163,7 +162,6 @@
 				style="font-size: 13px;">+0 <span class="visually-hidden">unread
 						messages</span></span></a>
 		</div>
-
 		<c:import url="../template/footer.jsp"></c:import>
 	</section>
 	<script src="/js/index.js"></script>

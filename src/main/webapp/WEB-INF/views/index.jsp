@@ -26,103 +26,51 @@
 </style>
 </head>
 <body>
-	<section class="container" style="width: 75%">
+	<section class="container" style="width: 65%">
 		<c:import url="./template/top_part.jsp"></c:import>
 		<c:import url="./template/header.jsp"></c:import>
-
+		
 		<div style="margin-top: 3em; padding-bottom: 70px">
-			<div
-				style="height: 40px; font-size: 22px; font-weight: 600; letter-spacing: -0.03em;">
-				우리 집 오늘부터 외식없다✋온가족 먹거리🥪</div>
+			<div style="height: 40px; font-size: 22px; font-weight: 600; letter-spacing: -0.03em;">따끈따끈~ 방금 오픈한 캠페인</div>
 			<div class="d-flex justify-content-between" style="height: 380px">
-				<!-- 상품1 -->
+			<!-- 상품 -->
+			<c:forEach items="${list }" var="vo" >
 				<div>
 					<div class="d-flex flex-column" style="width: 250px; height: 380px">
-						<div
-							style="width: 250px; height: 250px; background-image: url(https://cdn.imweb.me/upload/S2017032758d89cbde9730/5c344a55e5613.jpg); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
-						<div class="d-flex flex-column"
-							style="width: 250px; height: 130px">
-							<div class="d-flex justify-content-start pt-1"
-								style="font-size: 13.5px">
-								<div style="color: red">
-									<b>쿠팡</b>
-								</div>
-								<div class="ps-1 pe-1" style="color: rgb(147, 143, 143)">
-									|</div>
-								<div style="color: rgb(147, 143, 143)">[딜]풀무원</div>
+						<div>
+							<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 260px; border-radius: 15px">
+						</div>
+
+						<div class="d-flex flex-column" style="width: 250px; height: 130px">
+							<div class="d-flex justify-content-start pt-1" style="font-size: 14px">
+								<div style="color: red"><b>${vo.shop }</b></div>
+								<div class="px-1" style="color: grey">|</div>
+								<div style="color: grey">${vo.company }</div>
 							</div>
-							<div class="pb-1 pt-1" style="font-size: 17.5px; height: 50px">
-								<b>[로켓와우 회원만] 떡국(맛집 떡국)</b>
+							<div class="my-1">
+								<p style="font-size: 16px; height: 50px; margin: 0; 
+								overflow: hidden; text-overflow: ellipsis; 
+								display: -webkit-box;
+    							-webkit-line-clamp: 2;
+    							-webkit-box-orient: vertical;"><b>${vo.title }</b></p>
 							</div>
-							<div class="d-flex justify-content-start pb-1"
-								style="padding-top: 2px">
-								<div
-									style="text-decoration: line-through; color: grey; font-size: 16px;"
-									class="pe-2">8800</div>
-								<div class="pe-1" style="font-size: 13px; line-height: 23px">
-									실제구매가</div>
-								<div style="font-size: 17.5px; line-height: 22px; color: blue">
-									<b>100원</b>
+							<div class="d-flex justify-content-start">
+								<div style="text-decoration: line-through; color: grey; font-size: 15px;" class="pe-2"><b>${vo.price }원</b></div>
+								<div class="pe-1" style="color:gray; font-size: 14px; line-height: 23px">실제구매가</div>
+								<div style="font-size: 18px; line-height: 22px; color: blue">
+									<b>${vo.price-vo.point }원</b>
 								</div>
 							</div>
 							<div class="d-flex justify-content-between">
 								<div style="font-size: 18px; color: blue">
 									<i class="fa-regular fa-clock"></i> <b>3:39:52</b>
 								</div>
-								<div style="font-size: 13px; line-height: 28px; color: gray">
-									마감임박</div>
+								<div style="font-size: 12px; line-height: 28px; color: gray">마감임박</div>
 							</div>
 						</div>
 					</div>
 				</div>
-
-				<!-- 상품2 -->
-				<div>
-					<div class="d-flex flex-column" style="width: 250px; height: 380px">
-						<div
-							style="width: 250px; height: 250px; background-image: url(https://cdn.imweb.me/upload/S2017032758d89cbde9730/5c344a55e5613.jpg); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
-						<div class="d-flex flex-column"
-							style="width: 250px; height: 130px">
-							<div class="d-flex justify-content-start pt-1"
-								style="font-size: 13.5px">
-								<div style="color: red">
-									<b>쿠팡</b>
-								</div>
-								<div class="ps-1 pe-1" style="color: rgb(147, 143, 143)">
-									|</div>
-								<div style="color: rgb(147, 143, 143)">[딜]풀무원</div>
-							</div>
-							<div class="pb-1 pt-1" style="font-size: 17.5px; height: 50px">
-								<b>[로켓와우 회원만] 떡국dsfdsfdsfdsfdsfsdf</b>
-							</div>
-							<div class="d-flex justify-content-start pb-1"
-								style="padding-top: 2px">
-								<div
-									style="text-decoration: line-through; color: grey; font-size: 16px;"
-									class="pe-2">8800</div>
-								<div class="pe-1" style="font-size: 13px; line-height: 23px">
-									실제구매가</div>
-								<div style="font-size: 17.5px; line-height: 22px; color: blue">
-									<b>100원</b>
-								</div>
-							</div>
-							<div class="d-flex justify-content-between">
-								<div style="font-size: 18px; color: blue">
-									<i class="fa-regular fa-clock"></i> <b>3:39:52</b>
-								</div>
-								<div style="font-size: 13px; line-height: 28px; color: gray">
-									마감임박</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div>
-					<div style="width: 250px; border: solid 2px; height: 380px"></div>
-				</div>
-				<div>
-					<div style="width: 250px; border: solid 2px; height: 380px"></div>
-				</div>
+				</c:forEach>
 			</div>
 		</div>
 

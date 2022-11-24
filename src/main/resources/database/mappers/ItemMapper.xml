@@ -6,15 +6,52 @@
 <mapper namespace="com.shop.goodee.item.ItemMapper">
 
 	<insert id="setAdd" parameterType="ItemVO" useGeneratedKeys="true" keyProperty="itemNum">
-		INSERT INTO ITEM VALUES(NULL, #{id}, #{itemName}, #{price}, #{title}, #{type}, #{point}, #{itemDetail}, #{stock}, IFNULL(#{count}, 0), #{url}, NOW(), 0, 0)
+		INSERT INTO ITEM VALUES(NULL, #{id}, #{itemName}, #{price}, #{title}, #{type}, #{point}, #{itemDetail}, #{stock}, IFNULL(#{count}, 0), #{url}, NOW(), 0, 0, #{shop})
 	</insert>
 	<insert id="setAddFile" parameterType="ItemFileVO">
 		INSERT INTO ITEM_FILE VALUES(NULL, #{itemNum}, #{fileName}, #{oriName})
 	</insert>
 	
-	<select id="getList" resultType="ItemVO">
-		SELECT * FROM ITEM ORDER BY ASC;
+	<select id="getList" resultType="ItemVO" resultMap="getListResult">
+		SELECT S.COMPANY, I.*, F.* 
+		FROM SELLER S
+		INNER JOIN
+		ITEM I
+		USING(ID)
+		INNER JOIN
+		ITEM_FILE F
+		USING(ITEMNUM)
+		ORDER BY I.ITEMNUM DESC
 	</select>
-	
+	<resultMap type="ItemVO" id="getListResult">
+		<id column="ITEMNUM" property="itemNum"/>
+		<result column="ID" property="id"/>
+		<result column="ITEMNAME" property="itemName"/>
+		<result column="PRICE" property="price"/>
+		<result column="TITLE" property="title"/>
+		<result column="TYPE" property="type"/>
+		<result column="POINT" property="point"/>
+		<result column="ITEMDETAIL" property="itemDetail"/>
+		<result column="STOCK" property="stock"/>
+		<result column="COUNT" property="count"/>
+		<result column="SHOP" property="shop"/>
+		<result column="URL" property="url"/>
+		<result column="DATE" property="date"/>
+		<result column="HIT" property="hit"/>
+		<result column="STATUS" property="status"/>
+		
+		<!-- association 1:1관계일때 -->
+		<association property="company" javaType="String"> 
+			<result column="COMPANY" property="company"/>
+		</association>	
+		
+		<!-- collection 1:N관계일때 -->
+		<collection property="itemFileVOs" javaType="List" ofType="ItemFileVO"> 
+			<id column="FILENUM" property="fileNum"/>
+			<result column="ITEMNUM" property="itemNum"/>
+			<result column="FILENAME" property="fileName"/>
+			<result column="ORINAME" property="oriName"/>		
+		</collection>	
+	</resultMap>
 	
 </mapper>

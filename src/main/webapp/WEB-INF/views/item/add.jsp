@@ -60,6 +60,21 @@
 				
 				<div class="d-flex py-4" style="border-bottom: solid 0.5px gainsboro;">
 					<div style="margin:auto 0; width: 20%;">
+						<b>상품이미지<span style="color: limegreen;">*</span></b>
+						<div style="font-size: 15px; color: gray;">(<span id="count">0</span>/3)</div>
+					</div>
+					<div style="width: 79%">
+					<div class="d-flex" >
+						<div class="d-flex" id="fileBox"></div>
+						<label id="fileAdd" class="border border-success rounded-3" style="width: 130px; height: 130px; color: green; text-align: center;">
+						<i class="fa-solid fa-camera" style="font-size: 30px; margin-top: 35px"></i><p style="font-size: 13px; text-align: center;">이미지등록</p></label>
+					</div>	
+						<p style="color: #1ec800; font-size:13px; margin-top:5px; margin-bottom: 0px;">첫번째 이미지가 대표이미지 입니다</p>
+					</div>
+				</div>
+				
+				<div class="d-flex py-4" style="border-bottom: solid 0.5px gainsboro;">
+					<div style="margin:auto 0; width: 20%;">
 						<b>캠페인제목<span style="color: limegreen;">*</span></b>
 					</div>
 					<div style="width: 79%;">
@@ -79,6 +94,9 @@
 						
 						  <input type="radio" class="btn-check" name="type" id="type2" value="즉석추첨형">
 						  <label class="btn btn-outline-success" for="type2">즉석추첨형</label>
+						  
+						  <input type="radio" class="btn-check" name="type" id="type3" value="초간단미션">
+						  <label class="btn btn-outline-success" for="type3">초간단미션</label>
 						</div>
 					</div>
 				</div>
@@ -125,19 +143,6 @@
 					</div>
 				</div>
 				
-				<div id="camCount">
-				<div class="d-flex py-4" style="border-bottom: solid 0.5px gainsboro;">
-					<div style="margin:auto 0; width: 20%;">
-						<b>총 캠페인회차<span style="color: limegreen;">*</span></b>
-					</div>
-					<div style="width: 79%;">
-					<div class="d-flex">
-						<input class="form-control" style="width: 35%;" type="text" name="count"><p style="margin:auto 0;">&nbsp;회차</p></div>
-						<p style="color: #1ec800; font-size:13px; margin-bottom: 0px;">한 캠페인당 추첨 수량 = 총 제공수량/캠페인 회차 ex) 10개=50개/5회</p>
-					</div>
-				</div>
-				</div>
-				
 				<div class="d-flex py-4" style="border-bottom: solid 0.5px gainsboro;">
 					<div style="margin:auto 0; width: 20%;">
 						<b>총 제공수량<span style="color: limegreen;">*</span></b>
@@ -147,25 +152,31 @@
 					</div>
 				</div>
 				
+				<div id="camCount">
 				<div class="d-flex py-4" style="border-bottom: solid 0.5px gainsboro;">
 					<div style="margin:auto 0; width: 20%;">
-						<b>구매링크<span style="color: limegreen;">*</span></b>
+						<b>총 캠페인회차<span style="color: limegreen;">*</span></b>
 					</div>
 					<div style="width: 79%;">
-						<input class="form-control" type="url" name="url">
+					<div class="d-flex">
+						<input class="form-control" style="width: 35%;" type="text" name="count"><p style="margin:auto 0;">&nbsp;회</p></div>
+						<p style="color: #1ec800; font-size:13px; margin-bottom: 0px;">캠페인당 추첨 수량 = 총 제공수량/총 캠페인 회차 ex) 10개=50개/5회</p>
 					</div>
+				</div>
 				</div>
 				
 				<div class="d-flex py-4" style="border-bottom: solid 0.5px gainsboro;">
 					<div style="margin:auto 0; width: 20%;">
-						<b>상품이미지<span style="color: limegreen;">*</span></b>
-						<div style="font-size: 15px; color: gray;">(<span id="count">0</span>/3)</div>
+						<b>구매링크<span style="color: limegreen;">*</span></b>
 					</div>
-					<div class="d-flex" style="width: 79%">
-						<div class="d-flex" id="fileBox"></div>
-						<label id="fileAdd" class="border border-success rounded-3" style="width: 130px; height: 130px; color: green; text-align: center;">
-						<i class="fa-solid fa-camera" style="font-size: 30px; margin-top: 35px"></i><p style="font-size: 13px; text-align: center;">이미지등록</p></label>
-					</div>	
+					<div class="d-flex" style="width: 79%;">
+						<select class="form-select me-3" style="width: 110px;" name="shop">
+							<option hidden value="">쇼핑몰</option>
+							<option value="쿠팡">쿠팡</option>
+							<option value="인스타그램">인스타그램</option>
+						</select>
+						<input class="form-control" type="url" name="url">
+					</div>
 				</div>
 				</div>
 				

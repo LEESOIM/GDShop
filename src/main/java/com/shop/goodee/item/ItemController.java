@@ -12,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("/item/*")
-@Slf4j
 public class ItemController {
 	
 	@Autowired

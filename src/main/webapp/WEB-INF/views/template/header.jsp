@@ -14,11 +14,14 @@ prefix="c" %>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item tab0  ps-3 pe-3"><a href="/">홈</a></li>
-            <li class="nav-item tab1 ps-3 pe-3"><a href="/mainTab/tab1">추첨형</a></li>
-            <li class="nav-item tab2 ps-3 pe-3"><a href="/mainTab/tab2">즉석추첨형</a></li>
-            <li class="nav-item tab3 ps-3 pe-3"><a href="/mainTab/tab3">초간단미션</a></li>
+            <li class="nav-item tab1 ps-3 pe-3"><a href="/tab/tab1">추첨형</a></li>
+            <li class="nav-item tab2 ps-3 pe-3"><a href="/tab/tab2">즉석추첨형</a></li>
+            <li class="nav-item tab3 ps-3 pe-3"><a href="/tab/tab3">초간단미션</a></li>
           </ul>
           <div class="d-flex">
+          
+          <a href="/item/add" class="btn btn-success">상품등록</a>
+          
           <c:if test="${empty member}">
             <a
               href="#"
