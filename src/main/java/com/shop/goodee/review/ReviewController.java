@@ -48,12 +48,13 @@ public class ReviewController {
 		return finalReviewVO;
 	}
 	
-	@PostMapping("instaCraw")
+	@PostMapping("getReviewNaver")
 	@ResponseBody
-	public void instaTest(InstaTestVO instaTestVO) throws Exception{
-		ReviewService bot2 = new ReviewService();
-		instaTestVO.setUrl("https://www.instagram.com/");
-		bot2.activateBot(instaTestVO);
+	public void getReviewNaver(ReviewVO reviewVO) throws Exception{
+		
+		reviewService.getReviewNaver(reviewVO);
+//지포스나우//		https://smartstore.naver.com/onfitcompany/products/6995256658?NaPm=ct%3Dlauoe07v%7Cci%3Dcheckout%7Ctr%3Dmyv%7Ctrx%3D%7Chk%3De1b4df713e31651ce6097709a9f2943664548276
+		
 	}
 	
 }

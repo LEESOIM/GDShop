@@ -12,6 +12,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.beust.jcommander.internal.Console;
 import com.shop.goodee.review.ReviewVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -25,17 +26,17 @@ public class ReviewService {
 								//  ex) app.ocrPath=C:\\sts\\workspace\\GDShop\\src\\main\\resources\\Tess4J\\tessdata
 								//  ex) app.chromePath=C:\\sts\\workspace\\GDShop\\src\\main\\resources\\chromedriver.exe
 	private String WEB_DRIVER_ID = "webdriver.chrome.driver";
+	private String url;
 	
 	private WebDriver driver;
 	private WebElement element;
 	private List<WebElement> elements;
-	private String url;
-	private String nickName;
 	private List<ReviewVO> reviewVOs = new ArrayList<>();
 	
 	
 	
 	public ReviewVO getReview(TestVO testVO) {
+		String nickName;
 		
 		System.setProperty(WEB_DRIVER_ID, chromePath);
 				
@@ -132,10 +133,9 @@ public class ReviewService {
 								reviewVO.setReviewLength(tmp.length());
 								log.info("리뷰) "+tmp);
 							} catch (Exception e) {
+								
 							}
-//							if(tmp.equals("신고하기")) {
-//								reviewVO.setReview("");
-//							}
+							
 							reviewVOs.add(reviewVO);
 							if(check==false) {
 								break;
@@ -190,10 +190,99 @@ public class ReviewService {
 				driver.quit(); // 브라우저 종료
 			} catch (Exception e2) {
 			}
-			
 		}
 		return finalReviewVO;
 	}
-	
-	
+	//////////////////////////////////////////////////////////////////// 네이버 시작 ////////////////////////////////////////////////////////////////////
+	public ReviewVO getReviewNaver(ReviewVO reviewVO) {
+		
+		System.setProperty(WEB_DRIVER_ID, chromePath);
+				
+		ChromeOptions options = new ChromeOptions(); // WebDriver 옵션 설정
+		
+		options.addArguments("--start-maximized");
+		options.addArguments("--disable-popup-blocking");
+		options.addArguments("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36"); // access deny 설정
+		options.addArguments("--disable-blink-features=AutomationControlled");
+		options.addArguments("--disable-extensions");
+//		options.addArguments("headless");
+		
+		driver = new ChromeDriver(options);
+		System.out.println(reviewVO.getUrl());
+		
+		url = reviewVO.getUrl();
+		ReviewVO finalReviewVO = new ReviewVO();
+		try {
+			driver.get(url); // 1. url 접속
+			Thread.sleep(1000);
+			
+			element = driver.findElement(By.xpath("//*[@id=\"content\"]/div/div[3]/div[2]/ul/li[2]/a"));
+			element.click();
+			Thread.sleep(1000); // 2. 리뷰 클릭
+			
+			element = driver.findElement(By.xpath("//*[@id=\"REVIEW\"]/div/div[3]/div[1]/div[1]/ul/li[2]"));
+			element.click();
+			Thread.sleep(1000); // 3. 최신순 클릭
+			
+			//*[@id="REVIEW"]/div/div[3]/div[2]/ul/li[1]/div/div/div/div[1]/div/div/div[1]/div[2]/div[2]/strong
+			//*[@id="REVIEW"]/div/div[3]/div[2]/ul/li[2]/div/div/div/div[1]/div/div/div[1]/div[2]/div[2]/strong
+			String xpathFrontID = "//*[@id=\"REVIEW\"]/div/div[3]/div[2]/ul/li[";
+			String xpathBackID = "]/div/div/div/div[1]/div/div/div[1]/div[2]/div[2]/strong";
+			String xpathID = "";
+			
+			String searchNickName = reviewVO.getNickName(); //찾을 닉네임, 찾을 글자(2 or 4)
+			int searchLength; //찾을 글자수
+			boolean check = true; // 찾으면 false
+			
+			searchLength = searchNickName.length();
+			
+			if(searchLength>=7) {
+				searchNickName=searchNickName.substring(0,4);
+			}else {
+				searchNickName=searchNickName.substring(0,2);
+			}
+			
+			//*[@id="REVIEW"]/div/div[3]/div[2]/ul/li[1]/div/div/div/div[1]/div/div/div[2]/div/span[2] 리뷰내용
+			//*[@id="REVIEW"]/div/div[3]/div[2]/ul/li[2]/div/div/div/div[1]/div/div/div[2]/div/span[2]
+			//*[@id="REVIEW"]/div/div[3]/div[2]/div/div/a[1] 이전?
+			//*[@id="REVIEW"]/div/div[3]/div[2]/div/div/a[2] 페이징 1번
+			//*[@id="REVIEW"]/div/div[3]/div[2]/div/div/a[10] 페이징 9번
+			//*[@id="REVIEW"]/div/div[3]/div[2]/div/div/a[11] 다음
+			
+			for(int i=1;i<21;i++) {
+				try {
+					element = driver.findElement(By.xpath(xpathFrontID+i+xpathBackID));
+					String nickName = element.getText().trim(); // 익명 닉네임)
+					int nickNameLength = nickName.length(); // 익명 글자수
+					
+					log.info("{}) {}",i,searchNickName);
+					log.info("{}) {}",i,nickName);
+					if(nickNameLength>=7) {
+						nickName=nickName.substring(0,4); // 익명 글자(4)
+					}else {
+						nickName=nickName.substring(0,2); // 익명 글자(2)
+					}
+					if(nickName.equals(searchNickName) && nickNameLength==searchLength) {
+						log.info(") 앞자리와 글자수가 일치함");
+						check=false;
+					}
+					if(!check) {
+						log.info("try-catch문 탈출");
+						break;
+					}
+
+				} catch (Exception e) {
+					break;	//for(int i=1;i<21;i++) 문
+				}
+			}
+			log.info("for문탈출");
+
+
+			
+		}catch (Exception e) {
+			//첫 try catch
+		}
+			
+		return reviewVO;
+	}
 }

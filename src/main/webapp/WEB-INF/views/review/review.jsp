@@ -45,6 +45,29 @@
 	                <b>검색</b>
 	              </button>	              	              
 	            </form>
+	            <!-- 쿠팡 끝 -->
+	            
+	            <!-- 네이버 시작 -->
+      			<form action="getReviewNaver" method="POST">
+      			<h1>네이버 크롤링</h1>
+	              <!-- url -->
+	              <div class="mt-4">
+	                <label class="mt-2 mb-2" style="font-weight: bold">
+	                <span style="color: red">＊</span>url</label>
+	                <input type="text" name="url" placeholder="url을 입력해주세요." class="join_form"/>
+	              </div>
+	              
+	              <!-- 닉네임 -->
+	              <div class="mt-4">
+	                <label class="mt-2 mb-2" style="font-weight: bold">
+	                <span style="color: red">＊</span>네이버 닉네임</label>
+	                <input type="text" name="nickName" placeholder="네이버 닉네임을 입력해주세요." class="join_form"/>
+	              </div>
+	              
+	              <button class="btn btn-success" type="submit">
+	                <b>검색</b>
+	              </button>	              	              
+	            </form>
 	            
 <!-- 	            <form action="instaCraw" method="POST">
 	            <h1>인스타 크롤링</h1>
