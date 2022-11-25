@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+		    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.shop.goodee.admin.AdminMapper">
+	
+	<update id="setMember" parameterType="memberVO">
+		UPDATE 
+			MEMBER M
+			INNER JOIN
+			MEMBER_ROLE MR
+			ON M.ID = MR.ID
+		SET M.POINT=#{point},MR.ROLENUM=#{roleNum}
+		WHERE M.ID=#{id}
+	</update>
+	
+	
+	<select id="getMemberDetail" parameterType="MemberVO" resultType="MemberVO">
+		SELECT * FROM MEMBER M
+			INNER JOIN
+			MEMBER_ROLE MR
+			ON M.ID = MR.ID
+			INNER JOIN
+			ROLE R
+			ON MR.ROLENUM = R.ROLENUM 
+		WHERE M.ID=#{id}
+	</select>
+	
+	
+	<sql id="search">
+		AND
+			<choose>
+				<when test="kind == 'id'">M.ID</when>
+				<when test="kind == 'name'">M.NAME</when>
+				<otherwise>M.EMAIL</otherwise>
+			</choose>
+		LIKE CONCAT('%',#{search},'%')
+	</sql>
+	
+	<select id="getTotalCount" parameterType="Pager" resultType="Long">
+		SELECT COUNT(*)
+			FROM MEMBER M
+			INNER JOIN
+			MEMBER_ROLE MR
+			ON M.ID = MR.ID
+			INNER JOIN
+			ROLE R
+			ON MR.ROLENUM = R.ROLENUM
+		WHERE R.ROLENAME LIKE CONCAT('%',#{roleName},'%') <include refid="search"></include>	
+	</select>
+	
+	
+	
+	<select id="getMember" parameterType="Pager" resultMap="getMemberResult">
+		SELECT M.*, R.* 
+			FROM MEMBER M
+			INNER JOIN
+			MEMBER_ROLE MR
+			ON M.ID = MR.ID
+			INNER JOIN
+			ROLE R
+			ON MR.ROLENUM = R.ROLENUM
+		WHERE R.ROLENAME LIKE CONCAT('%',#{roleName},'%') <include refid="search"></include>	
+		LIMIT #{startRow}, #{perPage}
+	</select>
+	<resultMap type="MemberVO" id="getMemberResult">
+		<id column="id" property="id"/>
+		<result column="pw" property="pw"/>
+		<result column="name" property="name"/>
+		<result column="email" property="email"/>
+		<result column="birth" property="birth"/>
+		<result column="phone" property="phone"/>
+		<result column="point" property="point"/>
+		<result column="regDate" property="regDate"/>
+		<result column="status" property="status"/>
+		<result column="nickName" property="nickName"/>
+		<association property="roleName" javaType="String">
+			<result column="roleName" property="roleName"/>
+		</association>
+	</resultMap>
+</mapper>

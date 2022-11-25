@@ -28,6 +28,7 @@ pageEncoding="UTF-8"%>
     <section class="container" style="width: 75%">
       <c:import url="../template/top_part.jsp"></c:import>
       <c:import url="../template/header.jsp"></c:import>
+      
       <div class="container">
         <div class="content d-flex">
           <div class="sidebar">
@@ -49,11 +50,36 @@ pageEncoding="UTF-8"%>
           </div>
           <div style="width: 100%;">
             <div class="board_top p-3 mt-3 mb-3">Write Page</div>
-            <form action="write" method="post">
+
+            <form action="write" method="post" enctype="multipart/form-data">
                 <div style="width: 100%;">
-                    <input type="text" style="width: 100%;" id="title" value="제목을 입력하세요">
+                    <input type="text" style="width: 100%;" id="title" name="title" placeholder="제목을 입력하세요">
+                    <input type="text" style="width: 100%;" id="id" name="id" value="manager">
                 </div>
-                <textarea name="" id="summernote"></textarea>
+                <div>
+                    <input  type="file" name="files" id="files" class="files form-control form-control-sm" multiple>
+                </div> 
+
+                <!-- <div class="file_drag" id="file_drag" ondrop="drop(event)" ondragover="allowDrop(event)"> -->
+                <div class="file_drag" id="file_drag">
+              
+                  <div id="plz_drag">파일을 마우스로 끌어 오세요</div>
+                  <div class="file_list_header" style="display: none;">
+                    <div class="file_list_header_task">
+                      <button type="button" id="removeAll_button"><span class="blind">X</span></button>
+                    </div>
+                    <div class="file_list_header_title"><span class="text">파일명</span></div>
+                    <!-- <div class="file_list_header_status"><span class="text">업로드 상태</span></div> -->
+                    <div class="file_list_header_volume"><span class="text">총용량 </span><span id="fileSize">0</span></div>
+                  </div>
+
+                  <ul id="fileList"></ul>
+                </div>
+
+                
+                <textarea name="contents" id="summernote"></textarea>
+
+                <button type="submit">작성</button>
             </form>
 
           </div>

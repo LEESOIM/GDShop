@@ -6,18 +6,43 @@
 
 <mapper namespace="com.shop.goodee.board.notice.NoticeMapper">
 	
+	<select id="getFileDetail" parameterType="NoticeFileVO" resultType="NoticeFileVO">
+		SELECT * FROM NOTICE_FILE WHERE FILENUM=#{fileNum}	
+	</select>
 	
-	<insert id="setWrite" parameterType="NoticeVO">
+	<insert id="setFileAdd" parameterType="NoticeFileVO">
+		INSERT INTO NOTICE_FILE VALUES(null,#{noticeNum},#{fileName},#{oriName})
+	</insert>
+	
+	<insert id="setWrite" parameterType="NoticeVO" useGeneratedKeys="true" keyProperty="noticeNum">
 		INSERT INTO NOTICE VALUES(null,#{id},#{title},#{contents},sysdate(),0,0,0,0)
 	</insert>
 
-	<select id="getDetail" parameterType="NoticeVO" resultType="NoticeVO">
-		SELECT * FROM NOTICE WHERE NOTICENUM=#{noticeNum}
+	<select id="getDetail" parameterType="NoticeVO" resultMap="getDetailResult">
+		SELECT N.*, NF.* 
+		FROM NOTICE N
+			LEFT JOIN
+			NOTICE_FILE NF 
+			ON N.NOTICENUM=NF.NOTICENUM
+		WHERE N.NOTICENUM=#{noticeNum} 
 	</select>
+	<resultMap type="NoticeVO" id="getDetailResult">
+		<id column="noticeNum" property="noticeNum"/>
+		<result column="id" property="id"/>
+		<result column="title" property="title"/>
+		<result column="contents" property="contents"/>
+		<result column="regDate" property="regDate"/>
+		<result column="hit" property="hit"/>
+		<collection property="fileVOs" javaType="List" ofType="NoticeFileVO">
+			<id column="fileNum" property="fileNum"/>
+			<result column="fileName" property="fileName"/>
+			<result column="oriName" property="oriName"/>
+		</collection>
+	</resultMap>
 
 
 	<select id="getList" parameterType="Pager" resultType="NoticeVO" >
-		SELECT * FROM NOTICE ORDER BY NOTICENUM DESC LIMIT #{startRow},10 
+		SELECT * FROM NOTICE ORDER BY NOTICENUM DESC LIMIT #{startRow},#{perPage} 
 	</select>
 	
 	

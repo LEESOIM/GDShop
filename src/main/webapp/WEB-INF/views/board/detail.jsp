@@ -14,13 +14,15 @@ pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="../css/header.css" />
     <link rel="stylesheet" href="../css/login.css" />
     <link rel="stylesheet" href="../css/board.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
     <script defer src="/js/notice.js"></script>
   </head>
   <body>
     <section class="container" style="width: 75%">
       <c:import url="../template/top_part.jsp"></c:import>
       <c:import url="../template/header.jsp"></c:import>
+      <c:import url="../template/library.jsp"></c:import>
+      
       <div class="container">
         <div class="content d-flex">
           <div class="sidebar">
@@ -48,7 +50,12 @@ pageEncoding="UTF-8"%>
                 <h1>${noticeVO.id}</h3>
                 <h1>${noticeVO.regDate}</h3>
               </div>
-
+              <div id="files">
+              	<c:forEach items="${noticeVO.fileVOs}" var="fileVOs">
+               		<a href="/fileDown/notice?fileNum=${fileVOs.fileNum}">${fileVOs.oriName}</a> 
+              	</c:forEach>
+              
+              </div>
               <div id="contents" style="height: 100%;">
                 ${noticeVO.contents}
               </div>
