@@ -39,25 +39,25 @@
 								<form class="validation-form" novalidate>
 
 									<div class="mb-3">
-										<label for="address2">ID<span class="text-muted">&nbsp;(로그인
-												필요)</span></label> <input type="text" class="form-control" id="id1"
+										<label for="address2">ID<span class="text-muted">
+										</span></label> <input type="text" class="form-control" id="id1"
 											value="junsolhee" disabled>
 									</div>
-									
+
 									<div class="mb-3">
-										<label for="address2">이름<span class="text-muted">&nbsp;(로그인
-												필요)</span></label> <input type="text" class="form-control" id="name"
-											value="전하준" disabled>
+										<label for="address2">이름<span class="text-muted">
+										</span></label> <input type="text" class="form-control" id="name" value="전하준"
+											disabled>
 									</div>
 									<div class="mb-3">
-										<label for="address2">이메일<span class="text-muted">&nbsp;(로그인
-												필요)</span></label> <input type="text" class="form-control" id="email"
+										<label for="address2">이메일<span class="text-muted">
+										</span></label> <input type="text" class="form-control" id="email"
 											value="junsolhee7@naver.com" disabled>
 									</div>
-									
+
 									<div class="mb-3">
-										<label for="address2">전화번호<span class="text-muted">&nbsp;(로그인
-												필요)</span></label> <input type="text" class="form-control" id="phone"
+										<label for="address2">전화번호<span class="text-muted">
+										</span></label> <input type="text" class="form-control" id="phone"
 											value="01012345678" disabled>
 									</div>
 
@@ -66,7 +66,7 @@
 											class="form-control" id="company" placeholder="기업명" required>
 										<div class="invalid-feedback">기업명을 입력해주세요.</div>
 									</div>
-									
+
 									<hr class="mb-4">
 									<div class="custom-control custom-checkbox">
 										<input type="checkbox" class="custom-control-input"
