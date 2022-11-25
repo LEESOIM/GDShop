@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
 prefix="c" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,66 +31,14 @@ prefix="c" %>
       <c:import url="../template/header.jsp"></c:import>
       <div class="container">
         <div class="content d-flex">
-          <div class="sidebar">
-            <div style="height: 260px; width: 250px">
-              <div class="list_top p-3 mt-4 d-flex">
-                <img
-                  src="/images/user.webp"
-                  style="
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 25px;
-                    margin-top: 1.9px;
-                  "
-                />
-                <div class="ms-2">
-                  <div><span style="color: green">김OO</span> 회원님,</div>
-                  <div>커피 한 잔과 구디샵!</div>
-                </div>
-              </div>
-              <ol class="list-group list-group-flush">
-                <form action="mypage" method="get">
-                  <a href="./mypage" style="text-decoration: none">
-                    <li class="list-group-item" id="myinfo">
-                      <i class="fa-regular fa-circle-user ps-2 pe-3"></i>내 정보
-                    </li>
-                  </a>
-                </form>
-                <form action="point" method="get">
-                  <a href="./point" style="text-decoration: none">
-                    <li class="list-group-item" id="mypoint">
-                      <i class="fa-brands fa-product-hunt ps-2 pe-3"></i>내
-                      포인트
-                    </li>
-                  </a>
-                </form>
-                <form action="grade" method="get">
-                  <a href="./grade" style="text-decoration: none">
-                    <li class="list-group-item" id="mygrade">
-                      <i class="fa-solid fa-trophy ps-2 pe-3"></i>내 등급
-                    </li>
-                  </a>
-                </form>
-                <li class="list-group-item">
-                  <i class="fa-solid fa-gears ps-2 pe-3"></i>내 설정
-                </li>
-                <li class="list-group-item">
-                  <i class="fa-solid fa-triangle-exclamation ps-2 pe-3"></i>내
-                  경고상태
-                </li>
-                <li class="list-group-item">
-                  <i class="fa-brands fa-shopify ps-2 pe-3"></i>내 상품
-                </li>
-              </ol>
-            </div>
-          </div>
+          <c:import url="../template/mypage_side.jsp"></c:import>
           <div class="ms-3 mb-2" id="info" style="width: 100%">
             <!-- 여기부터 내포인트 상세보기 -->
             <div class="info_top d-flex p-2 mt-3 mb-3">
               <div>
-                <span style="color: rgb(10, 154, 10)">김설희</span>님의 포인트
+                <span style="color: rgb(10, 154, 10)">${memberVO.name}</span>님의 포인트
               </div>
-              <button class="ms-3" id="withdraw">출금요청</button>
+              <button class="ms-3" id="withdraw" data-bs-toggle="modal" data-bs-target="#exampleModal_withdraw" data-bs-whatever="@mdo">출금요청</button>
             </div>
             <div class="d-flex point_all" style="height: 118px">
               <div
@@ -97,10 +46,27 @@ prefix="c" %>
                 style="border-right: solid 1px lightgray"
               >
                 <div class="mb-2">
-                  내 포인트 <i class="fa-solid fa-circle-info"></i>
+                  내 포인트 <i class="fa-solid fa-circle-info" data-custom-class="custom-tooltip" data-toggle="tooltip" data-bs-placement="top" data-bs-title="포인트 지급 후 3일이 지나 출금 가능한 포인트"></i>
                 </div>
                 <div style="color: green">
-                  <span style="font-size: 26px">0</span
+                <span style="font-size: 26px" id="myPoint">
+                <fmt:formatNumber type="number" maxFractionDigits="3" value="${memberVO.point_3}" />
+                </span>
+                  <i
+                    class="fa-brands fa-product-hunt"
+                    style="font-size: 21px"
+                  ></i>
+                </div>
+              </div>
+              <div
+                class="point_box p-4"
+                style="border-right: solid 1px lightgray"
+              >
+                <div class="mb-2">
+                  적립 예정 포인트 <i class="fa-solid fa-circle-info" data-toggle="tooltip" data-bs-placement="top" data-custom-class="custom-tooltip" data-bs-title="캠페인 완료 후 포인트가 지급되었으나 3일이 지나지 않은 포인트 (3일 후 출금 가능)"></i>
+                </div>
+                <div style="color: green">
+                  <span style="font-size: 26px"><fmt:formatNumber type="number" maxFractionDigits="3" value="${memberVO.point}" /></span
                   ><i
                     class="fa-brands fa-product-hunt ps-1"
                     style="font-size: 21px"
@@ -112,25 +78,10 @@ prefix="c" %>
                 style="border-right: solid 1px lightgray"
               >
                 <div class="mb-2">
-                  적립 예정 포인트 <i class="fa-solid fa-circle-info"></i>
+                  출금 예정 포인트 <i class="fa-solid fa-circle-info" data-toggle="tooltip" data-bs-placement="top" data-custom-class="custom-tooltip" data-bs-title="출금 요청한 포인트로 매월 1~14일 요청건은 당월 15일 출금, 15~말일 요청건은 익월 1일에 출금"></i>
                 </div>
                 <div style="color: green">
-                  <span style="font-size: 26px">0</span
-                  ><i
-                    class="fa-brands fa-product-hunt ps-1"
-                    style="font-size: 21px"
-                  ></i>
-                </div>
-              </div>
-              <div
-                class="point_box p-4"
-                style="border-right: solid 1px lightgray"
-              >
-                <div class="mb-2">
-                  출금 예정 포인트 <i class="fa-solid fa-circle-info"></i>
-                </div>
-                <div style="color: green">
-                  <span style="font-size: 26px">0</span
+                  <span style="font-size: 26px" id="withdraw_sum">${memberVO.point_result}</span
                   ><i
                     class="fa-brands fa-product-hunt ps-1"
                     style="font-size: 21px"
@@ -139,7 +90,7 @@ prefix="c" %>
               </div>
               <div class="point_box p-4">
                 <div class="mb-2">
-                  출금 완료 포인트 <i class="fa-solid fa-circle-info"></i>
+                  출금 완료 포인트 <i class="fa-solid fa-circle-info" data-toggle="tooltip" data-bs-placement="top" data-custom-class="custom-tooltip" data-bs-title="출금완료일 기준으로 계산"></i>
                 </div>
                 <div style="color: green">
                   <span style="font-size: 26px">0</span
@@ -163,26 +114,32 @@ prefix="c" %>
               </select>
             </div>
             <hr />
-            <table class="table">
+            <table class="table mb-4" style="text-align: center">
               <thead class="table-light">
                 <tr>
-                  <th scope="col">날짜</th>
-                  <th scope="col">내용</th>
-                  <th scope="col">포인트 변화</th>
-                  <th scope="col">출금 (가능)일</th>
-                  <th scope="col">잔액 포인트</th>
+                  <th scope="col" style="width: 15%">날짜(마감일)</th>
+                  <th scope="col" style="width: 40%">내용(캠페인제목)</th>
+                  <th scope="col" style="width: 15%">포인트 변화(보상포인트)</th>
+                  <th scope="col" style="width: 15%">출금 (가능)일(마감일+3일)</th>
+                  <th scope="col" style="width: 15%">잔액 포인트(포인트+보상포인트)</th>
                 </tr>
               </thead>
-              <tbody style="display: none">
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
-                </tr>
+              <tbody>
+              <!-- 캠페인 번호가 있으면 보이기 ${not empty missionVO.missionNum}-->
+              <c:if test="${memberVO.point_3 ne 0}">
+                 <tr>
+                  <td>2022-10-22</td>
+                  <td>프로바이오틱스</td>
+                  <td><b style="color:green">+1000</b></td>
+                  <td>2022-10-25</td>
+                  <td>2000</td>
+                </tr> 
+               </c:if>
               </tbody>
             </table>
+            
+            <!-- 캠페인 번호가 없으면 보이기 ${empty missionVO.missionNum}-->
+            <c:if test="${memberVO.point_3 eq 0}">
             <div
               class="mb-5"
               style="
@@ -192,12 +149,9 @@ prefix="c" %>
                 padding-top: 13px;
               "
             >
-              <div class="mb-2">해당 연도의 포인트 내역이 없습니다.</div>
-              <div>
-                화면 상단의 출금 완료 포인트 옆에 화살표를 클릭해 연도 설정이
-                가능합니다.
-              </div>
+              <div class="mb-2">포인트 내역이 없습니다.</div>
             </div>
+            </c:if>
             <!-- 포인트 안내 -->
             <div class="mb-3">
               <div
@@ -360,13 +314,97 @@ prefix="c" %>
                 </ul>
               </div>
             </div>
+            <button type="button" style="display: none" id="point_check"></button>
+            
+            <!-- 모달창 -->
+      <div
+        class="modal fade"
+        id="exampleModal_withdraw"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div
+              class="modal-header"
+              style="background-color: #4AB34A; color: white; font-weight: bold"
+            >
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                <b>포인트 출금 요청</b>
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body p-3 mb-2 mt-2">
+              <div class="d-flex mb-3">
+	              <div style="width: 180px; padding-top: 9px"><span style="color: red;">＊</span>출금할 포인트</div>
+	                <input id="withdraw_point" type="number" placeholder="출금할 포인트를 입력" class="join_form ps-2"/>
+	          </div>
+	          <div class="d-flex mb-4 justify-content-end">
+	              <input type="checkbox" class="me-2" id="withdraw_limit" name="limit">최대 금액 입력
+	          </div>
+	          <div class="d-flex mb-4">
+	              <div style="width: 180px; padding-top: 9px"><span style="color: red;">＊</span>은행 선택</div>
+	                <select name="bank" class="join_form ps-2 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+					  <option hidden="hidden" value="은행 선택">은행 선택</option>
+					  <option value="기업은행">기업은행</option>
+					  <option value="우리은행">우리은행</option>
+					  <option value="농협은행">농협은행</option>
+					  <option value="국민은행">국민은행</option>
+					  <option value="하나은행">하나은행</option>
+					  <option value="카카오뱅크">카카오뱅크</option>
+					  <option value="토스뱅크">토스뱅크</option>
+					</select>   
+	          </div>
+	          <div class="d-flex mb-4">
+	              <div style="width: 180px; padding-top: 9px"><span style="color: red;">＊</span>예금주 명</div>
+	                <input id="bank_name" type="text" placeholder="예금주명 입력" class="join_form ps-2"/>
+	          </div>
+	          <div class="d-flex mb-4">
+	              <div style="width: 180px; padding-top: 9px"><span style="color: red;">＊</span>계좌번호</div>
+	                <input id="account" type="number" placeholder="계좌번호 숫자만 입력" class="join_form ps-2"/>
+	          </div>
+	          <div class="d-flex mb-4">
+	              <div style="width: 130px; padding-top: 9px"><span style="color: red;">＊</span>외국인여부</div>
+	                 <div class="select">
+					     <input type="radio" id="select" name="nat"><label for="select">내국인</label>
+					     <input type="radio" id="select2" name="nat"><label for="select2">외국인</label>
+					</div>
+	          </div>
+	          
+              <div class="mb-3 mt-4">
+                <div class="pt-2" style="font-size: 15px; color: #006400">
+                  <b>반드시 입력하신 계좌의 예금주와 일치하는 주민등록번호를 입력해 주세요.</b>
+                </div>
+              </div>
+              <div class="mb-4 p-3" style="height: 85px; background-color: #FDF5E6; border-radius: 8px; border: solid 1px #FAC87D;"><span id="withdraw_text">출금 요청한 포인트는 매월 1~14일 요청건은 당월 15일 출금, 15~말일 요청건은 익월 1일에 출금</span></div>
+              <div class="d-flex justify-content-center">
+                <button class="btn btn-outline-success" id="withdraw_btn">
+                  출금요청
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
             <!-- 여기까지!! -->
           </div>
         </div>
       </div>
       <c:import url="../template/footer.jsp"></c:import>
     </section>
-
+    
+	 <!-- 툴팁 활성화 -->
+	 <script>
+	  $(document).ready(function(){
+	    $('[data-toggle="tooltip"]').tooltip();   
+	  });
+	</script>
     <script src="/js/info.js"></script>
   </body>
 </html>

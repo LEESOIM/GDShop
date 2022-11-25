@@ -70,11 +70,11 @@ pageEncoding="UTF-8"%>
                 <label class="mt-1 mb-2" style="font-weight: bold"
                   ><span style="color: red">＊</span>비밀번호</label
                 >
-                <form:password path="pw" placeholder="8~20자리 비밀번호를 입력해주세요." class="join_form" style="padding-left: 10px;"/>
+                <form:password path="pw" placeholder="8~20자리 비밀번호를 입력해주세요." id="join_pw" class="join_form" style="padding-left: 10px;"/>
               </div>
               <div
                 class="pt-1"
-                style="color: red; font-size: 13px; height: 23px"
+                style="color: red; font-size: 13px; height: 23px" id="pw_resultText"
               >
                 <form:errors path="pw"></form:errors>
               </div>
@@ -110,7 +110,7 @@ pageEncoding="UTF-8"%>
                   ><span style="color: red">＊</span>이메일</label
                 >
                 <div class="d-flex">
-                <form:input path="e" placeholder="이메일을 입력해주세요." class="join_form"/>
+                <form:input path="e" id="join_e" placeholder="이메일을 입력해주세요." class="join_form"/>
                   <span
                     class="ps-1 pe-1"
                     style="line-height: 40px; font-size: 17px"
@@ -129,6 +129,7 @@ pageEncoding="UTF-8"%>
               <div
                 class="pt-1"
                 style="color: red; font-size: 13px; height: 23px"
+                id="join_eText"
               >
                 <form:errors path="e"></form:errors>
                 <form:errors path="mailOption"></form:errors>
@@ -172,11 +173,12 @@ pageEncoding="UTF-8"%>
                 <label class="mt-2 mb-2" style="font-weight: bold"
                   ><span style="color: red">＊</span>휴대전화</label
                 >
-                <form:input path="phone" placeholder="전화번호를 입력해주세요.(숫자만 입력)" class="join_form"/>
+                <form:input path="phone" id="join_phone" placeholder="전화번호를 입력해주세요.(숫자만 입력)" class="join_form"/>
               </div>
               <div
                 class="pt-1"
                 style="color: red; font-size: 13px; height: 23px"
+                id="join_phoneText"
               >
                 <form:errors path="phone"></form:errors>
               </div>
@@ -187,9 +189,9 @@ pageEncoding="UTF-8"%>
               style="margin-top: 40px"
             >
               <button
+              	id="join_result"
                 class="btn btn-success"
                 style="padding-top: 13px; padding-bottom: 13px; width: 80%"
-                type="submit"
               >
                 <b>회원가입</b>
               </button>
@@ -233,7 +235,6 @@ pageEncoding="UTF-8"%>
           </div>
           <div class="d-flex justify-content-end pb-4 ps-4 pe-4">
             <button
-              type="button"
               class="btn btn-success"
               style="border-radius: 18px; padding: 6px 18px"
               data-bs-dismiss="modal"
