@@ -14,11 +14,15 @@ prefix="c" %>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item tab0  ps-3 pe-3"><a href="/">홈</a></li>
-            <li class="nav-item tab1 ps-3 pe-3"><a href="/mainTab/tab1">추첨형</a></li>
-            <li class="nav-item tab2 ps-3 pe-3"><a href="/mainTab/tab2">즉석추첨형</a></li>
-            <li class="nav-item tab3 ps-3 pe-3"><a href="/mainTab/tab3">초간단미션</a></li>
+            <li class="nav-item tab1 ps-3 pe-3"><a href="/tab/tab1">추첨형</a></li>
+            <li class="nav-item tab2 ps-3 pe-3"><a href="/tab/tab2">즉석추첨형</a></li>
+            <li class="nav-item tab3 ps-3 pe-3"><a href="/tab/tab3">초간단미션</a></li>
+            <li class="nav-item tab4 ps-3 pe-3"><a href="/tab/tab4">프리미엄</a></li>
           </ul>
           <div class="d-flex">
+          
+          <a href="/item/add" class="btn btn-success">상품등록</a>
+          
           <c:if test="${empty member}">
             <a
               href="#"
@@ -51,15 +55,32 @@ prefix="c" %>
               <b style="font-size: 17.5px; color: rgb(9, 118, 31)">${member.id}</b>님
               환영합니다!💚
             </div>
-            <div class="me-3 log">
+<!--             <div class="me-3 log">
               <a href="#"><b>내캠페인</b></a>
             </div>
             <div class="me-3 log">
-              <a href="/member/mypage"><b>마이페이지</b></a>
+              <a href="#"><b>상품등록</b></a>
             </div>
             <div class="me-3 log">
-              <a href="/member/logout"><b>로그아웃</b></a>
-            </div>
+              <a href="/member/mypage"><b>마이페이지</b></a>
+            </div> -->
+            
+            <div class="top-dropdown">
+		      <div class="me-3 log">
+              <a href="/member/mypage"><b>마이페이지</b></a>
+           	  </div>
+		      <div class="dropdown-content">
+		      	<c:if test="${not empty member}">
+		           <c:forEach items="${sessionScope.member.roleVOs}" var="i">
+		             <c:if test="${i.roleName eq 'ROLE_SELLER'}">
+				      <a href="#">상품등록</a>
+		             </c:if>
+		          </c:forEach>
+		       </c:if>
+		      	<a href="#">내캠페인</a>
+		      </div>
+		    </div>
+            
             </c:if>
           </div>
         </div>
@@ -99,14 +120,14 @@ prefix="c" %>
               <div style="height: 68px">
                 <div id="email_icon"><i class="fa-regular fa-user"></i></div>
                 <input type="text" placeholder="아이디" id="id" />
-                <div class="inp">아이디를 입력해주세요.</div>
+                <div class="inp" id="inp_id" style="display: none">아이디를 입력해주세요.</div>
               </div>
               <div style="height: 68px">
                 <div id="pw_icon">
                   <i class="fa-solid fa-lock"></i>
                 </div>
                 <input type="password" placeholder="비밀번호" id="pw" />
-                <div class="inp">비밀번호를 입력해주세요.</div>
+                <div class="inp" id="inp_pw" style="display: none">비밀번호를 입력해주세요.</div>
               </div>
               <div
                 class="d-flex justify-content-between pt-1"
@@ -124,7 +145,7 @@ prefix="c" %>
                     로그인 상태 유지
                   </label>
                 </div>
-                <div><a href="#" id="id_search">아이디/비밀번호 찾기</a></div>
+                <div><a href="/member/find_id" id="id_search">아이디/비밀번호 찾기</a></div>
               </div>
               <div style="height: 10%">
                 <div class="d-grid gap-2">
@@ -166,7 +187,7 @@ prefix="c" %>
                   <div>
                   	<a href="#">
                     <img
-                      src="/images/facebook_logo_icon_147291.png"
+                      src="/images/google.png"
                       style="width: 38px; height: 38px"
                     />
                     </a>

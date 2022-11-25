@@ -23,10 +23,8 @@ prefix="c" %>
       <a href="#" type="button">고객센터</a>
       <div class="dropdown-content">
         <a href="/board/board">공지사항</a>
-        <a href="#">신고하기</a>
         <a href="#">1대 1문의</a>
       </div>
-      
     </div>
   </div>
 </div>
