@@ -48,3 +48,45 @@ body {
 	background-color: #dcdcdc;
 	cursor: pointer;
 }
+
+/* 포인트출금 폼 */
+.join_form {
+  width: 100%;
+  line-height: 1.5;
+  border-radius: 2px;
+  transition: all 0.3s;
+  height: 43px;
+  font-size: 16px;
+  position: relative;
+  outline: none;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+.select {
+	padding-top: 5px;
+}
+.select input[type=radio]{
+    display: none;
+}
+.select input[type=radio]+label{
+    display: inline-block;
+    cursor: pointer;
+    height: 35px;
+    width: 120px;
+    border: 1px solid rgb(192, 192, 192);
+    border-radius: 2px;
+    line-height: 32px;
+    text-align: center;
+    font-weight:bold;
+    font-size:13px;
+}
+.select input[type=radio]+label{
+    background-color: #fff;
+    color: green;
+}
+.select input[type=radio]:checked+label{
+    background-color: green;
+    color: #fff;
+}

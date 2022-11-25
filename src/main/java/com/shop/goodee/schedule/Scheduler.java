@@ -20,9 +20,9 @@ public class Scheduler {
 	@Autowired
 	private MemberMapper memberMapper;
 	
-	@Scheduled(cron = "0 0 0 * * *")
+	//30일 이후, 탈퇴회원 삭제
+	@Scheduled(cron = "0 */720 * * * *")
 	public void cron() throws Exception{
-		log.info("실행");
 		
 		MemberVO memberVO = new MemberVO();
 		List<MemberVO> ar = new ArrayList<>();
@@ -34,11 +34,17 @@ public class Scheduler {
 //			log.info("탈퇴일자 :{}", ar.get(i).getRegDate());
 //			log.info("삭제일자(탈퇴일자+3개월) :{}", ar.get(i).getByeDate());
 			int result = memberMapper.setRegdateAdd(ar.get(i));
-			log.info("result date : {}", result);
 			if(ar.get(i).getRegDate().equals(ar.get(i).getByeDate())) {
 				memberMapper.setUserDelete(ar.get(i));
 			}
 		}		
+	}
+	
+	//72시간마다 적립예정포인트를 -> 3일 후 적립되는 포인트로 업데이트
+	@Scheduled(cron = "0 */72 * * * *")
+	public void setPoint()throws Exception{
+		int result = memberMapper.setPoint_3();
+		log.info("result : {}", result);
 	}
 
 }

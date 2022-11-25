@@ -205,6 +205,45 @@ public class MemberController {
 		mv.setViewName("/member/point");
 		return mv;
 	}
+	
+	/* 적립예정 포인트 조회 */
+	@PostMapping("getPoint")
+	@ResponseBody
+	public int getPoint(HttpSession session, MemberVO memberVO)throws Exception{
+		memberVO = (MemberVO) session.getAttribute("member");
+		return memberService.getPoint(memberVO);
+	}
+	
+	/* 3일 뒤 적립 된 회원 포인트 조회 */
+	@PostMapping("getPoint_3")
+	@ResponseBody
+	public int getPoint_3(HttpSession session, MemberVO memberVO)throws Exception{
+		memberVO = (MemberVO) session.getAttribute("member");
+		
+		return memberService.getPoint_3(memberVO);
+	}
+	
+	/* 출금신청 후 적립 포인트 변경 */
+	@PostMapping("setResultPoint_3")
+	@ResponseBody
+	public int setResultPoint_3(HttpSession session, MemberVO memberVO, Long point)throws Exception{
+		memberVO = (MemberVO) session.getAttribute("member");
+		memberVO.setPoint_3(point);
+		return memberService.setResultPoint_3(memberVO);
+	}
+	
+	/* 출금신청 후 출금 예정 포인트 변경 */
+	@PostMapping("setResultPoint")
+	@ResponseBody
+	public Long setResultPoint(HttpSession session, MemberVO memberVO, Long point)throws Exception{
+		memberVO = (MemberVO) session.getAttribute("member");
+		memberVO.setPoint_result(point);
+		memberService.setResultPoint(memberVO);
+		Long result = memberVO.getPoint_result();
+		return result;
+	}
+
+	
 	/* 내등급 */
 	@GetMapping("grade")
 	public ModelAndView getGrade(HttpSession session, MemberVO memberVO, ModelAndView mv)throws Exception {
@@ -315,4 +354,16 @@ public class MemberController {
 		
 		return memberService.setWithdrawal(memberVO);
 	}
+	
+	/* 내 상품 */
+	@GetMapping("product")
+	public ModelAndView getProduct(HttpSession session, MemberVO memberVO, ModelAndView mv)throws Exception {
+		memberVO = (MemberVO) session.getAttribute("member");
+		memberVO = memberService.getMypage(memberVO);
+		mv.addObject("memberVO", memberVO);
+		mv.setViewName("/member/product");
+		return mv;
+	}
+	
+
 }

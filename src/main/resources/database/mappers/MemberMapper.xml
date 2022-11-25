@@ -6,7 +6,7 @@
 <mapper namespace="com.shop.goodee.member.MemberMapper">
 	<!-- 회원가입 -->
 	<insert id="setJoin" parameterType="MemberVO">
-		INSERT INTO MEMBER VALUES (#{id},#{pw},#{name},#{email},#{birth},#{phone},0,NOW(),1,NULL,NOW())
+		INSERT INTO MEMBER VALUES (#{id},#{pw},#{name},#{email},#{birth},#{phone},0,0,0,NOW(),1,NULL,NOW())
 	</insert>
 	<!-- 회원등급부여 -->
 	<insert id="setMemberRole" parameterType="MemberVO">
@@ -51,9 +51,12 @@
 		<result column="birth" property="birth"/>
 		<result column="phone" property="phone"/>
 		<result column="point" property="point"/>
+		<result column="point_3" property="point_3"/>
+		<result column="point_result" property="point_result"/>
 		<result column="regDate" property="regDate"/>
 		<result column="status" property="status"/>
 		<result column="nickName" property="nickName"/>
+		<result column="byeDate" property="byeDate"/>
 		<collection property="roleVOs" javaType="List" ofType="RoleVO">
 			<id column="roleNum" property="roleNum"/>
 			<result column="roleName" property="roleName"/>
@@ -77,9 +80,12 @@
 		<result column="birth" property="birth"/>
 		<result column="phone" property="phone"/>
 		<result column="point" property="point"/>
+		<result column="point_3" property="point_3"/>
+		<result column="point_result" property="point_result"/>
 		<result column="regDate" property="regDate"/>
 		<result column="status" property="status"/>
 		<result column="nickName" property="nickName"/>
+		<result column="byeDate" property="byeDate"/>
 		<collection property="memberFileVO" javaType="MemberFileVO" ofType="MemberFileVO">
 			<result column="fileName" property="fileName"/>
 			<result column="oriName" property="oriName"/>
@@ -118,7 +124,7 @@
 	</update>
 	<!-- 회원 탈퇴 -->
 	<update id="setWithdrawal" parameterType="MemberVO">
-		UPDATE MEMBER SET STATUS=0, POINT=0, REGDATE=NOW(), BYEDATE=DATE_ADD(REGDATE, INTERVAL 3 MONTH) WHERE ID=#{id}
+		UPDATE MEMBER SET STATUS=0, POINT=0, POINT_3=0, POINT_RESULT=0, REGDATE=NOW(), BYEDATE=DATE_ADD(REGDATE, INTERVAL 3 MONTH) WHERE ID=#{id}
 	</update>
 	<!-- 탈퇴일 +1씩 증가 (삭제날짜와 같아지면 DELETE)-->
 	<update id="setRegdateAdd" parameterType="MemberVO">
@@ -132,6 +138,31 @@
 	<delete id="setUserDelete" parameterType="MemberVO">
 		DELETE FROM MEMBER WHERE ID=#{id}
 	</delete>
+	
+	<!-- 내포인트 - 적립 예정 포인트 확인 -->
+	<select id="getPoint" parameterType="MemberVO" resultType="Integer">
+		SELECT POINT FROM MEMBER WHERE ID=#{id}
+	</select>
+	
+	<!-- 내포인트 - 3일 뒤 포인트 적립(적립예정포인트 : 0) -->
+	<update id="setPoint_3">
+		UPDATE MEMBER SET POINT_3=POINT+POINT_3, POINT=0
+	</update>
+	
+	<!-- 내포인트 - 3일 뒤 적립 된 포인트 조회 -->
+	<select id="getPoint_3" parameterType="MemberVO" resultType="Integer">
+		SELECT POINT_3 FROM MEMBER WHERE ID=#{id}
+	</select>
+	
+	<!-- 내포인트 - 출금신청 후 적립 포인트 변경 -->
+	<update id="setResultPoint_3" parameterType="MemberVO">
+		UPDATE MEMBER SET POINT_3=#{point_3} WHERE ID=#{id}
+	</update>
+	
+	<!-- 내포인트 - 출금신청 후 출금예정 포인트 변경 -->
+	<update id="setResultPoint" parameterType="MemberVO">
+		UPDATE MEMBER SET POINT_RESULT=#{point_result}+POINT_RESULT WHERE ID=#{id}
+	</update>
 	
 
 </mapper>

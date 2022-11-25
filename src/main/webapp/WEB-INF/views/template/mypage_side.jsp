@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="sidebar">
 <div style="height: 260px; width: 250px">
   <div class="list_top p-3 mt-4 d-flex">
@@ -48,12 +49,21 @@
       </a>
       </form>
       <li class="list-group-item">
-        <i class="fa-solid fa-triangle-exclamation ps-2 pe-3"></i>내
-        경고상태
+        <i class="fa-solid fa-arrow-pointer ps-2 pe-3"></i>내 캠페인
       </li>
-      <li class="list-group-item">
-        <i class="fa-brands fa-shopify ps-2 pe-3"></i>내 상품
-      </li>
+      <c:if test="${not empty member}">
+           <c:forEach items="${sessionScope.member.roleVOs}" var="i">
+             <c:if test="${i.roleName eq 'ROLE_SELLER'}">
+             <form action="product" method="get">
+      			<a href="./product" style="text-decoration: none">
+			      <li class="list-group-item" id="my_product">
+			        <i class="fa-brands fa-shopify ps-2 pe-3"></i>판매상품
+			      </li>
+			    </a>
+     		 </form>
+             </c:if>
+        </c:forEach>
+      </c:if>
     </ol>
   </div>
 </div>

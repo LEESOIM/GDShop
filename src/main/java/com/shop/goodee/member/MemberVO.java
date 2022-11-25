@@ -24,6 +24,8 @@ public class MemberVO {
 	private String birth;
 	private String phone;
 	private Long point;
+	private Long point_3;
+	private Long point_result;
 	private Date regDate;
 	private boolean status;
 	private String nickName;

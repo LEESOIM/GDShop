@@ -333,3 +333,84 @@ $("#withdrawal_updateBtn").click(function () {
     });
   }
 });
+//포인트 출금
+$("#withdraw_btn").click(function () {
+  let point = $("#withdraw_point").val();
+  let bank = $("select[name='bank']").val();
+  let name = $("#bank_name").val();
+  let account = $("#account").val();
+  let select = $(':radio[name="nat"]:checked').length;
+
+  if (
+    point == "" ||
+    bank == "은행 선택" ||
+    name == "" ||
+    account == "" ||
+    select < 1
+  ) {
+    $("#withdraw_text").attr("style", "color:red; font-weight:bold");
+    $("#withdraw_text").text("빈칸을 채워주세요.");
+  } else {
+    $.ajax({
+      type: "POST",
+      url: "/member/getPoint_3",
+      data: {},
+      success: function (data) {
+        if (point < 0) {
+          $("#withdraw_text").attr("style", "color:red; font-weight:bold");
+          $("#withdraw_text").text("정확한 금액을 입력하세요.");
+        } else if (point > data) {
+          $("#withdraw_text").attr("style", "color:red; font-weight:bold");
+          $("#withdraw_text").text("출금가능 금액보다 초과 입력하였습니다.");
+        } else if (data == 0) {
+          $("#withdraw_text").attr("style", "color:red; font-weight:bold");
+          $("#withdraw_text").text("출금가능한 포인트가 없습니다.");
+        } else {
+          let result = data - point;
+          //result값 보내서 point_3값 업데이트하기
+          $.ajax({
+            type: "POST",
+            url: "/member/setResultPoint_3",
+            data: {
+              point: result,
+            },
+            success: function (data) {
+              if (data == 1) {
+                //출금예정데이터 업데이트
+                $.ajax({
+                  type: "POST",
+                  url: "/member/setResultPoint",
+                  data: {
+                    point: point,
+                  },
+                  success: function (data) {
+                    $("#withdraw_sum").text(data);
+                    location.href = "/member/point";
+                  },
+                });
+              }
+            },
+          });
+        }
+      },
+    });
+  }
+});
+
+//출금 - 최대금액입력 체크박스
+$(document).ready(function () {
+  $("input[type=checkbox][name=limit]").change(function () {
+    if ($(this).prop("checked")) {
+      $.ajax({
+        type: "POST",
+        url: "/member/getPoint_3",
+        data: {},
+        success: function (data) {
+          $("#withdraw_point").val(data);
+        },
+      });
+    } else {
+      $("#withdraw_point").val("");
+    }
+  });
+});

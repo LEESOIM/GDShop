@@ -183,5 +183,24 @@ public class MemberService {
 		return memberMapper.setWithdrawal(memberVO);
 	}
 	
+	/* 회원 포인트 조회 */
+	public int getPoint(MemberVO memberVO)throws Exception{
+		return memberMapper.getPoint(memberVO);
+	}
+	
+	/* 3일 뒤 적립 된 회원 포인트 조회 */
+	public int getPoint_3(MemberVO memberVO)throws Exception{
+		return memberMapper.getPoint_3(memberVO);
+	}
+	
+	/* 출금신청 후 적립 포인트 변경 */
+	public int setResultPoint_3(MemberVO memberVO)throws Exception{
+		return memberMapper.setResultPoint_3(memberVO);
+	}
+	
+	/* 출금신청 후 출금 예정 포인트 변경 */
+	public int setResultPoint(MemberVO memberVO)throws Exception{
+		return memberMapper.setResultPoint(memberVO);
+	}
 
 }

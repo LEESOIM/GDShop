@@ -57,4 +57,20 @@ public interface MemberMapper {
 	
 	/* 탈퇴 회원삭제 */
 	public int setUserDelete(MemberVO memberVO)throws Exception;
+	
+	/* 적립 예정 포인트 조회 */
+	public int getPoint(MemberVO memberVO)throws Exception;
+	
+	/* 3일 뒤 포인트 적립 */
+	public int setPoint_3()throws Exception;
+	
+	/* 3일 뒤 적립 된 회원 포인트 조회 */
+	public int getPoint_3(MemberVO memberVO)throws Exception;
+	
+	/* 출금신청 후 적립 포인트 변경 */
+	public int setResultPoint_3(MemberVO memberVO)throws Exception;
+	
+	/* 출금신청 후 출금 예정 포인트 변경 */
+	public int setResultPoint(MemberVO memberVO)throws Exception;
+	
 }

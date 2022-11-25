@@ -64,6 +64,6 @@ public class MailService {
 		
 		//메일 발송
 		javaMailSender.send(simpleMessage);
-		
 	}
+	
 }
