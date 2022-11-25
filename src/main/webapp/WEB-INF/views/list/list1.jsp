@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +39,7 @@
 				<div class="campaign-content">지원한 참여자 중 매일 정해진 추첨 인원만큼 랜덤으로 선정되는 무작위 선정 방식</div>
 			</div>
 
-			<div class="search">
+			<div class="search mb-5" style="border-bottom: 1px solid #d8d8d8;">
 				<div class="available">
 					<input type="checkbox" value="" id="able">
 					<label for="able">지원 가능</label> 
@@ -57,96 +58,50 @@
 			</div>
 
 		
-			<div
-				style="height: 40px; font-size: 22px; font-weight: 600; letter-spacing: -0.03em;">
-				우리 집 오늘부터 외식없다✋온가족 먹거리🥪</div>
-			<div class="d-flex justify-content-between" style="height: 380px">
-				<!-- 상품1 -->
+			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4">
+				<c:forEach items="${list1 }" var="vo" >
 				<div>
-					<div class="d-flex flex-column" style="width: 250px; height: 380px">
-						<div
-							style="width: 250px; height: 250px; background-image: url(https://cdn.imweb.me/upload/S2017032758d89cbde9730/5c344a55e5613.jpg); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
-						<div class="d-flex flex-column"
-							style="width: 250px; height: 130px">
-							<div class="d-flex justify-content-start pt-1"
-								style="font-size: 13.5px">
-								<div style="color: red">
-									<b>쿠팡</b>
+					<div class="d-flex flex-column" style="width: 250px; height: 380px; margin-bottom: 50px">
+						<div>
+							<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 260px; border-radius: 15px">
+						</div>
+
+						<div class="d-flex flex-column" style="width: 250px; height: 130px">
+							<div class="d-flex justify-content-start pt-1" style="font-size: 14px">
+								<c:choose>
+									<c:when test="${vo.shop eq '쿠팡'}"><div style="color: red"><b>${vo.shop }</b></div></c:when>
+									<c:when test="${vo.shop eq '네이버'}"><div style="color: #2DB400"><b>${vo.shop }</b></div></c:when>
+									<c:when test="${vo.shop eq '인스타그램'}"><div style="color: purple"><b>${vo.shop }</b></div></c:when>
+									<c:otherwise><div style="color: #646464"><b>${vo.shop }</b></div></c:otherwise>
+								</c:choose>
+							<span class="px-1" style="color: grey">|</span>
+								<div style="color: grey">${vo.company }</div>
 								</div>
-								<div class="ps-1 pe-1" style="color: rgb(147, 143, 143)">|</div>
-								<div style="color: rgb(147, 143, 143)">[딜]풀무원</div>
 							</div>
-							<div class="pb-1 pt-1" style="font-size: 17.5px; height: 50px">
-								<b>[로켓와우 회원만] 떡국(맛집 떡국)</b>
+							<div class="my-1">
+								<p style="font-size: 16px; height: 50px; margin: 0; 
+								overflow: hidden; text-overflow: ellipsis; 
+								display: -webkit-box;
+    							-webkit-line-clamp: 2;
+    							-webkit-box-orient: vertical;"><b>${vo.title }</b></p>
 							</div>
-							<div class="d-flex justify-content-start pb-1"
-								style="padding-top: 2px">
-								<div
-									style="text-decoration: line-through; color: grey; font-size: 16px;"
-									class="pe-2">8800</div>
-								<div class="pe-1" style="font-size: 13px; line-height: 23px">
-									실제구매가</div>
-								<div style="font-size: 17.5px; line-height: 22px; color: blue">
-									<b>100원</b>
+							<div class="d-flex justify-content-start">
+								<div style="text-decoration: line-through; color: grey; font-size: 15px;" class="pe-2"><b>${vo.price }원</b></div>
+								<div class="pe-1" style="color:gray; font-size: 14px; line-height: 23px">실제구매가</div>
+								<div style="font-size: 18px; line-height: 22px; color: blue">
+								
+								<b><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.price-vo.point }" />원</b>
 								</div>
 							</div>
 							<div class="d-flex justify-content-between">
 								<div style="font-size: 18px; color: blue">
 									<i class="fa-regular fa-clock"></i> <b>3:39:52</b>
 								</div>
-								<div style="font-size: 13px; line-height: 28px; color: gray">
-									마감임박</div>
+								<div style="font-size: 12px; line-height: 28px; color: gray">마감임박</div>
 							</div>
 						</div>
 					</div>
-				</div>
-
-				<!-- 상품2 -->
-				<div>
-					<div class="d-flex flex-column" style="width: 250px; height: 380px">
-						<div
-							style="width: 250px; height: 250px; background-image: url(https://cdn.imweb.me/upload/S2017032758d89cbde9730/5c344a55e5613.jpg); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
-						<div class="d-flex flex-column"
-							style="width: 250px; height: 130px">
-							<div class="d-flex justify-content-start pt-1"
-								style="font-size: 13.5px">
-								<div style="color: red">
-									<b>쿠팡</b>
-								</div>
-								<div class="ps-1 pe-1" style="color: rgb(147, 143, 143)">|</div>
-								<div style="color: rgb(147, 143, 143)">[딜]풀무원</div>
-							</div>
-							<div class="pb-1 pt-1" style="font-size: 17.5px; height: 50px">
-								<b>[로켓와우 회원만] 떡국dsfdsfdsfdsfdsfsdf</b>
-							</div>
-							<div class="d-flex justify-content-start pb-1"
-								style="padding-top: 2px">
-								<div
-									style="text-decoration: line-through; color: grey; font-size: 16px;"
-									class="pe-2">8800</div>
-								<div class="pe-1" style="font-size: 13px; line-height: 23px">
-									실제구매가</div>
-								<div style="font-size: 17.5px; line-height: 22px; color: blue">
-									<b>100원</b>
-								</div>
-							</div>
-							<div class="d-flex justify-content-between">
-								<div style="font-size: 18px; color: blue">
-									<i class="fa-regular fa-clock"></i> <b>3:39:52</b>
-								</div>
-								<div style="font-size: 13px; line-height: 28px; color: gray">
-									마감임박</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div>
-					<div style="width: 250px; border: solid 2px; height: 380px"></div>
-				</div>
-				<div>
-					<div style="width: 250px; border: solid 2px; height: 380px"></div>
-				</div>
+				</c:forEach>
 			</div>
 		</div>
 

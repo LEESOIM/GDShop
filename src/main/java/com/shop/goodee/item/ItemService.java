@@ -53,4 +53,28 @@ public class ItemService {
 	public List<ItemVO> getList() throws Exception {
 		return itemMapper.getList();
 	}
+	
+	public List<ItemVO> getListHit() throws Exception {
+		return itemMapper.getListHit();
+	}
+	
+	public List<ItemVO> getListVIP() throws Exception {
+		return itemMapper.getListVIP();
+	}
+	
+	public List<ItemVO> getList1() throws Exception {
+		return itemMapper.getList1();
+	}
+	
+	public List<ItemVO> getList2() throws Exception {
+		return itemMapper.getList2();
+	}
+	
+	public List<ItemVO> getList3() throws Exception {
+		return itemMapper.getList3();
+	}
+	
+	public List<ItemVO> getList4() throws Exception {
+		return itemMapper.getList4();
+	}
 }

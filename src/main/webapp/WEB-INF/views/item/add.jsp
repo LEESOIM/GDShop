@@ -69,7 +69,7 @@
 						<label id="fileAdd" class="border border-success rounded-3" style="width: 130px; height: 130px; color: green; text-align: center;">
 						<i class="fa-solid fa-camera" style="font-size: 30px; margin-top: 35px"></i><p style="font-size: 13px; text-align: center;">이미지등록</p></label>
 					</div>	
-						<p style="color: #1ec800; font-size:13px; margin-top:5px; margin-bottom: 0px;">첫번째 이미지가 대표이미지 입니다</p>
+						<p style="color: #1ec800; font-size:13px; margin-top:10px; margin-bottom: 0px;">첫번째 이미지가 대표이미지로 적용됩니다.</p>
 					</div>
 				</div>
 				
@@ -79,7 +79,7 @@
 					</div>
 					<div style="width: 79%;">
 						<input class="form-control" type="text" name="title">
-						<p style="color: #1ec800; font-size:13px; margin-bottom: 0px;">판매 상품과 직접 관련이 없는 다른 상품명, 스팸성 키워드 입력 시 상품 게시가 어려울 수 있습니다.</p>
+						<p style="color: #1ec800; font-size:13px; margin-top:3px; margin-bottom: 0px;">판매 상품과 직접 관련이 없는 다른 상품명, 스팸성 키워드 입력 시 상품 게시가 어려울 수 있습니다.</p>
 					</div>
 				</div>
 				
@@ -103,6 +103,16 @@
 				
 				<div class="d-flex py-4" style="border-bottom: solid 0.5px gainsboro;">
 					<div style="margin:auto 0; width: 20%;">
+						<b>캠페인등급<span style="color: limegreen;">*</span></b>
+					</div>
+					<div style="width: 79%;">
+						 <input type="checkbox" class="btn-check" name="role" id="camType" value="VIP" autocomplete="off">
+						 <label class="btn btn-outline-success" for="camType">VIP상품</label>
+					</div>
+				</div>				
+				
+				<div class="d-flex py-4" style="border-bottom: solid 0.5px gainsboro;">
+					<div style="margin:auto 0; width: 20%;">
 						<b>고객부담금<span style="color: limegreen;">*</span></b>
 					</div>
 					<div style="width: 79%;">
@@ -116,30 +126,32 @@
 						
 						<div id="pointOn" style="display: none;">
 							<div class="mt-3">
-								<div class="mb-3"><span class="me-4">판매금액</span><input type="text" id="point1_1" disabled="disabled"><span>&nbsp;원</span></div>
-								<div class="mb-3"><span class="me-2">고객부담금</span><input type="text" id="point1_2"><span>&nbsp;원</span></div>
+								<div class="mb-2"><span class="me-4">판매금액</span><input type="text" id="point1_1" disabled="disabled"><span>&nbsp;원</span></div>
+								<div class="mb-2"><span class="me-2">고객부담금</span><input type="text" id="point1_2"><span>&nbsp;원</span></div>
 								<div><span class="me-4">환급금액</span><input type="hidden" id="point1_3" readonly="readonly">
-								<span id="point1Text" style="font-size: 20px; font-weight: bold;"></span><span>&nbsp;원</span></div>
+								<span id="point1Text" style="font-size: 22px; font-weight: bold;"></span><span>&nbsp;원</span></div>
 							</div>
 						</div>
+
 						
 						<div id="pointOff" style="display: none;">
 							<div class="mt-3">
-								<div class="mb-3"><span class="me-4">판매금액</span><input type="text" id="point2_1" disabled="disabled"><span>&nbsp;원</span></div>
-								<div class="mb-3"><span class="me-2">고객부담금</span><input type="text" id="point2_2" value="0" disabled="disabled"><span>&nbsp;원</span></div>
+								<div class="mb-2"><span class="me-4">판매금액</span><input type="text" id="point2_1" disabled="disabled"><span>&nbsp;원</span></div>
+								<div class="mb-2"><span class="me-2">고객부담금</span><input type="text" id="point2_2" value="0" disabled="disabled"><span>&nbsp;원</span></div>
 								<div><span class="me-4">환급금액</span><input type="hidden" id="point2_3" readonly="readonly">
-								<span id="point2Text" style="font-size: 20px; font-weight: bold;"></span><span>&nbsp;원</span></div>
+								<span id="point2Text" style="font-size: 22px; font-weight: bold;"></span><span>&nbsp;원</span></div>
 							</div>
 						</div>
 					</div>
 				</div>
+				
 				<div class="d-flex py-4" style="border-bottom: solid 0.5px gainsboro;">
 					<div style="margin:auto 0; width: 20%;">
 						<b style="line-height: 50px">제공내역<span style="color: limegreen;">*</span></b>
 					</div>
 					<div style="width: 79%;">
-						<textarea class="form-control" rows="3" cols="79%" name="itemDetail" placeholder="상품 옵션 내역을 상세히 써주세요"></textarea>
-						<p style="color: #1ec800; font-size:13px; margin-bottom: 0px;">ex) OOO프로바이오틱스, 30캡슐, 1개 / OOO트리트먼트 화이트머스크향, 1000ml, 1개</p>
+						<textarea class="form-control" rows="3" cols="79%" name="detail" placeholder="상품 옵션 내역을 상세히 써주세요"></textarea>
+						<p style="color: #1ec800; font-size:13px; margin-top:3px; margin-bottom: 0px;">ex) OOO프로바이오틱스, 30캡슐, 1개 / OOO트리트먼트 화이트머스크향, 1000ml, 1개</p>
 					</div>
 				</div>
 				
@@ -160,7 +172,7 @@
 					<div style="width: 79%;">
 					<div class="d-flex">
 						<input class="form-control" style="width: 35%;" type="text" name="count"><p style="margin:auto 0;">&nbsp;회</p></div>
-						<p style="color: #1ec800; font-size:13px; margin-bottom: 0px;">캠페인당 추첨 수량 = 총 제공수량/총 캠페인 회차 ex) 10개=50개/5회</p>
+						<p style="color: #1ec800; font-size:13px; margin-top:3px; margin-bottom: 0px;">캠페인당 모집인원 = 총 제공수량/총 캠페인 회차</p>
 					</div>
 				</div>
 				</div>
@@ -173,6 +185,7 @@
 						<select class="form-select me-3" style="width: 110px;" name="shop">
 							<option hidden value="">쇼핑몰</option>
 							<option value="쿠팡">쿠팡</option>
+							<option value="네이버">네이버</option>
 							<option value="인스타그램">인스타그램</option>
 						</select>
 						<input class="form-control" type="url" name="url">

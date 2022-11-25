@@ -15,9 +15,10 @@ public class ItemVO {
 	private Long price; //상품가격
 	private String title; //캠페인제목
 	private String type; //캠페인유형
+	private String role; //캠페인등급
 	private Long point; //보상포인트
-	private String itemDetail; //제공내역
-	private Long stock; //총 제공수량
+	private String detail; //제공내역
+	private Long stock; //총제공수량
 	private Long count; //캠페인회차
 	private String shop; //쇼핑몰
 	private String url; //구매링크

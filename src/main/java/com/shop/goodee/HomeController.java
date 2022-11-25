@@ -20,8 +20,15 @@ public class HomeController {
 	@GetMapping("/")
 	public ModelAndView home() throws Exception {
 		ModelAndView mv = new ModelAndView();
-		List<ItemVO> ar = itemService.getList();
-		mv.addObject("list", ar);
+		List<ItemVO> list = itemService.getList();
+		List<ItemVO> listHit = itemService.getListHit();
+		List<ItemVO> listVIP = itemService.getListVIP();
+		
+		
+		mv.addObject("list", list);
+		mv.addObject("listHit", listHit);
+		mv.addObject("listVIP", listVIP);
+		
 		mv.setViewName("index");
 		return mv;
 	}
