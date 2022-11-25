@@ -43,7 +43,7 @@ pageEncoding="UTF-8"%>
             <div class="board_top p-3 mt-3 mb-3">공지사항</div>
 
             <div>
-              <div class="board_list">
+              <div class="board_list ">
                 <table class="table table-hover" id="list">
                   <tr>
                     <th>번호</th>

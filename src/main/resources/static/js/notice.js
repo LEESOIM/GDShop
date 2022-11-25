@@ -130,24 +130,16 @@ $("#removeAll_button").click(function(){
     }
 })
 
-// const fd = document.getElementById("fd")
+const file_drag = document.getElementById("file_drag")
 
-// fd.addEventListener("dragover",function(e){
-//     e.preventDefault();
-//     console.log("드래그 오버")
-// })
-
-
-// 파일 Drag and Drop 이벤트
-function allowDrop(event) {
+file_drag.addEventListener("dragover",function(e){
     console.log("드래그 오버")
-    event.preventDefault();
-}
-
-function drop(event){
-    event.preventDefault();
+    e.preventDefault();
+})
+file_drag.addEventListener("drop",function(e){
     console.log("드랍")
-   
+    e.preventDefault();
+    
     arr= event.dataTransfer.files;
     addFileList(arr)
     for(var i=0; i<arr.length; i++){
@@ -157,4 +149,27 @@ function drop(event){
     $('#plz_drag').css("display",'none')
     $('.file_list_header').css('display','flex')
     document.getElementById("files").files=dataTransfer.files;
-}
+})
+
+
+
+// 파일 Drag and Drop 이벤트
+// function allowDrop(event) {
+//     console.log("드래그 오버")
+//     event.preventDefault();
+// }
+
+// function drop(event){
+//     event.preventDefault();
+//     console.log("드랍")
+   
+//     arr= event.dataTransfer.files;
+//     addFileList(arr)
+//     for(var i=0; i<arr.length; i++){
+//        dataTransfer.items.add(arr[i])
+//     }
+
+//     $('#plz_drag').css("display",'none')
+//     $('.file_list_header').css('display','flex')
+//     document.getElementById("files").files=dataTransfer.files;
+// }

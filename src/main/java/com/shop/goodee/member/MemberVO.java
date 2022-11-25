@@ -25,7 +25,8 @@ public class MemberVO {
 	private Date regDate;
 	private Boolean status;
 	private String nickName;
-	
+	private Long roleNum;
+	private String roleName;
 	//추가 memberVO
 	private String pwCheck;
 	@NotBlank

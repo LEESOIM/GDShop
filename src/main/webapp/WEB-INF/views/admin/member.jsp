@@ -14,9 +14,8 @@ pageEncoding="UTF-8"%>
 
     <title>Admin - Dashboard</title>
 
-    <link rel="stylesheet" href="../css/index.css" />
-    <link rel="stylesheet" href="../css/header.css" />
-    <link rel="stylesheet" href="../css/login.css" />
+    <link rel="stylesheet" href="../css/admin/member.css" />
+    <script defer src="/js/admin/member.js"></script>
 
     <!-- Custom fonts for this template-->
     <link href="/bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
@@ -30,7 +29,7 @@ pageEncoding="UTF-8"%>
 </head>
 
 <body id="page-top">
-
+    <c:import url="../template/library.jsp"></c:import>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -158,24 +157,16 @@ pageEncoding="UTF-8"%>
 
             <!-- Main Content -->
             <div id="content">
-
-                <!-- Topbar -->
-    
-                <c:import url="../template/library.jsp"></c:import>
-                <!-- End of Topbar -->
-
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-      
+                        <h1 class="h3 mb-0 text-gray-800">Member</h1>
                     </div>
 
                     <!-- Content Row -->
                     <div class="row">
-
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
@@ -259,96 +250,84 @@ pageEncoding="UTF-8"%>
                             </div>
                         </div>
                     </div>
-
                     <!-- Content Row -->
-
-                    <div class="row">
-
-                        <!-- Area Chart -->
-                        <div class="col-xl-8 col-lg-7">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-area">
-                                        <canvas id="myAreaChart"></canvas>
-                                    </div>
-                                </div>
+                    
+                    <div id="option">
+                        <div class="row row-cols-lg-auto g-3 align-items-center" id="form">
+                            <div>
+                                <label><input type="radio" name="roleName" value="" checked>전체</label>
+                                <label><input type="radio" name="roleName" value="ROLE_ADMIN">관리자</label>
+                                <label><input type="radio" name="roleName" value="ROLE_SELLER">판매자</label>
+                                <label><input type="radio" name="roleName" value="ROLE_VIP">VIP</label>
+                                <label><input type="radio" name="roleName" value="ROLE_MEMBER">멤버</label>
                             </div>
-                        </div>
-
-                        <!-- Pie Chart -->
-                        <div class="col-xl-4 col-lg-5">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-pie pt-4 pb-2">
-                                        <canvas id="myPieChart"></canvas>
-                                    </div>
-                                    <div class="mt-4 text-center small">
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> Direct
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> Social
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-info"></i> Referral
-                                        </span>
-                                    </div>
+                            
+                            <div class="col-12">
+                                <div class="input-group">
+                                    <select name="kind" class="form-select" id="kind">
+                                        <option class="kinds" value="id">ID</option>
+                                        <option class="kinds" value="name">이름</option>
+                                        <option class="kinds" value="email">Email</option>
+                                    </select>
+                                  <input type="text" name="search" value="${param.search}" class="form-control" id="search" onKeypress="javascript:if(event.keyCode==13) {search_onclick_subm()}" >
+                                  <button type="button" class="btn btn-primary" id="search_btn">검색</button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                
-
+                    <div class="row" id="member_list">
+                        <table class="table table-hover" id="table">
+                            <tr>
+                                <th>ID</th>
+                                <th>이름</th>
+                                <th>Email</th>
+                                <th>포인트</th>
+                                <th>등급</th>
+                                <th>미션</th> 
+                                <th>가입승인</th>
+                            </tr>
+                            <c:forEach items="${list}" var="memberVO">
+                            	<tr onclick=""  data-bs-toggle="modal" data-bs-target="#memberInfoModal">
+                            		<td>${memberVO.id}</td>
+                            		<td>${memberVO.name}</td>
+                            		<td>${memberVO.email}</td>
+                            		<td>${memberVO.point}</td>
+                                    <td>${memberVO.roleName}</td>
+                                    <td><button data-bs-toggle="modal" data-bs-target="#missionModal">미션</button></td>
+                            		<td>${memberVO.status}</td>
+                            	</tr>
+                            </c:forEach>
+                        </table>
+                        
+                        <div id="page">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    <li class="page-item"  value="${pager.pre}" id="pre">
+                                        <a class="page-link"  aria-label="Previous">
+                                            <span aria-hidden="true" data-dir="prev"  data-page="${pager.page}">previous</span>
+                                        </a>
+                                    </li>
+              
+                                    <c:forEach var="i" begin="${pager.startNum}" end="${pager.lastNum}">
+                                        <li class="page-item ${pager.page==i? 'active':''}">
+                                            <a class="page-link">${i}</a>
+                                        </li>
+                                    </c:forEach>
+                                
+                                    <li class="page-item ${pager.next?'':'disabled'}" id="next">
+                                        <a class="page-link" aria-label="Next">
+                                            <span aria-hidden="true" data-dir="next"  data-page="${pager.page}">next</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.container-fluid -->
-
             </div>
             <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <c:import url="../template/footer.jsp"></c:import>
-            <!-- End of Footer -->
 
         </div>
         <!-- End of Content Wrapper -->
@@ -361,25 +340,88 @@ pageEncoding="UTF-8"%>
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
+    <!-- Member Info Modal-->
+    <div class="modal fade" id="memberInfoModal" tabindex="-1" aria-labelledby="memberInfoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="memberInfoModalLabel">New message</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="update" method="post" onsubmit="return confirm('수정하시겠습니까?')">
+                <div class="mb-3">
+                  <label for="member-id" class="col-form-label">ID:</label>
+                  <input type="text" class="form-control" id="member-id" disabled>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="mb-3">
+                    <label for="member-roleName" class="col-form-label">등급:</label>
+                    <select name="roleName" class="form-select" id="member-roleName">
+                        <option class="roleName" value="1">Admin</option>
+                        <option class="roleName" value="2">Seller</option>
+                        <option class="roleName" value="3">Vip</option>
+                        <option class="roleName" value="4">Member</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                  <label for="member-name" class="col-form-label">이름:</label>
+                  <input class="form-control" id="member-name" disabled></input>
+                </div>
+                <div class="mb-3">
+                    <label for="member-phone" class="col-form-label">전화번호:</label>
+                    <input class="form-control" id="member-phone" disabled></input>
+                </div>
+                <div class="mb-3">
+                    <label for="member-email" class="col-form-label">Email:</label>
+                    <input class="form-control" id="member-email" disabled></input>
+                </div>
+                <div class="mb-3">
+                    <label for="member-point" class="col-form-label">포인트:</label>
+                    <input class="form-control" id="member-point" name="point"></input>
+                </div>
+                <div class="mb-3">
+                    <label for="member-regDate" class="col-form-label">가입일:</label>
+                    <input class="form-control" id="member-regDate" disabled></input>
+                </div>
+                
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">수정</button>
                 </div>
+              </div>
+              </form>
             </div>
         </div>
-    </div>
+      </div>
+
+      <!-- Member Mission Modal-->
+    <div class="modal fade" id="missionModal" tabindex="-1" aria-labelledby="missionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="missionModalLabel">Mission</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="mb-3">
+                  <label for="member-id" class="col-form-label">진행중인 미션:</label>
+                  <input type="text" class="form-control" id="member-id">
+                </div>
+                <div class="mb-3">
+                    <label for="member-roleName" class="col-form-label">완료 미션:</label>
+                    <input class="form-control" id="member-roleName"></input>
+                </div>
+              
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="/bootstrap/vendor/jquery/jquery.min.js"></script>
@@ -398,6 +440,21 @@ pageEncoding="UTF-8"%>
     <script src="/bootstrap/js/demo/chart-area-demo.js"></script>
     <script src="/bootstrap/js/demo/chart-pie-demo.js"></script>
 
+    <script>
+        preCheck();
+        // pagination previous 체크
+        function preCheck(){
+            if($('#pre').attr("value")=='true'){
+                $('#pre').removeClass('disabled')
+            }else if($('#pre').attr("value")=='false'){
+                $('#pre').addClass('disabled')
+            }
+        }
+    </script>
+
+    
+        
+    
 </body>
 
 </html>

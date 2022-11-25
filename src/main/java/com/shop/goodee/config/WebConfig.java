@@ -14,8 +14,8 @@ public class WebConfig implements WebMvcConfigurer{
 	
 	@Value("${app.url.path}")
 	private String urlPath; //	/file/**
-	@Value("${app.upload.base}") // file:///gdshop/
-	private String filePath;
+	@Value("${app.upload.base}")
+	private String filePath; // file:///gdshop/
 		
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {

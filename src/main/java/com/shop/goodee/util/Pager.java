@@ -17,8 +17,9 @@ public class Pager {
 	private Long lastNum;
 	private boolean pre;
 	private boolean next;
-	
-	
+	private String roleName;
+	private String kind;
+	private String search;
 	
 	public Pager() {
 		this.page=1L;
@@ -46,6 +47,10 @@ public class Pager {
 		log.info("startNum {}",startNum);
 		log.info("lastNum {}",lastNum);
 		
+		if(totalBlock==0) {
+			this.lastNum=1L;
+		}
+		
 		if(curBlock==totalBlock) {
 			this.lastNum=totalPage;
 		}
@@ -55,7 +60,7 @@ public class Pager {
 			pre=false;
 		}
 		
-		if(curBlock<totalBlock) {
+		if(curBlock<=totalBlock && page!=totalPage) {
 			next=true;
 		}else{
 			next=false;
@@ -78,6 +83,18 @@ public class Pager {
 		return page;
 	}
 	
+	public String getSearch() {
+		if(this.search==null) {
+			this.search="";
+		}
+		return search;
+	}
 	
+	public String getRoleName() {
+		if(this.roleName==null) {
+			this.roleName="";
+		}
+		return roleName;
+	}
 	
 }

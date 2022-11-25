@@ -60,7 +60,9 @@ pageEncoding="UTF-8"%>
                     <input  type="file" name="files" id="files" class="files form-control form-control-sm" multiple>
                 </div> 
 
-                <div class="file_drag" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <!-- <div class="file_drag" id="file_drag" ondrop="drop(event)" ondragover="allowDrop(event)"> -->
+                <div class="file_drag" id="file_drag">
+              
                   <div id="plz_drag">파일을 마우스로 끌어 오세요</div>
                   <div class="file_list_header" style="display: none;">
                     <div class="file_list_header_task">
