@@ -46,22 +46,6 @@ $("#point1_2").change(function () {
 })
 
 
-
-//캠페인 유형
-$("#type1").click(function () {
-  $("#camCount").show();
-})
-
-$("#type2").click(function () {
-  $("#camCount").hide();
-})
-
-$("#type3").click(function () {
-  $("#camCount").hide();
-})
-
-
-
 //파일 등록
 let count = 0;
 $("#fileAdd").click(function () {

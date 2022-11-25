@@ -6,22 +6,29 @@
 <mapper namespace="com.shop.goodee.item.ItemMapper">
 
 	<insert id="setAdd" parameterType="ItemVO" useGeneratedKeys="true" keyProperty="itemNum">
-		INSERT INTO ITEM VALUES(NULL, #{id}, #{itemName}, #{price}, #{title}, #{type}, #{point}, #{itemDetail}, #{stock}, IFNULL(#{count}, 0), #{url}, NOW(), 0, 0, #{shop})
+		INSERT INTO ITEM VALUES(NULL, #{id}, #{itemName}, #{price}, #{title}, #{type}, #{point}, #{detail}, #{stock}, IFNULL(#{count}, 0), #{url}, NOW(), 0, 0, #{shop}, IFNULL(#{role}, "모두"))
 	</insert>
 	<insert id="setAddFile" parameterType="ItemFileVO">
 		INSERT INTO ITEM_FILE VALUES(NULL, #{itemNum}, #{fileName}, #{oriName})
 	</insert>
 	
-	<select id="getList" resultType="ItemVO" resultMap="getListResult">
+	<sql id="search">
 		SELECT S.COMPANY, I.*, F.* 
-		FROM SELLER S
-		INNER JOIN
-		ITEM I
+		FROM ITEM I
+		LEFT OUTER JOIN
+		SELLER S
 		USING(ID)
-		INNER JOIN
+		LEFT OUTER JOIN
 		ITEM_FILE F
 		USING(ITEMNUM)
+	</sql>
+	
+	<!-- 최신순 -->
+	<select id="getList" resultType="ItemVO" resultMap="getListResult">
+		<include refid="search"></include>
+		GROUP BY(I.ITEMNUM)
 		ORDER BY I.ITEMNUM DESC
+		LIMIT 0, 4
 	</select>
 	<resultMap type="ItemVO" id="getListResult">
 		<id column="ITEMNUM" property="itemNum"/>
@@ -30,8 +37,9 @@
 		<result column="PRICE" property="price"/>
 		<result column="TITLE" property="title"/>
 		<result column="TYPE" property="type"/>
+		<result column="ROLE" property="role"/>
 		<result column="POINT" property="point"/>
-		<result column="ITEMDETAIL" property="itemDetail"/>
+		<result column="DETAIL" property="detail"/>
 		<result column="STOCK" property="stock"/>
 		<result column="COUNT" property="count"/>
 		<result column="SHOP" property="shop"/>
@@ -54,4 +62,52 @@
 		</collection>	
 	</resultMap>
 	
+	<!-- 인기순 -->
+	<select id="getListHit" resultType="ItemVO" resultMap="getListResult">
+		<include refid="search"></include>
+		GROUP BY(I.ITEMNUM)
+		ORDER BY HIT DESC
+		LIMIT 0, 4
+	</select>
+	
+	<!-- VIP전용 -->
+	<select id="getListVIP" resultType="ItemVO" resultMap="getListResult">
+		<include refid="search"></include>
+		WHERE `ROLE` = 'VIP'
+		GROUP BY(I.ITEMNUM)
+		ORDER BY I.ITEMNUM DESC
+		LIMIT 0, 4
+	</select>
+	
+	<!-- 즉석추첨형 -->
+	<select id="getList1" resultType="ItemVO" resultMap="getListResult">
+		<include refid="search"></include>
+		WHERE `TYPE` = '추첨형'
+		GROUP BY(I.ITEMNUM)
+		ORDER BY I.ITEMNUM DESC
+	</select>
+	
+	<!-- 추첨형 -->
+	<select id="getList2" resultType="ItemVO" resultMap="getListResult">
+		<include refid="search"></include>
+		WHERE `TYPE` = '즉석추첨형'
+		GROUP BY(I.ITEMNUM)
+		ORDER BY I.ITEMNUM DESC
+	</select>
+	
+	<!-- 초간단미션 -->
+	<select id="getList3" resultType="ItemVO" resultMap="getListResult">
+		<include refid="search"></include>
+		WHERE `TYPE` = '초간단미션'
+		GROUP BY(I.ITEMNUM)
+		ORDER BY I.ITEMNUM DESC
+	</select>
+	
+		<!-- VIP전용 -->
+	<select id="getList4" resultType="ItemVO" resultMap="getListResult">
+		<include refid="search"></include>
+		WHERE `ROLE` = 'VIP'
+		GROUP BY(I.ITEMNUM)
+		ORDER BY I.ITEMNUM DESC
+	</select>
 </mapper>
