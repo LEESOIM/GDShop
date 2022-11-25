@@ -117,6 +117,19 @@ uri="http://www.springframework.org/tags/form" %>
                   style="width: 380px"
                 />
               </div>
+              <hr class="mt-3 mb-1" />
+              <div class="d-flex justify-content-between mb-4">
+                <label class="me-4" style="font-weight: bold; margin-top: 21px"
+                  ><span style="color: red">＊</span>휴대폰번호</label
+                >
+                <input
+                  class="mt-3 p-1 ps-2"
+                  type="text"
+                  id="findPw_phone"
+                  placeholder="-제외 휴대폰 번호를 입력해주세요."
+                  style="width: 380px"
+                />
+              </div>
             </div>
             <div
               class="d-flex justify-content-center mt-4 pt-1 mb-5"
