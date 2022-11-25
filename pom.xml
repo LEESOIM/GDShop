@@ -17,12 +17,26 @@
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
+	
 		<!-- 메일전송 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 		
+		<!-- OCR -->
+		<dependency>
+		    <groupId>net.sourceforge.tess4j</groupId>
+		    <artifactId>tess4j</artifactId>
+		    <version>5.4.0</version>
+		</dependency>
+	
+		<!-- 크롤링 (구글 크롬 최신버전 업데이트 필요 ( 107버전 ))-->	
+ 		<dependency>
+		    <groupId>org.seleniumhq.selenium</groupId>
+		    <artifactId>selenium-java</artifactId>
+		</dependency>
+	
 		<!-- Web-Client -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

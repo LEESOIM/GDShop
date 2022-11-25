@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shop.goodee.seller.SellerMapper">
+
+	<insert id="setSellerAdd" parameterType="SellerVO">
+		INSERT INTO SELLER VALUES(#{id},#{roleNum},#{company})
+	</insert>
+
+	<select id="getSellerList" resultType="SellerVO">
+		<!-- SELECT * FROM SELLER WHERE ROLENUM=4 ORDER BY ID -->
+		SELECT *
+		FROM seller s
+		LEFT JOIN MEMBER_ROLE mr
+		ON s.id=mr.id
+		INNER JOIN MEMBER m
+		ON mr.id=m.id
+
+	</select>
+</mapper>
