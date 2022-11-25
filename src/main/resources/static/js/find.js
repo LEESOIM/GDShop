@@ -34,7 +34,8 @@ $("#find_btn").click(function () {
 $("#findPw_btn").click(function () {
   let id = $("#findPw_id").val();
   let birth = $("#findPw_birth").val();
-  if (id == "" || birth == "") {
+  let phone = $("#findPw_phone").val();
+  if (id == "" || birth == "" || phone == "") {
     document.getElementById("pwFind_modal").click();
     $("#findPw_text").text("빈칸을 모두 입력해주세요.");
   } else {
@@ -44,6 +45,7 @@ $("#findPw_btn").click(function () {
       data: {
         id: id,
         birth: birth,
+        phone: phone,
       },
       success: function (data) {
         if (data == "") {

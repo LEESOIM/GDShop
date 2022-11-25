@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
+prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MemberShip</title>
-    
+
     <c:import url="../template/library.jsp"></c:import>
     <link rel="stylesheet" href="/css/index.css" />
     <link rel="stylesheet" href="/css/header.css" />
@@ -42,9 +42,12 @@
       >
         <div class="modal-dialog">
           <div class="modal-content">
-            <div class="modal-header">
+            <div
+              class="modal-header"
+              style="background-color: black; color: #d4af37; font-weight: bold"
+            >
               <h1 class="modal-title fs-5" id="exampleModalLabel">
-                멤버십가입
+                <b>멤버십 가입 안내</b>
               </h1>
               <button
                 type="button"
@@ -53,24 +56,32 @@
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">
-              <form>
-                <div class="mb-3">
-                  <label for="recipient-name" class="col-form-label"
-                    >가입내용</label
-                  >
-                  <input type="text" class="form-control" id="recipient-name" />
+            <div class="modal-body p-4 mb-2">
+              <div class="mb-3">
+                <h5 style="color: #d4af37" class="mb-3"><b>가입내용</b></h5>
+                <div>
+                  구디샵에서 제공하는 다양한 혜택과 좋은 캠페인에 참여할 수 있는
+                  기회를 드립니다!
                 </div>
-                <div class="mb-3">
-                  <label for="message-text" class="col-form-label"
-                    >가입혜택</label
-                  >
-                  <textarea class="form-control" id="message-text"></textarea>
+              </div>
+              <div style="margin-bottom: 150px">
+                <h5 style="color: #d4af37" class="mb-3"><b>가입혜택</b></h5>
+                <div class="pb-1" style="font-size: 14px">
+                  ✨ VIP회원은 등급제한 캠페인에 참여할 수 있어 남들보다 더 많은
+                  캠페인에 참여 가능!
                 </div>
-                <div class="d-flex justify-content-center">
-                  <button class="btn btn-outline-primary">가입하기</button>
+                <div style="font-size: 14px" class="pb-2 pt-1">
+                  ✨ 포인트 적립 시 0.5% 추가적립 팡팡팡!
                 </div>
-              </form>
+                <div class="mb-5" style="font-size: 14px">
+                  ✨ 등급제한 캠페인은 실제 구매가가 0원
+                </div>
+              </div>
+              <div class="d-flex justify-content-center">
+                <button class="btn btn-outline-dark" id="membership_joinBtn">
+                  가입하기
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -78,5 +89,10 @@
 
       <c:import url="../template/footer.jsp"></c:import>
     </section>
+    <script type="text/javascript">
+      $("#membership_joinBtn").click(function () {
+        alert("결제창으로 이동~~");
+      });
+    </script>
   </body>
 </html>

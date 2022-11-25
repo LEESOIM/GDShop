@@ -4,8 +4,10 @@ import java.sql.Date;
 import java.util.List;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
 
@@ -14,7 +16,7 @@ public class MemberVO {
 	
 	@NotBlank
 	private String id;
-	@NotBlank
+	@Size(min =8,max = 20)
 	private String pw;
 	@NotBlank
 	private String name;
@@ -22,12 +24,16 @@ public class MemberVO {
 	private String birth;
 	private String phone;
 	private Long point;
+	private Long point_3;
+	private Long point_result;
 	private Date regDate;
-	private Boolean status;
+	private boolean status;
 	private String nickName;
+	private Date byeDate;
 	
 	//추가 memberVO
 	private String pwCheck;
+	private String newPwCheck;
 	@NotBlank
 	private String e;
 	private String mailText;
@@ -41,6 +47,9 @@ public class MemberVO {
 	
 	//등급 여러개 가능
 	private List<RoleVO> roleVOs;
-	//프로필 사진 한개
+	//프로필 업로드
+	private MultipartFile multipartFile;
+	//프로필 사진 한개	
+	private MemberFileVO memberFileVO;
 	
 }

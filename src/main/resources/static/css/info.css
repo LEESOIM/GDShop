@@ -75,7 +75,30 @@
 }
 
 .grade_top span {
-  border-bottom: solid 4px yellow;
+  border-bottom: solid 4px rgb(98, 214, 48);
   font-size: 22px;
 }
 
+
+/* 판매자 - 내 상품 */
+/* 상품 등록 */
+#product {
+  font-size: 14px;
+  background-color: transparent;
+  border: 1px solid lightgray;
+  padding: 6px 10px;
+  border-radius: 2px;
+  margin-left: 13px;
+}
+#product:hover {
+  border: 1px solid green;
+  color: green;
+}
+
+.product_box{
+  width: 100%;
+  height: 400px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 10px;
+  padding: 1.2em 2em;
+}
