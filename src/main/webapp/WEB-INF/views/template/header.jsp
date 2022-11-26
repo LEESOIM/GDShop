@@ -142,7 +142,7 @@ prefix="c" %>
                     checked
                   />
                   <label class="form-check-label2" for="flexCheckChecked2">
-                    로그인 상태 유지
+                    아이디 기억하기
                   </label>
                 </div>
                 <div><a href="/member/find_id" id="id_search">아이디/비밀번호 찾기</a></div>
