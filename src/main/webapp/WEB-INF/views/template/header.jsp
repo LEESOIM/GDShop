@@ -119,14 +119,15 @@ prefix="c" %>
               </div>
               <div style="height: 68px">
                 <div id="email_icon"><i class="fa-regular fa-user"></i></div>
-                <input type="text" placeholder="아이디" id="id" />
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                <input type="text" placeholder="아이디" id="id" name="id"/>
                 <div class="inp" id="inp_id" style="display: none">아이디를 입력해주세요.</div>
               </div>
               <div style="height: 68px">
                 <div id="pw_icon">
                   <i class="fa-solid fa-lock"></i>
                 </div>
-                <input type="password" placeholder="비밀번호" id="pw" />
+                <input type="password" placeholder="비밀번호" id="pw" name="pw"/>
                 <div class="inp" id="inp_pw" style="display: none">비밀번호를 입력해주세요.</div>
               </div>
               <div
@@ -149,7 +150,7 @@ prefix="c" %>
               </div>
               <div style="height: 10%">
                 <div class="d-grid gap-2">
-                  <button class="btn btn-success" id="log_btn" type="button">
+                  <button class="btn btn-success" id="log_btn">
                     로그인
                   </button>
                 </div>

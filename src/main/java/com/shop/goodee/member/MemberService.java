@@ -107,9 +107,9 @@ public class MemberService {
 	}
 	
 	//로그인
-	public MemberVO getLogin(MemberVO memberVO)throws Exception{
-		return memberMapper.getLogin(memberVO);
-	}
+//	public MemberVO getLogin(MemberVO memberVO)throws Exception{
+//		return memberMapper.getLogin(memberVO);
+//	}
 	
 	// 마이페이지
 	public MemberVO getMypage(MemberVO memberVO)throws Exception{

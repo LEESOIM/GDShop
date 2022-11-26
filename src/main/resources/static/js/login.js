@@ -17,6 +17,12 @@ $("#log_btn").click(function () {
         id: id,
         pw: pw,
       },
+      beforeSend: function (xhr) {
+        //이거 안하면 403 error
+        //데이터를 전송하기 전에 헤더에 csrf값을 설정한다
+        var $token = $("#token");
+        xhr.setRequestHeader($token.data("token-name"), $token.val());
+      },
       success: function (data) {
         if (data == 1) {
           location.href = "/";
@@ -54,6 +60,12 @@ $("#pw").on("keyup", function (key) {
         data: {
           id: id,
           pw: pw,
+        },
+        beforeSend: function (xhr) {
+          //이거 안하면 403 error
+          //데이터를 전송하기 전에 헤더에 csrf값을 설정한다
+          var $token = $("#token");
+          xhr.setRequestHeader($token.data("token-name"), $token.val());
         },
         success: function (data) {
           if (data == 1) {

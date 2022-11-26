@@ -31,6 +31,9 @@ public class MemberController {
 	private MemberService memberService;
 	
 	@Autowired
+	private MemberSecurityService memberSecurityService;
+	
+	@Autowired
 	private MailService mailService;
 	
 	//아이디 찾기
@@ -113,26 +116,35 @@ public class MemberController {
 	}
 	
 	//로그인(세션)
+//	@PostMapping("login")
+//	@ResponseBody
+//	public int getLogin(MemberVO memberVO,HttpSession session)throws Exception{
+//		memberVO = memberService.getLogin(memberVO);
+//		int result = 0;
+//		if(memberVO != null) {
+//			session.setAttribute("member", memberVO);
+//			result = 1;
+//		}
+//		
+//		return result;
+//	}
+	
+	//로그인(시큐리티)
 	@PostMapping("login")
 	@ResponseBody
-	public int getLogin(MemberVO memberVO,HttpSession session)throws Exception{
-		memberVO = memberService.getLogin(memberVO);
-		int result = 0;
-		if(memberVO != null) {
-			session.setAttribute("member", memberVO);
-			result = 1;
-		}
-		
-		return result;
+	public String getLogin(MemberVO memberVO)throws Exception{
+		log.info("로그인중!!");
+		memberSecurityService.loadUserByUsername(memberVO.getId());
+		return "/member/login";
 	}
 	
 	//로그아웃(세션)
-	@GetMapping("logout")
-	public String setLogout(HttpSession session)throws Exception{
-		session.invalidate();
-		
-		return "redirect:/";
-	}
+//	@GetMapping("logout")
+//	public String setLogout(HttpSession session)throws Exception{
+//		session.invalidate();
+//		
+//		return "redirect:/";
+//	}
 	
 	/* 마이페이지 */
 	@GetMapping("mypage")

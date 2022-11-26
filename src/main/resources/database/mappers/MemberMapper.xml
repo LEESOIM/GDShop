@@ -31,7 +31,7 @@
 	</update>
 	
 	<!-- 로그인 -->
-	<select id="getLogin" parameterType="MemberVO" resultMap="getLoginResult">
+	<select id="getLogin" parameterType="String" resultMap="getLoginResult">
 		SELECT M.*, R.* 
 			FROM MEMBER M
 			INNER JOIN
@@ -40,7 +40,7 @@
 			INNER JOIN
 			ROLE R
 			ON MR.ROLENUM = R.ROLENUM
-		WHERE M.ID=#{id} AND M.PW=#{pw} AND M.STATUS=1
+		WHERE M.ID=#{username} AND M.STATUS=1
 	</select>
 	
 	<resultMap type="MemberVO" id="getLoginResult">
