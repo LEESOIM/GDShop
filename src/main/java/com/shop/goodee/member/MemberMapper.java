@@ -73,4 +73,10 @@ public interface MemberMapper {
 	/* 출금신청 후 출금 예정 포인트 변경 */
 	public int setResultPoint(MemberVO memberVO)throws Exception;
 	
+	/* 내등급 - VIP회원 확인 */
+	public int getVIP(MemberVO memberVO)throws Exception;
+	
+	/* 내등급 - VIP회원 페이지 출력 */
+	public MemberVO getVIPlist(MemberVO memberVO)throws Exception;
+	
 }

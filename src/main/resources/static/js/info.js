@@ -414,3 +414,30 @@ $(document).ready(function () {
     }
   });
 });
+
+//등급확인
+//VIP등급 확인되면 페이지 변경
+function getVIP() {
+  $.ajax({
+    type: "POST",
+    url: "/member/VIP",
+    data: {},
+    success: function (data) {
+      if (data == 1) {
+        //vip 페이지 가져오기
+        getVIPlist();
+      }
+    },
+  });
+}
+
+function getVIPlist() {
+  $.ajax({
+    type: "POST",
+    url: "/member/VIP_list",
+    data: {},
+    success: function (data) {
+      $("#grade_box").html(data);
+    },
+  });
+}

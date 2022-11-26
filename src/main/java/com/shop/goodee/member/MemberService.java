@@ -202,5 +202,15 @@ public class MemberService {
 	public int setResultPoint(MemberVO memberVO)throws Exception{
 		return memberMapper.setResultPoint(memberVO);
 	}
+	
+	/* 내등급 - VIP회원 확인 */
+	public int getVIP(MemberVO memberVO)throws Exception{
+		return memberMapper.getVIP(memberVO);
+	}
+	
+	/* 내등급 - VIP회원 페이지 출력 */
+	public MemberVO getVIPlist(MemberVO memberVO)throws Exception{
+		return memberMapper.getVIPlist(memberVO);
+	}
 
 }

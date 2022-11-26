@@ -164,5 +164,15 @@
 		UPDATE MEMBER SET POINT_RESULT=#{point_result}+POINT_RESULT WHERE ID=#{id}
 	</update>
 	
+	<!-- 내등급 - VIP등급 확인 -->
+	<select id="getVIP" parameterType="MemberVO" resultType="Integer">
+		SELECT COUNT(id) FROM MEMBER_ROLE WHERE ROLENUM=3 AND ID=#{id}
+	</select>
+	
+	<!-- 내등급 - VIP등급 페이지 출력 -->
+	<select id="getVIPlist" parameterType="MemberVO" resultType="MemberVO">
+		SELECT * FROM MEMBER_ROLE WHERE ROLENUM=3 AND ID=#{id}
+	</select>
+	
 
 </mapper>

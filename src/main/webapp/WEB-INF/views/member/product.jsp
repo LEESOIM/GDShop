@@ -35,13 +35,13 @@ prefix="c" %>
             <!-- 여기부터 내정보 상세보기 -->
             <div class="info_top p-2 mt-3 mb-4 d-flex">
               <div><span style="color: rgb(10, 154, 10)">${memberVO.name}</span>님의 상품목록</div>
-              <button id="product" data-bs-toggle="modal" data-bs-target="#exampleModal_withdraw" data-bs-whatever="@mdo">상품등록</button>
+              <button id="product" data-bs-toggle="modal" data-bs-target="#exampleModal_withdraw" data-bs-whatever="@mdo" onclick="location.href='/item/add'" >상품등록</button>
             </div>
               <!-- 목록보기 -->
               <div class="d-flex justify-content-between mb-3">
                 <div class="product_box">
                   <div class="mt-1 mb-2" style="font-size: 17px">
-                    <b>상품 목록</b>
+                    <b>상품</b>
                   </div>
                 </div>
            	  </div>

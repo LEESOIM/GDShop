@@ -5,6 +5,7 @@ prefix="c" %>
 <div class="d-flex justify-content-end mt-3">
   <div id="top-menu">
   <a href="/admin/index">관리자</a>
+  <span style="padding: 0px 9px 0px 14px">|</span>
   <c:if test="${empty member}">
     <a
       href="#"

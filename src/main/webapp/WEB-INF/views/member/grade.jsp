@@ -39,11 +39,11 @@ prefix="c" %>
                 >님의 등급
               </div>
             </div>
-            <!-- 등급이 없는 회원의 경우 -->
-            <c:if test="${not empty member}">
+            
+            <div id="grade_box">
               <c:forEach items="${sessionScope.member.roleVOs}" var="i">
-                <c:if test="${i.roleName ne 'ROLE_VIP'}">
-                  <div
+                	<c:if test="${i.roleName ne 'ROLE_VIP'}">
+                		<div
                     class="mb-5"
                     style="
                       text-align: center;
@@ -72,51 +72,10 @@ prefix="c" %>
                       멤버십가입 알아보기
                     </button>
                   </div>
-                </c:if>
+                  </c:if>
               </c:forEach>
-              <!-- VIP등급 회원일 경우 -->
-              <c:forEach items="${sessionScope.member.roleVOs}" var="i">
-                <c:if test="${i.roleName eq 'ROLE_VIP'}">
-                  <div
-                    class="p-3"
-                    style="
-                      margin: 40px auto 10px auto;
-                      width: 65%;
-                      height: 315px;
-                      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-                    "
-                  >
-                    <div class="grade_top mt-3">
-                      ${memberVO.name}님은 <span>VIP등급</span>입니다.
-                    </div>
-                    <hr />
-                    <div>
-                      <div>
-                        <div style="font-size: 14px">
-                          이용기간 : <b>2020-05-22 ~ 2022-06-01</b>
-                        </div>
-                        <div class="pt-1" style="font-size: 14px">
-                          해지일 :
-                          <span style="color: red">2022-06-01 해지예정</span>
-                        </div>
-                      </div>
-                      <hr />
-                      <div class="pb-2" style="font-size: 16px">
-                        🎁 등급 혜택
-                      </div>
-                      <div class="pb-1" style="font-size: 14px">
-                        ✅ VIP회원은 등급제한 캠페인에 참여할 수 있어 남들보다
-                        더 많은 캠페인에 참여 가능!
-                      </div>
-                      <div style="font-size: 14px">
-                        ✅ 등급제한 캠페인은 실제 구매가가 0원
-                      </div>
-                    </div>
-                  </div>
-                </c:if>
-              </c:forEach>
-            </c:if>
-
+              </div>
+              
             <!-- 멤버십 가입 모달창 -->
             <div
               class="modal fade"
@@ -191,6 +150,7 @@ prefix="c" %>
 
     <script src="/js/info.js"></script>
     <script type="text/javascript">
+    getVIP();
       $("#membership_joinBtn").click(function () {
         alert("결제창으로 이동~~");
       });

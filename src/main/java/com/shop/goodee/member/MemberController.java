@@ -365,5 +365,23 @@ public class MemberController {
 		return mv;
 	}
 	
+	/* 내등급 - VIP회원 확인 */
+	@PostMapping("VIP")
+	@ResponseBody
+	public int getVIP(HttpSession session, MemberVO memberVO)throws Exception{
+		memberVO = (MemberVO) session.getAttribute("member");
+		int result = memberService.getVIP(memberVO);
+		
+		return result;
+	}
+	
+	/* 내등급 - VIP회원 페이지 출력 */
+	@PostMapping("VIP_list")
+	@ResponseBody
+	public ModelAndView getVIPlist(MemberVO memberVO, ModelAndView mv)throws Exception{
+		memberVO = memberService.getVIPlist(memberVO);
+		mv.setViewName("/member/VIP");
+		return mv;
+	}
 
 }
