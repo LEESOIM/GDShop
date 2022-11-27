@@ -6,12 +6,24 @@
 
 <mapper namespace="com.shop.goodee.board.notice.NoticeMapper">
 	
+	<delete id="setDelete" parameterType="NoticeVO">
+		DELETE FROM NOTICE WHERE NOTICENUM=#{noticeNum}
+	</delete>
+	
+	<delete id="setDeleteFile" parameterType="NoticeFileVO">
+		DELETE FROM NOTICE_FILE WHERE FILENUM=#{fileNum}
+	</delete>
+	
+	<update id="setUpdate" parameterType="NoticeVO">
+		UPDATE NOTICE SET TITLE=#{title}, CONTENTS=#{contents} WHERE NOTICENUM=#{noticeNum}
+	</update>
+	
 	<select id="getFileDetail" parameterType="NoticeFileVO" resultType="NoticeFileVO">
 		SELECT * FROM NOTICE_FILE WHERE FILENUM=#{fileNum}	
 	</select>
 	
 	<insert id="setFileAdd" parameterType="NoticeFileVO">
-		INSERT INTO NOTICE_FILE VALUES(null,#{noticeNum},#{fileName},#{oriName})
+		INSERT INTO NOTICE_FILE VALUES(null,#{noticeNum},#{fileName},#{oriName},#{size})
 	</insert>
 	
 	<insert id="setWrite" parameterType="NoticeVO" useGeneratedKeys="true" keyProperty="noticeNum">
@@ -37,6 +49,7 @@
 			<id column="fileNum" property="fileNum"/>
 			<result column="fileName" property="fileName"/>
 			<result column="oriName" property="oriName"/>
+			<result column="size" property="size"/>
 		</collection>
 	</resultMap>
 

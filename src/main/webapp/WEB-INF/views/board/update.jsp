@@ -19,7 +19,7 @@ pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="../css/login.css" />
     <link rel="stylesheet" href="../css/board.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script defer src="/js/notice/notice.js"></script>
+    <script defer src="/js/notice/update.js"></script>
      <!-- include summernote css/js-->
 	 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 	 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
@@ -49,13 +49,14 @@ pageEncoding="UTF-8"%>
             </div>
           </div>
           <div style="width: 100%;">
-            <div class="board_top p-3 mt-3 mb-3">Write Page</div>
+            <div class="board_top p-3 mt-3 mb-3">Update Page</div>
 
-            <form action="write" method="post" enctype="multipart/form-data">
-           
-                <div style="width: 100%;">
-                    <input type="text" style="width: 100%;" id="title" name="title" placeholder="제목을 입력하세요">
-                    <input type="text" style="width: 100%;" id="id" name="id" value="admin">
+            <form action="update" method="post" enctype="multipart/form-data" id="form">
+        
+              <div style="width: 100%;">
+                    <input type="text" name="noticeNum" id="noticeNum" value="${noticeVO.noticeNum}">
+                    <input type="text" style="width: 100%;" value="${noticeVO.title}" id="title" name="title" placeholder="제목을 입력하세요">
+                    <input type="text" style="width: 100%;" value="${noticeVO.id}" id="id" name="id">
                 </div>
                 <div>
                     <input  type="file" name="files" id="files" class="files form-control form-control-sm" multiple>
@@ -63,24 +64,29 @@ pageEncoding="UTF-8"%>
 
                 <!-- <div class="file_drag" id="file_drag" ondrop="drop(event)" ondragover="allowDrop(event)"> -->
                 <div class="file_drag" id="file_drag">
-              
-                  <div id="plz_drag">파일을 마우스로 끌어 오세요</div>
-                  <div class="file_list_header" style="display: none;">
-                    <div class="file_list_header_task">
-                      <button type="button" id="removeAll_button"><span class="blind">X</span></button>
-                    </div>
-                    <div class="file_list_header_title"><span class="text">파일명</span></div>
-                    <!-- <div class="file_list_header_status"><span class="text">업로드 상태</span></div> -->
-                    <div class="file_list_header_volume"><span class="text">총용량 </span><span id="fileSize">0</span></div>
-                  </div>
-
-                  <ul id="fileList"></ul>
+               
+	                  <div id="plz_drag">파일을 마우스로 끌어 오세요</div>
+                 
+                  
+	                  <div class="file_list_header">
+	                    <div class="file_list_header_task">
+	                      <button type="button" id="removeAll_button"><span class="blind">X</span></button>
+	                    </div>
+	                    <div class="file_list_header_title"><span class="text">파일명</span></div>
+	                    <!-- <div class="file_list_header_status"><span class="text">업로드 상태</span></div> -->
+	                    <div class="file_list_header_volume"><span class="text">총용량 </span><span id="fileSize">0</span></div>
+	                  </div>
+	
+	                  <ul id="fileList">
+	        
+	                  </ul>
+                  
                 </div>
-
+            
                 
-                <textarea name="contents" id="summernote"></textarea>
+                <textarea name="contents" id="summernote" value="${noticeVO.contents}">${noticeVO.contents}</textarea>
 
-                <button type="submit">작성</button>
+                <button type="submit">수정</button>
             </form>
 
           </div>
@@ -94,6 +100,8 @@ pageEncoding="UTF-8"%>
             tabsize:4,
             height:250
         })
+
+
 
     </script>
 

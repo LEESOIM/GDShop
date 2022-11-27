@@ -13,7 +13,7 @@ pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="../css/header.css" />
     <link rel="stylesheet" href="../css/login.css" />
     <link rel="stylesheet" href="../css/board.css" />
-    <script defer src="/js/notice.js"></script>
+    <script defer src="/js/notice/notice.js"></script>
   </head>
   <body>
     <section class="container" style="width: 75%">

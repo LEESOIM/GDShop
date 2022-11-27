@@ -82,4 +82,12 @@ public class FileManager extends AbstractView {
 		return buffer.toString();
 	}
 
+	
+	public boolean deleteFile(String path, String fileName) {
+		String filename = fileName;
+		File file = new File(path,filename);
+		
+		boolean fileDeleted = file.delete();
+		return fileDeleted;
+	}
 }

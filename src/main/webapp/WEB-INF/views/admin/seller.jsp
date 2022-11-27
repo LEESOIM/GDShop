@@ -15,9 +15,6 @@ pageEncoding="UTF-8"%>
 
     <title>Admin - Dashboard</title>
 
-    <link rel="stylesheet" href="../css/admin/member.css" />
-    <script defer src="/js/admin/member.js"></script>
-
     <!-- Custom fonts for this template-->
     <link href="/bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
     <link
@@ -48,7 +45,7 @@ pageEncoding="UTF-8"%>
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Member</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Seller</h1>
                     </div>
 
                     <!-- Content Row -->
@@ -137,81 +134,115 @@ pageEncoding="UTF-8"%>
                         </div>
                     </div>
                     <!-- Content Row -->
-                    
-                    <div id="option">
-                        <div class="row row-cols-lg-auto g-3 align-items-center" id="form">
-                            <div>
-                                <label><input type="radio" name="roleName" value="" checked>전체</label>
-                                <label><input type="radio" name="roleName" value="ROLE_ADMIN">관리자</label>
-                                <label><input type="radio" name="roleName" value="ROLE_SELLER">판매자</label>
-                                <label><input type="radio" name="roleName" value="ROLE_VIP">VIP</label>
-                                <label><input type="radio" name="roleName" value="ROLE_MEMBER">멤버</label>
-                            </div>
-                            
-                            <div class="col-12">
-                                <div class="input-group">
-                                    <select name="kind" class="form-select" id="kind">
-                                        <option class="kinds" value="id">ID</option>
-                                        <option class="kinds" value="name">이름</option>
-                                        <option class="kinds" value="email">Email</option>
-                                    </select>
-                                  <input type="text" name="search" value="${param.search}" class="form-control" id="search" onKeypress="javascript:if(event.keyCode==13) {search_onclick_subm()}" >
-                                  <button type="button" class="btn btn-primary" id="search_btn">검색</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row" id="member_list">
-                        <table class="table table-hover" id="table">
-                            <tr>
-                                <th>ID</th>
-                                <th>이름</th>
-                                <th>Email</th>
-                                <th>포인트</th>
-                                <th>등급</th>
-                                <th>미션</th> 
-                                <th>가입승인</th>
-                            </tr>
-                            <c:forEach items="${list}" var="memberVO">
-                            	<tr onclick=""  data-bs-toggle="modal" data-bs-target="#memberInfoModal">
-                            		<td>${memberVO.id}</td>
-                            		<td>${memberVO.name}</td>
-                            		<td>${memberVO.email}</td>
-                            		<td>${memberVO.point}</td>
-                                    <td>
-                                        <c:forEach items="${memberVO.roleVOs}" var="roleVO">
-                                            ${fn:split(roleVO.roleName,'_')[1] }
-                                        </c:forEach>  
-                                    </td>
-                                    <td><button data-bs-toggle="modal" data-bs-target="#missionModal">미션</button></td>
-                            		<td>${memberVO.status}</td>
-                            	</tr>
-                            </c:forEach>
+                    <div class="row" id="apply_list">
+                        <h1>입점 신청 목록</h1>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">아이디</th>
+                                    <th scope="col">이름</th>
+                                    <th scope="col">이메일</th>
+                                    <th scope="col">전화번호</th>
+                                    <th scope="col">기업명</th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${requestScope.vo}" var="dto">
+                                    <tr>
+                                        <th scope="row"></th>
+                                        <td>${dto.id}</td>
+                                        <td>${dto.name}</td>
+                                        <td>${dto.email}</td>
+                                        <td>${dto.phone}</td>
+                                        <td>${dto.company}</td>
+                                        <td><a href="#">O</a></td>
+                                        <td><a href="#">X</a></td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
                         </table>
                         
                         <div id="page">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination">
-                                    <li class="page-item"  value="${pager.pre}" id="pre">
-                                        <a class="page-link"  aria-label="Previous">
-                                            <span aria-hidden="true" data-dir="prev"  data-page="${pager.page}">previous</span>
-                                        </a>
+                                  <li class="page-item"  value="${pager.pre}" id="pre">
+                                    <a class="page-link" href="./seller?page=${pager.page-1}" aria-label="Previous">
+                                      <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                  </li>
+                
+                                  <c:forEach var="i" begin="${pager.startNum}" end="${pager.lastNum}">
+                                    <li class="page-item ${pager.page==i? 'active':''}">
+                                      <a class="page-link" href="./seller?page=${i}">${i}</a>
                                     </li>
-              
-                                    <c:forEach var="i" begin="${pager.startNum}" end="${pager.lastNum}">
-                                        <li class="page-item ${pager.page==i? 'active':''}">
-                                            <a class="page-link">${i}</a>
-                                        </li>
-                                    </c:forEach>
-                                
-                                    <li class="page-item ${pager.next?'':'disabled'}" id="next">
-                                        <a class="page-link" aria-label="Next">
-                                            <span aria-hidden="true" data-dir="next"  data-page="${pager.page}">next</span>
-                                        </a>
-                                    </li>
+                                  </c:forEach>
+                                  
+                                  <li class="page-item ${pager.next?'':'disabled'}" id="next">
+                                    <a class="page-link" href="./seller?page=${pager.page+1}" aria-label="Next">
+                                      <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                  </li>
                                 </ul>
-                            </nav>
+                              </nav>
+                        </div>
+                    </div>
+
+                    <div class="row" id="seller_list">
+                        <h1>판매자 목록</h1>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">아이디</th>
+                                    <th scope="col">이름</th>
+                                    <th scope="col">이메일</th>
+                                    <th scope="col">전화번호</th>
+                                    <th scope="col">기업명</th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${requestScope.vo}" var="dto">
+                                    <tr>
+                                        <th scope="row"></th>
+                                        <td>${dto.id}</td>
+                                        <td>${dto.name}</td>
+                                        <td>${dto.email}</td>
+                                        <td>${dto.phone}</td>
+                                        <td>${dto.company}</td>
+                                        <td><a href="#">O</a></td>
+                                        <td><a href="#">X</a></td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                        
+                        <div id="page">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                  <li class="page-item"  value="${pager.pre}" id="pre">
+                                    <a class="page-link" href="./seller?page=${pager.page-1}" aria-label="Previous">
+                                      <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                  </li>
+                
+                                  <c:forEach var="i" begin="${pager.startNum}" end="${pager.lastNum}">
+                                    <li class="page-item ${pager.page==i? 'active':''}">
+                                      <a class="page-link" href="./seller?page=${i}">${i}</a>
+                                    </li>
+                                  </c:forEach>
+                                  
+                                  <li class="page-item ${pager.next?'':'disabled'}" id="next">
+                                    <a class="page-link" href="./seller?page=${pager.page+1}" aria-label="Next">
+                                      <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </nav>
                         </div>
                     </div>
                 </div>
@@ -246,8 +277,12 @@ pageEncoding="UTF-8"%>
                 </div>
                 <div class="mb-3">
                     <label for="member-roleName" class="col-form-label">등급:</label>
-                    <div id="roleNameDiv"></div>
-                    
+                    <select name="roleName" class="form-select" id="member-roleName">
+                        <option class="roleName" value="1">Admin</option>
+                        <option class="roleName" value="2">Seller</option>
+                        <option class="roleName" value="3">Vip</option>
+                        <option class="roleName" value="4">Member</option>
+                    </select>
                 </div>
                 <div class="mb-3">
                   <label for="member-name" class="col-form-label">이름:</label>

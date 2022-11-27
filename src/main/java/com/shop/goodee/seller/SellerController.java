@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shop.goodee.member.MemberVO;
+import com.shop.goodee.util.Pager;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,10 +31,10 @@ public class SellerController {
 	}
 	
 	@GetMapping("sellerList")
-	public ModelAndView getSellerList() throws Exception{
+	public ModelAndView getSellerList(Pager pager) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		List<SellerVO> ar = sellerService.getSellerList(); 
+		List<SellerVO> ar = sellerService.getSellerList(pager); 
 		
 		mv.addObject("vo", ar);
 		mv.setViewName("/seller/sellerList");

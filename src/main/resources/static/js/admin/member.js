@@ -70,9 +70,16 @@ function memberDetail(event){
             id:id
         },
         success:function(data){
+            console.log(data)
             $("#memberInfoModalLabel").text(data.id+"님의 정보")
             $("#member-id").val(data.id)
-            $("#member-roleName").val(data.roleNum).prop("selected",true)
+            $("#roleNameDiv").empty()
+            for(i=0; i<data.roleVOs.length;i++){
+                console.log(data.roleVOs[i].roleName)
+                let input = "<div class='member-roleName'>"+data.roleVOs[i].roleName+"<button type='button'>X</button></div>"
+                           
+                $("#roleNameDiv").append(input)
+            }
             // $("#member-roleName").val(data.roleName.split('_')[1])
             $("#member-name").val(data.name)
             $("#member-phone").val(data.phone)

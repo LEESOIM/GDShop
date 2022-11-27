@@ -15,7 +15,7 @@ pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="../css/login.css" />
     <link rel="stylesheet" href="../css/board.css" />
 
-    <script defer src="/js/notice.js"></script>
+
   </head>
   <body>
     <section class="container" style="width: 75%">
@@ -45,7 +45,7 @@ pageEncoding="UTF-8"%>
           <div style="width: 100%;">
             <div class="board_top p-3 mt-3 mb-3">Detail Page</div>
 
-              <div id="title">
+              <!-- <div id="title">
                 <h1>${noticeVO.title}</h3>
                 <h1>${noticeVO.id}</h3>
                 <h1>${noticeVO.regDate}</h3>
@@ -58,8 +58,57 @@ pageEncoding="UTF-8"%>
               </div>
               <div id="contents" style="height: 100%;">
                 ${noticeVO.contents}
-              </div>
-          </div>
+              </div> -->
+
+              <table class="table " >
+                <colgroup>
+                  <col width="15%"/>
+                  <col width="35%"/>
+                  <col width="15%"/>
+                  <col width="35%"/>
+                </colgroup>
+                <tbody>
+                  <tr>
+                    <th scope="row">글 번호</th>
+                    <td>
+                      ${noticeVO.noticeNum }
+                    </td>
+                    <th scope="row">조회수</th>
+                    <td>${noticeVO.hit}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">작성자</th>
+                    <td>${noticeVO.id}</td>
+                    <th scope="row">작성일</th>
+                    <td>${noticeVO.regDate}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">제목</th>
+                    <td colspan="3">
+                      ${noticeVO.title}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="4" class="view_text">
+                      ${noticeVO.contents}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">첨부파일</th>
+                    <td colspan="3">
+                      <div id="files">
+                        <c:forEach items="${noticeVO.fileVOs}" var="fileVOs">
+                           <a href="/fileDown/notice?fileNum=${fileVOs.fileNum}">${fileVOs.oriName}</a> 
+                        </c:forEach>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <a href="javascript:history.back();" class="btn" id="list">목록으로</a>
+              <a href="./update?noticeNum=${noticeVO.noticeNum}" class="btn" id="update">수정</a>
+              <a href="./delete?noticeNum=${noticeVO.noticeNum}" class="btn" id="delete">삭제</a>
+
         </div>
       </div>
       <c:import url="../template/footer.jsp"></c:import>

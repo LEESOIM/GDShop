@@ -8,4 +8,5 @@ public class NoticeFileVO {
 	private Long noticeNum;
 	private String fileName;
 	private String oriName;
+	private Long size;
 }

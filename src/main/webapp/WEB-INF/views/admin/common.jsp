@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +24,11 @@ pageEncoding="UTF-8"%>
                 <td>${memberVO.name}</td>
                 <td>${memberVO.email}</td>
                 <td>${memberVO.point}</td>
-                <td>${memberVO.roleName}</td>
+                <td>
+                    <c:forEach items="${memberVO.roleVOs}" var="roleVO">
+                        ${fn:split(roleVO.roleName,'_')[1] }
+                    </c:forEach>  
+                </td>
                 <td><button data-bs-toggle="modal" data-bs-target="#missionModal">미션</button></td>
                 <td>${memberVO.status}</td>
             </tr>

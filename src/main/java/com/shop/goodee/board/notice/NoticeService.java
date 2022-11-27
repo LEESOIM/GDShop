@@ -1,5 +1,6 @@
 package com.shop.goodee.board.notice;
 
+import java.io.Console;
 import java.io.File;
 import java.util.List;
 
@@ -25,6 +26,78 @@ public class NoticeService {
 	@Value("${app.notice}") //	D:/gdshop/notice/
 	private String path;
 	
+	public int setDelete(NoticeVO noticeVO)throws Exception{
+		
+		
+		noticeVO = noticeMapper.getDetail(noticeVO);
+		log.info("=================================");
+		log.info("NOTICEVO => {}",noticeVO);
+		log.info("=================================");
+		// 기존 HDD 파일 지우기 안됨 나중에하기
+		if(noticeVO.getFileName()!=null) {
+			for(String filename: noticeVO.getFileName()) {
+				boolean check = fileManager.deleteFile(path, filename);
+				log.info("delete HDD =>{}",check);
+			}
+		}
+		// 기존 DB 파일 지우기
+		if(noticeVO.getFileNum()!=null) {
+			for(Long filenum: noticeVO.getFileNum()) {
+				NoticeFileVO noticeFileVO = new NoticeFileVO();
+				noticeFileVO.setFileNum(filenum);
+				int r = noticeMapper.setDeleteFile(noticeFileVO);
+				log.info("delete DB =>{}",r);
+			}
+		}
+		
+		// 글 삭제
+		int result = noticeMapper.setDelete(noticeVO);
+		return result;
+	}
+
+	public int setUpdate(NoticeVO noticeVO)throws Exception{
+		// 글 수정
+		int result = noticeMapper.setUpdate(noticeVO);
+		// 기존 HDD 파일 지우기
+		if(noticeVO.getFileName()!=null) {
+			for(String filename: noticeVO.getFileName()) {
+				boolean check = fileManager.deleteFile(path, filename);
+				log.info("delete HDD =>{}",check);
+			}
+		}
+		// 기존 DB 파일 지우기
+		if(noticeVO.getFileNum()!=null) {
+			for(Long filenum: noticeVO.getFileNum()) {
+				NoticeFileVO noticeFileVO = new NoticeFileVO();
+				noticeFileVO.setFileNum(filenum);
+				int r = noticeMapper.setDeleteFile(noticeFileVO);
+				log.info("delete DB =>{}",r);
+			}
+		}
+		// 새로 파일 추가
+		File file = new File(path);
+		
+		if(!file.exists()) {
+			boolean check = file.mkdirs();
+		}
+		
+		for(MultipartFile f :noticeVO.getFiles()) {
+			if(!f.isEmpty()) {
+				log.info("file => {}",f.getOriginalFilename());
+				// HDD에 저장
+				String fileName = fileManager.saveFile(f, path);
+				
+				// DB에 저장
+				NoticeFileVO noticeFileVO = new NoticeFileVO();
+				noticeFileVO.setNoticeNum(noticeVO.getNoticeNum());
+				noticeFileVO.setFileName(fileName);
+				noticeFileVO.setOriName(f.getOriginalFilename());
+				noticeFileVO.setSize(f.getSize());
+				noticeMapper.setFileAdd(noticeFileVO);
+			}
+		}
+		return result;
+	}
 	
 	public NoticeFileVO getFileDetail(NoticeFileVO noticeFileVO)throws Exception{
 		return noticeMapper.getFileDetail(noticeFileVO);
@@ -50,6 +123,7 @@ public class NoticeService {
 				noticeFileVO.setNoticeNum(noticeVO.getNoticeNum());
 				noticeFileVO.setFileName(fileName);
 				noticeFileVO.setOriName(f.getOriginalFilename());
+				noticeFileVO.setSize(f.getSize());
 				noticeMapper.setFileAdd(noticeFileVO);
 			}
 		}

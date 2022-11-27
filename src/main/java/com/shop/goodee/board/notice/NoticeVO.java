@@ -20,4 +20,6 @@ public class NoticeVO  {
 	private Long depth;
 	private MultipartFile[] files;
 	private List<NoticeFileVO> fileVOs;
+	private String[] fileName;
+	private Long[] fileNum;
 }

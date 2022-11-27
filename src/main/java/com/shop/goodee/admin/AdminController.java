@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shop.goodee.member.MemberVO;
+import com.shop.goodee.seller.SellerService;
+import com.shop.goodee.seller.SellerVO;
 import com.shop.goodee.util.Pager;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +25,23 @@ import lombok.extern.slf4j.Slf4j;
 public class AdminController {
 	
 	@Autowired
-	private AdminService adminService;
+	private AdminService adminService;	
+	@Autowired
+	private SellerService sellerService;
+	
+	@GetMapping("seller")
+	public ModelAndView getSellerList(Pager pager)throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		
+		List<SellerVO> ar = sellerService.getSellerList(pager); 
+		
+		mv.addObject("vo", ar);
+		mv.addObject("pager",pager);
+		mv.setViewName("/admin/seller");
+		return mv;
+	}
+	
 	
 	@GetMapping("detail")
 	@ResponseBody
@@ -49,6 +67,7 @@ public class AdminController {
 //		map.put("pager",pager);
 //		mv.addObject("map",map);
 		//return map;
+		log.info("list {}",list);
 		mv.addObject("list",list);
 		mv.addObject("pager",pager);
 		mv.setViewName("admin/common");

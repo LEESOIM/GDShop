@@ -1,21 +1,41 @@
-const fileList = document.getElementById("fileList")
+let total_file_size=0
 
-preCheck();
-// pagination previous 체크
-function preCheck(){
-    if($('#pre').attr("value")=='true'){
-        $('#pre').removeClass('disabled')
-    }else if($('#pre').attr("value")=='false'){
-        $('#pre').addClass('disabled')
-    }
-}
-//========================================== 파일 업로드 ===============================
+$(document).ready(function(){
+    console.log("시작")
+    $.ajax({
+        type:"GET",
+        url:"start",
+        data:{
+            noticeNum:parseInt($("#noticeNum").val())
+        },
+        success:function(data){
+            console.log(data)
+            for(i=0; i<data.fileVOs.length; i++){
+                total_file_size += data.fileVOs[i].size
+
+                byteUnit=setByteUnit(data.fileVOs[i].size).get("unit")
+                size=setByteUnit(data.fileVOs[i].size).get("size")
+                let li = $('<li class="fileItem" id="'+data.fileVOs[i].fileNum+'"></li>')
+                li.append('<div class="remove"><button type="button" data-filenum="'+data.fileVOs[i].fileNum +'"data-filename="'+data.fileVOs[i].fileName+'"data-size="'+data.fileVOs[i].size+'"class="remove_button_uploaded">X</button></div>')
+                li.append('<div class="fileName">'+data.fileVOs[i].oriName+'</div>')
+                li.append('<div class="fileSize">'+size+byteUnit+'</div>')
+                $("#fileList").append(li)
+            }
+            unit = setByteUnit(total_file_size).get("unit")
+            total_size = setByteUnit(total_file_size).get("size")
+            $("#fileSize").text(total_size+unit)
+            plz_drag_check()
+        }
+    })
+})
+
+
 addFileList();
 removeFile();
 
 const dataTransfer = new DataTransfer();
-let total_file_size=0
-
+total_file_size=parseInt($("#fileSize").text())
+console.log($("#fileSize").text())
 //파일 업로드 변경 이벤트
 $("#files").change(function(){
     console.log("파일 변경")
@@ -52,9 +72,11 @@ function addFileList(fileArr){
             li.append('<div class="fileSize">'+size+byteUnit+'</div>')
             $("#fileList").append(li)
         }
+
         unit = setByteUnit(total_file_size).get("unit")
         total_size = setByteUnit(total_file_size).get("size")
         $("#fileSize").text(total_size+unit)
+        plz_drag_check()
     }
 }
 
@@ -86,7 +108,25 @@ function setByteUnit(size){
 function removeFile(){
     $("#fileList").click(function(event){
         console.log("removeFile")
-        let fileArr = document.getElementById("files").files
+        // 원래 올라갔던 파일 제거 버튼
+        if(event.target.className=='remove_button_uploaded'){
+            // fileName[], fileNum[] 
+            let inputName = '<input type="text" name="fileName" value="'+ event.target.dataset.filename+'">'
+            let inputNum = '<input type="text" name="fileNum" value="'+ parseInt(event.target.dataset.filenum)+'">'
+            $("#form").append(inputName)
+            $("#form").append(inputNum)
+            
+            const removeTarget = document.getElementById(event.target.dataset.filenum);
+            removeTarget.remove();
+
+            total_file_size-=event.target.dataset.size
+            unit = setByteUnit(total_file_size).get("unit")
+            total_size = setByteUnit(total_file_size).get("size")
+            $("#fileSize").text(total_size+unit)
+            plz_drag_check()
+        }
+
+        // 추가할 파일 제거 버튼
         if(event.target.className=='remove_button'){
             targetFile = event.target.dataset.index 
             
@@ -108,10 +148,9 @@ function removeFile(){
             unit = setByteUnit(total_file_size).get("unit")
             total_size = setByteUnit(total_file_size).get("size")
             $("#fileSize").text(total_size+unit)
-            if(dataTransfer.files.length<=0){
-                $('#plz_drag').css("display",'block')
-                $('.file_list_header').css('display','none')
-            }
+
+
+            plz_drag_check()
         }
     })
 }
@@ -120,16 +159,24 @@ $("#removeAll_button").click(function(){
     console.log("전체 제거",dataTransfer.files.length)
     dataTransfer.items.clear()
     total_file_size=0
+    if($(".remove_button_uploaded").length>0){
+        console.log($(".remove_button_uploaded"))
+        for(i=0; i<$(".remove_button_uploaded").length; i++){
+            let inputName = '<input type="text" name="fileName" value="'+ $(".remove_button_uploaded")[i].dataset.filename+'">'
+            let inputNum = '<input type="text" name="fileNum" value="'+ parseInt($(".remove_button_uploaded")[i].dataset.filenum)+'">'
+            $("#form").append(inputName)
+            $("#form").append(inputNum)
+        }
+    }
     $("#fileList").empty();
 
     document.getElementById("files").files = dataTransfer.files;
 
-    if(dataTransfer.files.length<=0){
-        $('#plz_drag').css("display",'block')
-        $('.file_list_header').css('display','none')
-    }
+    plz_drag_check()
 })
 
+
+// 파일 Drag & Drop
 const file_drag = document.getElementById("file_drag")
 
 file_drag.addEventListener("dragover",function(e){
@@ -140,36 +187,22 @@ file_drag.addEventListener("drop",function(e){
     console.log("드랍")
     e.preventDefault();
     
-    arr= event.dataTransfer.files;
+    arr= e.dataTransfer.files;
     addFileList(arr)
     for(var i=0; i<arr.length; i++){
        dataTransfer.items.add(arr[i])
     }
-
-    $('#plz_drag').css("display",'none')
-    $('.file_list_header').css('display','flex')
+    plz_drag_check()
     document.getElementById("files").files=dataTransfer.files;
 })
 
 
-
-// 파일 Drag and Drop 이벤트
-// function allowDrop(event) {
-//     console.log("드래그 오버")
-//     event.preventDefault();
-// }
-
-// function drop(event){
-//     event.preventDefault();
-//     console.log("드랍")
-   
-//     arr= event.dataTransfer.files;
-//     addFileList(arr)
-//     for(var i=0; i<arr.length; i++){
-//        dataTransfer.items.add(arr[i])
-//     }
-
-//     $('#plz_drag').css("display",'none')
-//     $('.file_list_header').css('display','flex')
-//     document.getElementById("files").files=dataTransfer.files;
-// }
+function plz_drag_check(){
+    if($("#fileList").children().length>0){
+        $('#plz_drag').css("display",'none')
+        $('.file_list_header').css('display','flex')
+      }else{
+        $('#plz_drag').css("display",'block')
+        $('.file_list_header').css('display','none')
+      }
+}

@@ -13,6 +13,8 @@ import com.shop.goodee.board.notice.NoticeVO;
 import com.shop.goodee.member.MemberMapper;
 import com.shop.goodee.member.MemberService;
 import com.shop.goodee.member.MemberVO;
+import com.shop.goodee.seller.SellerMapper;
+import com.shop.goodee.seller.SellerVO;
 
 @SpringBootTest
 class NoticeTest {
@@ -21,6 +23,8 @@ class NoticeTest {
 	private NoticeMapper noticeMapper;
 	@Autowired
 	private MemberMapper memberMapper;
+	@Autowired
+	private SellerMapper sellerMapper;
 //	@Test
 //	void getList()throws Exception {
 //		
@@ -33,7 +37,7 @@ class NoticeTest {
 //	void setWrite()throws Exception{
 //		NoticeVO noticeVO = new NoticeVO();
 //		for(int i=0; i<100; i++) {
-//			noticeVO.setId("manager");
+//			noticeVO.setId("admin");
 //			noticeVO.setTitle("Title test"+i);
 //			noticeVO.setContents("Contents test"+i);
 //			
@@ -54,6 +58,19 @@ class NoticeTest {
 //			memberVO.setPhone("010"+i+i+i+i);
 //			memberMapper.setJoin(memberVO);
 //			memberMapper.setMemberRole(memberVO);
+//		}
+//	}
+	
+//	@Test
+//	void setSeller()throws Exception{
+//		SellerVO sellerVO = new SellerVO();
+//		
+//		for(int i=32; i<80; i++) {
+//			sellerVO.setId("id"+i);
+//			sellerVO.setRoleNum(4);
+//			sellerVO.setCompany("test"+i);
+//
+//			sellerMapper.setSellerAdd(sellerVO);
 //		}
 //	}
 }
