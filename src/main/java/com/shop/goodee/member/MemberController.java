@@ -308,10 +308,10 @@ public class MemberController {
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
 		MemberVO sessionMemberVO = (MemberVO) authentication.getPrincipal();
-		
+		String pw = memberVO.getPw();
 		memberVO.setId(sessionMemberVO.getId());
-		
-		return memberService.getPwCheck(memberVO);
+		memberVO.setPw(memberVO.getPw().trim());
+		return memberService.getPwCheck(memberVO, sessionMemberVO);
 	}
 	/* 내 설정 - 내 정보 변경*/
 	@GetMapping("set_up")
@@ -435,7 +435,6 @@ public class MemberController {
 		memberVO = (MemberVO) authentication.getPrincipal();
 		
 		int result = memberService.getVIP(memberVO);
-		log.info("???????????????????????????한개 안나오나??{}{}", result, memberVO.getId());
 		return result;
 	}
 	

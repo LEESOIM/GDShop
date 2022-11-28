@@ -97,6 +97,8 @@ public class MemberVO implements UserDetails{
 		return true;
 	}
 	
-	
+	public String getPw() {
+		return this.pw;
+	}
 	
 }

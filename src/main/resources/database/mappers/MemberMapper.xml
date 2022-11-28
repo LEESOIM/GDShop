@@ -108,7 +108,7 @@
 	<!-- 내 정보 확인 및 설정 -->
 	<!-- 본인확인(패스워드 일치 확인) -->
 	<select id="getPwCheck" parameterType="MemberVO" resultType="Integer">
-		SELECT COUNT(ID) FROM MEMBER WHERE ID=#{id} AND PW=#{pw}
+		SELECT COUNT(ID) FROM MEMBER WHERE ID=#{id} AND PW=#{password}
 	</select>
 	<!-- 메일주소 변경 -->
 	<update id="setChangeEmail" parameterType="MemberVO">

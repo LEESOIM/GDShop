@@ -47,10 +47,14 @@ public class SecurityConfig {
 					.antMatchers("/member/join").permitAll()
 					.antMatchers("/member/agree").permitAll()
 					.antMatchers("/member/join_end").permitAll()
+					.antMatchers("/member/find_id").permitAll()
+					.antMatchers("/member/find_pw").permitAll()
 					.antMatchers("/admin").hasRole("ADMIN")
+					.antMatchers("/member/product").hasRole("SELLER")
 					.anyRequest().authenticated()
 					.and()
 				.formLogin()
+					.loginPage("/")
 					.loginProcessingUrl("/member/login")
 					.successHandler(loginSuccess)
 					.passwordParameter("pw")
@@ -70,7 +74,7 @@ public class SecurityConfig {
 	}
 	
 	//평문(Clear Text)을 암호화 시켜주는 객체생성
-	@Bean
+	@Bean("en")
 	public PasswordEncoder getEncoder() {
 		return new BCryptPasswordEncoder();
 	}

@@ -1,9 +1,11 @@
 package com.shop.goodee.member;
 
 import java.io.File;
+import java.net.URLEncoder;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,7 @@ public class MemberService {
 	private String path;
 	
 	@Autowired
+	@Qualifier("en")
 	private PasswordEncoder passwordEncoder;
 	
 	//아이디 찾기
@@ -59,8 +62,11 @@ public class MemberService {
 		memberFileVO.setFileName("user.webp");
 		memberFileVO.setOriName("user.webp");
 		memberFileVO.setId(memberVO.getId());
+		log.info("pw : {}",memberVO.getPw());
 		
-		memberVO.setPw(passwordEncoder.encode(memberVO.getPw()));
+		//memberVO.setPw(passwordEncoder.encode(memberVO.getPw()));
+		this.encodePassword(memberVO);
+		
 		int result = memberMapper.setJoin(memberVO);
 		int success= 0;
 		//회원가입 성공 시, result = 1 (회원등급 추가하기)
@@ -163,7 +169,12 @@ public class MemberService {
 	
 	/* 내 설정 */
 	//비밀번호 일치 확인(본인확인)
-	public int getPwCheck(MemberVO memberVO)throws Exception{
+	public int getPwCheck(MemberVO memberVO, MemberVO check)throws Exception{
+		log.info("pwCheck :{}",memberVO.getPw());
+		log.info("pwCheck :{}",passwordEncoder.encode(memberVO.getPw()));
+		log.info("pwCheck :{}",check.getPw());
+		log.info("pwCheck :{}",passwordEncoder.encode(memberVO.getPw()).equals(check.getPw()));
+		this.encodePassword(memberVO);
 		return memberMapper.getPwCheck(memberVO);
 	}
 	
@@ -216,6 +227,10 @@ public class MemberService {
 	/* 내등급 - VIP회원 페이지 출력 */
 	public MemberVO getVIPlist(MemberVO memberVO)throws Exception{
 		return memberMapper.getVIPlist(memberVO);
+	}
+	
+	private void encodePassword(MemberVO memberVO) {
+		memberVO.setPw(passwordEncoder.encode(memberVO.getPw()));
 	}
 
 }

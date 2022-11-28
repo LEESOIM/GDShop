@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <div
   class="p-3"
   style="
@@ -10,7 +11,7 @@
   "
 >
   <div class="grade_top mt-3">
-    ${memberVO.name}님은 <span>VIP등급</span>입니다.
+    <sec:authentication property="Principal.name"/>님은 <span>VIP등급</span>입니다.
   </div>
   <hr />
   <div>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
 prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -34,7 +35,7 @@ prefix="c" %>
           <div class="ms-3 mb-2" id="info" style="width: 100%">
             <!-- 여기부터 내정보 상세보기 -->
             <div class="info_top p-2 mt-3 mb-3">
-              <span style="color: rgb(10, 154, 10)">${memberVO.name}</span>님의 정보
+              <span style="color: rgb(10, 154, 10)"><sec:authentication property="Principal.name"/></span>님의 정보
             </div>
             <div>
               <div style="text-align: center">
@@ -58,10 +59,10 @@ prefix="c" %>
                   </div>
                 </div>
                 <div>
-                  <h4><b>${memberVO.id}</b></h4>
+                  <h4><b><sec:authentication property="Principal.id"/></b></h4>
                 </div>
                 <div style="color: gray; margin-top: -5px">
-                  ${memberVO.email}
+                  <sec:authentication property="Principal.email"/>
                 </div>
               </div>
               <!-- 정보상자1 -->
@@ -70,16 +71,16 @@ prefix="c" %>
                   <div class="mt-1 mb-2" style="font-size: 17px">
                     <b>기본정보</b>
                   </div>
-                  <div>이름 : ${memberVO.name}</div>
+                  <div>이름 : <sec:authentication property="Principal.name"/></div>
                   <div>
-                    <i class="fa-solid fa-calendar-days pe-1"></i> ${memberVO.birth}
+                    <i class="fa-solid fa-calendar-days pe-1"></i> <sec:authentication property="Principal.birth"/>
                   </div>
                   <div>
                     <i class="fa-solid fa-mobile-screen-button pe-2"></i>
-                    ${memberVO.phone}
+                    <sec:authentication property="Principal.phone"/>
                   </div>
                   <div>
-                    <i class="fa-regular fa-envelope pe-1"></i> ${memberVO.email}
+                    <i class="fa-regular fa-envelope pe-1"></i> <sec:authentication property="Principal.email"/>
                   </div>
                 </div>
                 <div class="board_box">

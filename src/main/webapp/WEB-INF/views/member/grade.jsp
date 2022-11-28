@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
 prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
+    <title>Grade</title>
 
     <c:import url="../template/library.jsp"></c:import>
     <link rel="stylesheet" href="/css/mypage.css" />
@@ -35,46 +36,13 @@ prefix="c" %>
             <!-- 여기부터 내등급 상세보기 -->
             <div class="info_top p-2 mt-3 mb-3">
               <div>
-                <span style="color: rgb(10, 154, 10)">${memberVO.name}</span
+                <span style="color: rgb(10, 154, 10)"><sec:authentication property="Principal.name"/></span
                 >님의 등급
               </div>
             </div>
             
             <div id="grade_box">
-              <c:forEach items="${sessionScope.member.roleVOs}" var="i">
-                	<c:if test="${i.roleName ne 'ROLE_VIP'}">
-                		<div
-                    class="mb-5"
-                    style="
-                      text-align: center;
-                      color: rgba(139, 139, 139, 0.737);
-                      font-size: 14px;
-                      padding-top: 13px;
-                    "
-                  >
-                    <div class="mb-2 mt-5">해당 회원의 등급이 없습니다.</div>
-                    <div>
-                      등급에 따라 캠페인 당첨 확률에 영향을 주지는 않지만,
-                      결정된 등급에 따라 참여할 수 있는 캠페인이 제한될 수
-                      있습니다.
-                    </div>
-                    <div class="mt-2">
-                      *멤버십 가입 시 VIP등급으로 올릴 수 있습니다. 등급제에
-                      관한 자세한 내용은 아래 버튼을 클릭해 주세요.
-                    </div>
-                    <button
-                      type="button"
-                      class="btn btn-outline-success btn-sm mt-4"
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal_membership"
-                      data-bs-whatever="@mdo"
-                    >
-                      멤버십가입 알아보기
-                    </button>
-                  </div>
-                  </c:if>
-              </c:forEach>
-              </div>
+            </div>
               
             <!-- 멤버십 가입 모달창 -->
             <div
