@@ -6,6 +6,19 @@
 
 <mapper namespace="com.shop.goodee.admin.AdminMapper">
 	
+	<select id="getAdmin" resultMap="getMemberResult">
+		SELECT * 
+		FROM MEMBER M
+			INNER JOIN
+			MEMBER_ROLE MR
+			ON M.ID = MR.ID
+			INNER JOIN
+			ROLE R
+			ON MR.ROLENUM = R.ROLENUM
+		WHERE MR.ROLENUM=1;
+	</select>
+	
+	
 	<update id="setMember" parameterType="memberVO">
 		UPDATE 
 			MEMBER M

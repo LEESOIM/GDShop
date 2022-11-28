@@ -14,6 +14,10 @@ public class AdminService {
 	@Autowired
 	private AdminMapper adminMapper;
 	
+	public List<MemberVO> getAdmin()throws Exception{
+		return adminMapper.getAdmin();
+	}
+	
 	public int setMember(MemberVO memberVO)throws Exception{
 		return adminMapper.setMember(memberVO);
 	}
