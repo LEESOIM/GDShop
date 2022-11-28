@@ -21,7 +21,9 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="/css/header.css" />
 <link rel="stylesheet" href="/css/index.css" />
+<link rel="stylesheet" href="/css/seller.css" />
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
@@ -39,44 +41,40 @@
 								<form class="validation-form" novalidate>
 
 									<div class="mb-3">
-										<label for="address2">ID<span class="text-muted">
-										</span></label> <input type="text" class="form-control" id="id1"
-											value="junsolhee" disabled>
+										<label for="id1">ID</label>
+										<input type="text" class="form-control" id="id1" value="junsolhee" disabled required>
 									</div>
 
 									<div class="mb-3">
-										<label for="address2">이름<span class="text-muted">
-										</span></label> <input type="text" class="form-control" id="name" value="전하준"
-											disabled>
+										<label for="name">이름</label>
+										<input type="text" class="form-control" id="name" value="전하준" disabled>
 									</div>
+									
 									<div class="mb-3">
-										<label for="address2">이메일<span class="text-muted">
-										</span></label> <input type="text" class="form-control" id="email"
-											value="junsolhee7@naver.com" disabled>
-									</div>
-
-									<div class="mb-3">
-										<label for="address2">전화번호<span class="text-muted">
-										</span></label> <input type="text" class="form-control" id="phone"
-											value="01012345678" disabled>
+										<label for="email">이메일</label>
+										<input type="text" class="form-control" id="email" value="junsolhee7@naver.com" disabled>
 									</div>
 
 									<div class="mb-3">
-										<label for="name">기업명</label> <input type="text"
-											class="form-control" id="company" placeholder="기업명" required>
+										<label for="phone">전화번호</label>
+										<input type="text" class="form-control" id="phone" value="01012345678" disabled>
+									</div>
+
+									<div class="mb-3">
+										<label for="company">기업명</label>
+										<input type="text" class="form-control" id="company" placeholder="기업명" required>
 										<div class="invalid-feedback">기업명을 입력해주세요.</div>
 									</div>
 
 									<hr class="mb-4">
 									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input"
-											id="aggrement" required> <label
-											class="custom-control-label" for="aggrement">개인정보 수집
-											및 이용에 동의합니다.</label>
+										<input type="checkbox" class="custom-control-input" id="aggrement" required>
+										<label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
 									</div>
 									<div class="mb-4"></div>
-									<button class="btn btn-primary btn-lg btn-block" type="submit"
-										id="standingRequest">입점 신청</button>
+									<button class="btn btn-primary btn-lg btn-block" type="submit" id="standingRequest">
+										입점 신청
+									</button>
 								</form>
 							</div>
 						</div>

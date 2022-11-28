@@ -45,7 +45,6 @@ public class SellerController {
 		log.info("=================Controller================");
 		log.info("=================SellerVO================");
 		log.info("ID){}",sellerVO.getId());
-		log.info("roleNum){}",sellerVO.getRoleNum());
 		log.info("기업명){}",sellerVO.getCompany());
 		log.info("=================MemberVO================");
 		log.info("이름){}",sellerVO.getName());
