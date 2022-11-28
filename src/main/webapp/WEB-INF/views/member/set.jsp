@@ -56,6 +56,7 @@ prefix="c" %>
                   <div class="pe-4" style="font-size: 18px">
                     <b>구디샵 비밀번호</b>
                   </div>
+                  
                   <div class="pe-2">
                     <input
                       type="password"
@@ -63,9 +64,12 @@ prefix="c" %>
                       class="ps-2"
                       id="pwCheck_setInput"
                       placeholder="비밀번호를 입력하세요."
+                      name="pw"
                     />
                   </div>
                   <button class="pe-3 ps-3 btn btn-dark btn-sm" id="set_pwCheck" >확 인</button>
+                  
+                  
                 </div>
               </div>
             </div>

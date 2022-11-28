@@ -2,6 +2,7 @@
 $("#log_btn").click(function () {
   let id = $("#id").val();
   let pw = $("#pw").val();
+  let rememberId = $(".rememberId").prop("checked");
   if (id == "") {
     $("#inp_id").text("빈칸을 입력해주세요.");
     $("#inp_id").attr("style", "display:block");
@@ -16,6 +17,7 @@ $("#log_btn").click(function () {
       data: {
         id: id,
         pw: pw,
+        rememberId: rememberId,
       },
       success: function (data) {
         if (data == 1) {
@@ -39,6 +41,7 @@ $("#pw").on("keyup", function (key) {
   if (key.keyCode == 13) {
     let id = $("#id").val();
     let pw = $("#pw").val();
+    let rememberId = $(".rememberId").prop("checked");
 
     if (id == "") {
       $("#inp_id").text("빈칸을 입력해주세요.");
@@ -54,6 +57,7 @@ $("#pw").on("keyup", function (key) {
         data: {
           id: id,
           pw: pw,
+          rememberId: rememberId,
         },
         success: function (data) {
           if (data == 1) {

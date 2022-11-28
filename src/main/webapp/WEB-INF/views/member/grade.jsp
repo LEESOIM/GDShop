@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
 prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
+    <title>Grade</title>
 
     <c:import url="../template/library.jsp"></c:import>
     <link rel="stylesheet" href="/css/mypage.css" />
@@ -35,88 +36,14 @@ prefix="c" %>
             <!-- 여기부터 내등급 상세보기 -->
             <div class="info_top p-2 mt-3 mb-3">
               <div>
-                <span style="color: rgb(10, 154, 10)">${memberVO.name}</span
+                <span style="color: rgb(10, 154, 10)"><sec:authentication property="Principal.name"/></span
                 >님의 등급
               </div>
             </div>
-            <!-- 등급이 없는 회원의 경우 -->
-            <c:if test="${not empty member}">
-              <c:forEach items="${sessionScope.member.roleVOs}" var="i">
-                <c:if test="${i.roleName ne 'ROLE_VIP'}">
-                  <div
-                    class="mb-5"
-                    style="
-                      text-align: center;
-                      color: rgba(139, 139, 139, 0.737);
-                      font-size: 14px;
-                      padding-top: 13px;
-                    "
-                  >
-                    <div class="mb-2 mt-5">해당 회원의 등급이 없습니다.</div>
-                    <div>
-                      등급에 따라 캠페인 당첨 확률에 영향을 주지는 않지만,
-                      결정된 등급에 따라 참여할 수 있는 캠페인이 제한될 수
-                      있습니다.
-                    </div>
-                    <div class="mt-2">
-                      *멤버십 가입 시 VIP등급으로 올릴 수 있습니다. 등급제에
-                      관한 자세한 내용은 아래 버튼을 클릭해 주세요.
-                    </div>
-                    <button
-                      type="button"
-                      class="btn btn-outline-success btn-sm mt-4"
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal_membership"
-                      data-bs-whatever="@mdo"
-                    >
-                      멤버십가입 알아보기
-                    </button>
-                  </div>
-                </c:if>
-              </c:forEach>
-              <!-- VIP등급 회원일 경우 -->
-              <c:forEach items="${sessionScope.member.roleVOs}" var="i">
-                <c:if test="${i.roleName eq 'ROLE_VIP'}">
-                  <div
-                    class="p-3"
-                    style="
-                      margin: 40px auto 10px auto;
-                      width: 65%;
-                      height: 315px;
-                      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-                    "
-                  >
-                    <div class="grade_top mt-3">
-                      ${memberVO.name}님은 <span>VIP등급</span>입니다.
-                    </div>
-                    <hr />
-                    <div>
-                      <div>
-                        <div style="font-size: 14px">
-                          이용기간 : <b>2020-05-22 ~ 2022-06-01</b>
-                        </div>
-                        <div class="pt-1" style="font-size: 14px">
-                          해지일 :
-                          <span style="color: red">2022-06-01 해지예정</span>
-                        </div>
-                      </div>
-                      <hr />
-                      <div class="pb-2" style="font-size: 16px">
-                        🎁 등급 혜택
-                      </div>
-                      <div class="pb-1" style="font-size: 14px">
-                        ✅ VIP회원은 등급제한 캠페인에 참여할 수 있어 남들보다
-                        더 많은 캠페인에 참여 가능!
-                      </div>
-                      <div style="font-size: 14px">
-                        ✅ 등급제한 캠페인은 실제 구매가가 0원
-                      </div>
-                    </div>
-                  </div>
-                </c:if>
-              </c:forEach>
-            </c:if>
-
+            
+            <div id="grade_box">
+            </div>
+              
             <!-- 멤버십 가입 모달창 -->
             <div
               class="modal fade"
@@ -191,6 +118,7 @@ prefix="c" %>
 
     <script src="/js/info.js"></script>
     <script type="text/javascript">
+    getVIP();
       $("#membership_joinBtn").click(function () {
         alert("결제창으로 이동~~");
       });

@@ -3,6 +3,7 @@ package com.shop.goodee.member;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 @Mapper
 public interface MemberMapper {
@@ -22,7 +23,7 @@ public interface MemberMapper {
 	public int setNewPw(MemberVO memberVO)throws Exception;
 	
 	/* 로그인 */
-	public MemberVO getLogin(MemberVO memberVO)throws Exception;
+	public MemberVO getLogin(String username)throws UsernameNotFoundException;
 	
 	/* 마이페이지 */
 	public MemberVO getMypage(MemberVO memberVO)throws Exception;
@@ -72,5 +73,11 @@ public interface MemberMapper {
 	
 	/* 출금신청 후 출금 예정 포인트 변경 */
 	public int setResultPoint(MemberVO memberVO)throws Exception;
+	
+	/* 내등급 - VIP회원 확인 */
+	public int getVIP(MemberVO memberVO)throws Exception;
+	
+	/* 내등급 - VIP회원 페이지 출력 */
+	public MemberVO getVIPlist(MemberVO memberVO)throws Exception;
 	
 }

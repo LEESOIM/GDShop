@@ -154,9 +154,9 @@ uri="http://www.springframework.org/tags/form" %>
       data-bs-target="#exampleModal_findPw"
       style="display: none"
       id="pwFind_modal"
-      >아이디 찾기 모달창</a
+      >비밀번호 찾기 모달창</a
     >
-    <!-- 아이디 찾기 모달창 -->
+    <!-- 비밀번호 찾기 모달창 -->
     <div
       class="modal fade"
       id="exampleModal_findPw"
@@ -192,6 +192,7 @@ uri="http://www.springframework.org/tags/form" %>
               class="btn btn-success"
               style="border-radius: 18px; padding: 6px 18px"
               data-bs-dismiss="modal"
+              onclick="location.href='/'"
             >
               확인
             </button>
