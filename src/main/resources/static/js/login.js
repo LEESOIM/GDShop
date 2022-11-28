@@ -2,6 +2,7 @@
 $("#log_btn").click(function () {
   let id = $("#id").val();
   let pw = $("#pw").val();
+  let rememberId = $(".rememberId").prop("checked");
   if (id == "") {
     $("#inp_id").text("빈칸을 입력해주세요.");
     $("#inp_id").attr("style", "display:block");
@@ -16,12 +17,7 @@ $("#log_btn").click(function () {
       data: {
         id: id,
         pw: pw,
-      },
-      beforeSend: function (xhr) {
-        //이거 안하면 403 error
-        //데이터를 전송하기 전에 헤더에 csrf값을 설정한다
-        var $token = $("#token");
-        xhr.setRequestHeader($token.data("token-name"), $token.val());
+        rememberId: rememberId,
       },
       success: function (data) {
         if (data == 1) {
@@ -45,6 +41,7 @@ $("#pw").on("keyup", function (key) {
   if (key.keyCode == 13) {
     let id = $("#id").val();
     let pw = $("#pw").val();
+    let rememberId = $(".rememberId").prop("checked");
 
     if (id == "") {
       $("#inp_id").text("빈칸을 입력해주세요.");
@@ -60,12 +57,7 @@ $("#pw").on("keyup", function (key) {
         data: {
           id: id,
           pw: pw,
-        },
-        beforeSend: function (xhr) {
-          //이거 안하면 403 error
-          //데이터를 전송하기 전에 헤더에 csrf값을 설정한다
-          var $token = $("#token");
-          xhr.setRequestHeader($token.data("token-name"), $token.val());
+          rememberId: rememberId,
         },
         success: function (data) {
           if (data == 1) {

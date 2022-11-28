@@ -6,6 +6,8 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -17,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -129,13 +129,15 @@ public class MemberController {
 //		return result;
 //	}
 	
+	
+	
 	//로그인(시큐리티)
 	@PostMapping("login")
 	@ResponseBody
 	public String getLogin(MemberVO memberVO)throws Exception{
 		log.info("로그인중!!");
 		memberSecurityService.loadUserByUsername(memberVO.getId());
-		return "/member/login";
+		return "/";
 	}
 	
 	//로그아웃(세션)
@@ -149,7 +151,9 @@ public class MemberController {
 	/* 마이페이지 */
 	@GetMapping("mypage")
 	public ModelAndView getMypage(HttpSession session,MemberVO memberVO, ModelAndView mv)throws Exception {
-		memberVO = (MemberVO) session.getAttribute("member");
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		memberVO = (MemberVO) authentication.getPrincipal();
 		memberVO = memberService.getMypage(memberVO);
 		
 		mv.addObject("memberVO", memberVO);
@@ -160,7 +164,12 @@ public class MemberController {
 	/* 마이페이지 - 프로필 수정 */
 	@GetMapping("profile")
 	public ModelAndView setProfile(HttpSession session,MemberVO memberVO, ModelAndView mv)throws Exception {
-		memberVO = (MemberVO) session.getAttribute("member");
+		
+		//security에 담긴 id,pw정보를 memberVO에 담음.
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		memberVO = (MemberVO) authentication.getPrincipal();
+		
 		if(memberVO == null) {
 			mv.setViewName("redirect:/");
 		}else {
@@ -181,7 +190,9 @@ public class MemberController {
 	
 	@PostMapping("profile")
 	public ModelAndView setProfile(HttpSession session, MemberVO memberVO, @RequestParam("file")MultipartFile multipartFile, ModelAndView mv)throws Exception {
-		memberVO = (MemberVO) session.getAttribute("member");
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		memberVO = (MemberVO) authentication.getPrincipal();
 		MemberFileVO memberFileVO = memberService.setProfile(memberVO, multipartFile);
 		
 		mv.setViewName("redirect:/member/profile");
@@ -211,7 +222,9 @@ public class MemberController {
 	/* 내포인트 */
 	@GetMapping("point")
 	public ModelAndView getPoint(HttpSession session, MemberVO memberVO, ModelAndView mv)throws Exception {
-		memberVO = (MemberVO) session.getAttribute("member");
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		memberVO = (MemberVO) authentication.getPrincipal();
 		memberVO = memberService.getMypage(memberVO);
 		mv.addObject("memberVO", memberVO);
 		mv.setViewName("/member/point");
@@ -222,7 +235,9 @@ public class MemberController {
 	@PostMapping("getPoint")
 	@ResponseBody
 	public int getPoint(HttpSession session, MemberVO memberVO)throws Exception{
-		memberVO = (MemberVO) session.getAttribute("member");
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		memberVO = (MemberVO) authentication.getPrincipal();
 		return memberService.getPoint(memberVO);
 	}
 	
@@ -230,7 +245,9 @@ public class MemberController {
 	@PostMapping("getPoint_3")
 	@ResponseBody
 	public int getPoint_3(HttpSession session, MemberVO memberVO)throws Exception{
-		memberVO = (MemberVO) session.getAttribute("member");
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		memberVO = (MemberVO) authentication.getPrincipal();
 		
 		return memberService.getPoint_3(memberVO);
 	}
@@ -239,7 +256,9 @@ public class MemberController {
 	@PostMapping("setResultPoint_3")
 	@ResponseBody
 	public int setResultPoint_3(HttpSession session, MemberVO memberVO, Long point)throws Exception{
-		memberVO = (MemberVO) session.getAttribute("member");
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		memberVO = (MemberVO) authentication.getPrincipal();
 		memberVO.setPoint_3(point);
 		return memberService.setResultPoint_3(memberVO);
 	}
@@ -248,7 +267,9 @@ public class MemberController {
 	@PostMapping("setResultPoint")
 	@ResponseBody
 	public Long setResultPoint(HttpSession session, MemberVO memberVO, Long point)throws Exception{
-		memberVO = (MemberVO) session.getAttribute("member");
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		memberVO = (MemberVO) authentication.getPrincipal();
 		memberVO.setPoint_result(point);
 		memberService.setResultPoint(memberVO);
 		Long result = memberVO.getPoint_result();
@@ -259,7 +280,9 @@ public class MemberController {
 	/* 내등급 */
 	@GetMapping("grade")
 	public ModelAndView getGrade(HttpSession session, MemberVO memberVO, ModelAndView mv)throws Exception {
-		memberVO = (MemberVO) session.getAttribute("member");
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		memberVO = (MemberVO) authentication.getPrincipal();
 		memberVO = memberService.getMypage(memberVO);
 		mv.addObject("memberVO", memberVO);
 		mv.setViewName("/member/grade");
@@ -269,7 +292,9 @@ public class MemberController {
 	/* 내 설정 - 본인확인 */
 	@GetMapping("set")
 	public ModelAndView getSet(HttpSession session, MemberVO memberVO, ModelAndView mv)throws Exception {
-		memberVO = (MemberVO) session.getAttribute("member");
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		memberVO = (MemberVO) authentication.getPrincipal();
 		memberVO = memberService.getMypage(memberVO);
 		mv.addObject("memberVO", memberVO);
 		mv.setViewName("/member/set");
@@ -280,7 +305,10 @@ public class MemberController {
 	@PostMapping("pwCheck")
 	@ResponseBody
 	public int getPwCheck(HttpSession session, MemberVO memberVO)throws Exception{
-		MemberVO sessionMemberVO = (MemberVO) session.getAttribute("member");
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		MemberVO sessionMemberVO = (MemberVO) authentication.getPrincipal();
+		
 		memberVO.setId(sessionMemberVO.getId());
 		
 		return memberService.getPwCheck(memberVO);
@@ -288,7 +316,9 @@ public class MemberController {
 	/* 내 설정 - 내 정보 변경*/
 	@GetMapping("set_up")
 	public ModelAndView getSetUp(HttpSession session, MemberVO memberVO, ModelAndView mv)throws Exception {
-		memberVO = (MemberVO) session.getAttribute("member");
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		memberVO = (MemberVO) authentication.getPrincipal();
 		memberVO = memberService.getMypage(memberVO);
 		
 		mv.addObject("memberVO", memberVO);
@@ -301,7 +331,10 @@ public class MemberController {
 	@PostMapping("changeEmail")
 	@ResponseBody
 	public int setChangeEmail(MemberVO memberVO, HttpSession session, String e, String mailOption)throws Exception {
-		MemberVO sessionMemberVO = (MemberVO) session.getAttribute("member");
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		MemberVO sessionMemberVO = (MemberVO) authentication.getPrincipal();
+
 		memberVO.setId(sessionMemberVO.getId());
 		memberVO.setEmail(memberVO.getEmail());
 		
@@ -314,7 +347,10 @@ public class MemberController {
 	@PostMapping("changePhone")
 	@ResponseBody
 	public int setChangePhone(MemberVO memberVO, HttpSession session)throws Exception {
-		MemberVO sessionMemberVO = (MemberVO) session.getAttribute("member");
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		MemberVO sessionMemberVO = (MemberVO) authentication.getPrincipal();
+		
 		memberVO.setId(sessionMemberVO.getId());
 		memberVO.setPhone(memberVO.getPhone());
 		
@@ -326,7 +362,9 @@ public class MemberController {
 	/* 내 설정 - 비밀번호 변경*/
 	@GetMapping("set_pw")
 	public ModelAndView getSetPw(MemberVO memberVO, HttpSession session, ModelAndView mv)throws Exception {
-		memberVO = (MemberVO) session.getAttribute("member");
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		memberVO = (MemberVO) authentication.getPrincipal();
 		memberVO = memberService.getMypage(memberVO);
 		
 		mv.addObject("memberVO", memberVO);
@@ -337,7 +375,10 @@ public class MemberController {
 	@PostMapping("changePw")
 	@ResponseBody
 	public int setChangePw(MemberVO memberVO, HttpSession session)throws Exception {
-		MemberVO sessionMemberVO = (MemberVO) session.getAttribute("member");
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		MemberVO sessionMemberVO = (MemberVO) authentication.getPrincipal();
+		
 		memberVO.setId(sessionMemberVO.getId());
 		memberVO.setPw(memberVO.getPw());
 		
@@ -349,7 +390,10 @@ public class MemberController {
 	/* 내 설정 - 회원 탈퇴*/
 	@GetMapping("withdrawal")
 	public ModelAndView getWithdrawal(HttpSession session, MemberVO memberVO, ModelAndView mv)throws Exception {
-		memberVO = (MemberVO) session.getAttribute("member");
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		memberVO = (MemberVO) authentication.getPrincipal();
+		
 		memberVO = memberService.getMypage(memberVO);
 		
 		mv.addObject("memberVO", memberVO);
@@ -362,7 +406,9 @@ public class MemberController {
 	@PostMapping("withdrawal")
 	@ResponseBody
 	public int setWithdrawal(HttpSession session, MemberVO memberVO)throws Exception{
-		memberVO = (MemberVO) session.getAttribute("member");
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		memberVO = (MemberVO) authentication.getPrincipal();
 		
 		return memberService.setWithdrawal(memberVO);
 	}
@@ -370,7 +416,10 @@ public class MemberController {
 	/* 내 상품 */
 	@GetMapping("product")
 	public ModelAndView getProduct(HttpSession session, MemberVO memberVO, ModelAndView mv)throws Exception {
-		memberVO = (MemberVO) session.getAttribute("member");
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		memberVO = (MemberVO) authentication.getPrincipal();
+		
 		memberVO = memberService.getMypage(memberVO);
 		mv.addObject("memberVO", memberVO);
 		mv.setViewName("/member/product");
@@ -381,9 +430,12 @@ public class MemberController {
 	@PostMapping("VIP")
 	@ResponseBody
 	public int getVIP(HttpSession session, MemberVO memberVO)throws Exception{
-		memberVO = (MemberVO) session.getAttribute("member");
-		int result = memberService.getVIP(memberVO);
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		memberVO = (MemberVO) authentication.getPrincipal();
 		
+		int result = memberService.getVIP(memberVO);
+		log.info("???????????????????????????한개 안나오나??{}{}", result, memberVO.getId());
 		return result;
 	}
 	
@@ -392,6 +444,14 @@ public class MemberController {
 	@ResponseBody
 	public ModelAndView getVIPlist(MemberVO memberVO, ModelAndView mv)throws Exception{
 		memberVO = memberService.getVIPlist(memberVO);
+		mv.setViewName("/member/VIP");
+		return mv;
+	}
+	
+	/* 내등급 - member 페이지 출력 */
+	@PostMapping("VIP_list")
+	@ResponseBody
+	public ModelAndView getVIPlist(ModelAndView mv)throws Exception{
 		mv.setViewName("/member/VIP");
 		return mv;
 	}

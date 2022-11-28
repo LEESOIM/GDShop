@@ -424,17 +424,30 @@ function getVIP() {
     data: {},
     success: function (data) {
       if (data == 1) {
-        //vip 페이지 가져오기
         getVIPlist();
+      } else {
+        getUserGrade();
       }
     },
   });
 }
 
+//vip등급 페이지
 function getVIPlist() {
   $.ajax({
     type: "POST",
     url: "/member/VIP_list",
+    data: {},
+    success: function (data) {
+      $("#grade_box").html(data);
+    },
+  });
+}
+//member등급 페이지
+function getUserGrade() {
+  $.ajax({
+    type: "POST",
+    url: "/member/member_list",
     data: {},
     success: function (data) {
       $("#grade_box").html(data);

@@ -2,6 +2,7 @@
 pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
 prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
     <nav class="navbar navbar-expand-lg header">
       <div class="container-fluid" style="padding: 0px">
         <a class="navbar-brand" href="/" style="margin-right: 1.2em"
@@ -23,7 +24,7 @@ prefix="c" %>
           
           <a href="/item/add" class="btn btn-success">상품등록</a>
           
-          <c:if test="${empty member}">
+          <sec:authorize access="!isAuthenticated()">
             <a
               href="#"
               class="btn btn-outline-success"
@@ -48,40 +49,27 @@ prefix="c" %>
               "
               href="/membership/membership"
               >Premium</a
-            ></c:if>
+            ></sec:authorize>
             <!-- 로그인후 해당 블록 보이기 -->
-            <c:if test="${not empty member}">
+            <sec:authorize access="isAuthenticated()">
             <div class="me-3">
-              <b style="font-size: 17.5px; color: rgb(9, 118, 31)">${member.id}</b>님
+              <b style="font-size: 17.5px; color: rgb(9, 118, 31)"><sec:authentication property="Principal" var="user"/>${user.id}</b>님
               환영합니다!💚
             </div>
-<!--             <div class="me-3 log">
-              <a href="#"><b>내캠페인</b></a>
-            </div>
-            <div class="me-3 log">
-              <a href="#"><b>상품등록</b></a>
-            </div>
-            <div class="me-3 log">
-              <a href="/member/mypage"><b>마이페이지</b></a>
-            </div> -->
             
             <div class="top-dropdown">
 		      <div class="me-3 log">
               <a href="/member/mypage"><b>마이페이지</b></a>
            	  </div>
 		      <div class="dropdown-content">
-		      	<c:if test="${not empty member}">
-		           <c:forEach items="${sessionScope.member.roleVOs}" var="i">
-		             <c:if test="${i.roleName eq 'ROLE_SELLER'}">
+		      <sec:authorize access="hasRole('SELLER')">
 				      <a href="#">상품등록</a>
-		             </c:if>
-		          </c:forEach>
-		       </c:if>
+		       </sec:authorize>
 		      	<a href="#">내캠페인</a>
 		      </div>
 		    </div>
             
-            </c:if>
+            </sec:authorize>
           </div>
         </div>
       </div>
@@ -119,8 +107,7 @@ prefix="c" %>
               </div>
               <div style="height: 68px">
                 <div id="email_icon"><i class="fa-regular fa-user"></i></div>
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                <input type="text" placeholder="아이디" id="id" name="id"/>
+                <input type="text" placeholder="아이디" id="id" name="id" value="${cookie.userId.value}" />
                 <div class="inp" id="inp_id" style="display: none">아이디를 입력해주세요.</div>
               </div>
               <div style="height: 68px">
@@ -136,11 +123,11 @@ prefix="c" %>
               >
                 <div class="form-check2">
                   <input
-                    class="form-check-input2"
+                    class="rememberId form-check-input2"
                     type="checkbox"
-                    value=""
                     id="flexCheckChecked2"
                     checked
+                    name="rememberId"
                   />
                   <label class="form-check-label2" for="flexCheckChecked2">
                     아이디 기억하기

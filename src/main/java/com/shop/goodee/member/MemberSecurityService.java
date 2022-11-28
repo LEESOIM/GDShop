@@ -18,9 +18,7 @@ public class MemberSecurityService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		log.info("로그인시도중!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		MemberVO memberVO = memberMapper.getLogin(username);
-		log.info("MemberVO => {}", memberVO);
 		
 		return memberVO;
 	}

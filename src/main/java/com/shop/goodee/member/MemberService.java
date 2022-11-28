@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +27,9 @@ public class MemberService {
 	
 	@Value("${app.profile}")
 	private String path;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	//아이디 찾기
 	public String getFindId(MemberVO memberVO)throws Exception{
@@ -56,6 +60,7 @@ public class MemberService {
 		memberFileVO.setOriName("user.webp");
 		memberFileVO.setId(memberVO.getId());
 		
+		memberVO.setPw(passwordEncoder.encode(memberVO.getPw()));
 		int result = memberMapper.setJoin(memberVO);
 		int success= 0;
 		//회원가입 성공 시, result = 1 (회원등급 추가하기)
