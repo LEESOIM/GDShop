@@ -46,5 +46,8 @@ public class Scheduler {
 		int result = memberMapper.setPoint_3();
 		log.info("result : {}", result);
 	}
+	
+	//30일 이후, VIP등급 삭제
+	//30일 이후, 판매자등급 삭제
 
 }

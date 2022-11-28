@@ -1,10 +1,13 @@
 package com.shop.goodee.member;
 
 import java.io.File;
+import java.net.URLEncoder;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +29,10 @@ public class MemberService {
 	
 	@Value("${app.profile}")
 	private String path;
+	
+	@Autowired
+	@Qualifier("en")
+	private PasswordEncoder passwordEncoder;
 	
 	//아이디 찾기
 	public String getFindId(MemberVO memberVO)throws Exception{
@@ -55,6 +62,10 @@ public class MemberService {
 		memberFileVO.setFileName("user.webp");
 		memberFileVO.setOriName("user.webp");
 		memberFileVO.setId(memberVO.getId());
+		log.info("pw : {}",memberVO.getPw());
+		
+		memberVO.setPw(passwordEncoder.encode(memberVO.getPw()));
+		
 		
 		int result = memberMapper.setJoin(memberVO);
 		int success= 0;
@@ -107,9 +118,9 @@ public class MemberService {
 	}
 	
 	//로그인
-	public MemberVO getLogin(MemberVO memberVO)throws Exception{
-		return memberMapper.getLogin(memberVO);
-	}
+//	public MemberVO getLogin(MemberVO memberVO)throws Exception{
+//		return memberMapper.getLogin(memberVO);
+//	}
 	
 	// 마이페이지
 	public MemberVO getMypage(MemberVO memberVO)throws Exception{
@@ -158,7 +169,16 @@ public class MemberService {
 	
 	/* 내 설정 */
 	//비밀번호 일치 확인(본인확인)
-	public int getPwCheck(MemberVO memberVO)throws Exception{
+	public int getPwCheck(MemberVO memberVO, MemberVO check)throws Exception{
+		//mathces("평문 비번", "인코딩된 pw")
+		log.info("pwCheck :{}",passwordEncoder.matches(memberVO.getPw(), check.getPw()));
+		
+		if(passwordEncoder.matches(memberVO.getPw(), check.getPw())) {
+			memberVO.setPw(check.getPw());
+		}else {
+		}
+		
+		
 		return memberMapper.getPwCheck(memberVO);
 	}
 	
@@ -174,8 +194,13 @@ public class MemberService {
 	}
 	
 	/* 비밀번호 변경 */
-	public int setChangePw(MemberVO memberVO)throws Exception{
-		return memberMapper.setChangePw(memberVO);
+	public int setChangePw(MemberVO memberVO, MemberVO sessionVO)throws Exception{
+		memberVO.setPw(passwordEncoder.encode(memberVO.getPw()));
+		int result = memberMapper.setChangePw(memberVO);
+		if(result == 1) {
+			sessionVO.setPw(memberVO.getPw());
+		}
+		return result;
 	}
 	
 	/* 회원 탈퇴 */
@@ -202,5 +227,16 @@ public class MemberService {
 	public int setResultPoint(MemberVO memberVO)throws Exception{
 		return memberMapper.setResultPoint(memberVO);
 	}
+	
+	/* 내등급 - VIP회원 확인 */
+	public int getVIP(MemberVO memberVO)throws Exception{
+		return memberMapper.getVIP(memberVO);
+	}
+	
+	/* 내등급 - VIP회원 페이지 출력 */
+	public MemberVO getVIPlist(MemberVO memberVO)throws Exception{
+		return memberMapper.getVIPlist(memberVO);
+	}
+	
 
 }

@@ -1,18 +1,23 @@
 package com.shop.goodee.member;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
 
 @Data
-public class MemberVO {
+public class MemberVO implements UserDetails{
 	
 	@NotBlank
 	private String id;
@@ -51,5 +56,45 @@ public class MemberVO {
 	private MultipartFile multipartFile;
 	//프로필 사진 한개	
 	private MemberFileVO memberFileVO;
+	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		for(RoleVO roleVO : roleVOs) {
+			authorities.add(new SimpleGrantedAuthority(roleVO.getRoleName()));	
+		}
+		
+		return authorities;
+	}
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return this.getPw();
+	}
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return this.id;
+	}
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 	
 }

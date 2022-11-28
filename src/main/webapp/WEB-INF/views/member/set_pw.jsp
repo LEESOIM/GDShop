@@ -3,6 +3,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
 prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -44,8 +45,9 @@ prefix="c" %>
           <c:import url="../template/mypage_side.jsp"></c:import>
           <div class="ms-3 mb-2" id="info" style="width: 100%">
             <!-- 여기부터 내정보 상세보기 -->
+            <sec:authentication property="Principal" var="user"/>
             <div class="info_top p-2 mt-3 mb-2">
-              <span style="color: rgb(10, 154, 10)">${memberVO.name}</span>님의 설정
+              <span style="color: rgb(10, 154, 10)">${user.name}</span>님의 설정
             </div>
             <div
               class="setUp_menu d-flex justify-content-started"

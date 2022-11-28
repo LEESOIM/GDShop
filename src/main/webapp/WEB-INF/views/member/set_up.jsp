@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
 prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -43,8 +44,9 @@ prefix="c" %>
           <c:import url="../template/mypage_side.jsp"></c:import>
           <div class="ms-3 mb-2" id="info" style="width: 100%">
             <!-- 여기부터 내정보 상세보기 -->
+            <sec:authentication property="Principal" var="user"/>
             <div class="info_top p-2 mt-3 mb-2">
-              <span style="color: rgb(10, 154, 10)">${memberVO.name}</span>님의 설정
+              <span style="color: rgb(10, 154, 10)">${user.name}</span>님의 설정
             </div>
             <div
               class="setUp_menu d-flex justify-content-started"
@@ -57,9 +59,9 @@ prefix="c" %>
             <div class="mt-4" style="margin-bottom: 100px">
               <div class="flex-column">
                 <div class="pb-2" style="font-size: 14.5px">아이디</div>
-                <input class="setUp_form" type="text" value="${memberVO.id}" disabled />
+                <input class="setUp_form" type="text" value="${user.id}" disabled />
                 <div class="pb-2 mt-4" style="font-size: 14.5px">이름</div>
-                <input class="setUp_form" type="text" value="${memberVO.name}" disabled />
+                <input class="setUp_form" type="text" value="${user.name}" disabled />
                 <div style="position: relative">
                   <div class="pb-2 mt-4" style="font-size: 14.5px">
                     휴대폰번호
@@ -67,7 +69,7 @@ prefix="c" %>
                   <input
                     class="setUp_form"
                     type="text"
-                    value="${memberVO.phone}"
+                    value="${user.phone}"
                     disabled
                   />
                   <button
@@ -84,7 +86,7 @@ prefix="c" %>
                   <input
                     class="setUp_form"
                     type="text"
-                    value="${memberVO.email}"
+                    value="${user.email}"
                     disabled
                   />
                   <button
@@ -103,7 +105,7 @@ prefix="c" %>
                   <input
                     class="setUp_form"
                     type="text"
-                    value="${memberVO.birth}"
+                    value="${user.birth}"
                     disabled
                   />
                 </div>
