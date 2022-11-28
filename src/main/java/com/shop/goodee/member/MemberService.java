@@ -64,8 +64,8 @@ public class MemberService {
 		memberFileVO.setId(memberVO.getId());
 		log.info("pw : {}",memberVO.getPw());
 		
-		//memberVO.setPw(passwordEncoder.encode(memberVO.getPw()));
-		this.encodePassword(memberVO);
+		memberVO.setPw(passwordEncoder.encode(memberVO.getPw()));
+		
 		
 		int result = memberMapper.setJoin(memberVO);
 		int success= 0;
@@ -170,11 +170,15 @@ public class MemberService {
 	/* 내 설정 */
 	//비밀번호 일치 확인(본인확인)
 	public int getPwCheck(MemberVO memberVO, MemberVO check)throws Exception{
-		log.info("pwCheck :{}",memberVO.getPw());
-		log.info("pwCheck :{}",passwordEncoder.encode(memberVO.getPw()));
-		log.info("pwCheck :{}",check.getPw());
-		log.info("pwCheck :{}",passwordEncoder.encode(memberVO.getPw()).equals(check.getPw()));
-		this.encodePassword(memberVO);
+		//mathces("평문 비번", "인코딩된 pw")
+		log.info("pwCheck :{}",passwordEncoder.matches(memberVO.getPw(), check.getPw()));
+		
+		if(passwordEncoder.matches(memberVO.getPw(), check.getPw())) {
+			memberVO.setPw(check.getPw());
+		}else {
+		}
+		
+		
 		return memberMapper.getPwCheck(memberVO);
 	}
 	
@@ -190,8 +194,13 @@ public class MemberService {
 	}
 	
 	/* 비밀번호 변경 */
-	public int setChangePw(MemberVO memberVO)throws Exception{
-		return memberMapper.setChangePw(memberVO);
+	public int setChangePw(MemberVO memberVO, MemberVO sessionVO)throws Exception{
+		memberVO.setPw(passwordEncoder.encode(memberVO.getPw()));
+		int result = memberMapper.setChangePw(memberVO);
+		if(result == 1) {
+			sessionVO.setPw(memberVO.getPw());
+		}
+		return result;
 	}
 	
 	/* 회원 탈퇴 */
@@ -229,8 +238,5 @@ public class MemberService {
 		return memberMapper.getVIPlist(memberVO);
 	}
 	
-	private void encodePassword(MemberVO memberVO) {
-		memberVO.setPw(passwordEncoder.encode(memberVO.getPw()));
-	}
 
 }

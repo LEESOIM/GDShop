@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
 prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -53,10 +54,11 @@ prefix="c" %>
                   />
                 </div>
                 <div class="d-flex justify-content-center mt-4">
+                <sec:authentication property="Principal" var="user"/>
                 	<label for="file" class="profile_btn me-2" id="profile_change">사진변경</label>
                 	<input type="file" name="file" id="file" style="display: none" onchange="setThumbnail(event)"/>
                 	<button type="button" class="profile_btn ms-1 me-2" id="profile_delete">삭제</button>
-                	<input type="text" id="sessionId" name="id" value="${sessionScope.member.id}" style="display: none"/>
+                	<input type="text" id="sessionId" name="id" value="${user.id}" style="display: none"/>
                 	<button class="profile_btn ms-1" id="profile_save" onclick="location.href='/member/mypage'">완료</button>
                 </div>
               </div>

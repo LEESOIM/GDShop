@@ -102,3 +102,16 @@
   border-radius: 10px;
   padding: 1.2em 1.2em;
 }
+
+.product_request{
+	box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+	border: none;
+	background-color: white;
+	border-radius: 50px;
+	font-size: 14px;
+	padding: 5px;
+}
+
+.product_request:hover{
+	background-color: #dcdcdc;
+}

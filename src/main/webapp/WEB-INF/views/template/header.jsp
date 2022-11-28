@@ -114,7 +114,7 @@ prefix="c" %>
                 <div id="pw_icon">
                   <i class="fa-solid fa-lock"></i>
                 </div>
-                <input type="password" placeholder="비밀번호" id="pw" name="pw" value="testtest3!"/>
+                <input type="password" placeholder="비밀번호" id="pw" name="pw"/>
                 <div class="inp" id="inp_pw" style="display: none">비밀번호를 입력해주세요.</div>
               </div>
               <div

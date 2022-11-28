@@ -57,8 +57,6 @@ prefix="c" %>
                     <b>구디샵 비밀번호</b>
                   </div>
                   
-                  
-                  <form action="pwCheck" method="post">
                   <div class="pe-2">
                     <input
                       type="password"
@@ -69,8 +67,7 @@ prefix="c" %>
                       name="pw"
                     />
                   </div>
-                  <button class="pe-3 ps-3 btn btn-dark btn-sm" id="set_pwCheck2" >확 인</button>
-                  </form>
+                  <button class="pe-3 ps-3 btn btn-dark btn-sm" id="set_pwCheck" >확 인</button>
                   
                   
                 </div>

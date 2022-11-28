@@ -62,12 +62,11 @@ $("#set_pwCheck").click(function () {
     $("#pwCheck_modal").click();
     return false;
   }
-  alert("PW : " + pw);
   $.ajax({
     type: "POST",
     url: "/member/pwCheck",
     data: {
-      pw: pw.trim(),
+      pw: pw,
     },
     success: function (data) {
       if (data == 0) {

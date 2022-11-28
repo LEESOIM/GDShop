@@ -352,7 +352,6 @@ public class MemberController {
 		MemberVO sessionMemberVO = (MemberVO) authentication.getPrincipal();
 		
 		memberVO.setId(sessionMemberVO.getId());
-		memberVO.setPhone(memberVO.getPhone());
 		
 		int result = memberService.setChangePhone(memberVO);
 		
@@ -380,9 +379,9 @@ public class MemberController {
 		MemberVO sessionMemberVO = (MemberVO) authentication.getPrincipal();
 		
 		memberVO.setId(sessionMemberVO.getId());
-		memberVO.setPw(memberVO.getPw());
 		
-		int result = memberService.setChangePw(memberVO);
+		
+		int result = memberService.setChangePw(memberVO, sessionMemberVO);
 		return result;
 	}
 	
