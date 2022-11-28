@@ -448,11 +448,13 @@ public class MemberController {
 		return mv;
 	}
 	
-	/* 내등급 - member 페이지 출력 */
-	@PostMapping("VIP_list")
+	/* 내등급 - VIP회원 페이지 출력 */
+	@PostMapping("member_list")
 	@ResponseBody
-	public ModelAndView getVIPlist(ModelAndView mv)throws Exception{
-		mv.setViewName("/member/VIP");
+	public ModelAndView getVIPlist(MemberVO memberVO)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		memberVO = memberService.getVIPlist(memberVO);
+		mv.setViewName("/member/user_grade");
 		return mv;
 	}
 
