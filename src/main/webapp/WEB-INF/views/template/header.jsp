@@ -63,7 +63,7 @@ prefix="c" %>
            	  </div>
 		      <div class="dropdown-content">
 		      <sec:authorize access="hasRole('SELLER')">
-				      <a href="#">상품등록</a>
+				      <a href="/member/product">판매상품</a>
 		       </sec:authorize>
 		      	<a href="#">내캠페인</a>
 		      </div>
