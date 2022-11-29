@@ -310,7 +310,7 @@ public class MemberController {
 		MemberVO sessionMemberVO = (MemberVO) authentication.getPrincipal();
 		String pw = memberVO.getPw();
 		memberVO.setId(sessionMemberVO.getId());
-		memberVO.setPw(memberVO.getPw().trim());
+		memberVO.setPw(memberVO.getPw());
 		return memberService.getPwCheck(memberVO, sessionMemberVO);
 	}
 	/* 내 설정 - 내 정보 변경*/
@@ -318,8 +318,10 @@ public class MemberController {
 	public ModelAndView getSetUp(HttpSession session, MemberVO memberVO, ModelAndView mv)throws Exception {
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
-		memberVO = (MemberVO) authentication.getPrincipal();
+		memberVO = (MemberVO) authentication.getPrincipal();	
+
 		memberVO = memberService.getMypage(memberVO);
+		memberVO.setPhone(memberVO.getPhone());
 		
 		mv.addObject("memberVO", memberVO);
 		mv.setViewName("/member/set_up");

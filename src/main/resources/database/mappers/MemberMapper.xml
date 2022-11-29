@@ -174,5 +174,10 @@
 		SELECT * FROM MEMBER_ROLE WHERE ROLENUM=3 AND ID=#{id}
 	</select>
 	
+	<!-- 내 판매상품 - 상품등록 신청한 목록 확인(판매자 페이지) --> 
+<!-- 	<select id="getSellerProduct" parameterType="MemberVO" resultMap="getProductResult">
+		
+	</select> -->
+	
 
 </mapper>

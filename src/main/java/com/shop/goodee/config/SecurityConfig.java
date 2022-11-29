@@ -29,6 +29,7 @@ public class SecurityConfig {
 		return web -> web
 			   .ignoring()
 			   .antMatchers("/images/**")
+			   .antMatchers("/file/**")
 			   .antMatchers("/css/**")
 			   .antMatchers("/js/**")
 			   .antMatchers("/favicon/**")
@@ -44,6 +45,7 @@ public class SecurityConfig {
 					.disable()
 				.authorizeRequests()
 					.antMatchers("/").permitAll()
+					.antMatchers("/tab/*").permitAll()
 					.antMatchers("/member/join").permitAll()
 					.antMatchers("/member/agree").permitAll()
 					.antMatchers("/member/join_end").permitAll()

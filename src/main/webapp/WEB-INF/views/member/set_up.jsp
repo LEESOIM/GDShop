@@ -69,7 +69,7 @@ prefix="c" %>
                   <input
                     class="setUp_form"
                     type="text"
-                    value="${user.phone}"
+                    value="${memberVO.phone}"
                     disabled
                   />
                   <button
@@ -86,7 +86,7 @@ prefix="c" %>
                   <input
                     class="setUp_form"
                     type="text"
-                    value="${user.email}"
+                    value="${memberVO.email}"
                     disabled
                   />
                   <button
