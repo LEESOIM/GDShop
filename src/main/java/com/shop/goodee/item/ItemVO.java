@@ -1,9 +1,11 @@
 package com.shop.goodee.item;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
+
+import com.shop.goodee.seller.SellerVO;
 
 import lombok.Data;
 
@@ -22,11 +24,12 @@ public class ItemVO {
 	private Long count; //캠페인회차
 	private String shop; //쇼핑몰
 	private String url; //구매링크
-	private Date date; //등록일
+	private Timestamp date; //등록일
 	private Long hit; //조회수
 	private boolean status; //승인여부
+	private String sellerSNS; //판매자SNS
 	
-	private String company; //판매자
+	private SellerVO sellerVO; //판매자(1:1)
 	private MultipartFile [] files; //Service에서 업로드할때
-	private List<ItemFileVO> itemFileVOs; //DB 조회해서 담을때
+	private List<ItemFileVO> itemFileVOs; //상품파일(1:N)
 }
