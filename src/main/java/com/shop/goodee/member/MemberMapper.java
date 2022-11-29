@@ -80,4 +80,7 @@ public interface MemberMapper {
 	/* 내등급 - VIP회원 페이지 출력 */
 	public MemberVO getVIPlist(MemberVO memberVO)throws Exception;
 	
+	/* 판매 상품 - 판매자 상품목록 리스트 */
+	public List<MemberVO> getSellerProduct(MemberVO memberVO)throws Exception;
+	
 }

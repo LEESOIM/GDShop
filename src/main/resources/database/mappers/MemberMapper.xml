@@ -175,9 +175,36 @@
 	</select>
 	
 	<!-- 내 판매상품 - 상품등록 신청한 목록 확인(판매자 페이지) --> 
-<!-- 	<select id="getSellerProduct" parameterType="MemberVO" resultMap="getProductResult">
-		
-	</select> -->
+ 	<select id="getSellerProduct" parameterType="MemberVO" resultMap="getProductResult">
+		SELECT I.ITEMNUM, I.STATUS, I.ITEMNAME, I.TYPE, I.COUNT, I.SHOP, I.PRICE, I.POINT, ITF.FILENAME 
+		FROM MEMBER M
+		INNER JOIN
+		MEMBER_ROLE MR
+		ON (M.ID=MR.ID)
+		INNER JOIN
+		ITEM I
+		ON (MR.ID=I.ID)
+		INNER JOIN
+		ITEM_FILE ITF
+		ON (I.ITEMNUM = ITF.ITEMNUM)
+		WHERE MR.ROLENUM=2 AND M.ID=#{id}
+	</select>
+	
+	<resultMap type="ItemVO" id="getProductResult">
+		<collection property="items" javaType="List" ofType="ItemVO">
+			<id column="itemNum" property="itemNum"/>
+			<result column="status" property="status"/>
+			<result column="itemName" property="itemName"/>
+			<result column="type" property="type"/>
+			<result column="count" property="count"/>
+			<result column="shop" property="shop"/>
+			<result column="price" property="price"/>
+			<result column="point" property="point"/>
+		</collection>
+		<collection property="itemFileVOs" javaType="List" ofType="ItemFileVO">
+			<result column="fileName" property="fileName"/>
+		</collection>
+	</resultMap>
 	
 
 </mapper>

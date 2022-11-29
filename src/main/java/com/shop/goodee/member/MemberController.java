@@ -420,8 +420,11 @@ public class MemberController {
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
 		memberVO = (MemberVO) authentication.getPrincipal();
+		List<MemberVO> ar = memberService.getSellerProduct(memberVO);
 		
 		memberVO = memberService.getMypage(memberVO);
+		
+		mv.addObject("ar", ar);
 		mv.addObject("memberVO", memberVO);
 		mv.setViewName("/member/product");
 		return mv;
@@ -457,5 +460,6 @@ public class MemberController {
 		mv.setViewName("/member/user_grade");
 		return mv;
 	}
+	
 
 }
