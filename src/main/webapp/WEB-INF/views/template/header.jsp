@@ -4,7 +4,7 @@ pageEncoding="UTF-8"%>
 prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
     <nav class="navbar navbar-expand-lg header">
-      <div class="container-fluid" style="padding: 0px">
+      <div class="container-fluid" style="padding: 0px; width: 68%">
         <a class="navbar-brand" href="/" style="margin-right: 1.2em"
           ><img
             src="/images/h.png"

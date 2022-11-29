@@ -72,25 +72,21 @@
 			<artifactId>jstl</artifactId>
 		</dependency>
 
-		<!-- Sosical login 사용할때 -->
-		<!--	
+		<!-- Sosical login 사용할때 -->	
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-oauth2-client</artifactId>
 		</dependency>
-		-->
 		<!-- Spring Security -->
  		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-		<!-- 	
+		</dependency>	
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		-->
 		<!-- JSP Security Tag -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>

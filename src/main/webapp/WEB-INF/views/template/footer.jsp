@@ -4,7 +4,7 @@
     <footer class="text-center text-lg-start bg-white text-muted">
       <!-- Section: Social media -->
       <section
-        class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
+        class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom" style="width: 70%; margin: 80px auto 0 auto"
       >
         <!-- Left -->
         <div class="me-5 d-none d-lg-block">
