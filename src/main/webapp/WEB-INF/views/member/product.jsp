@@ -64,7 +64,7 @@ prefix="c" %>
                   		<div style="line-height: 32px"><i class="fa-brands fa-product-hunt" style="color: blue"></i>${item.items[0].point}</div>
                   	</div>
                   	<div>
-                  		<button class="product_request me-1" type="button" onclick="location.href='/item/update'"><b>수정</b></button>
+                  		<button class="product_request me-1" type="button" onclick="location.href='/item/update?itemNum=${item.items[0].itemNum}'"><b>수정</b></button>
                   		<button class="product_request" type="button"><b>삭제</b></button>
                   	</div>
                   	</div>

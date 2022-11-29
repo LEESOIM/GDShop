@@ -56,7 +56,8 @@ public class ItemService {
 		return itemMapper.getDetail(itemVO);
 	}
 	
-	public int setUpdate(ItemVO itemVO) throws Exception {
+	public int setUpdate(ItemVO itemVO, MultipartFile [] files) throws Exception {
+		int result = itemMapper.setUpdate(itemVO);
 		return itemMapper.setUpdate(itemVO);
 	}
 

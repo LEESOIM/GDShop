@@ -28,9 +28,9 @@
 </style>
 </head>
 <body>
-	<section class="container" style="width: 65%">
 		<c:import url="../template/top_part.jsp"></c:import>
 		<c:import url="../template/header.jsp"></c:import>
+	<section class="container" style="width: 65%">
 
 		<div style="margin-top: 3em; padding-bottom: 70px">
 			<div class="campaign">
@@ -62,7 +62,7 @@
 				<div>
 					<div class="d-flex flex-column" style="width: 250px; height: 380px; margin-bottom: 50px">
 						<div>
-							<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 260px; border-radius: 15px">
+							<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px">
 						</div>
 
 						<div class="d-flex flex-column" style="width: 250px; height: 130px">
@@ -122,8 +122,8 @@
 						messages</span></span></a>
 		</div>
 
-		<c:import url="../template/footer.jsp"></c:import>
 	</section>
+		<c:import url="../template/footer.jsp"></c:import>
 	<script src="/js/index.js"></script>
 	<script src="/js/timer.js"></script>
 </body>
