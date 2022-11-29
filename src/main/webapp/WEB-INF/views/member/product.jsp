@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
 prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +47,16 @@ prefix="c" %>
                   <div><img src="/file/item/${item.itemFileVOs[0].fileName}" style="width: 100%; height: 100%; border-radius: 5px"/></div>
                   <div class="ps-4" style="width:60%">
                   	<div class="pb-2 pt-1" style="font-size: 22px; color: green;"><b><c:if test="${item.items[0].status}">승인완료</c:if>승인요청</b></div>
-                  	<div class="pb-1" style="font-size: 18px;overflow-wrap: anywhere;"><b>${item.items[0].itemName}</b></div>
+                  	<div class="pb-1" style="font-size: 18px;overflow-wrap: anywhere;"><b>
+                  	<c:choose>
+			           <c:when test="${fn:length(item.items[0].itemName) > 40}">
+			            <c:out value="${fn:substring(item.items[0].itemName,0,40)}"/>....
+			           </c:when>
+			           <c:otherwise>
+			            <c:out value="${item.items[0].itemName}"/>
+			           </c:otherwise> 
+			        </c:choose>
+                  	</b></div>
                   	<div class="pb-1"><b>${item.items[0].type}</b> <span class="me-2" style="background-color: #90ee90; padding: 2px; font-size: 13px">${item.items[0].count}회차</span><span style="background-color: #87ceeb; padding: 2px; font-size: 13px;">${item.items[0].shop}</span></div>
                   	<div class="d-flex justify-content-between">
                   	<div class="d-flex">

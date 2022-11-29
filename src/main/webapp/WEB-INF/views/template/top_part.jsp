@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
 prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<div class="d-flex justify-content-end mt-3">
+<div class="d-flex justify-content-end mt-3" style="width: 84%">
   <div id="top-menu">
   <sec:authorize access="hasRole('ADMIN')">
   <a href="/admin/index">관리자</a>
