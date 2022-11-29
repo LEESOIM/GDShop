@@ -54,7 +54,6 @@ $("#standingRequest").on("click", function(e) {
 			contentType: 'application/json',
 			data: JSON.stringify({
 				"id": id,
-				"roleNum": "4",
 				"name": name,
 				"email": email,
 				"phone": phone,
@@ -71,8 +70,8 @@ $("#standingRequest").on("click", function(e) {
 			},
 			error: function() {
 				swal({
-					title: "입점 신청이 실패하였습니다.",
-					icon: "error", //warning,error,success,info,question
+					title: "입점 신청에 실패하였습니다.",
+					icon: "error", 
 					buttons: true,
 					dangerMode: true
 				})
