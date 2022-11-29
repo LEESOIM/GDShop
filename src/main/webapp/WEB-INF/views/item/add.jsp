@@ -23,7 +23,6 @@
 			<div class="row justify-content-center col-9">
 			
 			<form action="./add" method="post" enctype="multipart/form-data">
-				<input type="hidden" name="id" value="seller">
 				<div class="d-flex pt-5">
 					<div>
 						<div class="btn-group">
