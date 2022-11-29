@@ -16,9 +16,9 @@
 <link rel="stylesheet" href="/css/detail.css" />
 </head>
 <body>
-	<section class="container" style="width: 75%">
 		<c:import url="../template/top_part.jsp"></c:import>
 		<c:import url="../template/header.jsp"></c:import>
+	<section class="container" style="width: 75%">
 		<div class="row justify-content-center">
 			<div class="row justify-content-center col-9">
 			
@@ -221,15 +221,15 @@
 					</div>
 				</div>
 				</div>
-				<div class="d-flex my-5 justify-content-center">
+				<div class="d-flex mt-5 justify-content-center">
 					<a href=""><button type="button" class="btn me-2" style="width:250px; height:50px; color:white; background-color: #adb5bd; font-weight: bold;">취소</button></a>
 					<button type="submit" class="btn" style="width:250px; color:white; background-color: #75c30b; font-weight: bold;">상품 등록 완료</button>
 				</div>
 			</form>
 			</div>
 		</div>
-		<c:import url="../template/footer.jsp"></c:import>
 	</section>
+		<c:import url="../template/footer.jsp"></c:import>
 	<script src="/js/itemAdd.js"></script>
 </body>
 </html>

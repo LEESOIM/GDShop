@@ -53,7 +53,6 @@ public class ItemController {
 	}
 	
 	@GetMapping("update")
-	@ResponseBody
 	public ModelAndView setUpdate(ItemVO itemVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		itemVO = itemService.getDetail(itemVO);
@@ -63,8 +62,7 @@ public class ItemController {
 	}
 	
 	@PostMapping("update")
-	public void setUpdate(ItemVO itemVO, MultipartFile [] files) throws Exception {
-
+	public void setUpdate(HttpSession session, ItemVO itemVO, MultipartFile [] files) throws Exception {
 	}
 	
 }
