@@ -38,7 +38,7 @@ prefix="c" %>
             <sec:authentication property="Principal" var="user"/>
             <div class="info_top p-2 mt-4 mb-3 d-flex">
               <div><span style="color: rgb(10, 154, 10)">${user.name}</span>님의 상품목록</div>
-              <button id="product" data-bs-toggle="modal" data-bs-target="#exampleModal_withdraw" data-bs-whatever="@mdo" onclick="location.href='/item/add'" >상품등록</button>
+              <button id="product" onclick="location.href='/item/add'" ><b>상품등록</b></button>
             </div>
               <!-- 목록보기 -->
               <div class="row mb-5">

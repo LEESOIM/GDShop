@@ -1,5 +1,6 @@
 package com.shop.goodee.item;
 
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,10 @@ import com.shop.goodee.member.MemberVO;
 
 import lombok.extern.slf4j.Slf4j;
 
+
 @Controller
 @RequestMapping("/item/*")
+@Slf4j
 public class ItemController {
 	
 	@Autowired
@@ -30,10 +33,17 @@ public class ItemController {
 	}
 	
 	@PostMapping("add")
-	public ModelAndView setAdd(ItemVO itemVO, MultipartFile [] files) throws Exception {
+	public ModelAndView setAdd(HttpSession session, ItemVO itemVO, MultipartFile [] files) throws Exception {
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
+		itemVO.setId(memberVO.getId());
+		
 		ModelAndView mv = new ModelAndView();
 		int result = itemService.setAdd(itemVO);
-		mv.setViewName("redirect:../");
+		log.info("==C==={}", itemVO.getId());
+		
+		mv.setViewName("redirect:../member/product");
 		return mv;
 	}
 	
