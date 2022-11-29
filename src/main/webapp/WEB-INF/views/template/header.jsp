@@ -22,8 +22,6 @@ prefix="c" %>
           </ul>
           <div class="d-flex">
           
-          <a href="/item/add" class="btn btn-success">상품등록</a>
-          
           <sec:authorize access="!isAuthenticated()">
             <a
               href="#"
@@ -53,7 +51,7 @@ prefix="c" %>
             <!-- 로그인후 해당 블록 보이기 -->
             <sec:authorize access="isAuthenticated()">
             <div class="me-3">
-              <b style="font-size: 17.5px; color: rgb(9, 118, 31)"><sec:authentication property="Principal" var="user"/>${user.id}</b>님
+              <b style="font-size: 17.5px; color: rgb(9, 118, 31)"><sec:authentication property="Principal" var="user"/>${user.name}</b>님
               환영합니다!💚
             </div>
             
@@ -63,9 +61,9 @@ prefix="c" %>
            	  </div>
 		      <div class="dropdown-content">
 		      <sec:authorize access="hasRole('SELLER')">
-				      <a href="/member/product">판매상품</a>
+				      <a href="/member/product">내 상품</a>
 		       </sec:authorize>
-		      	<a href="#">내캠페인</a>
+		      	<a href="#">내 캠페인</a>
 		      </div>
 		    </div>
             
