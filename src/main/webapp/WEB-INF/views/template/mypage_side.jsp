@@ -56,7 +56,7 @@
              <form action="product" method="get">
       			<a href="./product" style="text-decoration: none">
 			      <li class="list-group-item" id="my_product">
-			        <i class="fa-brands fa-shopify ps-2 pe-3"></i>판매상품
+			        <i class="fa-brands fa-shopify ps-2 pe-3"></i>내 상품
 			      </li>
 			    </a>
      		 </form>

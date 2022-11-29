@@ -22,8 +22,6 @@ prefix="c" %>
           </ul>
           <div class="d-flex">
           
-          <a href="/item/add" class="btn btn-success">상품등록</a>
-          
           <sec:authorize access="!isAuthenticated()">
             <a
               href="#"
