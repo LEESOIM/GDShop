@@ -46,6 +46,8 @@ public class SecurityConfig {
 				.authorizeRequests()
 					.antMatchers("/").permitAll()
 					.antMatchers("/tab/*").permitAll()
+					.antMatchers("/board/notice").permitAll()
+					.antMatchers("/seller/seller").permitAll()
 					.antMatchers("/member/join").permitAll()
 					.antMatchers("/member/agree").permitAll()
 					.antMatchers("/member/join_end").permitAll()

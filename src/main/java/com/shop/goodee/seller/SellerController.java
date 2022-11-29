@@ -44,7 +44,7 @@ public class SellerController {
 	}
 	
 	@PostMapping("seller")
-	public String setSeller(@RequestBody SellerVO sellerVO) throws Exception{
+	public String setSeller(SellerVO sellerVO) throws Exception{
 		log.info("=================Controller================");
 		log.info("=================SellerVO================");
 		log.info("ID){}",sellerVO.getId());

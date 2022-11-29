@@ -24,7 +24,7 @@ public class SseController {
 	@Autowired
 	private NotificationService notificationService;
 	
-	@GetMapping(value = "/sub/{id}", consumes = MediaType.ALL_VALUE)
+	@GetMapping(value = "/sub/{id}")
 	public SseEmitter subscribe(@PathVariable String id) {
 		// 현재 클라이언트의 SseEmitter 생성
 		SseEmitter sseEmitter = new SseEmitter(DEFAULT_TIMEOUT);
@@ -37,7 +37,7 @@ public class SseController {
 		}
 		
 		// 해당 유저의 Emitter 저장
-		sseEmitters.put("admin", sseEmitter);
+		sseEmitters.put(id, sseEmitter);
 		log.info("=========== Sse Controller===========");
 		log.info("sseEmitter =>{}", sseEmitter);
 		log.info("sseEmitters<> =>{}", sseEmitters);
