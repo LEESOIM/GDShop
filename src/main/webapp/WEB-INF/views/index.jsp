@@ -27,12 +27,34 @@
 </style>
 </head>
 <body>
-	<section class="container" style="width: 65%">
 		<c:import url="./template/top_part.jsp"></c:import>
 		<c:import url="./template/header.jsp"></c:import>
 
+		<!-- 홈페이지 배너 -->	
+		<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+		  <div class="carousel-inner">
+		    <div class="carousel-item active">
+		      <img src="/images/main2.avif" class="d-block w-100" alt="...">
+		    </div>
+		    <div class="carousel-item">
+		      <img src="/images/main1.avif" class="d-block w-100" alt="...">
+		    </div>
+		    <div class="carousel-item">
+		      <img src="/images/main3.avif" class="d-block w-100" alt="...">
+		    </div>
+		  </div>
+		  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+		    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		    <span class="visually-hidden">Previous</span>
+		  </button>
+		  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+		    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		    <span class="visually-hidden">Next</span>
+		  </button>
+		</div>
+
 		<!-- 최신순 -->
-		<div style="margin-top: 5em; padding-bottom: 85px">
+		<div class="container" style="width: 65%; margin-top: 4em; padding-bottom: 70px">
 			<div style="height: 40px; font-size: 22px; font-weight: 600; letter-spacing: -0.03em; margin-bottom: 20px;">따끈따끈~ 방금 오픈한 캠페인</div>
 			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4" style="height: 380px">
 				<c:forEach items="${list }" var="vo">
@@ -110,9 +132,8 @@
 			</div>
 		</div>
 
-
 		<!-- 인기순 -->
-		<div style="padding-top: 5em; padding-bottom: 85px;">
+		<div class="container" style=" width:65%; padding-top: 4em; padding-bottom: 70px;">
 			<div class="d-flex justify-content-between">
 				<div style="height: 40px; font-size: 22px; font-weight: 600; letter-spacing: -0.03em; margin-bottom: 20px;">실시간 인기 캠페인!</div>
 				<div class="more"> 더보기 <i class="fa-solid fa-circle-chevron-right" style="color: rgb(130, 203, 41)"></i>
@@ -194,10 +215,9 @@
 				</c:forEach>
 			</div>
 		</div>
-
-
 		<!-- VIP전용 -->
-		<div style="padding-top: 5em; padding-bottom: 85px;">
+		<div style="background-color: #E8F5FF;">
+		<div class="container" style=" width:65%; padding-top: 4em; padding-bottom: 70px;">
 			<div class="d-flex justify-content-between">
 				<div style="height: 40px; font-size: 22px; font-weight: 600; letter-spacing: -0.03em; margin-bottom: 20px;">프리미엄 상품을 만나보세요</div>
 				<div class="more"> 더보기 <i class="fa-solid fa-circle-chevron-right" style="color: rgb(130, 203, 41)"></i>
@@ -279,10 +299,9 @@
 				</c:forEach>
 			</div>
 		</div>
-
-
+	</div>
 		<!-- ??? -->
-		<div style="padding-top: 5em; padding-bottom: 85px;">
+		<div class="container" style=" width:65%; padding-top: 4em; padding-bottom: 70px;">
 			<div class="d-flex justify-content-between">
 				<div style="height: 40px; font-size: 22px; font-weight: 600; letter-spacing: -0.03em; margin-bottom: 20px;">
 				마감 임박 캠페인, 놓치지 마세요? 지금 당첨 확률 높은 캠페인?</div>
@@ -379,8 +398,8 @@
 				style="font-size: 13px;">+0 <span class="visually-hidden">unread
 						messages</span></span></a>
 		</div>
+	
 		<c:import url="./template/footer.jsp"></c:import>
-	</section>
 	<script src="/js/index.js"></script>
 	<script src="/js/timer.js"></script>
 </body>
