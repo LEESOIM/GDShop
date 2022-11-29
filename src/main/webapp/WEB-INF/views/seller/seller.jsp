@@ -100,7 +100,7 @@
 			integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
 			crossorigin="anonymous"></script>
 
-		<script>
+		<!-- <script>
 			function apply(){
 				console.log("apply")
 				const id = $("#id1").val();
@@ -152,7 +152,7 @@
         		})
 			}
 
-		</script>
+		</script> -->
 
 
 	</section>

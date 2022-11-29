@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +31,11 @@
 	<section class="container" style="width: 65%">
 		<c:import url="./template/top_part.jsp"></c:import>
 		<c:import url="./template/header.jsp"></c:import>
+		<sec:authorize access="isAuthenticated()">
+			<sec:authentication property="Principal" var="user"/>
+			<h1 id="id1">${user.id}</h1>
 		
+		</sec:authorize>
 		<!-- 최신순 -->
 		<div style="margin-top: 5em; padding-bottom: 85px">
 			<div style="height: 40px; font-size: 22px; font-weight: 600; letter-spacing: -0.03em; margin-bottom: 20px;">따끈따끈~ 방금 오픈한 캠페인</div>
@@ -270,6 +275,30 @@
 	<script src="/js/index.js"></script>
 	<script>
 		remaindTime();
+	</script>
+	<script>
+		console.log($("#id1").text())
+		if($("#id1").text()!=""){
+			
+			$(document).ready(function(){
+				console.log("sse 저장")
+				const id = $("#id1").text();
+				const eventSource = new EventSource('/sub/'+id);
+				console.log(eventSource)
+				eventSource.addEventListener("connect",function(event){
+					let message = event.data;
+					alert(message)
+				})
+				eventSource.addEventListener("addApply",function(event){
+					let message = event.data;
+					alert(message)
+				})
+				eventSource.addEventListener("error", function(event) {
+            		eventSource.close()
+        		})
+			})
+		}
+
 	</script>
 </body>
 </html>
