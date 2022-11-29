@@ -26,15 +26,15 @@ prefix="c" %>
     </style>
   </head>
   <body>
-    <section class="container" style="width: 75%">
       <c:import url="../template/top_part.jsp"></c:import>
       <c:import url="../template/header.jsp"></c:import>
+    <section class="container" style="width: 75%">
       <div class="container">
         <div class="content d-flex">
           <c:import url="../template/mypage_side.jsp"></c:import>
           <div class="ms-3 mb-2" id="info" style="width: 100%">
             <!-- 여기부터 내정보 상세보기 -->
-            <div class="info_top p-2 mt-3">
+            <div class="info_top p-2 mt-4">
               프로필 수정
             </div>
             <div class="p-2" color: #2f4f4f;">구디샵 대표 프로필을 수정 하실 수 있습니다.</div>
@@ -67,8 +67,8 @@ prefix="c" %>
           </div>
         </div>
       </div>
-      <c:import url="../template/footer.jsp"></c:import>
     </section>
+      <c:import url="../template/footer.jsp"></c:import>
 
     <script src="/js/info.js"></script>
 	 <script>
