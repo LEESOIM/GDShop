@@ -5,6 +5,17 @@
 //$("선택1,선택2") 그룹
 //$("요소.클래스명") 종속1
 //$("요소.#아이디명") 종속2
+
+$("#testest").on("click",function(e){
+	console.log("test3");
+	swal({
+		title: "테스트",
+		icon: "success", //warning,error,success,info,question
+		buttons: true,
+		dangerMode: true
+	})
+})
+
 window.addEventListener('load', () => {
 	const forms = document.getElementsByClassName('validation-form');
 	Array.prototype.filter.call(forms, (form) => {
