@@ -75,8 +75,8 @@
 									<c:otherwise><div style="color: #646464"><b>${vo.shop }</b></div></c:otherwise>
 								</c:choose>
 							<span class="px-1" style="color: grey">|</span>
-								<div style="color: grey">${vo.company }</div>
-								</div>
+								<div style="color: grey">${vo.sellerVO.company }</div>
+							</div>
 							</div>
 							<div class="my-1">
 								<p style="font-size: 16px; height: 50px; margin: 0; 
@@ -95,7 +95,12 @@
 							</div>
 							<div class="d-flex justify-content-between">
 								<div style="font-size: 18px; color: blue">
-									<i class="fa-regular fa-clock"></i> <b>3:39:52</b>
+									<i class="fa-regular fa-clock"></i> 
+									<input type="hidden" value="${vo.date}" class="date"> 
+									<input type="hidden" value="${vo.count}" class="count"> 
+									<b class="time">
+										<span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
+									</b>
 								</div>
 								<div style="font-size: 12px; line-height: 28px; color: gray">마감임박</div>
 							</div>
@@ -120,6 +125,7 @@
 		<c:import url="../template/footer.jsp"></c:import>
 	</section>
 	<script src="/js/index.js"></script>
+	<script src="/js/timer.js"></script>
 </body>
 </html>
 

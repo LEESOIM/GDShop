@@ -7,7 +7,7 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>ItemAdd</title>
+<title>ItemUpdate</title>
 
 <c:import url="../template/library.jsp"></c:import>
 <link rel="stylesheet" href="/css/index.css" />
@@ -22,7 +22,8 @@
 		<div class="row justify-content-center">
 			<div class="row justify-content-center col-9">
 			
-			<form action="./add" method="post" enctype="multipart/form-data">
+			<form action="./update" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="id" value="seller">
 				<div class="d-flex pt-5">
 					<div>
 						<div class="btn-group">
@@ -51,7 +52,7 @@
 						<b>상품명<span style="color: limegreen;">*</span></b>
 					</div>
 					<div style="width: 79%;">
-						<input class="form-control" type="text" name="itemName">
+						<input class="form-control" type="text" name="itemName" value="${vo.itemName }">
 					</div>
 				</div>
 				
@@ -60,7 +61,7 @@
 						<b>상품가격<span style="color: limegreen;">*</span></b>
 					</div>
 					<div class="d-flex" style="width: 79%;">
-						<input class="form-control" style="width: 35%;" type="text" name="price" id="price" placeholder="숫자만 입력"><p style="margin:auto 0;">&nbsp;원</p>
+						<input class="form-control" style="width: 35%;" type="text" name="price" id="price" value="${vo.price }"><p style="margin:auto 0;">&nbsp;원</p>
 					</div>
 				</div>
 				</div>
@@ -77,7 +78,7 @@
 						<b>SNS 계정<span style="color: limegreen;">*</span></b>
 					</div>
 					<div style="width: 79%;">
-						<input class="form-control" type="text" name="sellerSNS">
+						<input class="form-control" type="text" name="sellerSNS" value="${vo.sellerSNS }">
 					</div>
 				</div>
 				</div>
@@ -98,7 +99,11 @@
 					<div style="width: 79%">
 					<div class="d-flex" >
 						<div class="d-flex" id="fileBox">
-							<c:forEach items=""></c:forEach>
+						<c:forEach items="${vo.itemFileVOs }" var="fileVO">
+							<div class="me-3">
+							<img src="/file/item/${fileVO.fileName}" style="width:135px; height:135px; border-radius: 15px">
+							</div>
+						</c:forEach>
 						</div>
 						<label id="fileAdd" class="border border-success rounded-3" style="width: 130px; height: 130px; color: green; text-align: center;">
 						<i class="fa-solid fa-camera" style="font-size: 30px; margin-top: 35px"></i><p style="font-size: 13px; text-align: center;">이미지등록</p></label>
@@ -112,7 +117,7 @@
 						<b>캠페인제목<span style="color: limegreen;">*</span></b>
 					</div>
 					<div style="width: 79%;">
-						<input class="form-control" type="text" name="title">
+						<input class="form-control" type="text" name="title" value="${vo.title }">
 						<p style="color: #1ec800; font-size:13px; margin-top:3px; margin-bottom: 0px;">판매 상품과 관련이 없는 다른 상품명, 스팸성 키워드 입력 시 상품 게시가 어려울 수 있습니다.</p>
 					</div>
 				</div>
@@ -180,7 +185,7 @@
 						<b style="line-height: 50px">제공내역<span style="color: limegreen;">*</span></b>
 					</div>
 					<div style="width: 79%;">
-						<textarea class="form-control" rows="3" cols="79%" name="detail" placeholder="상품 옵션 내역을 상세히 써주세요"></textarea>
+						<textarea class="form-control" rows="3" cols="79%" name="detail">${vo.detail }</textarea>
 						<p style="color: #1ec800; font-size:13px; margin-top:3px; margin-bottom: 0px;">ex) OOO프로바이오틱스, 30캡슐, 1개 / OOO트리트먼트 화이트머스크향, 1000ml, 1개</p>
 					</div>
 				</div>
@@ -190,7 +195,7 @@
 						<b>총 제공수량<span style="color: limegreen;">*</span></b>
 					</div>
 					<div style="width: 79%;">
-						<input class="form-control" id="stock" style="width: 35%;" type="text" name="stock">
+						<input class="form-control" id="stock" style="width: 35%;" type="text" name="stock"  value="${vo.stock }">
 					</div>
 				</div>
 				
@@ -200,7 +205,7 @@
 						<b>총 캠페인회차<span style="color: limegreen;">*</span></b>
 					</div>
 					<div style="width: 79%;">
-						<div class="d-flex"><input class="form-control" id="count" style="width: 35%;" type="text" name="count"><p style="margin:auto 0;">&nbsp;회</p></div>
+						<div class="d-flex"><input class="form-control" id="count" style="width: 35%;" type="text" name="count" value="${vo.count }"><p style="margin:auto 0;">&nbsp;회</p></div>
 						<p style="color: #1ec800; font-size:13px; margin-top:3px; margin-bottom: 0px;">캠페인당 모집인원 = 총 제공수량/총 캠페인 회차</p>
 					</div>
 				</div>
@@ -217,7 +222,7 @@
 							<option value="네이버">네이버</option>
 							<option value="인스타그램">인스타그램</option>
 						</select>
-						<input class="form-control" type="url" name="url">
+						<input class="form-control" type="url" name="url" value="${vo.url }">
 					</div>
 				</div>
 				</div>

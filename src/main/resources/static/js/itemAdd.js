@@ -1,10 +1,26 @@
+//미션종류 선택
+$(document).ready(function(){
+  $(".mission1").hide();
+  $(".mission2").hide();
+})
+
+$('#type1, #type2').click(function () {
+  $(".mission1").show();
+  $(".mission2").hide();
+})
+
+$('#type3').click(function () {
+  $(".mission1").hide();
+  $(".mission2").show();
+})
+
+
 //고객부담금 설정에 따른 name속성 부여
 $("#point1").click(function () {
   $("#point2_3").attr("name", "");
   $("#pointOff").hide();
   $("#point1_3").attr("name", "point");
   $("#pointOn").show();
-
 })
 
 $("#point2").click(function () {
@@ -47,19 +63,19 @@ $("#point1_2").change(function () {
 
 
 //파일 등록
-let count = 0;
+let num = 0;
 $("#fileAdd").click(function () {
-  if (count < 3) {
+  if (num < 3) {
     //<div id="file0">
     //  <input type="file" name="files" id="files0">
     //  <i class="del fa-solid fa-xmark"></i>
     //</div>
 
-    let input = '<div id="file'+count+'">';
-    input = input + '<input type="file" name="files" id="files'+count+'" accept="image/*" onchange="setThumbnail(event);" style="display:none;">';
+    let input = '<div id="file' + num + '">';
+    input = input + '<input type="file" name="files" id="files' + num + '" accept="image/*" onchange="setThumbnail(event);" style="display:none;">';
     input = input + '</div>';
     $("#fileBox").append(input);
-    $("#fileAdd").attr("for", "files"+count);
+    $("#fileAdd").attr("for", "files" + num);
 
   } else {
     alert("이미지는 3개까지만 등록 가능합니다")
@@ -82,18 +98,18 @@ function setThumbnail(event) {
     img.setAttribute("style", "width:135px; height:135px;");
     div.append(img);
     $("#fileBox div:last").append(div);
-    
+
     //<i class="del fa-solid fa-xmark"></i>
     let i = document.createElement("i");
     i.setAttribute("class", "del fa-solid fa-xmark");
     i.setAttribute("style", "position: absolute; right:0");
     div.append(i);
 
-    count++;
-    $("#count").text(count);
-    console.log(count);
+    num++;
+    $("#num").text(num);
+    console.log(num);
 
-    if (3 <= count) {
+    if (3 <= num) {
       $("#fileAdd").attr("style", "display:none");
     }
   };
@@ -104,10 +120,28 @@ function setThumbnail(event) {
 //$("부모선택자").on("이벤트명", "자식선택자", callback function) -이벤트 위임
 $("#fileBox").on("click", ".del", function () {
   $(this).parent().parent().remove(); //선택자 포함, 하위 자식들 까지 모두 삭제
-  count--;
-  $("#count").text(count);
-  
-  if (count < 3) {
+  num--;
+  $("#num").text(num);
+
+  if (num < 3) {
     $("#fileAdd").attr("style", "width: 130px; height: 130px; color: green; text-align: center;");
+  }
+})
+
+
+
+
+//제공수량 > 회차
+$("#count").change(function () {
+  if ($("#stock").val() < $("#count").val()) {
+   alert("캠페인회차는 상품 제공수량보다 클 수 없습니다.");
+   $("#count").val("");
+  }
+})
+
+$("#stock").change(function () {
+  if ($("#stock").val() < $("#count").val()) {
+    alert("총 제공수량은 캠페인 회차보다 적을 수 없습니다.");
+    $("#count").val("");
   }
 })

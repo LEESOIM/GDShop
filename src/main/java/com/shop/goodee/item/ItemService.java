@@ -49,6 +49,14 @@ public class ItemService {
 		}
 		return result;
 	}
+	
+	public ItemVO getDetail(ItemVO itemVO) throws Exception {
+		return itemMapper.getDetail(itemVO);
+	}
+	
+	public int setUpdate(ItemVO itemVO) throws Exception {
+		return itemMapper.setUpdate(itemVO);
+	}
 
 	public List<ItemVO> getList() throws Exception {
 		return itemMapper.getList();
