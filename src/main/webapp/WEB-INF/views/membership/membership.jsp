@@ -15,9 +15,9 @@ prefix="c" %>
     <link rel="stylesheet" href="/css/login.css" />
   </head>
   <body>
-    <section class="container" style="width: 75%">
       <c:import url="../template/top_part.jsp"></c:import>
       <c:import url="../template/header.jsp"></c:import>
+    <section class="container" style="width: 65%">
 
       <div
         class="membership_img"
@@ -87,8 +87,8 @@ prefix="c" %>
         </div>
       </div>
 
-      <c:import url="../template/footer.jsp"></c:import>
     </section>
+      <c:import url="../template/footer.jsp"></c:import>
     <script type="text/javascript">
       $("#membership_joinBtn").click(function () {
         alert("결제창으로 이동~~");

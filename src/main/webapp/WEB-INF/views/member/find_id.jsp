@@ -26,9 +26,9 @@ uri="http://www.springframework.org/tags/form" %>
     </style>
   </head>
   <body>
-    <section class="container" style="width: 75%">
       <c:import url="../template/top_part.jsp"></c:import>
       <c:import url="../template/header.jsp"></c:import>
+    <section class="container" style="width: 65%">
       <div class="d-flex justify-content-center">
         <div>
           <div class="p-3 mt-4" style="color: rgb(34, 62, 33)">
@@ -140,8 +140,8 @@ uri="http://www.springframework.org/tags/form" %>
           </div>
         </div>
       </div>
-      <c:import url="../template/footer.jsp"></c:import>
     </section>
+      <c:import url="../template/footer.jsp"></c:import>
     <a
       data-bs-toggle="modal"
       data-bs-target="#exampleModal_findId"

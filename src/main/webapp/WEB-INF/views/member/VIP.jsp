@@ -5,7 +5,7 @@
   class="p-3"
   style="
     margin: 40px auto 10px auto;
-    width: 65%;
+    width: 75%;
     height: 315px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   "
