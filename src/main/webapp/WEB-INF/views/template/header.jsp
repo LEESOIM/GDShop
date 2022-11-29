@@ -17,7 +17,7 @@ prefix="c" %>
             <li class="nav-item tab0  ps-3 pe-3"><a href="/">홈</a></li>
             <li class="nav-item tab1 ps-3 pe-3"><a href="/tab/tab1">추첨형</a></li>
             <li class="nav-item tab2 ps-3 pe-3"><a href="/tab/tab2">즉석추첨형</a></li>
-            <li class="nav-item tab3 ps-3 pe-3"><a href="/tab/tab3">초간단미션</a></li>
+            <li class="nav-item tab3 ps-3 pe-3"><a href="/tab/tab3">SNS미션</a></li>
             <li class="nav-item tab4 ps-3 pe-3"><a href="/tab/tab4">프리미엄</a></li>
           </ul>
           <div class="d-flex">
@@ -58,7 +58,7 @@ prefix="c" %>
             </div>
             
             <div class="top-dropdown">
-		      <div class="me-3 log">
+		      <div class="log">
               <a href="/member/mypage"><b>마이페이지</b></a>
            	  </div>
 		      <div class="dropdown-content">
