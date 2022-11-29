@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.shop.goodee.member.MemberVO;
 import com.shop.goodee.util.FileManager;
 
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +35,8 @@ public class ItemService {
 		if (!file.exists()) {
 			file.mkdirs();
 		}
-
+		log.info("==S==={}", itemVO.getId());
+		
 		for (MultipartFile f : itemVO.getFiles()) {
 			if(!f.isEmpty()) {
 				log.info("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡfileName : {}", f.getOriginalFilename()); // 파일이름을 String 값으로 반환
