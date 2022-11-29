@@ -14,6 +14,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.shop.goodee.item.ItemFileVO;
+import com.shop.goodee.item.ItemVO;
+
 import lombok.Data;
 
 @Data
@@ -56,6 +59,7 @@ public class MemberVO implements UserDetails{
 	private MultipartFile multipartFile;
 	//프로필 사진 한개	
 	private MemberFileVO memberFileVO;
+
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

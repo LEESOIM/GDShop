@@ -29,4 +29,6 @@ public class ItemVO {
 	private String company; //판매자
 	private MultipartFile [] files; //Service에서 업로드할때
 	private List<ItemFileVO> itemFileVOs; //DB 조회해서 담을때
+
+	private List<ItemVO> items; //판매상품 리스트
 }

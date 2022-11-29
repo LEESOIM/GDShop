@@ -2,6 +2,7 @@ package com.shop.goodee.member;
 
 import java.io.File;
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -236,6 +237,11 @@ public class MemberService {
 	/* 내등급 - VIP회원 페이지 출력 */
 	public MemberVO getVIPlist(MemberVO memberVO)throws Exception{
 		return memberMapper.getVIPlist(memberVO);
+	}
+	
+	/* 판매 상품 - 판매자 상품목록 리스트 */
+	public List<MemberVO> getSellerProduct(MemberVO memberVO)throws Exception{
+		return memberMapper.getSellerProduct(memberVO);
 	}
 	
 
