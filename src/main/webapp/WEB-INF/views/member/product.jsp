@@ -40,7 +40,7 @@ prefix="c" %>
               <button id="product" data-bs-toggle="modal" data-bs-target="#exampleModal_withdraw" data-bs-whatever="@mdo" onclick="location.href='/item/add'" >상품등록</button>
             </div>
               <!-- 목록보기 -->
-              <div class="row">
+              <div class="row mb-5">
               <c:forEach items="${ar}" var="item">
                  <div class="d-flex product_box col-6 m-2">
                   <div><img src="/file/item/${item.itemFileVOs[0].fileName}" style="width: 100%; height: 100%; border-radius: 5px"/></div>
