@@ -10,13 +10,14 @@
 	</insert>
 
 	<select id="getSellerList" resultType="SellerVO">
-		<!-- SELECT * FROM SELLER WHERE ROLENUM=4 ORDER BY ID -->
-		SELECT *
-		FROM seller s
-		LEFT JOIN MEMBER_ROLE mr
-		ON s.id=mr.id
-		INNER JOIN MEMBER m
-		ON mr.id=m.id
+	
+		SELECT M.ID, M.NAME, M.EMAIL, M.PHONE, S.COMPANY
+		FROM SELLER S
+		LEFT JOIN MEMBER_ROLE MR
+		ON S.ID=MR.ID
+		INNER JOIN MEMBER M
+		ON MR.ID=M.ID
+		WHERE S.STATUS=0
 
 	</select>
 </mapper>

@@ -38,7 +38,7 @@
 						<div class="input-form-backgroud row">
 							<div class="input-form col-md-12 mx-auto">
 								<h4 class="mb-3">판매자 입점 신청</h4>
-								<form class="validation-form" novalidate>
+								<form class="validation-form" onsubmit="return false;" novalidate>
 
 									<div class="mb-3">
 										<label for="id1">ID</label>
@@ -72,7 +72,7 @@
 										<label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
 									</div>
 									<div class="mb-4"></div>
-									<button type = "button" class="btn btn-primary btn-lg btn-block" type="submit" id="standingRequest">
+									<button type = "submit" class="btn btn-primary btn-lg btn-block" id="standingRequest">
 										입점 신청
 									</button>
 								</form>
