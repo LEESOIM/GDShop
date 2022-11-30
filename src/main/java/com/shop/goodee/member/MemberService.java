@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.shop.goodee.item.ItemVO;
 import com.shop.goodee.util.FileManager;
 
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,9 @@ public class MemberService {
 	
 	@Value("${app.profile}")
 	private String path;
+	
+	@Value("${social.kakao.admin}")
+	private String adminKey;
 	
 	@Autowired
 	@Qualifier("en")
@@ -242,7 +246,7 @@ public class MemberService {
 	}
 	
 	/* 판매 상품 - 판매자 상품목록 리스트 */
-	public List<MemberVO> getSellerProduct(MemberVO memberVO)throws Exception{
+	public List<ItemVO> getSellerProduct(MemberVO memberVO)throws Exception{
 		return memberMapper.getSellerProduct(memberVO);
 	}
 	

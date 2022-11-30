@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -12,6 +13,7 @@ import org.hibernate.validator.constraints.Range;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shop.goodee.item.ItemFileVO;
@@ -20,7 +22,7 @@ import com.shop.goodee.item.ItemVO;
 import lombok.Data;
 
 @Data
-public class MemberVO implements UserDetails{
+public class MemberVO implements UserDetails, OAuth2User{
 	
 	@NotBlank
 	private String id;
@@ -54,19 +56,22 @@ public class MemberVO implements UserDetails{
 	private String dd;
 	
 	//등급 여러개 가능
-	private List<RoleVO> roleVOs;
+	private RoleVO roleVOs;
 	//프로필 업로드
 	private MultipartFile multipartFile;
 	//프로필 사진 한개	
 	private MemberFileVO memberFileVO;
+	
+	//OAuth2User, Token등 정보 저장
+	private Map<String, Object> attributes;
 
+	//kakao, naver, google
+	private String social;
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> authorities = new ArrayList<>();
-		for(RoleVO roleVO : roleVOs) {
-			authorities.add(new SimpleGrantedAuthority(roleVO.getRoleName()));	
-		}
+		authorities.add(new SimpleGrantedAuthority(roleVOs.getRoleName()));	
 		
 		return authorities;
 	}
