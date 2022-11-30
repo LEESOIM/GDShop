@@ -6,6 +6,11 @@
 
 <mapper namespace="com.shop.goodee.admin.AdminMapper">
 	
+	<delete id="setDeleteRole" parameterType="MemberVO">
+		DELETE FROM MEMBER_ROLE WHERE ID=#{id} AND ROLENUM=#{roleNum}
+	</delete>
+	
+	
 	<select id="getAdmin" resultMap="getMemberResult">
 		SELECT * 
 		FROM MEMBER M
@@ -25,7 +30,7 @@
 			INNER JOIN
 			MEMBER_ROLE MR
 			ON M.ID = MR.ID
-		SET M.POINT=#{point},MR.ROLENUM=#{roleNum}
+		SET M.POINT=#{point}
 		WHERE M.ID=#{id}
 	</update>
 	

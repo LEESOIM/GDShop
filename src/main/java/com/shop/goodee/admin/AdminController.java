@@ -1,5 +1,6 @@
 package com.shop.goodee.admin;
 
+import java.io.Console;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,23 @@ public class AdminController {
 	private AdminService adminService;	
 	@Autowired
 	private SellerService sellerService;
+	
+	@PostMapping("deleteRole")
+	@ResponseBody
+	public int setDeleteRole(MemberVO memberVO)throws Exception{
+		int result = adminService.setDeleteRole(memberVO);
+		return result;
+	}
+	
+	
+	@PostMapping("update")
+	public String setUpdate(MemberVO memberVO)throws Exception{
+		int result = adminService.setMember(memberVO);
+		log.info("memberVO => {}",memberVO);
+		return "redirect:/admin/member";
+	}
+	
+	
 	
 	@GetMapping("seller")
 	public ModelAndView getSellerList(Pager pager)throws Exception{

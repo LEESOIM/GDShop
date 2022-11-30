@@ -14,6 +14,10 @@ public class AdminService {
 	@Autowired
 	private AdminMapper adminMapper;
 	
+	public int setDeleteRole(MemberVO memberVO)throws Exception{
+		return adminMapper.setDeleteRole(memberVO );
+	}
+	
 	public List<MemberVO> getAdmin()throws Exception{
 		return adminMapper.getAdmin();
 	}

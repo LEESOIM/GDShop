@@ -81,7 +81,7 @@
 									</div>
 									<div class="mb-4"></div>
 									<button class="btn btn-primary btn-lg btn-block" type="button"
-										onclick="apply(); submitApply();" id="standingRequest" >입점 신청</button>
+										onclick="submitApply();" id="standingRequest" >입점 신청</button>
 								</form>
 							</div>
 						</div>

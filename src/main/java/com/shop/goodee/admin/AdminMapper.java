@@ -10,6 +10,7 @@ import com.shop.goodee.util.Pager;
 @Mapper
 public interface AdminMapper {
 	
+	public int setDeleteRole(MemberVO memberVO)throws Exception;
 	public List<MemberVO> getAdmin()throws Exception;
 	public int setMember(MemberVO memberVO)throws Exception;
 	public MemberVO getMemberDetail(MemberVO memberVO)throws Exception;

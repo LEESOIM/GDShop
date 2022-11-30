@@ -72,12 +72,18 @@ function memberDetail(event){
         success:function(data){
             console.log(data)
             $("#memberInfoModalLabel").text(data.id+"님의 정보")
+            $("#transfer-id").val(data.id)
             $("#member-id").val(data.id)
             $("#roleNameDiv").empty()
             for(i=0; i<data.roleVOs.length;i++){
-                console.log(data.roleVOs[i].roleName)
-                let input = "<div class='member-roleName'>"+data.roleVOs[i].roleName+"<button type='button'>X</button></div>"
-                           
+                console.log(data.roleVOs[i].roleName.split('_')[1])
+                let input = "<div class='member-roleName'>"+data.roleVOs[i].roleName.split('_')[1]
+                if(data.roleVOs[i].roleName!="ROLE_MEMBER"){
+                    input += "<button class='deleteRole' type='button' data-roleNum='"+data.roleVOs[i].roleNum+"'>X</button></div>"
+                }else{
+                    input += "</div>"
+                }
+                
                 $("#roleNameDiv").append(input)
             }
             // $("#member-roleName").val(data.roleName.split('_')[1])
@@ -92,3 +98,29 @@ function memberDetail(event){
     })
 
 }
+
+$("#roleDiv").click(function(event){
+    if(event.target.className="deleteRole"){
+        $.ajax({
+            type:"POST",
+            url:"deleteRole",
+            data:{
+                id:$("#member-id").val(),
+                roleNum:event.target.dataset.rolenum
+            },
+            success:function(data){
+                console.log(data)
+                
+                if(data==1){
+                    $(event.target).parent().remove();
+                    getMemberAjax(1)
+
+                }
+
+            }
+        })
+
+    }
+})
+
+function updateRole

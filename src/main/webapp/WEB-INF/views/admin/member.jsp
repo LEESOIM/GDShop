@@ -31,6 +31,7 @@ pageEncoding="UTF-8"%>
 
 <body id="page-top">
     <c:import url="../template/library.jsp"></c:import>
+    <c:import url="../template/header.jsp"></c:import>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -242,9 +243,10 @@ pageEncoding="UTF-8"%>
               <form action="update" method="post" onsubmit="return confirm('수정하시겠습니까?')">
                 <div class="mb-3">
                   <label for="member-id" class="col-form-label">ID:</label>
+                  <input type="text" class="form-control" id="transfer-id" name="id" hidden>
                   <input type="text" class="form-control" id="member-id" disabled>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3" id="roleDiv">
                     <label for="member-roleName" class="col-form-label">등급:</label>
                     <div id="roleNameDiv"></div>
                     

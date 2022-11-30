@@ -28,6 +28,7 @@ pageEncoding="UTF-8"%>
 
 <body id="page-top">
     <c:import url="../template/library.jsp"></c:import>
+    <c:import url="../template/header.jsp"></c:import>
     <!-- Page Wrapper -->
     <div id="wrapper">
 

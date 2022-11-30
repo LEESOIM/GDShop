@@ -53,7 +53,7 @@ prefix="c" %>
             <!-- 로그인후 해당 블록 보이기 -->
             <sec:authorize access="isAuthenticated()">
             <div class="me-3">
-              <b style="font-size: 17.5px; color: rgb(9, 118, 31)"><sec:authentication property="Principal" var="user"/>${user.id}</b>님
+              <b id="id1" style="font-size: 17.5px; color: rgb(9, 118, 31)"><sec:authentication property="Principal" var="user"/>${user.id}</b>님
               환영합니다!💚
             </div>
             
@@ -187,3 +187,28 @@ prefix="c" %>
         </div>
       </div>
     </div>
+
+    <script>
+   
+      if($("#id1").text()!=""){
+        
+        $(document).ready(function(){
+          console.log("sse 저장")
+          const id = $("#id1").text();
+          const eventSource = new EventSource('/sub/'+id);
+          console.log(eventSource)
+          eventSource.addEventListener("connect",function(event){
+            let message = event.data;
+            alert(message)
+          })
+          eventSource.addEventListener("addApply",function(event){
+            let message = event.data;
+            alert(message)
+          })
+          eventSource.addEventListener("error", function(event) {
+                  eventSource.close()
+              })
+        })
+      }
+  
+    </script>
