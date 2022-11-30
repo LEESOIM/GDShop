@@ -5,6 +5,8 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -242,6 +244,11 @@ public class MemberService {
 	/* 판매 상품 - 판매자 상품목록 리스트 */
 	public List<MemberVO> getSellerProduct(MemberVO memberVO)throws Exception{
 		return memberMapper.getSellerProduct(memberVO);
+	}
+	
+	/* 마이페이지 - 닉네임 변경 */
+	public int setNickName(MemberVO memberVO)throws Exception{
+		return memberMapper.setNickName(memberVO);
 	}
 	
 

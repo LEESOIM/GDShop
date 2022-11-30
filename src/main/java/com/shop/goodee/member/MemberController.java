@@ -161,6 +161,19 @@ public class MemberController {
 		return mv;	
 	}
 	
+	/* 마이페이지 - 내 계정 닉네임 변경 */
+	@PostMapping("nickUpdate")
+	@ResponseBody
+	public int getMypage(HttpSession session,MemberVO memberVO)throws Exception {
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		MemberVO sessionMemberVO = (MemberVO) authentication.getPrincipal();
+		memberVO.setId(sessionMemberVO.getId());
+		int result = memberService.setNickName(memberVO);
+
+		return result;	
+	}
+	
 	/* 마이페이지 - 프로필 수정 */
 	@GetMapping("profile")
 	public ModelAndView setProfile(HttpSession session,MemberVO memberVO, ModelAndView mv)throws Exception {
@@ -458,6 +471,20 @@ public class MemberController {
 		ModelAndView mv = new ModelAndView();
 		memberVO = memberService.getVIPlist(memberVO);
 		mv.setViewName("/member/user_grade");
+		return mv;
+	}
+	
+	/* 마이페이지 - 닉네임 변경 */
+	@PostMapping("nickName")
+	public ModelAndView setNickName(HttpSession session ,MemberVO memberVO, ModelAndView mv)throws Exception{
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		MemberVO sessionMemberVO = (MemberVO) authentication.getPrincipal();
+		memberVO.setId(sessionMemberVO.getId());
+		
+		memberService.setNickName(memberVO);
+		mv.setViewName("/member/mypage");
+		mv.addObject("nick", memberVO.getNickName());
 		return mv;
 	}
 	

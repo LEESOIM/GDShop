@@ -176,7 +176,7 @@
 	
 	<!-- 내 판매상품 - 상품등록 신청한 목록 확인(판매자 페이지) --> 
  	<select id="getSellerProduct" parameterType="MemberVO" resultMap="getProductResult">
-		SELECT I.ITEMNUM, I.STATUS, I.ITEMNAME, I.TYPE, I.COUNT, I.SHOP, I.PRICE, I.POINT, ITF.FILENAME 
+		SELECT I.ITEMNUM, I.STATUS, I.TITLE, I.TYPE, I.COUNT, I.SHOP, I.PRICE, I.POINT, ITF.FILENAME 
 		FROM MEMBER M
 		INNER JOIN
 		MEMBER_ROLE MR
@@ -187,14 +187,14 @@
 		INNER JOIN
 		ITEM_FILE ITF
 		ON (I.ITEMNUM = ITF.ITEMNUM)
-		WHERE MR.ROLENUM=2 AND M.ID=#{id}
+		WHERE MR.ROLENUM=2 AND M.ID=#{id} ORDER BY I.ITEMNUM DESC
 	</select>
 	
 	<resultMap type="ItemVO" id="getProductResult">
 		<collection property="items" javaType="List" ofType="ItemVO">
 			<id column="itemNum" property="itemNum"/>
 			<result column="status" property="status"/>
-			<result column="itemName" property="itemName"/>
+			<result column="title" property="title"/>
 			<result column="type" property="type"/>
 			<result column="count" property="count"/>
 			<result column="shop" property="shop"/>
@@ -206,5 +206,8 @@
 		</collection>
 	</resultMap>
 	
-
+	<!-- 닉네임 변경 -->
+	<update id="setNickName" parameterType="MemberVO">
+		UPDATE MEMBER SET NICKNAME=#{nickName} WHERE ID=#{id}
+	</update>
 </mapper>

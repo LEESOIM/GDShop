@@ -83,4 +83,7 @@ public interface MemberMapper {
 	/* 판매 상품 - 판매자 상품목록 리스트 */
 	public List<MemberVO> getSellerProduct(MemberVO memberVO)throws Exception;
 	
+	/* 마이페이지 - 닉네임 변경 */
+	public int setNickName(MemberVO memberVO)throws Exception;
+	
 }
