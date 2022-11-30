@@ -159,7 +159,7 @@ prefix="c" %>
                 >
                 <div class="d-flex justify-content-center pt-3">
                   <div class="pe-3">
-                  	<a href="#">
+                  	<a href="/oauth2/authorization/kakao">
                     <img
                       src="/images/kakaotalk_logo_icon_147272.png"
                       style="width: 38px; height: 38px"

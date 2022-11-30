@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import com.shop.goodee.item.ItemVO;
+
 @Mapper
 public interface MemberMapper {
 	
@@ -81,6 +83,9 @@ public interface MemberMapper {
 	public MemberVO getVIPlist(MemberVO memberVO)throws Exception;
 	
 	/* 판매 상품 - 판매자 상품목록 리스트 */
-	public List<MemberVO> getSellerProduct(MemberVO memberVO)throws Exception;
+	public List<ItemVO> getSellerProduct(MemberVO memberVO)throws Exception;
+	
+	/* 마이페이지 - 닉네임 변경 */
+	public int setNickName(MemberVO memberVO)throws Exception;
 	
 }

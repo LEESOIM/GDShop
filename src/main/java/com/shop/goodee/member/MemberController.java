@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shop.goodee.item.ItemVO;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -159,6 +161,19 @@ public class MemberController {
 		mv.addObject("memberVO", memberVO);
 		mv.setViewName("/member/mypage");
 		return mv;	
+	}
+	
+	/* 마이페이지 - 내 계정 닉네임 변경 */
+	@PostMapping("nickUpdate")
+	@ResponseBody
+	public int getMypage(HttpSession session,MemberVO memberVO)throws Exception {
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		MemberVO sessionMemberVO = (MemberVO) authentication.getPrincipal();
+		memberVO.setId(sessionMemberVO.getId());
+		int result = memberService.setNickName(memberVO);
+
+		return result;	
 	}
 	
 	/* 마이페이지 - 프로필 수정 */
@@ -420,10 +435,12 @@ public class MemberController {
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
 		memberVO = (MemberVO) authentication.getPrincipal();
-		List<MemberVO> ar = memberService.getSellerProduct(memberVO);
-		
+		List<ItemVO> ar = memberService.getSellerProduct(memberVO);
 		memberVO = memberService.getMypage(memberVO);
-		
+		for(ItemVO ar1 : ar) {
+			log.info("ar1 :{}", ar1.getItems());
+		}
+		log.info("아이템넘을 찾아라!!{}",ar.get(2));
 		mv.addObject("ar", ar);
 		mv.addObject("memberVO", memberVO);
 		mv.setViewName("/member/product");
@@ -458,6 +475,20 @@ public class MemberController {
 		ModelAndView mv = new ModelAndView();
 		memberVO = memberService.getVIPlist(memberVO);
 		mv.setViewName("/member/user_grade");
+		return mv;
+	}
+	
+	/* 마이페이지 - 닉네임 변경 */
+	@PostMapping("nickName")
+	public ModelAndView setNickName(HttpSession session ,MemberVO memberVO, ModelAndView mv)throws Exception{
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		MemberVO sessionMemberVO = (MemberVO) authentication.getPrincipal();
+		memberVO.setId(sessionMemberVO.getId());
+		
+		memberService.setNickName(memberVO);
+		mv.setViewName("/member/mypage");
+		mv.addObject("nick", memberVO.getNickName());
 		return mv;
 	}
 	

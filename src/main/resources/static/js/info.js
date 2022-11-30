@@ -454,3 +454,24 @@ function getUserGrade() {
     },
   });
 }
+
+//계정 닉네임 변경 요청
+$("#nick_btn").click(function () {
+  let nickName = $("#nick_text").val();
+  $.ajax({
+    type: "POST",
+    url: "/member/nickUpdate",
+    data: {
+      nickName: nickName,
+    },
+    success: function (data) {
+      if (data == 1) {
+        $("#f_nickName").attr("style", "display:none");
+        location.href = "/member/mypage";
+      } else {
+        $("#t_nickName").attr("style", "display:none");
+        location.href = "/member/mypage";
+      }
+    },
+  });
+});
