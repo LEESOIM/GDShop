@@ -2,7 +2,10 @@ package com.shop.goodee.member;
 
 import java.io.File;
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.UUID;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.shop.goodee.item.ItemVO;
 import com.shop.goodee.util.FileManager;
 
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +33,9 @@ public class MemberService {
 	
 	@Value("${app.profile}")
 	private String path;
+	
+	@Value("${social.kakao.admin}")
+	private String adminKey;
 	
 	@Autowired
 	@Qualifier("en")
@@ -236,6 +243,16 @@ public class MemberService {
 	/* 내등급 - VIP회원 페이지 출력 */
 	public MemberVO getVIPlist(MemberVO memberVO)throws Exception{
 		return memberMapper.getVIPlist(memberVO);
+	}
+	
+	/* 판매 상품 - 판매자 상품목록 리스트 */
+	public List<ItemVO> getSellerProduct(MemberVO memberVO)throws Exception{
+		return memberMapper.getSellerProduct(memberVO);
+	}
+	
+	/* 마이페이지 - 닉네임 변경 */
+	public int setNickName(MemberVO memberVO)throws Exception{
+		return memberMapper.setNickName(memberVO);
 	}
 	
 

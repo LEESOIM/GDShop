@@ -17,9 +17,9 @@ pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="/css/login.css" />
   </head>
   <body>
-    <section class="container" style="width: 75%">
       <c:import url="../template/top_part.jsp"></c:import>
       <c:import url="../template/header.jsp"></c:import>
+    <section class="container" style="width: 65%">
       <form:form action="./join" modelAttribute="memberVO" method="post">
       <div>
         <div class="p-3 mt-3" style="color: rgb(34, 62, 33)">
@@ -200,8 +200,8 @@ pageEncoding="UTF-8"%>
         </div>
       </div>
       </form:form>
-      <c:import url="../template/footer.jsp"></c:import>
     </section>
+      <c:import url="../template/footer.jsp"></c:import>
 
     <!-- 순서모달창 -->
     <div

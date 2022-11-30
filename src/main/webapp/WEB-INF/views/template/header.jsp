@@ -4,7 +4,7 @@ pageEncoding="UTF-8"%>
 prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
     <nav class="navbar navbar-expand-lg header">
-      <div class="container-fluid" style="padding: 0px">
+      <div class="container-fluid" style="padding: 0px; width: 68%">
         <a class="navbar-brand" href="/" style="margin-right: 1.2em"
           ><img
             src="/images/h.png"
@@ -17,12 +17,10 @@ prefix="c" %>
             <li class="nav-item tab0  ps-3 pe-3"><a href="/">홈</a></li>
             <li class="nav-item tab1 ps-3 pe-3"><a href="/tab/tab1">추첨형</a></li>
             <li class="nav-item tab2 ps-3 pe-3"><a href="/tab/tab2">즉석추첨형</a></li>
-            <li class="nav-item tab3 ps-3 pe-3"><a href="/tab/tab3">초간단미션</a></li>
+            <li class="nav-item tab3 ps-3 pe-3"><a href="/tab/tab3">SNS미션</a></li>
             <li class="nav-item tab4 ps-3 pe-3"><a href="/tab/tab4">프리미엄</a></li>
           </ul>
           <div class="d-flex">
-          
-          <a href="/item/add" class="btn btn-success">상품등록</a>
           
           <sec:authorize access="!isAuthenticated()">
             <a
@@ -58,14 +56,14 @@ prefix="c" %>
             </div>
             
             <div class="top-dropdown">
-		      <div class="me-3 log">
+		      <div class="log">
               <a href="/member/mypage"><b>마이페이지</b></a>
            	  </div>
 		      <div class="dropdown-content">
 		      <sec:authorize access="hasRole('SELLER')">
-				      <a href="/member/product">판매상품</a>
+				      <a href="/member/product">내 상품</a>
 		       </sec:authorize>
-		      	<a href="#">내캠페인</a>
+		      	<a href="#">내 캠페인</a>
 		      </div>
 		    </div>
             
@@ -161,7 +159,7 @@ prefix="c" %>
                 >
                 <div class="d-flex justify-content-center pt-3">
                   <div class="pe-3">
-                  	<a href="#">
+                  	<a href="/oauth2/authorization/kakao">
                     <img
                       src="/images/kakaotalk_logo_icon_147272.png"
                       style="width: 38px; height: 38px"

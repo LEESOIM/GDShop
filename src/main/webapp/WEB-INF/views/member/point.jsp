@@ -27,15 +27,15 @@ prefix="c" %>
     </style>
   </head>
   <body>
-    <section class="container" style="width: 75%">
       <c:import url="../template/top_part.jsp"></c:import>
       <c:import url="../template/header.jsp"></c:import>
+    <section class="container" style="width: 75%">
       <div class="container">
         <div class="content d-flex">
           <c:import url="../template/mypage_side.jsp"></c:import>
           <div class="ms-3 mb-2" id="info" style="width: 100%">
             <!-- 여기부터 내포인트 상세보기 -->
-            <div class="info_top d-flex p-2 mt-3 mb-3">
+            <div class="info_top d-flex p-2 mt-4 mb-3">
               <div>
                 <span style="color: rgb(10, 154, 10)"><sec:authentication property="Principal.name"/></span>님의 포인트
               </div>
@@ -398,8 +398,8 @@ prefix="c" %>
           </div>
         </div>
       </div>
-      <c:import url="../template/footer.jsp"></c:import>
     </section>
+      <c:import url="../template/footer.jsp"></c:import>
     
 	 <!-- 툴팁 활성화 -->
 	 <script>

@@ -28,9 +28,9 @@
 </style>
 </head>
 <body>
-	<section class="container" style="width: 65%">
 		<c:import url="../template/top_part.jsp"></c:import>
 		<c:import url="../template/header.jsp"></c:import>
+	<section class="container" style="width: 65%">
 
 		<div style="margin-top: 3em; padding-bottom: 70px">
 			<div class="campaign">
@@ -62,7 +62,7 @@
 				<div>
 					<div class="d-flex flex-column" style="width: 250px; height: 380px; margin-bottom: 50px">
 						<div>
-							<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 260px; border-radius: 15px">
+							<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px">
 						</div>
 
 						<div class="d-flex flex-column" style="width: 250px; height: 130px">
@@ -74,7 +74,7 @@
 									<c:otherwise><div style="color: #646464"><b>${vo.shop }</b></div></c:otherwise>
 								</c:choose>
 							<span class="px-1" style="color: grey">|</span>
-								<div style="color: grey">${vo.company }</div>
+								<div style="color: grey">${vo.sellerVO.company }</div>
 								</div>
 							</div>
 							<div class="my-1">
@@ -94,7 +94,12 @@
 							</div>
 							<div class="d-flex justify-content-between">
 								<div style="font-size: 18px; color: blue">
-									<i class="fa-regular fa-clock"></i> <b>3:39:52</b>
+									<i class="fa-regular fa-clock"></i> 
+									<input type="hidden" value="${vo.date}" class="date"> 
+									<input type="hidden" value="${vo.count}" class="count"> 
+									<b class="time">
+										<span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
+									</b>
 								</div>
 								<div style="font-size: 12px; line-height: 28px; color: gray">마감임박</div>
 							</div>
@@ -117,9 +122,10 @@
 						messages</span></span></a>
 		</div>
 
-		<c:import url="../template/footer.jsp"></c:import>
 	</section>
+		<c:import url="../template/footer.jsp"></c:import>
 	<script src="/js/index.js"></script>
+	<script src="/js/timer.js"></script>
 </body>
 </html>
 
