@@ -284,10 +284,13 @@ public class MemberController {
 	public Long setResultPoint(HttpSession session, MemberVO memberVO, Long point)throws Exception{
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
-		memberVO = (MemberVO) authentication.getPrincipal();
+		MemberVO sessionMemberVO = (MemberVO) authentication.getPrincipal();
+		memberVO.setId(sessionMemberVO.getId());
+		memberVO = memberService.getMypage(memberVO);
+		Long point_result = memberVO.getPoint_result();
 		memberVO.setPoint_result(point);
 		memberService.setResultPoint(memberVO);
-		Long result = memberVO.getPoint_result();
+		Long result= point_result+point;
 		return result;
 	}
 
@@ -437,10 +440,6 @@ public class MemberController {
 		memberVO = (MemberVO) authentication.getPrincipal();
 		List<ItemVO> ar = memberService.getSellerProduct(memberVO);
 		memberVO = memberService.getMypage(memberVO);
-		for(ItemVO ar1 : ar) {
-			log.info("ar1 :{}", ar1.getItems());
-		}
-		log.info("아이템넘을 찾아라!!{}",ar.get(2));
 		mv.addObject("ar", ar);
 		mv.addObject("memberVO", memberVO);
 		mv.setViewName("/member/product");
