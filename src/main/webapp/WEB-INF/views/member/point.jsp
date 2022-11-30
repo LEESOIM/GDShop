@@ -83,7 +83,7 @@ prefix="c" %>
                   출금 예정 포인트 <i class="fa-solid fa-circle-info" data-toggle="tooltip" data-bs-placement="top" data-custom-class="custom-tooltip" data-bs-title="출금 요청한 포인트로 매월 1~14일 요청건은 당월 15일 출금, 15~말일 요청건은 익월 1일에 출금"></i>
                 </div>
                 <div style="color: green">
-                  <span style="font-size: 26px" id="withdraw_sum">${user.point_result}</span
+                  <span style="font-size: 26px" id="withdraw_sum">${memberVO.point_result}</span
                   ><i
                     class="fa-brands fa-product-hunt ps-1"
                     style="font-size: 21px"

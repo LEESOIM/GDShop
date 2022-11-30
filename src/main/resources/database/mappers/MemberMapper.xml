@@ -57,10 +57,10 @@
 		<result column="status" property="status"/>
 		<result column="nickName" property="nickName"/>
 		<result column="byeDate" property="byeDate"/>
-		<association property="roleVOs" javaType="RoleVo">
+		<collection property="roleVOs" javaType="List" ofType="RoleVO">
 			<id column="roleNum" property="roleNum"/>
 			<result column="roleName" property="roleName"/>
-		</association>
+		</collection>
 	</resultMap>
 	
 	<!-- 마이페이지 -->
