@@ -24,10 +24,12 @@ pageEncoding="UTF-8"%>
                 <td>${memberVO.name}</td>
                 <td>${memberVO.email}</td>
                 <td>${memberVO.point}</td>
-                <td>
-                    <c:forEach items="${memberVO.roleVOs}" var="roleVO">
-                        ${fn:split(roleVO.roleName,'_')[1] }
-                    </c:forEach>  
+                <td onclick="roleDetail(this)" data-bs-toggle="modal" data-bs-target="#roleModal">
+                    <div>
+                        <c:forEach items="${memberVO.roleVOs}" var="roleVO">
+                            <div data-rolenum="${roleVO.roleNum}">${fn:split(roleVO.roleName,'_')[1]}</div> 
+                        </c:forEach>  
+                    </div>
                 </td>
                 <td><button data-bs-toggle="modal" data-bs-target="#missionModal">미션</button></td>
                 <td>${memberVO.status}</td>

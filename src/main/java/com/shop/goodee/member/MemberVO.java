@@ -22,7 +22,7 @@ import com.shop.goodee.item.ItemVO;
 import lombok.Data;
 
 @Data
-public class MemberVO implements UserDetails, OAuth2User{
+public class MemberVO implements UserDetails{
 	
 	@NotBlank
 	private String id;
@@ -56,7 +56,7 @@ public class MemberVO implements UserDetails, OAuth2User{
 	private String dd;
 	
 	//등급 여러개 가능
-	private RoleVO roleVOs;
+	private List<RoleVO> roleVOs;
 	//프로필 업로드
 	private MultipartFile multipartFile;
 	//프로필 사진 한개	
@@ -71,7 +71,9 @@ public class MemberVO implements UserDetails, OAuth2User{
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> authorities = new ArrayList<>();
-		authorities.add(new SimpleGrantedAuthority(roleVOs.getRoleName()));	
+		for(RoleVO roleVO : roleVOs) {
+			authorities.add(new SimpleGrantedAuthority(roleVO.getRoleName()));	
+		}
 		
 		return authorities;
 	}

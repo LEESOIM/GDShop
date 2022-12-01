@@ -30,10 +30,33 @@ public class AdminController {
 	@Autowired
 	private SellerService sellerService;
 	
+	
+	@GetMapping("product_list")
+	public void getProductList()throws Exception{
+		
+	}
+	
+	@GetMapping("product_request")
+	public void getProductRequest()throws Exception{
+		
+	}
+	
+	
+	@PostMapping("addRole")
+	@ResponseBody
+	public int setAddeRole(MemberVO memberVO)throws Exception{
+		
+		int result = adminService.setAddRole(memberVO);
+	
+		return result;
+	}
+	
 	@PostMapping("deleteRole")
 	@ResponseBody
 	public int setDeleteRole(MemberVO memberVO)throws Exception{
+		
 		int result = adminService.setDeleteRole(memberVO);
+	
 		return result;
 	}
 	

@@ -33,10 +33,9 @@ public class MemberController {
 	private MemberService memberService;
 	
 	@Autowired
-	private MemberSecurityService memberSecurityService;
-	
-	@Autowired
 	private MailService mailService;
+	@Autowired
+	private MemberSecurityService memberSecurityService;
 	
 	//아이디 찾기
 	@GetMapping("find_id")
@@ -437,10 +436,8 @@ public class MemberController {
 		memberVO = (MemberVO) authentication.getPrincipal();
 		List<ItemVO> ar = memberService.getSellerProduct(memberVO);
 		memberVO = memberService.getMypage(memberVO);
-		for(ItemVO ar1 : ar) {
-			log.info("ar1 :{}", ar1.getItems());
-		}
-		log.info("아이템넘을 찾아라!!{}",ar.get(2));
+		
+		
 		mv.addObject("ar", ar);
 		mv.addObject("memberVO", memberVO);
 		mv.setViewName("/member/product");

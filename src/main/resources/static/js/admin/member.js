@@ -34,7 +34,7 @@ $("input[name='roleName']").change(function(){
  })
 
 
-
+// 멤버리스트 정보 가져오기
 function getMemberAjax(page){
     console.log("멤버 ajax")
     let roleName = $("input[name='roleName']:checked").val()
@@ -61,7 +61,6 @@ function getMemberAjax(page){
 
 
 function memberDetail(event){
-    console.log($(event).attr("data-member"))
     let id = $(event).attr("data-member")
     $.ajax({
         type:"GET",
@@ -70,13 +69,12 @@ function memberDetail(event){
             id:id
         },
         success:function(data){
-            console.log(data)
             $("#memberInfoModalLabel").text(data.id+"님의 정보")
             $("#transfer-id").val(data.id)
             $("#member-id").val(data.id)
             $("#roleNameDiv").empty()
             for(i=0; i<data.roleVOs.length;i++){
-                console.log(data.roleVOs[i].roleName.split('_')[1])
+
                 let input = "<div class='member-roleName'>"+data.roleVOs[i].roleName.split('_')[1]
                 if(data.roleVOs[i].roleName!="ROLE_MEMBER"){
                     input += "<button class='deleteRole' type='button' data-roleNum='"+data.roleVOs[i].roleNum+"'>X</button></div>"
@@ -86,7 +84,7 @@ function memberDetail(event){
                 
                 $("#roleNameDiv").append(input)
             }
-            // $("#member-roleName").val(data.roleName.split('_')[1])
+
             $("#member-name").val(data.name)
             $("#member-phone").val(data.phone)
             $("#member-email").val(data.email)
@@ -96,31 +94,73 @@ function memberDetail(event){
         }
 
     })
-
 }
 
-$("#roleDiv").click(function(event){
-    if(event.target.className="deleteRole"){
-        $.ajax({
-            type:"POST",
-            url:"deleteRole",
-            data:{
-                id:$("#member-id").val(),
-                roleNum:event.target.dataset.rolenum
-            },
-            success:function(data){
-                console.log(data)
-                
-                if(data==1){
-                    $(event.target).parent().remove();
-                    getMemberAjax(1)
 
-                }
+//========================등급 관리 ======================================
+function roleDetail(event){
+    let memberRole = $(event).children().children()
 
-            }
-        })
-
+    $("#roleModalLabel").text($(event).prev().prev().prev().prev().text())
+    // 초기화
+    $("#admin").removeClass("hadRole")
+    $("#seller").removeClass("hadRole")
+    $("#vip").removeClass("hadRole")
+    $("#member").removeClass("hadRole")
+    
+    for(i=0; i<memberRole.length; i++){
+        if(memberRole[i].dataset.rolenum==1){
+            $("#admin").addClass("hadRole")
+        }
+        if(memberRole[i].dataset.rolenum==2){
+            $("#seller").addClass("hadRole")
+        }
+        if(memberRole[i].dataset.rolenum==3){
+            $("#vip").addClass("hadRole")
+        }
+        if(memberRole[i].dataset.rolenum==4){
+            $("#member").addClass("hadRole")
+        }
     }
+}
+
+
+
+$(".memberRole").hover(function(event){
+    $(event.target).toggleClass("roleHover")
+    
+},function(event){
+    $(event.target).toggleClass("roleHover")
 })
 
-function updateRole
+
+$(".memberRole").click(function(event){
+    console.log("클릭")
+    let url
+    if($(event.target).hasClass("hadRole")){
+        console.log("있음")
+        $(event.target).toggleClass("hadRole")
+        url = "deleteRole"
+        roleNum=$(event.target).attr("data-rolenum") 
+    }else{
+        console.log("없음")
+        $(event.target).toggleClass("hadRole")
+        url = "addRole"
+        roleNum=$(event.target).attr("data-rolenum")    
+    }
+
+    $.ajax({
+        type:"POST",
+        url:url,
+        data:{
+            id:$("#roleModalLabel").text(),
+            roleNum:parseInt(roleNum)
+        },
+        success:function(data){   
+            if(data==1){
+                getMemberAjax(1)
+            }
+        }
+    })
+})
+

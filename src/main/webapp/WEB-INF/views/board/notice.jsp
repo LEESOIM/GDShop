@@ -16,10 +16,10 @@ pageEncoding="UTF-8"%>
     <script defer src="/js/notice/notice.js"></script>
   </head>
   <body>
+    <c:import url="../template/top_part.jsp"></c:import>
+    <c:import url="../template/header.jsp"></c:import>
     <section class="container" style="width: 75%">
       <c:import url="../template/library.jsp"></c:import>
-      <c:import url="../template/top_part.jsp"></c:import>
-      <c:import url="../template/header.jsp"></c:import>
       <div class="container">
         <div class="content d-flex">
           <div class="sidebar">
@@ -95,8 +95,8 @@ pageEncoding="UTF-8"%>
           </div>
         </div>
       </div>
-      <c:import url="../template/footer.jsp"></c:import>
     </section>
+    <c:import url="../template/footer.jsp"></c:import>
 
   </body>
 </html>

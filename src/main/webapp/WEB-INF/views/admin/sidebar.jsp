@@ -5,12 +5,12 @@ pageEncoding="UTF-8"%>
 
     <!-- Sidebar - Brand -->
     <a class="navbar-brand" href="/" style="margin-right: 1.2em"
-  ><img
-    src="/images/admin_logo.png"
-    alt="Logo"
-    width="80"
-    height="62"
-    class="d-inline-block align-text-top"/> 구디샵</a>
+          ><div class="d-flex ps-3 pt-2" style="font-size: 33px; color: white;"><img
+            src="/images/admin_logo.png"
+            alt="Logo"
+            width="70"
+            height="75"
+            class="d-inline-block align-text-top"/> <div style="margin: 12px 0px 0px 5px"><b>구디샵</b></div></div></a>
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
@@ -57,10 +57,8 @@ pageEncoding="UTF-8"%>
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Utilities:</h6>
-                <a class="collapse-item" href="utilities-color.html">Colors</a>
-                <a class="collapse-item" href="utilities-border.html">Borders</a>
-                <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                <a class="collapse-item" href="utilities-other.html">Other</a>
+                <a class="collapse-item" href="./product_request">상품 신청/수정/삭제</a>
+                <a class="collapse-item" href="./product_list">상품 리스트</a>
             </div>
         </div>
     </li>

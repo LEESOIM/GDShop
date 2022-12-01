@@ -18,3 +18,22 @@
 }
 
 
+.memberRole{
+    color: gray;
+}
+
+.hadRole{
+    color: black;
+    font-weight: bold;
+}
+
+#roleDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.roleHover{
+    color: blue;
+    font-weight: bold;
+}

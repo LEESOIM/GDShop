@@ -6,6 +6,10 @@
 
 <mapper namespace="com.shop.goodee.admin.AdminMapper">
 	
+	<insert id="setAddRole" parameterType="MemberVO">
+		INSERT INTO MEMBER_ROLE VALUES(#{id},#{roleNum})
+	</insert>
+	
 	<delete id="setDeleteRole" parameterType="MemberVO">
 		DELETE FROM MEMBER_ROLE WHERE ID=#{id} AND ROLENUM=#{roleNum}
 	</delete>
@@ -95,7 +99,7 @@
 		<result column="regDate" property="regDate"/>
 		<result column="status" property="status"/>
 		<result column="nickName" property="nickName"/>
-		<collection property="roleVOs" javaType="List" ofType="ROleVO">
+		<collection property="roleVOs" javaType="List" ofType="RoleVO">
 			<id column="roleNum" property="roleNum"/>
 			<result column="roleName" property="roleName"/>
 		</collection>
