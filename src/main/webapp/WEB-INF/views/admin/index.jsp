@@ -39,12 +39,12 @@ pageEncoding="UTF-8"%>
 
             <!-- Sidebar - Brand -->
             <a class="navbar-brand" href="/" style="margin-right: 1.2em"
-          ><img
+          ><div class="d-flex ps-3 pt-2" style="font-size: 33px; color: white;"><img
             src="/images/admin_logo.png"
             alt="Logo"
-            width="80"
-            height="62"
-            class="d-inline-block align-text-top"/> 구디샵</a>
+            width=70"
+            height="75"
+            class="d-inline-block align-text-top"/> <div style="margin: 12px 0px 0px 5px"><b>구디샵</b></div></div></a>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">

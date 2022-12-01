@@ -46,7 +46,15 @@ prefix="c" %>
                  <div class="d-flex product_box col-6 m-2">
                   <div><img src="/file/item/${item.itemFileVOs[0].fileName}" style="width: 100%; height: 100%; border-radius: 5px"/></div>
                   <div class="ps-4" style="width:60%">
-                  	<div class="pb-2 pt-1" style="font-size: 22px; color: green;"><b><c:if test="${item.items[0].status}">승인완료</c:if><c:if test="${!item.items[0].status}">승인요청</c:if></b></div>
+                  	<div class="pb-2 pt-1" style="font-size: 22px; color: green;"><b>
+                  	<c:choose>
+                  		<c:when test="${item.items[0].status eq 1}">승인완료</c:when>
+                  		<c:when test="${item.items[0].status eq 2}">수정요청</c:when>
+                  		<c:when test="${item.items[0].status eq 3}">삭제요청</c:when>
+                  		<c:when test="${item.items[0].status eq 4}">캠페인 종료</c:when>
+                  		<c:otherwise>승인요청</c:otherwise>
+                  	</c:choose>
+                  	</b></div>
                   	<div class="pb-1" style="font-size: 18px;overflow-wrap: anywhere;"><b>
                   	<c:choose>
 			           <c:when test="${fn:length(item.items[0].title) > 40}">
@@ -64,8 +72,12 @@ prefix="c" %>
                   		<div style="line-height: 32px"><i class="fa-brands fa-product-hunt" style="color: blue"></i>${item.items[0].point}</div>
                   	</div>
                   	<div>
+                  		<c:if test="${item.items[0].status ne 2}">
+                  		<c:if test="${item.items[0].status ne 3}">
                   		<button class="product_request me-1" type="button" onclick="location.href='/item/update?itemNum=${item.items[0].itemNum}'"><b>수정</b></button>
                   		<button class="product_request" type="button"><b>삭제</b></button>
+                  		</c:if>
+                  		</c:if>
                   	</div>
                   	</div>
                   </div>
