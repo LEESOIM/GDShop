@@ -48,6 +48,15 @@
 		</collection>	
 	</resultMap>
 	
+		
+	<update id="setStatusUp" parameterType="ItemVO">
+		UPDATE ITEM SET STATUS=2 WHERE ID=#{id} and ITEMNUM=#{itemNum}
+	</update>
+	
+	<update id="setStatusDel" parameterType="ItemVO">
+		UPDATE ITEM SET STATUS=3 WHERE ID=#{id} and ITEMNUM=#{itemNum}
+	</update>
+	
 	<update id="setUpdate" parameterType="ItemVO">
 		UPDATE ITEM
 		SET ITEMNAME=#{itemName}, PRICE=IFNULL(#{price}, 0), TITLE=#{title}, DETAIL=#{detail}, STOCK=#{stock}, COUNT=IFNULL(#{count}, 0), URL=#{url}, NOW(), 0, 3, SHOP=#{shop}, ROLE=IFNULL(#{role}, "모두"), SELLERSNS=#{sellerSNS}
@@ -55,7 +64,7 @@
 	</update>
 	
 	<delete id="setDelete" parameterType="ItemVO">
-		DELETE ITEM WHERE ITEMNUM=#{itemNum}
+		DELETE FROM ITEM WHERE ITEMNUM=#{itemNum}
 	</delete>
 	
 	<sql id="search">
@@ -157,5 +166,6 @@
 		GROUP BY(I.ITEMNUM)
 		ORDER BY I.ITEMNUM DESC
 	</select>
+
 
 </mapper>

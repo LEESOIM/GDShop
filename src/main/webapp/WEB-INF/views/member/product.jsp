@@ -90,13 +90,6 @@ prefix="c" %>
       </div>
     </section>
       <c:import url="../template/footer.jsp"></c:import>
-
-	<!-- 툴팁 활성화 -->
-	 <script>
-	  $(document).ready(function(){
-	    $('[data-toggle="tooltip"]').tooltip();   
-	  });
-	</script>
-    <script src="/js/info.js"></script>
+      <script src="/js/product.js"></script>
   </body>
 </html>

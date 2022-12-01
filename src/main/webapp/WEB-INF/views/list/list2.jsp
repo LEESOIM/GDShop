@@ -17,7 +17,7 @@
 
 <style type="text/css">
 .tab2 {
-	padding-bottom: 7px;
+	padding-bottom: 3px;
 	border-bottom: 5px rgb(139, 176, 89) solid;
 }
 
