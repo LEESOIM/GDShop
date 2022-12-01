@@ -46,7 +46,7 @@ prefix="c" %>
                  <div class="d-flex product_box col-6 m-2">
                   <div><img src="/file/item/${item.itemFileVOs[0].fileName}" style="width: 100%; height: 100%; border-radius: 5px"/></div>
                   <div class="ps-4" style="width:60%">
-                  	<div class="pb-2 pt-1" style="font-size: 22px; color: green;"><b><c:if test="${item.items[0].status}">승인완료</c:if>승인요청</b></div>
+                  	<div class="pb-2 pt-1" style="font-size: 22px; color: green;"><b>승인완료승인요청</b></div>
                   	<div class="pb-1" style="font-size: 18px;overflow-wrap: anywhere;"><b>
                   	<c:choose>
 			           <c:when test="${fn:length(item.items[0].itemName) > 40}">
@@ -64,8 +64,8 @@ prefix="c" %>
                   		<div style="line-height: 32px"><i class="fa-brands fa-product-hunt" style="color: blue"></i>${item.items[0].point}</div>
                   	</div>
                   	<div>
-                  		<button class="product_request me-1" type="button" onclick="location.href='/item/update?itemNum=${item.items[0].itemNum}'"><b>수정</b></button>
-                  		<button class="product_request" type="button"><b>삭제</b></button>
+                  		<button class="upBtn product_request me-1"  type="button" onclick="location.href='/item/update?itemNum=${item.items[0].itemNum}'"><b>수정</b></button>
+                  		<button class="delBtn product_request" data-itemNum-num="${item.items[0].itemNum}"><b>삭제</b></button>
                   	</div>
                   	</div>
                   </div>
@@ -78,13 +78,6 @@ prefix="c" %>
       </div>
     </section>
       <c:import url="../template/footer.jsp"></c:import>
-
-	<!-- 툴팁 활성화 -->
-	 <script>
-	  $(document).ready(function(){
-	    $('[data-toggle="tooltip"]').tooltip();   
-	  });
-	</script>
-    <script src="/js/info.js"></script>
+      <script src="/js/product.js"></script>
   </body>
 </html>

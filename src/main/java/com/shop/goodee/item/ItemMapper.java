@@ -13,7 +13,11 @@ public interface ItemMapper {
 	
 	public ItemVO getDetail(ItemVO itemVO) throws Exception;
 	
+	public int setStatusDel(ItemVO itemVO) throws Exception;
+	
 	public int setUpdate(ItemVO itemVO) throws Exception;
+	
+	public int setDelete(ItemVO itemVO) throws Exception;
 
 	public List<ItemVO> getList() throws Exception;
 	
@@ -28,5 +32,6 @@ public interface ItemMapper {
 	public List<ItemVO> getList3() throws Exception;
 	
 	public List<ItemVO> getList4() throws Exception;
+	
 	
 }

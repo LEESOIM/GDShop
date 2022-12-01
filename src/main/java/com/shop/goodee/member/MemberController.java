@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shop.goodee.item.ItemService;
+import com.shop.goodee.item.ItemVO;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -420,7 +423,7 @@ public class MemberController {
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
 		memberVO = (MemberVO) authentication.getPrincipal();
-		List<MemberVO> ar = memberService.getSellerProduct(memberVO);
+		List<ItemVO> ar = memberService.getSellerProduct(memberVO);
 		
 		memberVO = memberService.getMypage(memberVO);
 		

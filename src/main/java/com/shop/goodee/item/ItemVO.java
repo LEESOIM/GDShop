@@ -26,7 +26,7 @@ public class ItemVO {
 	private String url; //구매링크
 	private Timestamp date; //등록일
 	private Long hit; //조회수
-	private boolean status; //승인여부
+	private Long status; //승인여부
 	private String sellerSNS; //판매자SNS
 	
 	private SellerVO sellerVO; //판매자(1:1)

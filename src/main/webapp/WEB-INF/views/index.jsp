@@ -18,18 +18,15 @@
 	padding-bottom: 7px;
 	border-bottom: 5px rgb(139, 176, 89) solid;
 }
-
 .tab0 a {
 	font-weight: bold;
 	color: rgb(139, 176, 89);
 }
-
 </style>
 </head>
 <body>
 		<c:import url="./template/top_part.jsp"></c:import>
 		<c:import url="./template/header.jsp"></c:import>
-
 		<!-- 홈페이지 배너 -->	
 		<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
 		  <div class="carousel-inner">
@@ -120,9 +117,8 @@
 									<i class="fa-regular fa-clock"></i> 
 									<input type="hidden" value="${vo.date}" class="date"> 
 									<input type="hidden" value="${vo.count}" class="count"> 
-									<b class="time">
-										<span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
-									</b>
+									<b class="time"></b>
+									<b><span class="hours"></span><span class="minutes"></span><span class="seconds"></span></b>
 								</div>
 								<div style="font-size: 12px; line-height: 28px; color: gray">마감임박</div>
 							</div>
@@ -204,9 +200,8 @@
 									<i class="fa-regular fa-clock"></i> 
 									<input type="hidden" value="${vo.date}" class="date"> 
 									<input type="hidden" value="${vo.count}" class="count"> 
-									<b class="time">
-										<span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
-									</b>
+									<b class="time"></b>
+									<b><span class="hours"></span><span class="minutes"></span><span class="seconds"></span></b>
 								</div>
 								<div style="font-size: 12px; line-height: 28px; color: gray">마감임박</div>
 							</div>
@@ -288,9 +283,8 @@
 									<i class="fa-regular fa-clock"></i> 
 									<input type="hidden" value="${vo.date}" class="date"> 
 									<input type="hidden" value="${vo.count}" class="count"> 
-									<b class="time">
-										<span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
-									</b>
+									<b class="time"></b>
+									<b><span class="hours"></span><span class="minutes"></span><span class="seconds"></span></b>
 								</div>
 								<div style="font-size: 12px; line-height: 28px; color: gray">마감임박</div>
 							</div>
@@ -373,9 +367,8 @@
 									<i class="fa-regular fa-clock"></i> 
 									<input type="hidden" value="${vo.date}" class="date"> 
 									<input type="hidden" value="${vo.count}" class="count"> 
-									<b class="time">
-										<span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
-									</b>
+									<b class="time"></b>
+									<b><span class="hours"></span><span class="minutes"></span><span class="seconds"></span></b>
 								</div>
 								<div style="font-size: 12px; line-height: 28px; color: gray">마감임박</div>
 							</div>

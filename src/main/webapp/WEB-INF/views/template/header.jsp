@@ -3,14 +3,14 @@ pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
 prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-    <nav class="navbar navbar-expand-lg header">
+    <nav class="navbar navbar-expand-lg header" style="padding: 6px;">
       <div class="container-fluid" style="padding: 0px; width: 68%">
-        <a class="navbar-brand" href="/" style="margin-right: 1.2em"
+        <a class="navbar-brand" href="/" style="margin-right: 2em"
           ><img
             src="/images/h.png"
             alt="Logo"
             width="169"
-            height="62"
+            height="58"
             class="d-inline-block align-text-top"/></a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -105,14 +105,14 @@ prefix="c" %>
               </div>
               <div style="height: 68px">
                 <div id="email_icon"><i class="fa-regular fa-user"></i></div>
-                <input type="text" placeholder="아이디" id="id" name="id" value="${cookie.userId.value}" />
+                <input type="text" placeholder="아이디" id="id" name="id" value="seller" />
                 <div class="inp" id="inp_id" style="display: none">아이디를 입력해주세요.</div>
               </div>
               <div style="height: 68px">
                 <div id="pw_icon">
                   <i class="fa-solid fa-lock"></i>
                 </div>
-                <input type="password" placeholder="비밀번호" id="pw" name="pw"/>
+                <input type="password" placeholder="비밀번호" id="pw" name="pw" value="sell1234!"/>
                 <div class="inp" id="inp_pw" style="display: none">비밀번호를 입력해주세요.</div>
               </div>
               <div

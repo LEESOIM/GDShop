@@ -1,5 +1,6 @@
 package com.shop.goodee.item;
 
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,44 +15,58 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shop.goodee.member.MemberService;
 import com.shop.goodee.member.MemberVO;
 
 import lombok.extern.slf4j.Slf4j;
-
 
 @Controller
 @RequestMapping("/item/*")
 @Slf4j
 public class ItemController {
-	
+
 	@Autowired
 	private ItemService itemService;
 	
+	@Autowired
+	private MemberService memberService;
+	
 	@GetMapping("add")
 	public void setAdd() {
-		
+
 	}
-	
+
 	@PostMapping("add")
-	public ModelAndView setAdd(HttpSession session, ItemVO itemVO, MultipartFile [] files) throws Exception {
+	public ModelAndView setAdd(HttpSession session, ItemVO itemVO, MultipartFile[] files) throws Exception {
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
 		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
 		itemVO.setId(memberVO.getId());
-		
+
 		ModelAndView mv = new ModelAndView();
 		int result = itemService.setAdd(itemVO);
 		log.info("==C==={}", itemVO.getId());
-		
+
 		mv.setViewName("redirect:../member/product");
 		return mv;
 	}
-	
+
 	@GetMapping("detail")
 	public void getDetail() {
-		
+
 	}
-	
+
+	@PostMapping("delete")
+	@ResponseBody
+	public int setStatusDel(HttpSession session, ItemVO itemVO) throws Exception {
+		SecurityContextImpl context = (SecurityContextImpl)session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
+		itemVO.setId(memberVO.getId());
+		itemVO.getItemNum();
+		return itemService.setStatusDel(itemVO);
+	}
+
 	@GetMapping("update")
 	public ModelAndView setUpdate(ItemVO itemVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
@@ -60,9 +75,9 @@ public class ItemController {
 		mv.setViewName("item/update");
 		return mv;
 	}
-	
+
 	@PostMapping("update")
-	public void setUpdate(HttpSession session, ItemVO itemVO, MultipartFile [] files) throws Exception {
+	public void setUpdate(HttpSession session, ItemVO itemVO, MultipartFile[] files) throws Exception {
 	}
-	
+
 }

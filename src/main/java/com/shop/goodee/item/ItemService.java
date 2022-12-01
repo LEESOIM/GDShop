@@ -52,6 +52,10 @@ public class ItemService {
 		return result;
 	}
 	
+	public int setStatusDel(ItemVO itemVO) throws Exception {
+		return itemMapper.setStatusDel(itemVO);
+	}
+	
 	public ItemVO getDetail(ItemVO itemVO) throws Exception {
 		return itemMapper.getDetail(itemVO);
 	}
@@ -59,6 +63,10 @@ public class ItemService {
 	public int setUpdate(ItemVO itemVO, MultipartFile [] files) throws Exception {
 		int result = itemMapper.setUpdate(itemVO);
 		return itemMapper.setUpdate(itemVO);
+	}
+	
+	public int setDelete(ItemVO itemVO) throws Exception {
+		return itemMapper.setDelete(itemVO);
 	}
 
 	public List<ItemVO> getList() throws Exception {
