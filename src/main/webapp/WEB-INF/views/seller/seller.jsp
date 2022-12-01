@@ -22,8 +22,9 @@
 <link rel="stylesheet" href="/css/header.css" />
 <link rel="stylesheet" href="/css/index.css" />
 <link rel="stylesheet" href="/css/seller.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 </head>
 
 <body>
@@ -81,12 +82,9 @@
 						<footer class="my-3 text-center text-small">
 							<p class="mb-1">&copy; 2022 GDShop</p>
 						</footer>
-						<a href="./sellerList">입점신청 리스트</a>
+						<a href="./wait">입점신청 리스트</a>
 					</div>
 				</div>
-			</div>
-			<div>
-				<a id="testest">testest</a>
 			</div>
 
 		</div>
@@ -96,6 +94,6 @@
 			integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
 			crossorigin="anonymous"></script>
 	</section>
-	<script src="/js/seller.js"></script>
+	<script src="/js/seller/seller.js"></script>
 </body>
 </html>

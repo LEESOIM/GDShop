@@ -1,13 +1,3 @@
-$("#testest").on("click",function(e){
-	console.log("test3");
-	swal({
-		title: "테스트",
-		icon: "success", //warning,error,success,info,question
-		buttons: true,
-		dangerMode: true
-	})
-})
-
 window.addEventListener('load', () => {
 	const forms = document.getElementsByClassName('validation-form');
 	Array.prototype.filter.call(forms, (form) => {
@@ -64,7 +54,6 @@ $("#standingRequest").on("click", function(e) {
 				swal({
 					title: "입점 신청에 실패하였습니다.",
 					icon: "error", 
-					buttons: true,
 					dangerMode: true
 				})
 				console.log("================ajax실패");

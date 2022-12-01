@@ -6,18 +6,64 @@
 <mapper namespace="com.shop.goodee.seller.SellerMapper">
 
 	<insert id="setSellerAdd" parameterType="SellerVO">
-		INSERT INTO SELLER VALUES(#{id},#{roleNum},#{company})
+		INSERT INTO SELLER
+		VALUES(#{id},#{roleNum},#{company})
 	</insert>
-
-	<select id="getSellerList" resultType="SellerVO">
-	
-		SELECT M.ID, M.NAME, M.EMAIL, M.PHONE, S.COMPANY
+	<select id="getWaitList" resultType="SellerVO">
+		SELECT M.ID, M.NAME,
+		M.EMAIL, M.PHONE, S.COMPANY, S.STATUS
 		FROM SELLER S
-		LEFT JOIN MEMBER_ROLE MR
+		LEFT JOIN
+		MEMBER_ROLE MR
+		ON
+		S.ID=MR.ID
+		INNER JOIN MEMBER M
+		ON MR.ID=M.ID
+		WHERE
+		S.STATUS=0 AND MR.ROLENUM=4
+
+	</select>
+	<select id="getAcceptList" resultType="SellerVO">
+		SELECT M.ID, M.NAME,
+		M.EMAIL, M.PHONE, S.COMPANY, S.STATUS
+		FROM SELLER S
+		LEFT JOIN
+		MEMBER_ROLE MR
+		ON
+		S.ID=MR.ID
+		INNER JOIN MEMBER M
+		ON MR.ID=M.ID
+		WHERE
+		S.STATUS=1 AND MR.ROLENUM=4
+	</select>
+	<select id="getPayList" resultType="SellerVO">
+		SELECT M.ID, M.NAME, M.EMAIL, M.PHONE, S.COMPANY, S.STATUS
+		FROM SELLER S
+		LEFT JOIN
+		MEMBER_ROLE MR
 		ON S.ID=MR.ID
 		INNER JOIN MEMBER M
 		ON MR.ID=M.ID
-		WHERE S.STATUS=0
-
+		WHERE
+		S.STATUS=1 AND MR.ROLENUM=2
 	</select>
+	<update id="setWait" parameterType="SellerVO">
+		UPDATE SELLER SET STATUS=1 WHERE ID=#{id}
+	</update>
+	
+	<delete id="setWaitNo" parameterType="SellerVO">
+		DELETE FROM SELLER WHERE ID=#{id}
+	</delete>
+	
+	<insert id="setAccept">
+		INSERT INTO MEMBER_ROLE VALUES(#{id},2)
+	</insert>
+	
+	<update id="setAcceptNo" parameterType="SellerVO">
+		UPDATE SELLER SET STATUS=0 WHERE ID=#{id}
+	</update>
+	
+	<delete id="setPayNo">
+		DELETE FROM MEMBER_ROLE WHERE ID=#{id} AND ROLENUM=2
+	</delete>
 </mapper>
