@@ -67,6 +67,7 @@ public class MemberVO implements UserDetails, OAuth2User{
 
 	//kakao, naver, google
 	private String social;
+	private String token;
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

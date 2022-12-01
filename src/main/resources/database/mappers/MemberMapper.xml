@@ -6,7 +6,7 @@
 <mapper namespace="com.shop.goodee.member.MemberMapper">
 	<!-- 회원가입 -->
 	<insert id="setJoin" parameterType="MemberVO">
-		INSERT INTO MEMBER VALUES (#{id},#{pw},#{name},#{email},#{birth},#{phone},0,0,0,NOW(),1,NULL,NOW())
+		INSERT INTO MEMBER VALUES (#{id},#{pw},#{name},#{email},#{birth},#{phone},0,0,0,NOW(),1,NULL,NOW(),#{social})
 	</insert>
 	<!-- 회원등급부여 -->
 	<insert id="setMemberRole" parameterType="MemberVO">
@@ -57,6 +57,7 @@
 		<result column="status" property="status"/>
 		<result column="nickName" property="nickName"/>
 		<result column="byeDate" property="byeDate"/>
+		<result column="social" property="social"/>
 		<collection property="roleVOs" javaType="List" ofType="RoleVO">
 			<id column="roleNum" property="roleNum"/>
 			<result column="roleName" property="roleName"/>
@@ -86,6 +87,7 @@
 		<result column="status" property="status"/>
 		<result column="nickName" property="nickName"/>
 		<result column="byeDate" property="byeDate"/>
+		<result column="social" property="social"/>
 		<collection property="memberFileVO" javaType="MemberFileVO" ofType="MemberFileVO">
 			<result column="fileName" property="fileName"/>
 			<result column="oriName" property="oriName"/>
@@ -210,4 +212,5 @@
 	<update id="setNickName" parameterType="MemberVO">
 		UPDATE MEMBER SET NICKNAME=#{nickName} WHERE ID=#{id}
 	</update>
+	
 </mapper>

@@ -15,7 +15,7 @@
       "
     />
     <div class="ms-2">
-      <div><span style="color: green"><sec:authentication property="Principal.name"/></span> 회원님,</div>
+      <div><span style="color: green">${memberVO.name}</span> 회원님,</div>
       <div>커피 한 잔과 구디샵!</div>
     </div>
   </div>
