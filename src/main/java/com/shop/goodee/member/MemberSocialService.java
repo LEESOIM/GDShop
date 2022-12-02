@@ -123,11 +123,80 @@ public class MemberSocialService extends DefaultOAuth2UserService{
 
 		}else if(social.equals("google")) {
 			log.info("구글 로그인");
+			
+			memberVO.setId(auth2User.getName().substring(0, 9));//id
+			int result;
+			try {
+				result = memberMapper.getIdCheck(memberVO);
+				if(result == 0) {
+					StringBuffer key = new StringBuffer();
+					memberVO.setPw(auth2User.getName().substring(0, 9));
+					memberVO.setName(auth2User.getAttributes().get("name").toString());
+					memberVO.setEmail(auth2User.getAttributes().get("email").toString());
+					memberVO.setBirth("--");
+					memberVO.setPhone("010-");
+					memberVO.setSocial("google");
+					MemberFileVO memberFileVO = new MemberFileVO();
+					memberFileVO.setFileName("user.webp");
+					memberFileVO.setOriName("user.webp");
+					memberFileVO.setId(memberVO.getId());
+					
+					memberMapper.setJoin(memberVO);
+					memberMapper.setMemberRole(memberVO);
+					memberMapper.setProfile(memberFileVO);
+					
+					//memberVO확인
+					log.info("social memberId:{}", memberVO.getId());
+					log.info("social memberName:{}", memberVO.getName());
+					log.info("social memberEmail:{}", memberVO.getEmail());
+					
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+			
 		}else if(social.equals("naver")) {
 			log.info("네이버 로그인");
+			
+			Map<String, String> na = auth2User.getAttribute("response");
+			
+			memberVO.setId(na.get("id").substring(0, 9));//id
+			int result;
+			try {
+				result = memberMapper.getIdCheck(memberVO);
+				if(result == 0) {
+					StringBuffer key = new StringBuffer();
+					memberVO.setPw(na.get("id").substring(0, 9));
+					memberVO.setName(na.get("nickname"));
+					memberVO.setEmail(na.get("email").toString());
+					memberVO.setBirth(na.get("birthyear").toString()+"-"+na.get("birthday").toString());
+					memberVO.setPhone(na.get("mobile").toString());
+					memberVO.setSocial("naver");
+					MemberFileVO memberFileVO = new MemberFileVO();
+					memberFileVO.setFileName("user.webp");
+					memberFileVO.setOriName("user.webp");
+					memberFileVO.setId(memberVO.getId());
+					
+					memberMapper.setJoin(memberVO);
+					memberMapper.setMemberRole(memberVO);
+					memberMapper.setProfile(memberFileVO);
+					
+					//memberVO확인
+					log.info("social memberId:{}", memberVO.getId());
+					log.info("social memberName:{}", memberVO.getName());
+					log.info("social memberEmail:{}", memberVO.getEmail());
+					
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
-		
 		
 		memberVO.setSocial(userRequest.getClientRegistration().getRegistrationId());
 		

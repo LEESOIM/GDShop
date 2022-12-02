@@ -52,7 +52,7 @@ prefix="c" %>
               style="border-bottom: solid 1px lightgray"
             >
               <a href="/member/set_up"><div class="p-3 info_change">개인정보 변경</div></a>
-              <c:if test="${memberVO.social ne 'kakao'}">
+              <c:if test="${empty memberVO.social}">
               <a href="/member/set_pw"><div class="p-3 pw_change">비밀번호 변경</div></a>
               <a href="/member/withdrawal"><div class="p-3 withdrawal_page">회원 탈퇴</div></a>
               </c:if>

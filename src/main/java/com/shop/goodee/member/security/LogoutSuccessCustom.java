@@ -22,6 +22,18 @@ public class LogoutSuccessCustom implements LogoutSuccessHandler{
 	@Value("${spring.security.oauth2.client.registration.kakao.client-id}")
 	private String clientId;
 	
+	@Value("${spring.security.oauth2.client.registration.google.client-id}")
+	private String googleId;
+	
+	@Value("${spring.security.oauth2.client.registration.naver.client-id}")
+	private String naverId;
+	
+	@Value("${spring.security.oauth2.client.registration.naver.client-secret}")
+	private String naverSecret;
+	
+	@Value("${spring.security.oauth2.client.provider.naver.token-uri}")
+	private String naverToken;
+	
 	@Override
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException, ServletException {
@@ -41,9 +53,24 @@ public class LogoutSuccessCustom implements LogoutSuccessHandler{
 
 				
 			}else if(social.equals("google")) {
+//				StringBuffer sb = new StringBuffer();
+//				sb.append("https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:81");
+//				response.sendRedirect(sb.toString());
+				response.sendRedirect("/");
 				
 			}else {
+				StringBuffer sb = new StringBuffer();
+				sb.append("https://nid.naver.com/oauth2.0/token?grant_type=delete");
+				sb.append("&client_id=");
+				sb.append(naverId);
+				sb.append("&client_secret=");
+				sb.append(naverSecret);
+				sb.append("&access_token=");
+				log.info("토큰값을 알수있나??:{}", memberVO.getToken());
+				sb.append(memberVO.getToken());
 				
+				response.sendRedirect(sb.toString());
+				response.sendRedirect("/");
 			}
 		}else {
 			log.info("=== logout 성공시에만 실행 ===");
@@ -55,3 +82,6 @@ public class LogoutSuccessCustom implements LogoutSuccessHandler{
 
 
 }
+
+
+
