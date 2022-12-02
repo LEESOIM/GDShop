@@ -186,7 +186,7 @@ prefix="c" %>
       </div>
     </div>
 
-<!--     <script>
+    <script>
    
       if($("#id1").text()!=""){
         
@@ -209,4 +209,4 @@ prefix="c" %>
         })
       }
   
-    </script> -->
+    </script>
