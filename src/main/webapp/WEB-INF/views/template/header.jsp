@@ -51,7 +51,7 @@ prefix="c" %>
             <!-- 로그인후 해당 블록 보이기 -->
             <sec:authorize access="isAuthenticated()">
             <div class="me-3">
-              <b style="font-size: 17.5px; color: rgb(9, 118, 31)"><sec:authentication property="Principal" var="user"/>
+              <b id="id1" style="font-size: 17.5px; color: rgb(9, 118, 31)"><sec:authentication property="Principal" var="user"/>
               <c:if test="${empty user.name}">${user.id}</c:if>
               <c:if test="${not empty user.name}">${user.name}</c:if>
               </b>님
@@ -59,16 +59,16 @@ prefix="c" %>
             </div>
             
             <div class="top-dropdown">
-		      <div class="log">
+            <div class="log">
               <a href="/member/mypage"><b>마이페이지</b></a>
-           	  </div>
-		      <div class="dropdown-content">
-		      <sec:authorize access="hasRole('SELLER')">
-				      <a href="/member/product">내 상품</a>
-		       </sec:authorize>
-		      	<a href="#">내 캠페인</a>
-		      </div>
-		    </div>
+                </div>
+            <div class="dropdown-content">
+            <sec:authorize access="hasRole('SELLER')">
+                  <a href="/member/product">내 상품</a>
+             </sec:authorize>
+               <a href="#">내 캠페인</a>
+            </div>
+          </div>
             
             </sec:authorize>
           </div>
@@ -162,19 +162,19 @@ prefix="c" %>
                 >
                 <div class="d-flex justify-content-center pt-3">
                   <div class="pe-3">
-                  	<a href="/oauth2/authorization/kakao">
+                     <a href="/oauth2/authorization/kakao">
                     <img
                       src="/images/kakaotalk_logo_icon_147272.png"
                       style="width: 38px; height: 38px"
                     /></a>
                   </div>
                   <div class="pe-3">
-                  	<a href="/oauth2/authorization/naver">
+                     <a href="/oauth2/authorization/naver">
                     <img src="/images/naver.png" style="width: 38px; height: 38px" />
-                  	</a>
+                     </a>
                   </div>
                   <div>
-                  	<a href="/oauth2/authorization/google">
+                     <a href="/oauth2/authorization/google">
                     <img
                       src="/images/google.png"
                       style="width: 38px; height: 38px"
@@ -189,7 +189,7 @@ prefix="c" %>
       </div>
     </div>
 
-    <script>
+<script>
    
       if($("#id1").text()!=""){
         
@@ -212,4 +212,4 @@ prefix="c" %>
         })
       }
   
-    </script>
+</script>

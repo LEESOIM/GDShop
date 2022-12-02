@@ -10,7 +10,7 @@ prefix="c" %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
 
-	<c:import url="../template/library.jsp"></c:import>
+   <c:import url="../template/library.jsp"></c:import>
     <link rel="stylesheet" href="/css/mypage.css" />
     <link rel="stylesheet" href="/css/info.css" />
     <link rel="stylesheet" href="/css/set_up.css" />

@@ -1,11 +1,7 @@
 function getTimer() {
-console.log('start', new Date())
     $(".date").each(function (index, value) {
         //캠페인회차
         let count = $(".count")[index].value;
-        console.log($(".count")[index])
-        console.log(count)
-        console.log("인덱스",index)
         //시작날짜(상품등록날짜)
         let start = new Date($(value).val());
     
@@ -13,11 +9,17 @@ console.log('start', new Date())
         let end = new Date(start.getFullYear(), start.getMonth(), start.getDate(), start.getHours(), start.getMinutes(), start.getSeconds());
         end.setDate(start.getDate() + parseInt(count))
         
-        let now = new Date().getTime(); //현재시간 ms
-        let endTime = end.getTime(); //종료시간 ms
+        //현재날짜
+        let now = new Date(); 
+
+        let endTime = end.getTime(); //종료날짜 ms
+        let nowTime = now.getTime(); //현재날짜 ms
 
         console.log('시작시간', start)
         console.log('종료시간', end)
+        console.log('종료날짜day', end.getDate())
+        console.log('현재날짜day', now.getDate())
+        console.log('회차', count)
 
         if (now < endTime) {
             let sec = parseInt(endTime - now) / 1000;
@@ -49,8 +51,6 @@ console.log('start', new Date())
             $(".time")[index].innerHTML = "지원마감";
         }
     })
-
-    console.log('start', new Date())
 }
 
 setInterval(getTimer, 1000); //1초마다 검사를 해주면 실시간으로 시간을 알 수 있다. 

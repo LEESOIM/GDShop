@@ -192,7 +192,6 @@ uri="http://www.springframework.org/tags/form" %>
               class="btn btn-success"
               style="border-radius: 18px; padding: 6px 18px"
               data-bs-dismiss="modal"
-              onclick="location.href='/'"
             >
               확인
             </button>
