@@ -34,6 +34,9 @@ public class MemberController {
 	
 	@Autowired
 	private MailService mailService;
+	
+	@Autowired
+	private MemberSecurityService memberSecurityService;
 
 	
 	//아이디 찾기
