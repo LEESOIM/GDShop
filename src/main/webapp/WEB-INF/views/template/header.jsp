@@ -51,7 +51,10 @@ prefix="c" %>
             <!-- 로그인후 해당 블록 보이기 -->
             <sec:authorize access="isAuthenticated()">
             <div class="me-3">
-              <b style="font-size: 17.5px; color: rgb(9, 118, 31)"><sec:authentication property="Principal" var="user"/>${user.id}</b>님
+              <b style="font-size: 17.5px; color: rgb(9, 118, 31)"><sec:authentication property="Principal" var="user"/>
+              <c:if test="${empty user.name}">${user.id}</c:if>
+              <c:if test="${not empty user.name}">${user.name}</c:if>
+              </b>님
               환영합니다!💚
             </div>
             

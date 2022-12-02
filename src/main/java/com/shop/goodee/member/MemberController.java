@@ -41,9 +41,6 @@ public class MemberController {
 	private MemberSecurityService memberSecurityService;
 	
 	@Autowired
-	private MemberSocialService memberSocialService;
-	
-	@Autowired
 	private MailService mailService;
 	
 	@Autowired

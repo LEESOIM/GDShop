@@ -36,9 +36,8 @@ prefix="c" %>
           <c:import url="../template/mypage_side.jsp"></c:import>
           <div class="ms-3 mb-2" id="info" style="width: 100%">
             <!-- 여기부터 내정보 상세보기 -->
-            <sec:authentication property="Principal" var="user"/>
             <div class="info_top p-2 mt-4 mb-3 d-flex">
-              <div><span style="color: rgb(10, 154, 10)">${user.name}</span>님의 상품목록</div>
+              <div><span style="color: rgb(10, 154, 10)">${memberVO.name}</span>님의 상품목록</div>
               <button id="product" onclick="location.href='/item/add'" style="font-size: 18px"><b>상품등록</b></button>
             </div>
               <!-- 목록보기 -->
