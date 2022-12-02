@@ -32,7 +32,7 @@
 						  <input type="radio" class="btn-check" name="type" id="type2" value="즉석추첨형">
 						  <label class="btn btn-outline-success" for="type2"><b>즉석추첨형</b></label>
 						  
-						  <input type="radio" class="btn-check" name="type" id="type3" value="초간단미션">
+						  <input type="radio" class="btn-check" name="type" id="type3" value="SNS미션">
 						  <label class="btn btn-outline-success" for="type3"><b>SNS미션</b></label>
 						</div>
 					</div>
@@ -123,8 +123,13 @@
 						<b>캠페인등급</b>
 					</div>
 					<div style="width: 79%;">
-						 <input type="checkbox" class="btn-check" name="role" id="camType" value="VIP" autocomplete="off">
-						 <label class="btn btn-outline-success" for="camType">VIP상품</label>
+					<div class="btn-group">
+							<input type="radio" class="btn-check" name="role" id="camType1" value="VIP">
+						 	<label class="btn btn-outline-success" for="camType1">VIP상품</label>
+						 
+						 	<input type="radio" class="btn-check" name="role" id="camType2" value="모두">
+						 	<label class="btn btn-outline-success" for="camType2">모두</label>
+					</div>
 					</div>
 				</div>				
 				
@@ -144,20 +149,29 @@
 						
 						<div id="pointOn" style="display: none;">
 							<div class="mt-3">
-								<div class="mb-2"><span class="me-4">판매금액</span><input type="text" id="point1_1" disabled="disabled"><span>&nbsp;원</span></div>
-								<div class="mb-2"><span class="me-2">고객부담금</span><input type="text" id="point1_2"><span>&nbsp;원</span></div>
-								<div><span class="me-4">보상금액</span><input type="hidden" id="point1_3" readonly="readonly">
-								<span id="point1Text" style="font-size: 22px; font-weight: bold;"></span><span>&nbsp;원</span></div>
+								<div class="d-flex mb-2"><span class="me-4" style="margin:auto 0;">판매금액</span>
+									<input type="text" class="form-control w-25" id="point1_1" disabled="disabled"><span style="margin:auto 0;">&nbsp;원</span>
+								</div>
+								<div class="d-flex mb-2"><span class="me-2" style="margin:auto 0;">고객부담금</span>
+									<input type="text" class="form-control w-25" id="point1_2"><span style="margin:auto 0;">&nbsp;원</span>
+								</div>
+								<div><span class="me-4">보상금액</span>
+									<input type="hidden" id="point1_3" readonly="readonly">
+									<span id="point1Text" style="font-size: 22px; font-weight: bold;"></span><span>&nbsp;원</span></div>
 							</div>
 						</div>
-
 						
 						<div id="pointOff" style="display: none;">
 							<div class="mt-3">
-								<div class="mb-2"><span class="me-4">판매금액</span><input type="text" id="point2_1" disabled="disabled"><span>&nbsp;원</span></div>
-								<div class="mb-2"><span class="me-2">고객부담금</span><input type="text" id="point2_2" value="0" disabled="disabled"><span>&nbsp;원</span></div>
-								<div><span class="me-4">환급금액</span><input type="hidden" id="point2_3" readonly="readonly">
-								<span id="point2Text" style="font-size: 22px; font-weight: bold;"></span><span>&nbsp;원</span></div>
+								<div class="d-flex mb-2"><span class="me-4" style="margin:auto 0;">판매금액</span>
+									<input type="text" class="form-control w-25" id="point2_1" disabled="disabled"><span style="margin:auto 0;">&nbsp;원</span>
+								</div>
+								<div class="d-flex mb-2"><span class="me-2" style="margin:auto 0;">고객부담금</span>
+									<input type="text" class="form-control w-25" id="point2_2" value="0" disabled="disabled"><span style="margin:auto 0;">&nbsp;원</span>
+								</div>
+								<div><span class="me-4">보상금액</span>
+									<input type="hidden" id="point2_3" readonly="readonly">
+									<span id="point2Text" style="font-size: 22px; font-weight: bold;"></span><span>&nbsp;원</span></div>
 							</div>
 						</div>
 					</div>
@@ -222,14 +236,15 @@
 				</div>
 				</div>
 				<div class="d-flex mt-5 justify-content-center">
-					<a href=""><button type="button" class="btn me-2" style="width:250px; height:50px; color:white; background-color: #adb5bd; font-weight: bold;">취소</button></a>
+					<a href="../member/product"><button type="button" class="btn me-2" style="width:250px; height:50px; color:white; background-color: #adb5bd; font-weight: bold;">취소</button></a>
 					<button type="submit" class="btn" style="width:250px; color:white; background-color: #75c30b; font-weight: bold;">상품 등록 완료</button>
 				</div>
 			</form>
 			</div>
 		</div>
 	</section>
-		<c:import url="../template/footer.jsp"></c:import>
+	<c:import url="../template/footer.jsp"></c:import>
 	<script src="/js/itemAdd.js"></script>
+	<script src="/js/itemFile.js"></script>
 </body>
 </html>

@@ -9,8 +9,8 @@ prefix="c" %>
           ><img
             src="/images/h.png"
             alt="Logo"
-            width="169"
-            height="58"
+            width="170"
+            height="60"
             class="d-inline-block align-text-top"/></a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
