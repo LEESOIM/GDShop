@@ -12,13 +12,10 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 
 import com.shop.goodee.member.security.LoginFail;
 import com.shop.goodee.member.security.LoginSuccess;
-import com.shop.goodee.member.security.LogoutCustom;
-import com.shop.goodee.member.security.LogoutSuccessCustom;
 
 @Configuration
 @EnableWebSecurity
@@ -30,12 +27,6 @@ public class SecurityConfig {
 	@Autowired
 	private LoginFail loginFail;
 	
-	
-	@Autowired
-	private LogoutSuccessCustom logoutSuccessCustom;
-	
-	@Autowired
-	private LogoutCustom logoutCustom;
 	
 	@Bean
 	WebSecurityCustomizer wegSecurityConfig() {
@@ -62,7 +53,6 @@ public class SecurityConfig {
 					.antMatchers("/tab/*").permitAll()
 					.antMatchers("/seller/seller").permitAll()
 					.antMatchers("/board/notice").permitAll()
-					.antMatchers("/item/detail").permitAll()
 					.antMatchers("/member/join").permitAll()
 					.antMatchers("/membership/membership").permitAll()
 					.antMatchers("/member/agree").permitAll()
@@ -84,8 +74,7 @@ public class SecurityConfig {
 					.and()
 				.logout()
 					.logoutUrl("/member/logout")
-					.logoutSuccessHandler(logoutSuccessCustom)
-					.addLogoutHandler(logoutCustom)
+					.logoutSuccessUrl("/")
 					.invalidateHttpSession(true)
 					.deleteCookies("JSESSIONID")
 					.permitAll();
