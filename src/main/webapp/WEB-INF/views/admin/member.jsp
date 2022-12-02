@@ -326,7 +326,7 @@ pageEncoding="UTF-8"%>
                   <div class="memberRole" id="admin" data-rolenum="1">Admin</div>
                   <div class="memberRole" id="seller" data-rolenum="2">Seller</div>
                   <div class="memberRole" id="vip" data-rolenum="3">VIP</div>
-                  <div class="memberRole" id="member" data-rolenum="4">Member</div>
+                  <div  id="member" data-rolenum="4">Member</div>
                 </div>
               </form>
             </div>

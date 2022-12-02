@@ -6,7 +6,7 @@
 <mapper namespace="com.shop.goodee.seller.SellerMapper">
 
 	<insert id="setSellerAdd" parameterType="SellerVO">
-		INSERT INTO SELLER VALUES(#{id},#{roleNum},#{company})
+		INSERT INTO SELLER VALUES(#{id},#{company},#{status})
 	</insert>
 
 	<select id="getSellerList" parameterType="Pager" resultType="SellerVO">
