@@ -66,11 +66,11 @@ public class LogoutSuccessCustom implements LogoutSuccessHandler{
 				sb.append("&client_secret=");
 				sb.append(naverSecret);
 				sb.append("&access_token=");
-				log.info("토큰값을 알수있나??:{}", memberVO.getToken());
 				sb.append(memberVO.getToken());
-				
+				sb.append("&service_provider=NAVER");
+//				sb.append("&logout_redirect_uri=http://localhost:81/member/logoutResult");
 				response.sendRedirect(sb.toString());
-				response.sendRedirect("/");
+				
 			}
 		}else {
 			log.info("=== logout 성공시에만 실행 ===");
