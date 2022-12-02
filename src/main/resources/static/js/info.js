@@ -475,3 +475,23 @@ $("#nick_btn").click(function () {
     },
   });
 });
+
+$("#nick_btn2").click(function () {
+  let nickName_N = $("#nickN_text").val();
+  $.ajax({
+    type: "POST",
+    url: "/member/nickUpdate",
+    data: {
+      nickName_N: nickName_N,
+    },
+    success: function (data) {
+      if (data == 1) {
+        $("#n_nickName").attr("style", "display:none");
+        location.href = "/member/mypage";
+      } else {
+        $("#na_nickName").attr("style", "display:none");
+        location.href = "/member/mypage";
+      }
+    },
+  });
+});

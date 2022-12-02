@@ -44,7 +44,7 @@ prefix="c" %>
                 text-align: center;
               "
             >
-              <div class="pt-4" style="font-size: 20px"><b>본인확인</b></div>
+              <div class="pt-4" style="font-size: 20px"><b>본인확인<i class="fa-solid fa-circle-info ms-2" data-toggle="tooltip" data-bs-placement="top" data-custom-class="custom-tooltip" data-bs-title="소셜로그인 사용자는 내정보의 아이디를 입력하여주세요."></i></b></div>
               <div class="pt-3">
                 고객님의 소중한 개인정보보호를 위해서 본인확인을 진행합니다.
               </div>
@@ -118,6 +118,12 @@ prefix="c" %>
     </section>
       <c:import url="../template/footer.jsp"></c:import>
 
+	<!-- 툴팁 활성화 -->
+	 <script>
+	  $(document).ready(function(){
+	    $('[data-toggle="tooltip"]').tooltip();   
+	  });
+	</script>
     <script src="/js/info.js"></script>
   </body>
 </html>

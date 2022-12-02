@@ -56,6 +56,7 @@ $("#findPw_btn").click(function () {
           document.getElementById("pwFind_modal").click();
           $("#findPw_icon").attr("class", "fa-solid fa-envelope");
           $("#findPw_text").text("메일 전송 완료");
+          $("#find_pwBTN").attr("onclick", "location.href='/'");
         }
       },
     });

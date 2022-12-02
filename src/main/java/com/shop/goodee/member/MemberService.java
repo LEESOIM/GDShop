@@ -10,16 +10,26 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import com.shop.goodee.item.ItemVO;
 import com.shop.goodee.util.FileManager;
 
 import lombok.extern.slf4j.Slf4j;
+import reactor.core.publisher.Mono;
 
 @Service
 @Slf4j
@@ -40,6 +50,89 @@ public class MemberService {
 	@Autowired
 	@Qualifier("en")
 	private PasswordEncoder passwordEncoder;
+	
+	
+	public int setDelete(MemberVO memberVO)throws Exception{
+		//1. WebClient 생성
+		WebClient webClient = WebClient.builder()
+									   .baseUrl("https://kapi.kakao.com/")
+									   .build();
+		
+		//2. parameter
+		MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+		map.add("target_id_type", "user_id");
+		map.add("target_id", memberVO.getId());
+		
+		Mono<String> res = webClient.post()
+				 .uri("v1/user/unlink")
+				 .body(BodyInserters.fromFormData(map))
+				 .header("Authorization", "KakaoAK "+adminKey)
+				 .header("Content-Type","application/x-www-form-urlencoded")
+				 .retrieve()
+				 .bodyToMono(String.class);
+		
+		log.info("WebClientResult = > {}",res.block());
+		
+		return 1;
+		
+	}
+	
+	public int setDelete2(MemberVO memberVO)throws Exception{
+		int result=0;
+		RestTemplate restTemplate=null;
+		HttpHeaders headers=null;
+		MultiValueMap<String, String> params =null;
+		HttpEntity<MultiValueMap<String, String>> req=null;
+		ResponseEntity<String> res=null;
+		//////=============================== 로그아웃
+		restTemplate= new RestTemplate();
+		
+		//--Header
+		headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);//application/x-www-form-urlencoded
+		headers.add("Authorization", "KakaoAK "+adminKey);
+		
+		//--parameter
+		params = new LinkedMultiValueMap<>();
+		params.add("target_id_type", "user_id");
+		params.add("target_id", memberVO.getId());
+		
+		//-- 요청 객체
+		req = new HttpEntity<>(params, headers);
+		
+		//-- 전송 후 결과 처리
+		res = restTemplate.postForEntity("https://kapi.kakao.com/v1/user/logout", req, String.class);
+		
+		log.info("logOut => {} ", res.getBody());
+		
+	//////=============================== 연결 해제
+		restTemplate = new RestTemplate();
+		
+		//--Header
+		headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);//application/x-www-form-urlencoded
+		headers.add("Authorization", "KakaoAK "+adminKey);
+		
+		//--parameter
+		params = new LinkedMultiValueMap<>();
+		params.add("target_id_type", "user_id");
+		params.add("target_id", memberVO.getId());
+		
+		//-- 요청 객체
+		req = new HttpEntity<>(params, headers);
+		
+		//-- 전송 후 결과 처리
+		res = restTemplate.postForEntity("https://kapi.kakao.com/v1/user/unlink", req, String.class);
+		
+		log.info("res => {} ", res.getBody());
+		
+		if(res.getBody()!= null) {
+			result=1;
+		}
+		
+
+		return result;
+	}
 	
 	//아이디 찾기
 	public String getFindId(MemberVO memberVO)throws Exception{
@@ -69,7 +162,6 @@ public class MemberService {
 		memberFileVO.setFileName("user.webp");
 		memberFileVO.setOriName("user.webp");
 		memberFileVO.setId(memberVO.getId());
-		log.info("pw : {}",memberVO.getPw());
 		
 		memberVO.setPw(passwordEncoder.encode(memberVO.getPw()));
 		
@@ -250,9 +342,14 @@ public class MemberService {
 		return memberMapper.getSellerProduct(memberVO);
 	}
 	
-	/* 마이페이지 - 닉네임 변경 */
+	/* 마이페이지 - 쿠팡 닉네임 변경 */
 	public int setNickName(MemberVO memberVO)throws Exception{
 		return memberMapper.setNickName(memberVO);
+	}
+	
+	/* 마이페이지 - 네이버 닉네임 변경 */
+	public int setNickName_N(MemberVO memberVO)throws Exception{
+		return memberMapper.setNickName_N(memberVO);
 	}
 	
 
