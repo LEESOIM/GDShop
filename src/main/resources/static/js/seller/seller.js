@@ -13,7 +13,7 @@ window.addEventListener('load', () => {
 
 $("#standingRequest").on("click", function(e) {
 	console.log("================================");
-	let id = $("#id1").val();
+	let id = $("#id2").val();
 	let name = $("#name").val();
 	let email = $("#email").val();
 	let phone = $("#phone").val();
