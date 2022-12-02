@@ -15,6 +15,15 @@ pageEncoding="UTF-8"%>
 
     <title>Admin - Dashboard</title>
 
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+	crossorigin="anonymous" />
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
     <!-- Custom fonts for this template-->
     <link href="/bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
     <link
@@ -23,6 +32,12 @@ pageEncoding="UTF-8"%>
 
     <!-- Custom styles for this template-->
     <link href="/bootstrap/css/sb-admin-2.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/header.css" />
+<link rel="stylesheet" href="/css/index.css" />
+<link rel="stylesheet" href="/css/sellerList.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 
 </head>
 
@@ -135,60 +150,54 @@ pageEncoding="UTF-8"%>
                         </div>
                     </div>
                     <!-- Content Row -->
-                    <div class="row" id="apply_list">
-                        <h1>입점 신청 목록</h1>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">아이디</th>
-                                    <th scope="col">이름</th>
-                                    <th scope="col">이메일</th>
-                                    <th scope="col">전화번호</th>
-                                    <th scope="col">기업명</th>
-                                    <th scope="col"></th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach items="${requestScope.vo}" var="dto">
-                                    <tr>
-                                        <th scope="row"></th>
-                                        <td>${dto.id}</td>
-                                        <td>${dto.name}</td>
-                                        <td>${dto.email}</td>
-                                        <td>${dto.phone}</td>
-                                        <td>${dto.company}</td>
-                                        <td><a href="#">O</a></td>
-                                        <td><a href="#">X</a></td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                        
-                        <div id="page">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination">
-                                  <li class="page-item"  value="${pager.pre}" id="pre">
-                                    <a class="page-link" href="./seller?page=${pager.page-1}" aria-label="Previous">
-                                      <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                  </li>
-                
-                                  <c:forEach var="i" begin="${pager.startNum}" end="${pager.lastNum}">
-                                    <li class="page-item ${pager.page==i? 'active':''}">
-                                      <a class="page-link" href="./seller?page=${i}">${i}</a>
-                                    </li>
-                                  </c:forEach>
-                                  
-                                  <li class="page-item ${pager.next?'':'disabled'}" id="next">
-                                    <a class="page-link" href="./seller?page=${pager.page+1}" aria-label="Next">
-                                      <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                  </li>
-                                </ul>
-                              </nav>
-                        </div>
+                 	<div style="margin-top: 3em; padding-bottom: 70px">
+
+			<div class="d-flex justify-content-center mt-4">
+				<div style="width: 80%; margin-bottom: 50px">
+					<h4>입점신청 현황</h4>
+
+					<ul class="nav nav-tabs">
+						<li class="nav-item"><a class="nav-link active" href="./wait">미승인</a></li>
+						<li class="nav-item"><a class="nav-link" href="./accept">승인</a></li>
+						<li class="nav-item"><a class="nav-link" href="./pay">결제완료</a></li>
+
+					</ul>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">아이디</th>
+								<th scope="col">이름</th>
+								<th scope="col">이메일</th>
+								<th scope="col">전화번호</th>
+								<th scope="col">기업명</th>
+								<th scope="col">상태</th>
+								<th scope="col"></th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${requestScope.vo}" var="dto">
+								<c:set var="i" value="${i+1}" />
+								<tr>
+									<th scope="row">${i}</th>
+									<td>${dto.id}</td>
+									<td>${dto.name}</td>
+									<td>${dto.email}</td>
+									<td>${dto.phone}</td>
+									<td>${dto.company}</td>
+									<td>${dto.status}</td>
+									<td class="wait"><a href="#">O</a></td>
+									<td class="waitNo"><a href="#">X</a></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+
+		</div>
                     </div>
 
                     <div class="row" id="seller_list">
@@ -361,7 +370,7 @@ pageEncoding="UTF-8"%>
     <!-- Page level custom scripts -->
     <script src="/bootstrap/js/demo/chart-area-demo.js"></script>
     <script src="/bootstrap/js/demo/chart-pie-demo.js"></script>
-
+<script src="/js/seller/wait.js"></script>
     <script>
         preCheck();
         // pagination previous 체크
