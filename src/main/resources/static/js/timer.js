@@ -1,9 +1,11 @@
 function getTimer() {
-
+console.log('start', new Date())
     $(".date").each(function (index, value) {
         //캠페인회차
         let count = $(".count")[index].value;
-    
+        console.log($(".count")[index])
+        console.log(count)
+        console.log("인덱스",index)
         //시작날짜(상품등록날짜)
         let start = new Date($(value).val());
     
@@ -32,22 +34,25 @@ function getTimer() {
 
             console.log('****', hour, min, sec);
 
-            $(".hours")[index].innerHTML = hour;
-            $(".minutes")[index].innerHTML = min;
-            $(".seconds")[index].innerHTML = sec;
+            // $(".hours")[index].innerHTML = hour;
+            // $(".minutes")[index].innerHTML = min;
+            // $(".seconds")[index].innerHTML = sec;
 
-            // let h = document.getElementsByClassName("hours");
-            // let m = document.getElementsByClassName("minutes");;
-            // let s = document.getElementsByClassName("seconds");
-            // h[index].innerHTML = hour;
-            // m[index].innerHTML = min;
-            // s[index].innerHTML = sec;
+            let h = document.getElementsByClassName("hours");
+            let m = document.getElementsByClassName("minutes");;
+            let s = document.getElementsByClassName("seconds");
+            h[index].innerHTML = hour+":";
+            m[index].innerHTML = min+":";
+            s[index].innerHTML = sec;
 
-        } else if (now >= endTime) {
+        } else{
             $(".time")[index].innerHTML = "지원마감";
         }
     })
+
+    console.log('start', new Date())
 }
 
 setInterval(getTimer, 1000); //1초마다 검사를 해주면 실시간으로 시간을 알 수 있다. 
+
 
