@@ -2,12 +2,17 @@ package com.shop.goodee.member;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextImpl;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -33,11 +38,57 @@ public class MemberController {
 	private MemberService memberService;
 	
 	@Autowired
+	private MemberSecurityService memberSecurityService;
+	
+	@Autowired
+	private MemberSocialService memberSocialService;
+	
+	@Autowired
 	private MailService mailService;
 	
 	@Autowired
-	private MemberSecurityService memberSecurityService;
-
+	@Qualifier("en")
+	private PasswordEncoder passwordEncoder;
+	
+	@GetMapping("logoutResult")
+	public String socialLogout()throws Exception{
+		
+		return "redirect:../";
+	}
+	
+	@GetMapping("ServiceLogin")
+	public String googleLogout()throws Exception{
+		
+		return "redirect:../";
+	}
+	
+	
+	@GetMapping("delete")
+	public ModelAndView setDelete(HttpServletRequest request, HttpServletResponse response, HttpSession session, String pw)throws Exception{
+		//1. Social, 일반 구분
+		ModelAndView mv = new ModelAndView();
+		SecurityContextImpl context = (SecurityContextImpl)session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		MemberVO memberVO  =(MemberVO)authentication.getPrincipal();
+			
+		int result= memberService.setDelete(memberVO);
+		
+		
+		if(result>0) {
+			session.invalidate();
+			Cookie [] cookies = request.getCookies();
+			for(Cookie cookie:cookies) {
+				cookie.setMaxAge(0);
+				response.addCookie(cookie);
+			}
+			
+			mv.setViewName("redirect:/");
+		}else {
+			//탙퇴 실패 
+		}	
+		
+		return mv;
+	}
 	
 	//아이디 찾기
 	@GetMapping("find_id")
@@ -143,14 +194,6 @@ public class MemberController {
 		return "/";
 	}
 	
-	//로그아웃(세션)
-//	@GetMapping("logout")
-//	public String setLogout(HttpSession session)throws Exception{
-//		session.invalidate();
-//		
-//		return "redirect:/";
-//	}
-	
 	/* 마이페이지 */
 	@GetMapping("mypage")
 	public ModelAndView getMypage(HttpSession session,MemberVO memberVO, ModelAndView mv)throws Exception {
@@ -172,10 +215,15 @@ public class MemberController {
 		Authentication authentication = context.getAuthentication();
 		MemberVO sessionMemberVO = (MemberVO) authentication.getPrincipal();
 		memberVO.setId(sessionMemberVO.getId());
-		int result = memberService.setNickName(memberVO);
-
+		int result = 0;
+		if(memberVO.getNickName()!= null) {
+			result = memberService.setNickName(memberVO);
+		}else {
+			result = memberService.setNickName_N(memberVO);
+		}
 		return result;	
 	}
+	
 	
 	/* 마이페이지 - 프로필 수정 */
 	@GetMapping("profile")
@@ -401,8 +449,8 @@ public class MemberController {
 		
 		memberVO.setId(sessionMemberVO.getId());
 		
-		
 		int result = memberService.setChangePw(memberVO, sessionMemberVO);
+		
 		return result;
 	}
 	
@@ -479,18 +527,19 @@ public class MemberController {
 	}
 	
 	/* 마이페이지 - 닉네임 변경 */
-	@PostMapping("nickName")
-	public ModelAndView setNickName(HttpSession session ,MemberVO memberVO, ModelAndView mv)throws Exception{
-		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
-		Authentication authentication = context.getAuthentication();
-		MemberVO sessionMemberVO = (MemberVO) authentication.getPrincipal();
-		memberVO.setId(sessionMemberVO.getId());
-		
-		memberService.setNickName(memberVO);
-		mv.setViewName("/member/mypage");
-		mv.addObject("nick", memberVO.getNickName());
-		return mv;
-	}
-	
+//	@PostMapping("nickName")
+//	public ModelAndView setNickName(HttpSession session ,MemberVO memberVO, ModelAndView mv)throws Exception{
+//		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+//		Authentication authentication = context.getAuthentication();
+//		MemberVO sessionMemberVO = (MemberVO) authentication.getPrincipal();
+//		memberVO.setId(sessionMemberVO.getId());
+//		
+//		memberService.setNickName(memberVO);
+//		memberService.setNickName_N(memberVO);
+//		mv.setViewName("/member/mypage");
+//		mv.addObject("nick", memberVO.getNickName());
+//		mv.addObject("nick_N", memberVO.getNickName_N());
+//		return mv;
+//	}
 
 }

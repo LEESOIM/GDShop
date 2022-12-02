@@ -22,7 +22,7 @@ import com.shop.goodee.item.ItemVO;
 import lombok.Data;
 
 @Data
-public class MemberVO implements UserDetails{
+public class MemberVO implements UserDetails, OAuth2User{
 	
 	@NotBlank
 	private String id;
@@ -39,12 +39,10 @@ public class MemberVO implements UserDetails{
 	private Date regDate;
 	private boolean status;
 	private String nickName;
+	private String nickName_N;
 	private Date byeDate;
 	
 	//추가 memberVO
-	private Integer sum;
-	private Integer cnt;
-	private Integer roleNum;
 	private String pwCheck;
 	private String newPwCheck;
 	@NotBlank
@@ -57,6 +55,8 @@ public class MemberVO implements UserDetails{
 	private String mm;
 	@Range(min=1, max=31)
 	private String dd;
+	
+	private Long roleNum;
 	
 	//등급 여러개 가능
 	private List<RoleVO> roleVOs;

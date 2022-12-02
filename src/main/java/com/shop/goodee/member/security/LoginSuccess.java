@@ -24,7 +24,7 @@ public class LoginSuccess implements AuthenticationSuccessHandler{
 				if(checkBox != null && checkBox.equals("true")) {
 					Cookie cookie = new Cookie("userId", request.getParameter("id"));
 					cookie.setHttpOnly(true);
-					cookie.setMaxAge(60);
+					cookie.setMaxAge(60*60*24);
 					cookie.setPath("/");
 					
 					response.addCookie(cookie);

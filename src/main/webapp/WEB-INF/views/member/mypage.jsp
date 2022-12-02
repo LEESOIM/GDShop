@@ -35,7 +35,7 @@ prefix="c" %>
           <div class="ms-3 mb-2" id="info" style="width: 100%">
             <!-- 여기부터 내정보 상세보기 -->
             <div class="info_top p-2 mt-4 mb-3">
-              <span style="color: rgb(10, 154, 10)"><sec:authentication property="Principal.name"/></span>님의 정보
+              <span style="color: rgb(10, 154, 10)">${memberVO.name}</span>님의 정보
             </div>
             <div>
               <div style="text-align: center">
@@ -62,7 +62,7 @@ prefix="c" %>
                   <h4><b><sec:authentication property="Principal.id"/></b></h4>
                 </div>
                 <div style="color: gray; margin-top: -5px">
-                  <sec:authentication property="Principal.email"/>
+                  ${memberVO.email}
                 </div>
               </div>
               <!-- 정보상자1 -->
@@ -71,16 +71,16 @@ prefix="c" %>
                   <div class="mt-1 mb-2" style="font-size: 17px">
                     <b>기본정보</b>
                   </div>
-                  <div>이름 : <sec:authentication property="Principal.name"/></div>
+                  <div>이름 : ${memberVO.name}</div>
                   <div>
-                    <i class="fa-solid fa-calendar-days pe-1"></i> <sec:authentication property="Principal.birth"/>
+                    <i class="fa-solid fa-calendar-days pe-1"></i> ${memberVO.birth}
                   </div>
                   <div>
                     <i class="fa-solid fa-mobile-screen-button pe-2"></i>
-                    <sec:authentication property="Principal.phone"/>
+                    ${memberVO.phone}
                   </div>
                   <div>
-                    <i class="fa-regular fa-envelope pe-1"></i> <sec:authentication property="Principal.email"/>
+                    <i class="fa-regular fa-envelope pe-1"></i> ${memberVO.email}
                   </div>
                 </div>
                 <div class="board_box">
@@ -146,13 +146,22 @@ prefix="c" %>
                     	</div>
                     	<div class="nickname_box me-2" style="text-align: center; padding: 12px">
                     		<h6><b>NAVER</b></h6>
-                    		<div>
-	                    		<div style="font-size: 12.5px; background-color: lightgray; width: 35%; margin: 0 auto">미등록</div>
-	                    		<div class="mt-1" style="font-size: 12px; color: grey">등록된 계정이 없습니다.</div>
-	                    		<div class="d-flex">
-	                    		<input type="text" placeholder="닉네임 입력" style="width: 120px; box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; border: none;"/><button type="button" style="width: 50px; font-size: 12px; box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; border: none; background-color: #78E150;">요청</button>
+                    		<c:choose>
+                    			<c:when test="${empty memberVO.nickName_N}">
+	                    		<div id="n_nickName">
+		                    		<div style="font-size: 12.5px; background-color: lightgray; width: 35%; margin: 0 auto">미등록</div>
+		                    		<div class="mt-1" style="font-size: 12px; color: grey">등록된 계정이 없습니다.</div>
+		                    		<div class="d-flex">
+		                    		<input type="text" placeholder="닉네임 입력" id="nickN_text" style="width: 120px; box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; border: none;"/><button type="button" id="nick_btn2" style="width: 50px; font-size: 12px; box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; border: none; background-color: #78E150;">요청</button>
+		                    		</div>
 	                    		</div>
-                    		</div>
+	                    		</c:when>
+                    			<c:otherwise>
+		                    		<div id="na_nickName">
+		                    			<div style="padding: 15px"><h5>${memberVO.nickName_N}</h5></div>
+		                    		</div>
+                    			</c:otherwise>
+                    		</c:choose>
                     	</div>
                     </div>
                   </div>
