@@ -10,7 +10,7 @@ prefix="c" %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
 
-	<c:import url="../template/library.jsp"></c:import>
+   <c:import url="../template/library.jsp"></c:import>
     <link rel="stylesheet" href="/css/mypage.css" />
     <link rel="stylesheet" href="/css/info.css" />
     <link rel="stylesheet" href="/css/set_up.css" />
@@ -44,24 +44,25 @@ prefix="c" %>
           <c:import url="../template/mypage_side.jsp"></c:import>
           <div class="ms-3 mb-2" id="info" style="width: 100%">
             <!-- 여기부터 내정보 상세보기 -->
-            <sec:authentication property="Principal" var="user"/>
             <div class="info_top p-2 mt-4 mb-2">
-              <span style="color: rgb(10, 154, 10)">${user.name}</span>님의 설정
+              <span style="color: rgb(10, 154, 10)">${memberVO.name}</span>님의 설정
             </div>
             <div
               class="setUp_menu d-flex justify-content-started"
               style="border-bottom: solid 1px lightgray"
             >
               <a href="/member/set_up"><div class="p-3 info_change">개인정보 변경</div></a>
+              <c:if test="${empty memberVO.social}">
               <a href="/member/set_pw"><div class="p-3 pw_change">비밀번호 변경</div></a>
               <a href="/member/withdrawal"><div class="p-3 withdrawal_page">회원 탈퇴</div></a>
+              </c:if>
             </div>
             <div class="mt-4" style="margin-bottom: 100px">
               <div class="flex-column">
                 <div class="pb-2" style="font-size: 14.5px">아이디</div>
-                <input class="setUp_form" type="text" value="${user.id}" disabled />
+                <input class="setUp_form" type="text" value="${memberVO.id}" disabled />
                 <div class="pb-2 mt-4" style="font-size: 14.5px">이름</div>
-                <input class="setUp_form" type="text" value="${user.name}" disabled />
+                <input class="setUp_form" type="text" value="${memberVO.name}" disabled />
                 <div style="position: relative">
                   <div class="pb-2 mt-4" style="font-size: 14.5px">
                     휴대폰번호
@@ -105,7 +106,7 @@ prefix="c" %>
                   <input
                     class="setUp_form"
                     type="text"
-                    value="${user.birth}"
+                    value="${memberVO.birth}"
                     disabled
                   />
                 </div>

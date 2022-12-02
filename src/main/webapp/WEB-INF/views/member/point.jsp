@@ -37,7 +37,7 @@ prefix="c" %>
             <!-- 여기부터 내포인트 상세보기 -->
             <div class="info_top d-flex p-2 mt-4 mb-3">
               <div>
-                <span style="color: rgb(10, 154, 10)"><sec:authentication property="Principal.name"/></span>님의 포인트
+                <span style="color: rgb(10, 154, 10)">${memberVO.name}</span>님의 포인트
               </div>
               <button class="ms-3" id="withdraw" data-bs-toggle="modal" data-bs-target="#exampleModal_withdraw" data-bs-whatever="@mdo">출금요청</button>
             </div>
@@ -52,7 +52,7 @@ prefix="c" %>
                 <div style="color: green">
                 <span style="font-size: 26px" id="myPoint">
                 <sec:authentication property="Principal" var="user"/>
-                <fmt:formatNumber type="number" maxFractionDigits="3" value="${user.point_3}" />
+                <fmt:formatNumber type="number" maxFractionDigits="3" value="${memberVO.point_3}" />
                 </span>
                   <i
                     class="fa-brands fa-product-hunt"
@@ -68,7 +68,7 @@ prefix="c" %>
                   적립 예정 포인트 <i class="fa-solid fa-circle-info" data-toggle="tooltip" data-bs-placement="top" data-custom-class="custom-tooltip" data-bs-title="캠페인 완료 후 포인트가 지급되었으나 3일이 지나지 않은 포인트 (3일 후 출금 가능)"></i>
                 </div>
                 <div style="color: green">
-                  <span style="font-size: 26px"><fmt:formatNumber type="number" maxFractionDigits="3" value="${user.point}" /></span
+                  <span style="font-size: 26px"><fmt:formatNumber type="number" maxFractionDigits="3" value="${memberVO.point}" /></span
                   ><i
                     class="fa-brands fa-product-hunt ps-1"
                     style="font-size: 21px"
@@ -344,41 +344,41 @@ prefix="c" %>
             </div>
             <div class="modal-body p-3 mb-2 mt-2">
               <div class="d-flex mb-3">
-	              <div style="width: 180px; padding-top: 9px"><span style="color: red;">＊</span>출금할 포인트</div>
-	                <input id="withdraw_point" type="number" placeholder="출금할 포인트를 입력" class="join_form ps-2"/>
-	          </div>
-	          <div class="d-flex mb-4 justify-content-end">
-	              <input type="checkbox" class="me-2" id="withdraw_limit" name="limit">최대 금액 입력
-	          </div>
-	          <div class="d-flex mb-4">
-	              <div style="width: 180px; padding-top: 9px"><span style="color: red;">＊</span>은행 선택</div>
-	                <select name="bank" class="join_form ps-2 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-					  <option hidden="hidden" value="은행 선택">은행 선택</option>
-					  <option value="기업은행">기업은행</option>
-					  <option value="우리은행">우리은행</option>
-					  <option value="농협은행">농협은행</option>
-					  <option value="국민은행">국민은행</option>
-					  <option value="하나은행">하나은행</option>
-					  <option value="카카오뱅크">카카오뱅크</option>
-					  <option value="토스뱅크">토스뱅크</option>
-					</select>   
-	          </div>
-	          <div class="d-flex mb-4">
-	              <div style="width: 180px; padding-top: 9px"><span style="color: red;">＊</span>예금주 명</div>
-	                <input id="bank_name" type="text" placeholder="예금주명 입력" class="join_form ps-2"/>
-	          </div>
-	          <div class="d-flex mb-4">
-	              <div style="width: 180px; padding-top: 9px"><span style="color: red;">＊</span>계좌번호</div>
-	                <input id="account" type="number" placeholder="계좌번호 숫자만 입력" class="join_form ps-2"/>
-	          </div>
-	          <div class="d-flex mb-4">
-	              <div style="width: 130px; padding-top: 9px"><span style="color: red;">＊</span>외국인여부</div>
-	                 <div class="select">
-					     <input type="radio" id="select" name="nat"><label for="select">내국인</label>
-					     <input type="radio" id="select2" name="nat"><label for="select2">외국인</label>
-					</div>
-	          </div>
-	          
+                 <div style="width: 180px; padding-top: 9px"><span style="color: red;">＊</span>출금할 포인트</div>
+                   <input id="withdraw_point" type="number" placeholder="출금할 포인트를 입력" class="join_form ps-2"/>
+             </div>
+             <div class="d-flex mb-4 justify-content-end">
+                 <input type="checkbox" class="me-2" id="withdraw_limit" name="limit">최대 금액 입력
+             </div>
+             <div class="d-flex mb-4">
+                 <div style="width: 180px; padding-top: 9px"><span style="color: red;">＊</span>은행 선택</div>
+                   <select name="bank" class="join_form ps-2 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                 <option hidden="hidden" value="은행 선택">은행 선택</option>
+                 <option value="기업은행">기업은행</option>
+                 <option value="우리은행">우리은행</option>
+                 <option value="농협은행">농협은행</option>
+                 <option value="국민은행">국민은행</option>
+                 <option value="하나은행">하나은행</option>
+                 <option value="카카오뱅크">카카오뱅크</option>
+                 <option value="토스뱅크">토스뱅크</option>
+               </select>   
+             </div>
+             <div class="d-flex mb-4">
+                 <div style="width: 180px; padding-top: 9px"><span style="color: red;">＊</span>예금주 명</div>
+                   <input id="bank_name" type="text" placeholder="예금주명 입력" class="join_form ps-2"/>
+             </div>
+             <div class="d-flex mb-4">
+                 <div style="width: 180px; padding-top: 9px"><span style="color: red;">＊</span>계좌번호</div>
+                   <input id="account" type="number" placeholder="계좌번호 숫자만 입력" class="join_form ps-2"/>
+             </div>
+             <div class="d-flex mb-4">
+                 <div style="width: 130px; padding-top: 9px"><span style="color: red;">＊</span>외국인여부</div>
+                    <div class="select">
+                    <input type="radio" id="select" name="nat"><label for="select">내국인</label>
+                    <input type="radio" id="select2" name="nat"><label for="select2">외국인</label>
+               </div>
+             </div>
+             
               <div class="mb-3 mt-4">
                 <div class="pt-2" style="font-size: 15px; color: #006400">
                   <b>반드시 입력하신 계좌의 예금주와 일치하는 주민등록번호를 입력해 주세요.</b>
@@ -401,12 +401,12 @@ prefix="c" %>
     </section>
       <c:import url="../template/footer.jsp"></c:import>
     
-	 <!-- 툴팁 활성화 -->
-	 <script>
-	  $(document).ready(function(){
-	    $('[data-toggle="tooltip"]').tooltip();   
-	  });
-	</script>
+    <!-- 툴팁 활성화 -->
+    <script>
+     $(document).ready(function(){
+       $('[data-toggle="tooltip"]').tooltip();   
+     });
+   </script>
     <script src="/js/info.js"></script>
   </body>
 </html>

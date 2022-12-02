@@ -36,7 +36,7 @@ prefix="c" %>
             <!-- 여기부터 내등급 상세보기 -->
             <div class="info_top p-2 mt-4 mb-3">
               <div>
-                <span style="color: rgb(10, 154, 10)"><sec:authentication property="Principal.name"/></span
+                <span style="color: rgb(10, 154, 10)">${memberVO.name}</span
                 >님의 등급
               </div>
             </div>

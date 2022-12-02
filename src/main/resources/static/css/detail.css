@@ -1,5 +1,4 @@
-html,
-body {
+html, body {
   margin: 0;
 }
 
@@ -12,4 +11,25 @@ body {
   position: sticky;
   top: 90px;
   width: 260px;
+}
+
+
+
+/* 모달창 */
+.solid {
+   height: 0.1px; 
+   width: 80px; 
+   border: solid lightgray 0.1px; 
+   margin: 20px 12px 0px 12px;
+}
+
+.mission_order{
+   color: gray; 
+   font-size: 14px;
+}
+
+.mission_order:hover{
+   color: black;
+   font-weight: bold;
+   cursor: pointer;
 }
