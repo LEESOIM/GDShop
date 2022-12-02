@@ -57,8 +57,8 @@
 				<c:forEach items="${list }" var="vo">
 					<div>
 						<div class="d-flex flex-column" style="width: 250px; height: 380px">
-							<div> <img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px"> </div>
-
+							<div><a href="/item/detail?itemNum=${vo.itemNum }">
+							<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px"></a></div>
 							<div class="d-flex flex-column" style="width: 250px; height: 130px">
 								<div class="d-flex justify-content-start pt-1" style="font-size: 14px">
 									<c:choose>
@@ -99,7 +99,7 @@
 
 								<c:if test="${vo.type eq 'SNS미션'}">
 									<div class="pe-1" style="color: gray; font-size: 14px; line-height: 23px">보상금액</div>
-									<div style="font-size: 18px; line-height: 22px; color: blue">
+									<div style="font-size: 18px; line-height: 22px; color: #FA6400">
 										<b><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.point }" />원</b>
 									</div>
 								</c:if>
@@ -182,7 +182,7 @@
 
 								<c:if test="${vo.type eq 'SNS미션'}">
 									<div class="pe-1" style="color: gray; font-size: 14px; line-height: 23px">보상금액</div>
-									<div style="font-size: 18px; line-height: 22px; color: blue">
+									<div style="font-size: 18px; line-height: 22px; color: #FA6400">
 										<b><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.point }" />원</b>
 									</div>
 								</c:if>
@@ -220,7 +220,7 @@
 			</div>
 			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4"
 				style="height: 380px">
-				<c:forEach items="${listHit }" var="vo">
+				<c:forEach items="${listVIP }" var="vo">
 					<div>
 						<div class="d-flex flex-column" style="width: 250px; height: 380px">
 							<div> <img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px"> </div>
@@ -265,7 +265,7 @@
 
 								<c:if test="${vo.type eq 'SNS미션'}">
 									<div class="pe-1" style="color: gray; font-size: 14px; line-height: 23px">보상금액</div>
-									<div style="font-size: 18px; line-height: 22px; color: blue">
+									<div style="font-size: 18px; line-height: 22px; color: #FA6400">
 										<b><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.point }" />원</b>
 									</div>
 								</c:if>
@@ -349,7 +349,7 @@
 
 								<c:if test="${vo.type eq 'SNS미션'}">
 									<div class="pe-1" style="color: gray; font-size: 14px; line-height: 23px">보상금액</div>
-									<div style="font-size: 18px; line-height: 22px; color: blue">
+									<div style="font-size: 18px; line-height: 22px; color: #FA6400">
 										<b><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.point }" />원</b>
 									</div>
 								</c:if>
