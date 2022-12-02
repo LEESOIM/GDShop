@@ -32,19 +32,9 @@ public class SellerController {
 	public void getSeller() throws Exception{
 	}
 	
-	@GetMapping("sellerList")
-	public ModelAndView getSellerList(Pager pager) throws Exception{
-		ModelAndView mv = new ModelAndView();
-		
-		List<SellerVO> ar = sellerService.getSellerList(pager); 
-		
-		mv.addObject("vo", ar);
-		mv.setViewName("/seller/sellerList");
-		return mv;
-	}
-	
+
 	@PostMapping("seller")
-	public String setSeller(SellerVO sellerVO) throws Exception{
+	public String setSeller(@RequestBody SellerVO sellerVO) throws Exception{
 		log.info("=================Controller================");
 		log.info("=================SellerVO================");
 		log.info("ID){}",sellerVO.getId());
@@ -59,6 +49,76 @@ public class SellerController {
 		sellerService.setSellerAdd(sellerVO);
 		return "seller/sellerList";
 	}
-
+			
+	@GetMapping("wait")
+	public ModelAndView getWaitList() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		List<SellerVO> ar = sellerService.getWaitList(); 
+		
+		mv.addObject("vo", ar);
+		mv.setViewName("/seller/wait");
+		return mv;
+	}
+	
+	@PostMapping("wait")
+	@ResponseBody
+	public int setWait(@RequestBody SellerVO sellerVO) throws Exception{
+		
+		int result = sellerService.setWait(sellerVO); 
+		return result;
+	}
+	
+	@PostMapping("waitNo")
+	@ResponseBody
+	public int setWaitNo(@RequestBody SellerVO sellerVO) throws Exception{
+		log.info("====================================");
+		log.info("==============================={}",sellerVO.getId());
+		int result = sellerService.setWaitNo(sellerVO); 
+		return result;
+	}
+	
+	@GetMapping("accept")
+	public ModelAndView getAcceptList() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		List<SellerVO> ar = sellerService.getAcceptList(); 
+		
+		mv.addObject("vo", ar);
+		mv.setViewName("/seller/accept");
+		return mv;
+	}
+	@PostMapping("accept")
+	@ResponseBody
+	public int setAccept(@RequestBody SellerVO sellerVO) throws Exception{
+		
+		int result = sellerService.setAccept(sellerVO); 
+		return result;
+	}
+	@PostMapping("acceptNo")
+	@ResponseBody
+	public int setAcceptNo(SellerVO sellerVO) throws Exception{
+		log.info("=================={}",sellerVO.getId());
+		int result = sellerService.setAcceptNo(sellerVO); 
+		return result;
+	}
+	
+	@GetMapping("pay")
+	public ModelAndView getPayList() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		List<SellerVO> ar = sellerService.getPayList(); 
+		
+		mv.addObject("vo", ar);
+		mv.setViewName("/seller/pay");
+		return mv;
+	}
+	@PostMapping("payNo")
+	@ResponseBody
+	public int setPayNo(SellerVO sellerVO) throws Exception{
+		log.info("=================={}",sellerVO.getId());
+		int result = sellerService.setPayNo(sellerVO); 
+		return result;
+	}
 	
 }

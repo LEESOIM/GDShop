@@ -22,7 +22,10 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="/css/header.css" />
 <link rel="stylesheet" href="/css/index.css" />
+<link rel="stylesheet" href="/css/seller.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 </head>
 
 <body>
@@ -37,58 +40,51 @@
 						<div class="input-form-backgroud row">
 							<div class="input-form col-md-12 mx-auto">
 								<h4 class="mb-3">판매자 입점 신청</h4>
-								<form method="post" action="seller" id="frm" class="validation-form" novalidate>
+								<form class="validation-form" onsubmit="return false;" novalidate>
 									<sec:authorize access="isAuthenticated()">
 										<sec:authentication property="Principal" var="user"/>
-										<input type="text" class="form-control" id="roleNum" name="roleNum"
-												value="4" hidden>
-										<div class="mb-3">
-											<label for="address2">ID<span class="text-muted">
-											</span></label> <input type="text" class="form-control" id="id1" name="id"
-												value="${user.id}" readonly>
-										</div>
-	
-										<div class="mb-3">
-											<label for="address2">이름<span class="text-muted">
-											</span></label> <input type="text" class="form-control" id="name" name="name" value="${user.name}" 
-											readonly>
-										</div>
-										<div class="mb-3">
-											<label for="address2">이메일<span class="text-muted">
-											</span></label> <input type="text" class="form-control" id="email" name="email"
-												value="${user.email}" readonly>
-										</div>
-	
-										<div class="mb-3">
-											<label for="address2">전화번호<span class="text-muted">
-											</span></label> <input type="text" class="form-control" id="phone" name="phone"
-												value="${user.phone}" readonly>
-										</div>
-									</sec:authorize>
+									<div class="mb-3">
+										<label for="id1">ID</label>
+										<input type="text" class="form-control" id="id1" value="${user.id}" disabled required>
+									</div>
 
 									<div class="mb-3">
-										<label for="name">기업명</label> <input type="text"
-											class="form-control" id="company" name="company" placeholder="기업명" required>
+										<label for="name">이름</label>
+										<input type="text" class="form-control" id="name" value="${user.name}" disabled>
+									</div>
+									
+									<div class="mb-3">
+										<label for="email">이메일</label>
+										<input type="text" class="form-control" id="email" value="${user.email}" disabled>
+									</div>
+
+									<div class="mb-3">
+										<label for="phone">전화번호</label>
+										<input type="text" class="form-control" id="phone" value="${user.phone}" disabled>
+									</div>
+								</sec:authorize>
+									<div class="mb-3">
+										<label for="company">기업명</label>
+										<input type="text" class="form-control" id="company" placeholder="기업명" required>
 										<div class="invalid-feedback">기업명을 입력해주세요.</div>
 									</div>
 
 									<hr class="mb-4">
 									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input"
-											id="aggrement" required> <label
-											class="custom-control-label" for="aggrement">개인정보 수집
-											및 이용에 동의합니다.</label>
+										<input type="checkbox" class="custom-control-input" id="aggrement" required>
+										<label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
 									</div>
 									<div class="mb-4"></div>
-									<button class="btn btn-primary btn-lg btn-block" type="button"
-										onclick="submitApply();" id="standingRequest" >입점 신청</button>
+									<button type = "submit" class="btn btn-primary btn-lg btn-block" id="standingRequest">
+										입점 신청
+									</button>
 								</form>
 							</div>
 						</div>
 						<footer class="my-3 text-center text-small">
 							<p class="mb-1">&copy; 2022 GDShop</p>
 						</footer>
-						<a href="./sellerList">입점신청 리스트</a>
+						<a href="./wait">입점신청 리스트</a>
 					</div>
 				</div>
 			</div>
@@ -156,6 +152,6 @@
 
 
 	</section>
-	<script src="/js/seller.js"></script>
+	<script src="/js/seller/seller.js"></script>
 </body>
 </html>

@@ -8,7 +8,7 @@ import lombok.Data;
 public class SellerVO extends MemberVO{
 
 	private String id;
-	private boolean status;
 	private String company;
+	private boolean status;
 	
 }

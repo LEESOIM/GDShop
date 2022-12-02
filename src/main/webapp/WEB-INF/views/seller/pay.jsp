@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>SellerList</title>
+<title>pay</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -22,7 +22,9 @@
 <link rel="stylesheet" href="/css/header.css" />
 <link rel="stylesheet" href="/css/index.css" />
 <link rel="stylesheet" href="/css/sellerList.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 </head>
 
 <body>
@@ -34,6 +36,13 @@
 			<div class="d-flex justify-content-center mt-4">
 				<div style="width: 80%; margin-bottom: 50px">
 					<h4>입점신청 현황</h4>
+
+					<ul class="nav nav-tabs">
+						<li class="nav-item"><a class="nav-link" href="./wait">미승인</a></li>
+						<li class="nav-item"><a class="nav-link" href="./accept">승인</a></li>
+						<li class="nav-item"><a class="nav-link active" href="./pay">결제완료</a></li>
+
+					</ul>
 					<table class="table table-striped">
 						<thead>
 							<tr>
@@ -43,21 +52,24 @@
 								<th scope="col">이메일</th>
 								<th scope="col">전화번호</th>
 								<th scope="col">기업명</th>
+								<th scope="col">상태</th>
 								<th scope="col"></th>
 								<th scope="col"></th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach items="${requestScope.vo}" var="dto">
+								<c:set var="i" value="${i+1}" />
 								<tr>
-									<th scope="row"></th>
+									<th scope="row">${i}</th>
 									<td>${dto.id}</td>
 									<td>${dto.name}</td>
 									<td>${dto.email}</td>
 									<td>${dto.phone}</td>
 									<td>${dto.company}</td>
-									<td><a href="#">O</a></td>
-									<td><a href="#">X</a></td>
+									<td>${dto.status}</td>
+									<td class="pay"><a href="#">O</a></td>
+									<td class="payNo"><a href="#">X</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -73,6 +85,6 @@
 			integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
 			crossorigin="anonymous"></script>
 	</section>
-	<script src="/js/seller.js"></script>
+	<script src="/js/seller/pay.js"></script>
 </body>
 </html>
