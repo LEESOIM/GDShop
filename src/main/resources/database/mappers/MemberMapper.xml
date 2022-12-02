@@ -191,7 +191,9 @@
       INNER JOIN
       ITEM_FILE ITF
       ON (I.ITEMNUM = ITF.ITEMNUM)
-      WHERE MR.ROLENUM=2 AND M.ID=#{id} ORDER BY I.ITEMNUM DESC
+      WHERE MR.ROLENUM=2 AND M.ID=#{id}
+      GROUP BY I.ITEMNUM
+      ORDER BY I.ITEMNUM DESC
    </select>
    
    <resultMap type="ItemVO" id="getProductResult">
