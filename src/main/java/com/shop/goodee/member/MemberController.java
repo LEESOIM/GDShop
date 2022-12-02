@@ -59,7 +59,6 @@ public class MemberController {
 		return "redirect:../";
 	}
 	
-	
 	@GetMapping("delete")
 	public ModelAndView setDelete(HttpServletRequest request, HttpServletResponse response, HttpSession session, String pw)throws Exception{
 		//1. Social, 일반 구분
