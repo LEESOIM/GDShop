@@ -8,7 +8,7 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>초간단미션 게시판</title>
+<title>SNS미션 게시판</title>
 <c:import url="../template/library.jsp"></c:import>
 <link rel="stylesheet" href="/css/index.css" />
 <link rel="stylesheet" href="/css/header.css" />
@@ -98,9 +98,8 @@
 									<i class="fa-regular fa-clock"></i> 
 									<input type="hidden" value="${vo.date}" class="date"> 
 									<input type="hidden" value="${vo.count}" class="count"> 
-									<b class="time">
-										<span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
-									</b>
+									<b class="time"></b>
+									<b><span class="hours"></span><span class="minutes"></span><span class="seconds"></span></b>
 								</div>
 								<div style="font-size: 12px; line-height: 28px; color: gray">마감임박</div>
 							</div>

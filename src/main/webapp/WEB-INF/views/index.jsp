@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="/css/header.css" />
 <style type="text/css">
 .tab0 {
-	padding-bottom: 7px;
+	padding-bottom: 3px;
 	border-bottom: 5px rgb(139, 176, 89) solid;
 }
 .tab0 a {
@@ -97,14 +97,14 @@
 									<b>${vo.price }원</b>
 								</div>
 
-								<c:if test="${vo.type eq '초간단미션'}">
+								<c:if test="${vo.type eq 'SNS미션'}">
 									<div class="pe-1" style="color: gray; font-size: 14px; line-height: 23px">보상금액</div>
 									<div style="font-size: 18px; line-height: 22px; color: blue">
 										<b><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.point }" />원</b>
 									</div>
 								</c:if>
 
-								<c:if test="${vo.type ne '초간단미션'}">
+								<c:if test="${vo.type ne 'SNS미션'}">
 									<div class="pe-1" style="color: gray; font-size: 14px; line-height: 23px">실제구매가</div>
 									<div style="font-size: 18px; line-height: 22px; color: blue">
 										<b><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.price-vo.point }" />원</b>
@@ -180,14 +180,14 @@
 									<b>${vo.price }원</b>
 								</div>
 
-								<c:if test="${vo.type eq '초간단미션'}">
+								<c:if test="${vo.type eq 'SNS미션'}">
 									<div class="pe-1" style="color: gray; font-size: 14px; line-height: 23px">보상금액</div>
 									<div style="font-size: 18px; line-height: 22px; color: blue">
 										<b><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.point }" />원</b>
 									</div>
 								</c:if>
 
-								<c:if test="${vo.type ne '초간단미션'}">
+								<c:if test="${vo.type ne 'SNS미션'}">
 									<div class="pe-1" style="color: gray; font-size: 14px; line-height: 23px">실제구매가</div>
 									<div style="font-size: 18px; line-height: 22px; color: blue">
 										<b><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.price-vo.point }" />원</b>
@@ -215,7 +215,7 @@
 		<div class="container" style=" width:65%; padding-top: 4em; padding-bottom: 70px;">
 			<div class="d-flex justify-content-between">
 				<div style="height: 40px; font-size: 22px; font-weight: 600; letter-spacing: -0.03em; margin-bottom: 20px;">프리미엄 상품을 만나보세요</div>
-				<div class="more"> 더보기 <i class="fa-solid fa-circle-chevron-right" style="color: rgb(130, 203, 41)"></i>
+				<div class="more"><a href="./tab/tab4" style="text-decoration: none; color: black;"> 더보기 <i class="fa-solid fa-circle-chevron-right" style="color: rgb(130, 203, 41);"></i></a>
 				</div>
 			</div>
 			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4"
@@ -263,14 +263,14 @@
 									<b>${vo.price }원</b>
 								</div>
 
-								<c:if test="${vo.type eq '초간단미션'}">
+								<c:if test="${vo.type eq 'SNS미션'}">
 									<div class="pe-1" style="color: gray; font-size: 14px; line-height: 23px">보상금액</div>
 									<div style="font-size: 18px; line-height: 22px; color: blue">
 										<b><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.point }" />원</b>
 									</div>
 								</c:if>
 
-								<c:if test="${vo.type ne '초간단미션'}">
+								<c:if test="${vo.type ne 'SNS미션'}">
 									<div class="pe-1" style="color: gray; font-size: 14px; line-height: 23px">실제구매가</div>
 									<div style="font-size: 18px; line-height: 22px; color: blue">
 										<b><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.price-vo.point }" />원</b>
@@ -347,14 +347,14 @@
 									<b>${vo.price }원</b>
 								</div>
 
-								<c:if test="${vo.type eq '초간단미션'}">
+								<c:if test="${vo.type eq 'SNS미션'}">
 									<div class="pe-1" style="color: gray; font-size: 14px; line-height: 23px">보상금액</div>
 									<div style="font-size: 18px; line-height: 22px; color: blue">
 										<b><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.point }" />원</b>
 									</div>
 								</c:if>
 
-								<c:if test="${vo.type ne '초간단미션'}">
+								<c:if test="${vo.type ne 'SNS미션'}">
 									<div class="pe-1" style="color: gray; font-size: 14px; line-height: 23px">실제구매가</div>
 									<div style="font-size: 18px; line-height: 22px; color: blue">
 										<b><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.price-vo.point }" />원</b>

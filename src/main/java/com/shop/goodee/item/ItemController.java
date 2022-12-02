@@ -27,10 +27,8 @@ public class ItemController {
 
 	@Autowired
 	private ItemService itemService;
-	
-	@Autowired
-	private MemberService memberService;
-	
+
+	// 상품등록
 	@GetMapping("add")
 	public void setAdd() {
 
@@ -45,7 +43,7 @@ public class ItemController {
 
 		ModelAndView mv = new ModelAndView();
 		int result = itemService.setAdd(itemVO);
-		log.info("==C==={}", itemVO.getId());
+		log.info("==id=={}", itemVO.getId());
 
 		mv.setViewName("redirect:../member/product");
 		return mv;
@@ -56,17 +54,7 @@ public class ItemController {
 
 	}
 
-	@PostMapping("delete")
-	@ResponseBody
-	public int setStatusDel(HttpSession session, ItemVO itemVO) throws Exception {
-		SecurityContextImpl context = (SecurityContextImpl)session.getAttribute("SPRING_SECURITY_CONTEXT");
-		Authentication authentication = context.getAuthentication();
-		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
-		itemVO.setId(memberVO.getId());
-		itemVO.getItemNum();
-		return itemService.setStatusDel(itemVO);
-	}
-
+	// 상품수정요청
 	@GetMapping("update")
 	public ModelAndView setUpdate(ItemVO itemVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
@@ -76,8 +64,37 @@ public class ItemController {
 		return mv;
 	}
 
+	//상품수정
 	@PostMapping("update")
-	public void setUpdate(HttpSession session, ItemVO itemVO, MultipartFile[] files) throws Exception {
+	public String setUpdate(HttpSession session, ItemVO itemVO, MultipartFile[] files) throws Exception {
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
+		itemVO.setId(memberVO.getId());
+		
+		int result = itemService.setUpdate(itemVO);
+		return "redirect:/member/product";
 	}
+	
+	//상품수정시 파일삭제
+	@PostMapping("fileDelete")
+	@ResponseBody
+	public int setFileDelete(ItemFileVO itemFileVO) throws Exception {
+		return itemService.setFileDelete(itemFileVO);
+	}
+	
 
+	// 상품삭제요청
+	@GetMapping("delete")
+	@ResponseBody
+	public int setStatusDel(HttpSession session, ItemVO itemVO) throws Exception {
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
+		itemVO.setId(memberVO.getId());
+		itemVO.getItemNum();
+		log.info("==id=={}", itemVO.getId());
+		log.info("==itemNum=={}", itemVO.getItemNum());
+		return itemService.setStatusDel(itemVO);
+	}
 }

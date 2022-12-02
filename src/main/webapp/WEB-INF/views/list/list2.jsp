@@ -96,9 +96,8 @@
 									<i class="fa-regular fa-clock"></i> 
 									<input type="hidden" value="${vo.date}" class="date"> 
 									<input type="hidden" value="${vo.count}" class="count"> 
-									<b class="time">
-										<span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
-									</b>
+									<b class="time"></b>
+									<b><span class="hours"></span><span class="minutes"></span><span class="seconds"></span></b>
 								</div>
 								<div style="font-size: 12px; line-height: 28px; color: gray">마감임박</div>
 							</div>

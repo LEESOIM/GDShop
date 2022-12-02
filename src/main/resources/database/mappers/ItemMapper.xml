@@ -6,7 +6,7 @@
 <mapper namespace="com.shop.goodee.item.ItemMapper">
 
 	<insert id="setAdd" parameterType="ItemVO" useGeneratedKeys="true" keyProperty="itemNum">
-		INSERT INTO ITEM VALUES(NULL, #{id}, #{itemName}, IFNULL(#{price}, 0), #{title}, #{type}, #{point}, #{detail}, #{stock}, IFNULL(#{count}, 0), #{url}, NOW(), 0, 0, #{shop}, IFNULL(#{role}, "모두"), #{sellerSNS})
+		INSERT INTO ITEM VALUES(NULL, #{id}, #{itemName}, IFNULL(#{price}, 0), #{title}, #{type}, #{point}, #{detail}, #{stock}, IFNULL(#{count}, 0), #{url}, NOW(), 0, 0, #{shop}, #{role}, IFNULL(#{sellerSNS}, ""))
 	</insert>
 	
 	<insert id="setAddFile" parameterType="ItemFileVO">
@@ -48,24 +48,30 @@
 		</collection>	
 	</resultMap>
 	
-		
-	<update id="setStatusUp" parameterType="ItemVO">
-		UPDATE ITEM SET STATUS=2 WHERE ID=#{id} and ITEMNUM=#{itemNum}
+	<update id="setUpdate" parameterType="ItemVO">
+		UPDATE ITEM
+		SET ITEMNAME=#{itemName}, TITLE=#{title}, POINT=#{point}, DETAIL=#{detail}, URL=#{url}, STATUS=2, SHOP=#{shop}, ROLE=#{role}, SELLERSNS=#{sellerSNS}
+		WHERE ITEMNUM=#{itemNum}
 	</update>
+	
+	<select id="getFileDetail" parameterType="ItemFileVO" resultType="ItemFileVO">
+		SELECT * FROM ITEM_FILE WHERE FILENUM=#{fileNum}
+	</select>
+	
+	<delete id="setFileDelete" parameterType="ItemFileVO">
+		DELETE FROM ITEM_FILE WHERE FILENUM=#{fileNum}
+	</delete>
+	
 	
 	<update id="setStatusDel" parameterType="ItemVO">
 		UPDATE ITEM SET STATUS=3 WHERE ID=#{id} and ITEMNUM=#{itemNum}
 	</update>
 	
-	<update id="setUpdate" parameterType="ItemVO">
-		UPDATE ITEM
-		SET ITEMNAME=#{itemName}, PRICE=IFNULL(#{price}, 0), TITLE=#{title}, DETAIL=#{detail}, STOCK=#{stock}, COUNT=IFNULL(#{count}, 0), URL=#{url}, NOW(), 0, 3, SHOP=#{shop}, ROLE=IFNULL(#{role}, "모두"), SELLERSNS=#{sellerSNS}
-		WHERE ITEMNUM=#{itemNum}
-	</update>
-	
 	<delete id="setDelete" parameterType="ItemVO">
 		DELETE FROM ITEM WHERE ITEMNUM=#{itemNum}
 	</delete>
+	
+	
 	
 	<sql id="search">
 		SELECT S.COMPANY, I.*, F.* 
@@ -81,6 +87,7 @@
 	<!-- 최신순 -->
 	<select id="getList" resultType="ItemVO" resultMap="getListResult">
 		<include refid="search"></include>
+		WHERE I.STATUS=1
 		GROUP BY(I.ITEMNUM)
 		ORDER BY I.ITEMNUM DESC
 		LIMIT 0, 4
@@ -121,6 +128,7 @@
 	<!-- 인기순 -->
 	<select id="getListHit" resultType="ItemVO" resultMap="getListResult">
 		<include refid="search"></include>
+		WHERE I.STATUS=1
 		GROUP BY(I.ITEMNUM)
 		ORDER BY HIT DESC
 		LIMIT 0, 4
@@ -129,32 +137,32 @@
 	<!-- VIP전용 -->
 	<select id="getListVIP" resultType="ItemVO" resultMap="getListResult">
 		<include refid="search"></include>
-		WHERE `ROLE` = 'VIP'
+		WHERE `ROLE` = 'VIP' AND I.STATUS=1
 		GROUP BY(I.ITEMNUM)
 		ORDER BY I.ITEMNUM DESC
 		LIMIT 0, 4
 	</select>
 	
-	<!-- 즉석추첨형 -->
+	<!-- 추첨형 -->
 	<select id="getList1" resultType="ItemVO" resultMap="getListResult">
 		<include refid="search"></include>
-		WHERE `TYPE` = '추첨형'
+		WHERE `TYPE` = '추첨형' AND I.STATUS=1
 		GROUP BY(I.ITEMNUM)
 		ORDER BY I.ITEMNUM DESC
 	</select>
 	
-	<!-- 추첨형 -->
+	<!-- 즉석추첨형 -->
 	<select id="getList2" resultType="ItemVO" resultMap="getListResult">
 		<include refid="search"></include>
-		WHERE `TYPE` = '즉석추첨형'
+		WHERE `TYPE` = '즉석추첨형' AND I.STATUS=1
 		GROUP BY(I.ITEMNUM)
 		ORDER BY I.ITEMNUM DESC
 	</select>
 	
-	<!-- 초간단미션 -->
+	<!-- SNS미션 -->
 	<select id="getList3" resultType="ItemVO" resultMap="getListResult">
 		<include refid="search"></include>
-		WHERE `TYPE` = '초간단미션'
+		WHERE `TYPE` = 'SNS미션' AND I.STATUS=1
 		GROUP BY(I.ITEMNUM)
 		ORDER BY I.ITEMNUM DESC
 	</select>
@@ -162,7 +170,7 @@
 	<!-- VIP전용 -->
 	<select id="getList4" resultType="ItemVO" resultMap="getListResult">
 		<include refid="search"></include>
-		WHERE `ROLE` = 'VIP'
+		WHERE `ROLE` = 'VIP' AND I.STATUS=1
 		GROUP BY(I.ITEMNUM)
 		ORDER BY I.ITEMNUM DESC
 	</select>
