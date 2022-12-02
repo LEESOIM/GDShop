@@ -39,9 +39,11 @@ public class MemberVO implements UserDetails{
 	private Date regDate;
 	private boolean status;
 	private String nickName;
-	private Date byeDate;
-	private Integer roleNum;
+	private Date byeDate;	
 	//추가 memberVO
+	private Integer sum;
+	private Integer cnt;
+	private Integer roleNum;
 	private String pwCheck;
 	private String newPwCheck;
 	@NotBlank

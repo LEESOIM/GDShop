@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shop.goodee.item.ItemVO;
 import com.shop.goodee.member.MemberVO;
 import com.shop.goodee.util.Pager;
 
@@ -13,6 +14,14 @@ public class AdminService {
 
 	@Autowired
 	private AdminMapper adminMapper;
+	
+	public List<ItemVO> getPdRequest(Pager pager)throws Exception{
+		Long totalCount = adminMapper.getCountPd(pager);
+		pager.setRow();
+		pager.setNum(totalCount);
+		
+		return adminMapper.getPdRequest(pager);
+	};
 	
 	public int setAddRole(MemberVO memberVO)throws Exception{
 		return adminMapper.setAddRole(memberVO);

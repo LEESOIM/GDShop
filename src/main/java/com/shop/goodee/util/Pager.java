@@ -20,6 +20,7 @@ public class Pager {
 	private String roleName;
 	private String kind;
 	private String search;
+	private Long status;
 	
 	public Pager() {
 		this.page=1L;

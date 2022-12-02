@@ -23,7 +23,7 @@ pageEncoding="UTF-8"%>
 
     <!-- Custom styles for this template-->
     <link href="/bootstrap/css/sb-admin-2.min.css" rel="stylesheet"/>
-
+    <script defer src="/js/admin/product_request.js"></script>
 </head>
 
 <body id="page-top">
@@ -135,30 +135,32 @@ pageEncoding="UTF-8"%>
                         </div>
                     </div>
                     <!-- Content Row -->
-                    <div class="row" id="apply_list">
-                        <h1>상품 등록 요청 </h1>
-                        <table class="table table-striped">
+                    <h1>상품 등록 요청 </h1>
+                    <div class="row" id="add_list">
+                        <!-- <table class="table table-striped" id="tableAdd">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
+                                    <th scope="col">상품번호</th>
+                                    <th scope="col">상품명</th>
+                                    <th scope="col">캠페인</th>
                                     <th scope="col">아이디</th>
-                                    <th scope="col">이름</th>
-                                    <th scope="col">이메일</th>
-                                    <th scope="col">전화번호</th>
                                     <th scope="col">기업명</th>
+                                    <th scope="col">등록일</th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach items="${requestScope.vo}" var="dto">
+                                <c:forEach items="${addList}" var="add">
                                     <tr>
                                         <th scope="row"></th>
-                                        <td>${dto.id}</td>
-                                        <td>${dto.name}</td>
-                                        <td>${dto.email}</td>
-                                        <td>${dto.phone}</td>
-                                        <td>${dto.company}</td>
+                                        <td>${add.itemNum}</td>
+                                        <td>${add.itemName}</td>
+                                        <td>${add.type}</td>
+                                        <td>${add.id}</td>
+                                        <td>${add.sellerVO.company}</td>
+                                        <td>${add.date}</td>
                                         <td><a href="#">O</a></td>
                                         <td><a href="#">X</a></td>
                                     </tr>
@@ -166,7 +168,7 @@ pageEncoding="UTF-8"%>
                             </tbody>
                         </table>
                         
-                        <div id="page">
+                        <div id="addPage">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination">
                                   <li class="page-item"  value="${pager.pre}" id="pre">
@@ -188,12 +190,12 @@ pageEncoding="UTF-8"%>
                                   </li>
                                 </ul>
                               </nav>
-                        </div>
+                        </div> -->
                     </div>
 
-                    <div class="row" id="seller_list">
-                        <h1>상품 삭제 요청</h1>
-                        <table class="table table-striped">
+                    <h1>상품 수정 요청</h1>
+                    <div class="row" id="update_list">
+                        <!-- <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -222,7 +224,7 @@ pageEncoding="UTF-8"%>
                             </tbody>
                         </table>
                         
-                        <div id="page">
+                        <div id="updatePage">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination">
                                   <li class="page-item"  value="${pager.pre}" id="pre">
@@ -244,12 +246,12 @@ pageEncoding="UTF-8"%>
                                   </li>
                                 </ul>
                               </nav>
-                        </div>
+                        </div> -->
                     </div>
 
-                    <div class="row" id="seller_list">
-                        <h1>상품 수정 요청</h1>
-                        <table class="table table-striped">
+                    <h1>상품 삭제 요청</h1>
+                    <div class="row" id="delete_list">
+                        <!-- <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -278,7 +280,7 @@ pageEncoding="UTF-8"%>
                             </tbody>
                         </table>
                         
-                        <div id="page">
+                        <div id="deletePage">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination">
                                   <li class="page-item"  value="${pager.pre}" id="pre">
@@ -301,7 +303,7 @@ pageEncoding="UTF-8"%>
                                 </ul>
                               </nav>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <!-- /.container-fluid -->
             </div>

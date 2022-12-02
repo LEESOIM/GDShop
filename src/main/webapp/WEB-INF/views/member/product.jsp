@@ -46,7 +46,7 @@ prefix="c" %>
                  <div class="d-flex product_box col-6 m-2">
                   <div><img src="/file/item/${item.itemFileVOs[0].fileName}" style="width: 100%; height: 100%; border-radius: 5px"/></div>
                   <div class="ps-4" style="width:60%">
-                  	<div class="pb-2 pt-1" style="font-size: 22px; color: green;"><b><c:if test="${item.items[0].status}">승인완료</c:if><c:if test="${!item.items[0].status}">승인요청</c:if></b></div>
+                  	<div class="pb-2 pt-1" style="font-size: 22px; color: green;"><b><c:if test="${item.items[0].status==1}">승인완료</c:if><c:if test="${item.items[0].status!=1}">승인요청</c:if></b></div>
                   	<div class="pb-1" style="font-size: 18px;overflow-wrap: anywhere;"><b>
                   	<c:choose>
 			           <c:when test="${fn:length(item.items[0].title) > 40}">

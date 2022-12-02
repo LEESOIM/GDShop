@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shop.goodee.item.ItemVO;
 import com.shop.goodee.member.MemberVO;
 import com.shop.goodee.seller.SellerService;
 import com.shop.goodee.seller.SellerVO;
@@ -30,15 +31,75 @@ public class AdminController {
 	@Autowired
 	private SellerService sellerService;
 	
-	
 	@GetMapping("product_list")
 	public void getProductList()throws Exception{
 		
 	}
 	
+	@GetMapping("deleteRequest")
+	@ResponseBody
+	public ModelAndView getDelRequest(Pager pager)throws Exception{
+		// 삭제 요청
+		ModelAndView mv = new ModelAndView();
+		pager.setStatus(3L);
+		List<ItemVO> list = adminService.getPdRequest(pager);
+		mv.addObject("list",list);
+		mv.addObject("pager",pager);
+		mv.addObject("request","delete");
+		mv.setViewName("admin/pd_request_common");
+		return mv;
+	}
+	
+	@GetMapping("updateRequest")
+	@ResponseBody
+	public ModelAndView getUpRequest(Pager pager)throws Exception{
+		// 수정 요청
+		ModelAndView mv = new ModelAndView();
+		pager.setStatus(2L);
+		List<ItemVO> list = adminService.getPdRequest(pager); 
+		mv.addObject("list",list);
+		mv.addObject("pager",pager);
+		mv.addObject("request","update");
+		mv.setViewName("admin/pd_request_common");
+		return mv;
+	}
+	
+	@GetMapping("addRequest")
+	@ResponseBody
+	public ModelAndView getAddRequest(Pager pager)throws Exception{
+		// 등록 요청
+		ModelAndView mv = new ModelAndView();
+		pager.setStatus(0L);
+		List<ItemVO> list = adminService.getPdRequest(pager); 
+		mv.addObject("list",list);
+		mv.addObject("pager",pager);
+		mv.addObject("request","add");
+		mv.setViewName("admin/pd_request_common");
+		return mv;
+	}
+	
+	
+	
 	@GetMapping("product_request")
-	public void getProductRequest()throws Exception{
-		
+	public void getProductRequest(Pager pager, ModelAndView mv)throws Exception{
+//		// 등록 요청
+//		pager.setStatus(0L);
+//		List<ItemVO> addList = adminService.getPdRequest(pager); 
+//		// 수정 요청
+//		pager.setStatus(2L);
+//		List<ItemVO> upList = adminService.getPdRequest(pager); 
+//		// 삭제 요청
+//		pager.setStatus(3L);
+//		List<ItemVO> delList = adminService.getPdRequest(pager);
+//		
+//		mv.addObject("addList",addList);
+//		mv.addObject("delList",delList);
+//		mv.addObject("upList",upList);
+//		mv.addObject("pager",pager);
+//		
+//		mv.setViewName("admin/product_request");
+//		
+//		return mv;
 	}
 	
 	
