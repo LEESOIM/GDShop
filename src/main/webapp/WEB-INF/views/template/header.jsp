@@ -105,14 +105,14 @@ prefix="c" %>
               </div>
               <div style="height: 68px">
                 <div id="email_icon"><i class="fa-regular fa-user"></i></div>
-                <input type="text" placeholder="아이디" id="id" name="id" value="seller" />
+                <input type="text" placeholder="아이디" id="id" name="id" value="" />
                 <div class="inp" id="inp_id" style="display: none">아이디를 입력해주세요.</div>
               </div>
               <div style="height: 68px">
                 <div id="pw_icon">
                   <i class="fa-solid fa-lock"></i>
                 </div>
-                <input type="password" placeholder="비밀번호" id="pw" name="pw" value="sell1234!"/>
+                <input type="password" placeholder="비밀번호" id="pw" name="pw" value=""/>
                 <div class="inp" id="inp_pw" style="display: none">비밀번호를 입력해주세요.</div>
               </div>
               <div

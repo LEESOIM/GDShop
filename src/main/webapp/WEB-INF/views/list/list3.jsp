@@ -88,8 +88,7 @@
 							<div class="d-flex justify-content-start">
 								<div style="text-decoration: line-through; color: grey; font-size: 15px;" class="pe-2"><b>${vo.price }원</b></div>
 								<div class="pe-1" style="color:gray; font-size: 14px; line-height: 23px">보상포인트</div>
-								<div style="font-size: 18px; line-height: 22px; color: blue">
-								
+								<div style="font-size: 18px; line-height: 22px; color: #FA6400">
 								<b><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.point }" />원</b>
 								</div>
 							</div>
