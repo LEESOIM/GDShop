@@ -42,7 +42,7 @@ public class MemberSocialService extends DefaultOAuth2UserService{
 		//로그인 후 그정보를 여기서 받아옴.
 		log.info("===== Social Login 시도 =====");
 		log.info("UserRequest {} ", userRequest);
-		log.info("AccessToken {} ", userRequest.getAccessToken().getTokenValue());
+		log.info("AccessToken {} ", userRequest.getAccessToken());
 		log.info("Reg => {}", userRequest.getClientRegistration());
 		String social = userRequest.getClientRegistration().getRegistrationId();
 //		log.info("Social : {} ", social);
