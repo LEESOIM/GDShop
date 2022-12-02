@@ -39,9 +39,7 @@ public class MemberVO implements UserDetails, OAuth2User{
 	private Date regDate;
 	private boolean status;
 	private String nickName;
-	private String nickName_N;
-	private Date byeDate;
-	
+	private Date byeDate;	
 	//추가 memberVO
 	private String pwCheck;
 	private String newPwCheck;
@@ -70,7 +68,6 @@ public class MemberVO implements UserDetails, OAuth2User{
 
 	//kakao, naver, google
 	private String social;
-	private String token;
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
