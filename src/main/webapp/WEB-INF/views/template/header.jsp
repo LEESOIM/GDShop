@@ -51,7 +51,7 @@ prefix="c" %>
             <!-- 로그인후 해당 블록 보이기 -->
             <sec:authorize access="isAuthenticated()">
             <div class="me-3">
-              <b style="font-size: 17.5px; color: rgb(9, 118, 31)"><sec:authentication property="Principal" var="user"/>${user.id}</b>님
+              <b id="id1" style="font-size: 17.5px; color: rgb(9, 118, 31)"><sec:authentication property="Principal" var="user"/>${user.id}</b>님
               환영합니다!💚
             </div>
             
@@ -166,12 +166,12 @@ prefix="c" %>
                     /></a>
                   </div>
                   <div class="pe-3">
-                  	<a href="/oauth2/authorization/naver">
+                  	<a href="#">
                     <img src="/images/naver.png" style="width: 38px; height: 38px" />
                   	</a>
                   </div>
                   <div>
-                  	<a href="/oauth2/authorization/google">
+                  	<a href="#">
                     <img
                       src="/images/google.png"
                       style="width: 38px; height: 38px"
@@ -185,9 +185,7 @@ prefix="c" %>
         </div>
       </div>
     </div>
-    
 
-    
     <script>
    
       if($("#id1").text()!=""){

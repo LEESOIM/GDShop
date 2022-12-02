@@ -6,7 +6,7 @@
 <mapper namespace="com.shop.goodee.member.MemberMapper">
 	<!-- 회원가입 -->
 	<insert id="setJoin" parameterType="MemberVO">
-		INSERT INTO MEMBER VALUES (#{id},#{pw},#{name},#{email},#{birth},#{phone},0,0,0,NOW(),1,NULL,NOW(),#{social})
+		INSERT INTO MEMBER VALUES (#{id},#{pw},#{name},#{email},#{birth},#{phone},0,0,0,NOW(),1,NULL,NULL,NOW(),#{social})
 	</insert>
 	<!-- 회원등급부여 -->
 	<insert id="setMemberRole" parameterType="MemberVO">

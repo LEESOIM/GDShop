@@ -2,17 +2,12 @@ package com.shop.goodee.member;
 
 import java.util.List;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextImpl;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -41,54 +36,8 @@ public class MemberController {
 	private MailService mailService;
 	
 	@Autowired
-	private MemberSocialService memberSocialService;
-	
-	@Autowired
-	private MailService mailService;
-	
-	@Autowired
-	@Qualifier("en")
-	private PasswordEncoder passwordEncoder;
-	
-	@GetMapping("logoutResult")
-	public String socialLogout()throws Exception{
-		
-		return "redirect:../";
-	}
-	
-	@GetMapping("ServiceLogin")
-	public String googleLogout()throws Exception{
-		
-		return "redirect:../";
-	}
-	
-	
-	@GetMapping("delete")
-	public ModelAndView setDelete(HttpServletRequest request, HttpServletResponse response, HttpSession session, String pw)throws Exception{
-		//1. Social, 일반 구분
-		ModelAndView mv = new ModelAndView();
-		SecurityContextImpl context = (SecurityContextImpl)session.getAttribute("SPRING_SECURITY_CONTEXT");
-		Authentication authentication = context.getAuthentication();
-		MemberVO memberVO  =(MemberVO)authentication.getPrincipal();
-			
-		int result= memberService.setDelete(memberVO);
-		
-		
-		if(result>0) {
-			session.invalidate();
-			Cookie [] cookies = request.getCookies();
-			for(Cookie cookie:cookies) {
-				cookie.setMaxAge(0);
-				response.addCookie(cookie);
-			}
-			
-			mv.setViewName("redirect:/");
-		}else {
-			//탙퇴 실패 
-		}	
-		
-		return mv;
-	}
+	private MemberSecurityService memberSecurityService;
+
 	
 	//아이디 찾기
 	@GetMapping("find_id")
@@ -193,6 +142,14 @@ public class MemberController {
 		memberSecurityService.loadUserByUsername(memberVO.getId());
 		return "/";
 	}
+	
+	//로그아웃(세션)
+//	@GetMapping("logout")
+//	public String setLogout(HttpSession session)throws Exception{
+//		session.invalidate();
+//		
+//		return "redirect:/";
+//	}
 	
 	/* 마이페이지 */
 	@GetMapping("mypage")
@@ -444,8 +401,8 @@ public class MemberController {
 		
 		memberVO.setId(sessionMemberVO.getId());
 		
-		int result = memberService.setChangePw(memberVO, sessionMemberVO);
 		
+		int result = memberService.setChangePw(memberVO, sessionMemberVO);
 		return result;
 	}
 	
