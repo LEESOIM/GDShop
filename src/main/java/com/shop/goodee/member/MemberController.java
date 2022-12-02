@@ -33,7 +33,7 @@ public class MemberController {
 	private MemberService memberService;
 	
 	@Autowired
-	private MailService mailService;
+	private MemberSecurityService memberSecurityService;
 	
 	@Autowired
 	private MemberSecurityService memberSecurityService;

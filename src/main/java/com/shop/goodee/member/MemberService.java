@@ -34,7 +34,7 @@ public class MemberService {
 	@Value("${app.profile}")
 	private String path;
 	
-	//@Value("${social.kakao.admin}")
+	@Value("${social.kakao.admin}")
 	private String adminKey;
 	
 	@Autowired
