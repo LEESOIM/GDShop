@@ -215,10 +215,15 @@ public class MemberController {
 		Authentication authentication = context.getAuthentication();
 		MemberVO sessionMemberVO = (MemberVO) authentication.getPrincipal();
 		memberVO.setId(sessionMemberVO.getId());
-		int result = memberService.setNickName(memberVO);
-
+		int result = 0;
+		if(memberVO.getNickName()!= null) {
+			result = memberService.setNickName(memberVO);
+		}else {
+			result = memberService.setNickName_N(memberVO);
+		}
 		return result;	
 	}
+	
 	
 	/* 마이페이지 - 프로필 수정 */
 	@GetMapping("profile")
@@ -522,18 +527,19 @@ public class MemberController {
 	}
 	
 	/* 마이페이지 - 닉네임 변경 */
-	@PostMapping("nickName")
-	public ModelAndView setNickName(HttpSession session ,MemberVO memberVO, ModelAndView mv)throws Exception{
-		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
-		Authentication authentication = context.getAuthentication();
-		MemberVO sessionMemberVO = (MemberVO) authentication.getPrincipal();
-		memberVO.setId(sessionMemberVO.getId());
-		
-		memberService.setNickName(memberVO);
-		mv.setViewName("/member/mypage");
-		mv.addObject("nick", memberVO.getNickName());
-		return mv;
-	}
-	
+//	@PostMapping("nickName")
+//	public ModelAndView setNickName(HttpSession session ,MemberVO memberVO, ModelAndView mv)throws Exception{
+//		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+//		Authentication authentication = context.getAuthentication();
+//		MemberVO sessionMemberVO = (MemberVO) authentication.getPrincipal();
+//		memberVO.setId(sessionMemberVO.getId());
+//		
+//		memberService.setNickName(memberVO);
+//		memberService.setNickName_N(memberVO);
+//		mv.setViewName("/member/mypage");
+//		mv.addObject("nick", memberVO.getNickName());
+//		mv.addObject("nick_N", memberVO.getNickName_N());
+//		return mv;
+//	}
 
 }
