@@ -4,31 +4,6 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.shop.goodee.seller.SellerMapper">
-
-	<insert id="setSellerAdd" parameterType="SellerVO">
-		INSERT INTO SELLER VALUES(#{id},#{company},#{status})
-	</insert>
-
-	<select id="getSellerList" parameterType="Pager" resultType="SellerVO">
-		<!-- SELECT * FROM SELLER WHERE ROLENUM=4 ORDER BY ID -->
-		SELECT *
-		FROM seller s
-		LEFT JOIN MEMBER_ROLE mr
-		ON s.id=mr.id
-		INNER JOIN MEMBER m
-		ON mr.id=m.id
-		LiMIT #{startRow},#{perPage}
-	</select>
-	
-	<select id="getTotalCount" resultType="Long">
-		SELECT COUNT(*)
-		FROM seller s
-		LEFT JOIN MEMBER_ROLE mr
-		ON s.id=mr.id
-		INNER JOIN MEMBER m
-		ON mr.id=m.id
-	</select>
-	
 	<select id="getApproveSeller" resultType="SellerVO">
 		SELECT *
 		FROM seller s
@@ -39,4 +14,75 @@
 		WHERE mr.RoleNum=2
 		LiMIT #{startRow},#{perPage}
 	</select>
+
+
+	<select id="getTotalCount" resultType="Long">
+		SELECT COUNT(*)
+		FROM seller s
+		LEFT JOIN MEMBER_ROLE mr
+		ON s.id=mr.id
+		INNER JOIN MEMBER m
+		ON mr.id=m.id
+	</select>
+
+	<insert id="setSellerAdd" parameterType="SellerVO">
+		INSERT INTO SELLER VALUES(#{id},#{company},#{status})
+	</insert>
+	<select id="getWaitList" resultType="SellerVO">
+		SELECT M.ID, M.NAME,
+		M.EMAIL, M.PHONE, S.COMPANY, S.STATUS
+		FROM SELLER S
+		LEFT JOIN
+		MEMBER_ROLE MR
+		ON
+		S.ID=MR.ID
+		INNER JOIN MEMBER M
+		ON MR.ID=M.ID
+		WHERE
+		S.STATUS=0 AND MR.ROLENUM=4
+
+	</select>
+	<select id="getAcceptList" resultType="SellerVO">
+		SELECT M.ID, M.NAME,
+		M.EMAIL, M.PHONE, S.COMPANY, S.STATUS
+		FROM SELLER S
+		LEFT JOIN
+		MEMBER_ROLE MR
+		ON
+		S.ID=MR.ID
+		INNER JOIN MEMBER M
+		ON MR.ID=M.ID
+		WHERE
+		S.STATUS=1 AND MR.ROLENUM=4
+	</select>
+	<select id="getPayList" resultType="SellerVO">
+		SELECT M.ID, M.NAME, M.EMAIL, M.PHONE, S.COMPANY, S.STATUS
+		FROM SELLER S
+		LEFT JOIN
+		MEMBER_ROLE MR
+		ON S.ID=MR.ID
+		INNER JOIN MEMBER M
+		ON MR.ID=M.ID
+		WHERE
+		S.STATUS=1 AND MR.ROLENUM=2
+	</select>
+	<update id="setWait" parameterType="SellerVO">
+		UPDATE SELLER SET STATUS=1 WHERE ID=#{id}
+	</update>
+	
+	<delete id="setWaitNo" parameterType="SellerVO">
+		DELETE FROM SELLER WHERE ID=#{id}
+	</delete>
+	
+	<insert id="setAccept">
+		INSERT INTO MEMBER_ROLE VALUES(#{id},2)
+	</insert>
+	
+	<update id="setAcceptNo" parameterType="SellerVO">
+		UPDATE SELLER SET STATUS=0 WHERE ID=#{id}
+	</update>
+	
+	<delete id="setPayNo">
+		DELETE FROM MEMBER_ROLE WHERE ID=#{id} AND ROLENUM=2
+	</delete>
 </mapper>

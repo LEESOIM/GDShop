@@ -48,7 +48,7 @@ pageEncoding="UTF-8"%>
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <c:import url="./sidebar.jsp"></c:import>
+        <c:import url="../admin/sidebar.jsp"></c:import>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->

@@ -1,6 +1,9 @@
 package com.shop.goodee.review;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -49,7 +52,7 @@ public class ReviewService {
 																																						// 설정
 		options.addArguments("--disable-blink-features=AutomationControlled");
 		options.addArguments("--disable-extensions");
-		options.addArguments("headless");
+//		options.addArguments("headless");
 
 		driver = new ChromeDriver(options);
 		System.out.println(testVO.getUrl());
@@ -85,6 +88,7 @@ public class ReviewService {
 			String text = "";
 			String xpathBtnCommon = "//*[@id=\"btfTab\"]/ul[2]/li[2]/div/div[6]/section[4]/div[3]/button[";
 			String xpathBtn = "]";
+			
 			boolean check = true;
 			int l = 0;
 			int reviewOption = 200;
@@ -120,6 +124,27 @@ public class ReviewService {
 							tmp = element.getText();
 							reviewVO.setDate(tmp);
 							log.info("날짜) " + tmp);
+							
+							
+							SimpleDateFormat sdformat = new SimpleDateFormat("yyyy.MM.dd"); // 날짜형식
+							
+							Date dateCur = new Date(); //현재날짜
+							Date dateRev = sdformat.parse(tmp); //리뷰날짜
+							
+							Calendar calCur = Calendar.getInstance(); //현재날짜
+							Calendar calRev = Calendar.getInstance(); //리뷰날짜
+							
+							int sub=3; //3일전 날짜까지
+							
+							calCur.setTime(dateCur);//현재날짜
+							calCur.add(Calendar.DATE,-sub-1);//현재날짜 -3일
+							calRev.setTime(dateRev);//리뷰날짜
+							
+							if(calCur.compareTo(calRev)>0){
+								log.info("==================={}일 초과 !=======================",sub);
+								driver.quit();
+								return finalReviewVO;
+							}
 
 							text = xpathCommon + j + xpathTitleDetail;
 							element = driver.findElement(By.xpath(text)); // 세부상품이름
@@ -209,7 +234,7 @@ public class ReviewService {
 		options.addArguments("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36"); // access deny 설정
 		options.addArguments("--disable-blink-features=AutomationControlled");
 		options.addArguments("--disable-extensions");
-		options.addArguments("headless");
+//		options.addArguments("headless");
 		
 		driver = new ChromeDriver(options);
 		System.out.println(reviewVO.getUrl());
@@ -262,6 +287,11 @@ public class ReviewService {
 			//*[@id="REVIEW"]/div/div[3]/div[2]/div/div/a[2] 페이징 1번
 			//*[@id="REVIEW"]/div/div[3]/div[2]/div/div/a[10] 페이징 9번
 			//*[@id="REVIEW"]/div/div[3]/div[2]/div/div/a[11] 다음
+			
+			
+			//*[@id="REVIEW"]/div/div[3]/div[2]/ul/li[1]/div/div/div/div[1]/div/div/div[1]/div[2]/div[2]/span/text() 날짜X
+			//*[@id="REVIEW"]/div/div[3]/div[2]/ul/li[2]/div/div/div/div[1]/div/div/div[1]/div[2]/div[2]/span 날짜O
+			
 			String xpathFrontReview ="//*[@id=\"REVIEW\"]/div/div[3]/div[2]/ul/li[";  
 			String xpathBackReview = "]/div/div/div/div[1]/div/div/div[2]/div/span[2]";
 			String xpathBackReviewPhoto = "]/div/div/div/div[1]/div/div[1]/div[2]/div/span";
@@ -269,8 +299,13 @@ public class ReviewService {
 			
 			String xpathFrontPage ="//*[@id=\"REVIEW\"]/div/div[3]/div[2]/div/div/a[";
 			String xpathBackPage ="]";
-			String xpathPage =""; 
+			String xpathPage ="";
+			
+			String xpathFrontDate ="//*[@id=\"REVIEW\"]/div/div[3]/div[2]/ul/li[";
+			String xpathBackDate ="]/div/div/div/div[1]/div/div/div[1]/div[2]/div[2]/span";
+			String xpathDate ="";
 			log.info(xpathFrontReview+xpathBackReview);
+			log.info(xpathFrontDate+xpathBackDate);
 			
 			int j=1;
 			int l=0;
@@ -289,8 +324,34 @@ public class ReviewService {
 						String nickName = element.getText().trim(); // 익명 닉네임)
 						int nickNameLength = nickName.length(); // 익명 글자수
 						
+						xpathDate = xpathFrontDate+i+xpathBackDate;
+						element = driver.findElement(By.xpath(xpathDate));
+						
+						String date = element.getText().trim(); // 날짜
+						SimpleDateFormat sdformat = new SimpleDateFormat("yy.MM.dd."); // 날짜형식
+						
+						Date dateCur = new Date(); //현재날짜
+						Date dateRev = sdformat.parse(date); //리뷰날짜
+						
+						Calendar calCur = Calendar.getInstance(); //현재날짜
+						Calendar calRev = Calendar.getInstance(); //리뷰날짜
+						
+						
+						int sub=3; //3일전 날짜까지
+						
+						calCur.setTime(dateCur);//현재날짜
+						calCur.add(Calendar.DATE,-sub-1);//현재날짜 -3일
+						calRev.setTime(dateRev);//리뷰날짜
+						
+						if(calCur.compareTo(calRev)>0){
+							log.info("==================={}일 초과 !=======================",sub);
+							driver.quit();
+							return finalReviewVO;
+						}
+						
 						log.info("{}-1) {}",m,searchNickName);
 						log.info("{}-2) {}",m,nickName);
+//						log.info("{}-3) {}",m,date);
 						if(nickNameLength>=7) {
 							nickName=nickName.substring(0,4); // 익명 글자(4)
 						}else {
@@ -321,6 +382,7 @@ public class ReviewService {
 							break;
 						}
 					} catch (Exception e) {
+						log.info("{}",e);
 						log.info("============= 페이지의 리뷰가 1~19개일때===============");
 						break;
 					}
@@ -333,13 +395,11 @@ public class ReviewService {
 			log.info("리뷰){}",reviewVO.getReview());
 			log.info("리뷰수){}",reviewVO.getReviewLength());
 			
-
-
 			
 		}catch (Exception e) {
 			//첫 try catch
 		}finally {
-			driver.quit();
+//			driver.quit();
 		}
 			
 		return reviewVO;

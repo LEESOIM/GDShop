@@ -131,16 +131,40 @@ public class AdminController {
 	
 	
 	
-	@GetMapping("seller")
+	@GetMapping("seller/wait")
 	public ModelAndView getSellerList(Pager pager)throws Exception{
 		
 		ModelAndView mv = new ModelAndView();
 		
-		List<SellerVO> ar = sellerService.getSellerList(pager); 
+		List<SellerVO> ar = sellerService.getWaitList(); 
 		
 		mv.addObject("vo", ar);
 		mv.addObject("pager",pager);
-		mv.setViewName("/admin/seller");
+		mv.setViewName("/seller/wait");
+		return mv;
+	}
+	@GetMapping("seller/accept")
+	public ModelAndView getSellerList2(Pager pager)throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		
+		List<SellerVO> ar = sellerService.getAcceptList(); 
+		
+		mv.addObject("vo", ar);
+		mv.addObject("pager",pager);
+		mv.setViewName("/seller/accept");
+		return mv;
+	}
+	@GetMapping("seller/pay")
+	public ModelAndView getSellerList3(Pager pager)throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		
+		List<SellerVO> ar = sellerService.getPayList(); 
+		
+		mv.addObject("vo", ar);
+		mv.addObject("pager",pager);
+		mv.setViewName("/seller/pay");
 		return mv;
 	}
 	

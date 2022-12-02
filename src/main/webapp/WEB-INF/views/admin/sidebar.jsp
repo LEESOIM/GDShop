@@ -41,7 +41,7 @@ pageEncoding="UTF-8"%>
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Components:</h6>
                 <a class="collapse-item" href="./member">회원</a>
-                <a class="collapse-item" href="./seller">판매자</a>
+                <a class="collapse-item" href="/admin/seller/wait">판매자</a>
             </div>
         </div>
     </li>

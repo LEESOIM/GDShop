@@ -48,7 +48,7 @@ pageEncoding="UTF-8"%>
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <c:import url="./sidebar.jsp"></c:import>
+        <c:import url="../admin/sidebar.jsp"></c:import>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -157,9 +157,9 @@ pageEncoding="UTF-8"%>
 					<h4>입점신청 현황</h4>
 
 					<ul class="nav nav-tabs">
-						<li class="nav-item"><a class="nav-link active" href="./wait">미승인</a></li>
+						<li class="nav-item"><a class="nav-link" href="./wait">미승인</a></li>
 						<li class="nav-item"><a class="nav-link" href="./accept">승인</a></li>
-						<li class="nav-item"><a class="nav-link" href="./pay">결제완료</a></li>
+						<li class="nav-item"><a class="nav-link active" href="./pay">결제완료</a></li>
 
 					</ul>
 					<table class="table table-striped">
