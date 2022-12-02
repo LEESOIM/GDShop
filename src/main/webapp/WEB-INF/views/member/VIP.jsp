@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"
+prefix="c" %>
 <div
   class="p-3"
   style="
@@ -11,7 +13,11 @@
   "
 >
   <div class="grade_top mt-3">
-    <sec:authentication property="Principal.name"/>님은 <span>VIP등급</span>입니다.
+  <sec:authentication property="Principal" var="user"/>
+  <c:if test="${empty user.name}">
+    ${user.id}</c:if>
+    <c:if test="${not empty user.name}">
+    ${user.name}</c:if>님은 <span>VIP등급</span>입니다.
   </div>
   <hr />
   <div>

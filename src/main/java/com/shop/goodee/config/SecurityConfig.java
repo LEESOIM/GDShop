@@ -13,7 +13,8 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.SecurityFilterChain;
 
-
+import com.shop.goodee.member.MemberSecurityService;
+import com.shop.goodee.member.MemberSocialService;
 import com.shop.goodee.member.security.LoginFail;
 import com.shop.goodee.member.security.LoginSuccess;
 
@@ -27,6 +28,8 @@ public class SecurityConfig {
 	@Autowired
 	private LoginFail loginFail;
 	
+	@Autowired
+	private MemberSocialService memberSocialService;
 	
 	@Bean
 	WebSecurityCustomizer wegSecurityConfig() {
@@ -51,7 +54,6 @@ public class SecurityConfig {
 				.authorizeRequests()
 					.antMatchers("/").permitAll()
 					.antMatchers("/tab/*").permitAll()
-					.antMatchers("/seller/seller").permitAll()
 					.antMatchers("/board/notice").permitAll()
 					.antMatchers("/member/join").permitAll()
 					.antMatchers("/membership/membership").permitAll()
@@ -77,9 +79,11 @@ public class SecurityConfig {
 					.logoutSuccessUrl("/")
 					.invalidateHttpSession(true)
 					.deleteCookies("JSESSIONID")
-					.permitAll();
-					
-
+					.permitAll()
+					.and()
+				.oauth2Login()//social login
+					.userInfoEndpoint()
+					.userService(memberSocialService);
 					
 		
 		return httpSecurity.build();

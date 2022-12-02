@@ -37,7 +37,7 @@ prefix="c" %>
             <!-- 여기부터 내포인트 상세보기 -->
             <div class="info_top d-flex p-2 mt-4 mb-3">
               <div>
-                <span style="color: rgb(10, 154, 10)"><sec:authentication property="Principal.name"/></span>님의 포인트
+                <span style="color: rgb(10, 154, 10)">${memberVO.name}</span>님의 포인트
               </div>
               <button class="ms-3" id="withdraw" data-bs-toggle="modal" data-bs-target="#exampleModal_withdraw" data-bs-whatever="@mdo">출금요청</button>
             </div>
@@ -52,7 +52,7 @@ prefix="c" %>
                 <div style="color: green">
                 <span style="font-size: 26px" id="myPoint">
                 <sec:authentication property="Principal" var="user"/>
-                <fmt:formatNumber type="number" maxFractionDigits="3" value="${user.point_3}" />
+                <fmt:formatNumber type="number" maxFractionDigits="3" value="${memberVO.point_3}" />
                 </span>
                   <i
                     class="fa-brands fa-product-hunt"
@@ -68,7 +68,7 @@ prefix="c" %>
                   적립 예정 포인트 <i class="fa-solid fa-circle-info" data-toggle="tooltip" data-bs-placement="top" data-custom-class="custom-tooltip" data-bs-title="캠페인 완료 후 포인트가 지급되었으나 3일이 지나지 않은 포인트 (3일 후 출금 가능)"></i>
                 </div>
                 <div style="color: green">
-                  <span style="font-size: 26px"><fmt:formatNumber type="number" maxFractionDigits="3" value="${user.point}" /></span
+                  <span style="font-size: 26px"><fmt:formatNumber type="number" maxFractionDigits="3" value="${memberVO.point}" /></span
                   ><i
                     class="fa-brands fa-product-hunt ps-1"
                     style="font-size: 21px"
