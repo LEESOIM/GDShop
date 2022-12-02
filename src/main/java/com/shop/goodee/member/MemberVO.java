@@ -39,7 +39,6 @@ public class MemberVO implements UserDetails{
 	private Date regDate;
 	private boolean status;
 	private String nickName;
-	private String nickName_N;
 	private Date byeDate;
 	
 	//추가 memberVO

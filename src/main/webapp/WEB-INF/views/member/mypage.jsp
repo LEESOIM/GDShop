@@ -146,22 +146,13 @@ prefix="c" %>
                     	</div>
                     	<div class="nickname_box me-2" style="text-align: center; padding: 12px">
                     		<h6><b>NAVER</b></h6>
-                    		<c:choose>
-                    			<c:when test="${empty memberVO.nickName_N}">
-	                    		<div id="n_nickName">
-		                    		<div style="font-size: 12.5px; background-color: lightgray; width: 35%; margin: 0 auto">미등록</div>
-		                    		<div class="mt-1" style="font-size: 12px; color: grey">등록된 계정이 없습니다.</div>
-		                    		<div class="d-flex">
-		                    		<input type="text" placeholder="닉네임 입력" id="nickN_text" style="width: 120px; box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; border: none;"/><button type="button" id="nick_btn2" style="width: 50px; font-size: 12px; box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; border: none; background-color: #78E150;">요청</button>
-		                    		</div>
+                    		<div>
+	                    		<div style="font-size: 12.5px; background-color: lightgray; width: 35%; margin: 0 auto">미등록</div>
+	                    		<div class="mt-1" style="font-size: 12px; color: grey">등록된 계정이 없습니다.</div>
+	                    		<div class="d-flex">
+	                    		<input type="text" placeholder="닉네임 입력" style="width: 120px; box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; border: none;"/><button type="button" style="width: 50px; font-size: 12px; box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; border: none; background-color: #78E150;">요청</button>
 	                    		</div>
-	                    		</c:when>
-                    			<c:otherwise>
-		                    		<div id="na_nickName">
-		                    			<div style="padding: 15px"><h5>${memberVO.nickName_N}</h5></div>
-		                    		</div>
-                    			</c:otherwise>
-                    		</c:choose>
+                    		</div>
                     	</div>
                     </div>
                   </div>

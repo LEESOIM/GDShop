@@ -21,12 +21,14 @@ public class LogoutCustom implements LogoutHandler {
 	
 	@Override
 	public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
-
+		// TODO Auto-generated method stub
 		log.info("========== LogoutHandler ===========");
-		MemberVO memberVO = new MemberVO();
-		if(authentication.getPrincipal() != null) {
-			memberVO =(MemberVO)authentication.getPrincipal();			
-		}
+		MemberVO memberVO =(MemberVO)authentication.getPrincipal();
+		//1. 일반 로그인?? 아니면 social login 사용??
+		log.info("Auth => {}", authentication.getPrincipal());
+		log.info("Auth => {}", authentication.getDetails());
+		log.info("Auth => {}", memberVO.getId());
+//		String social = 
 		
 		String social = memberVO.getSocial();
 		if(social != null && social.equals("kakao")) {

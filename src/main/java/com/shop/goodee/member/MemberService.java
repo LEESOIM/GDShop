@@ -342,14 +342,9 @@ public class MemberService {
 		return memberMapper.getSellerProduct(memberVO);
 	}
 	
-	/* 마이페이지 - 쿠팡 닉네임 변경 */
+	/* 마이페이지 - 닉네임 변경 */
 	public int setNickName(MemberVO memberVO)throws Exception{
 		return memberMapper.setNickName(memberVO);
-	}
-	
-	/* 마이페이지 - 네이버 닉네임 변경 */
-	public int setNickName_N(MemberVO memberVO)throws Exception{
-		return memberMapper.setNickName_N(memberVO);
 	}
 	
 
