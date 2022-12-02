@@ -31,12 +31,15 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
-	
+
 	@Autowired
 	private MemberSecurityService memberSecurityService;
-	
+
 	@Autowired
-	private MemberSecurityService memberSecurityService;
+	private MemberSocialService memberSocialService;
+
+	@Autowired
+	private MailService mailService;
 
 	
 	//아이디 찾기
