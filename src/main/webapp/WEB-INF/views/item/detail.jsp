@@ -49,7 +49,7 @@
                 </div>
               </div>
               <hr style="margin: 0" />
-              <button class="btn btn-success w-100 mt-3"  data-bs-toggle="modal" data-bs-target="#exampleModal_item" data-bs-whatever="@mdo">지원하기</button>
+              <button class="btn btn-success w-100 mt-3">지원하기</button>
             </div>
           </div>
           <div
@@ -86,50 +86,6 @@
             <br />
             <br />
             dfff
-          </div>
-        </div>
-      </div>
-      
-      <!-- 모달창 -->
-      <div
-        class="modal fade"
-        id="exampleModal_item"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div
-              class="modal-header"
-              style="background-color: #4AB34A; color: white; font-weight: bold"
-            >
-              <h1 class="modal-title fs-5" id="exampleModalLabel">
-                <b>미션수행카드</b>
-              </h1>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body p-3 mb-2 mt-2">
-            	<div class="d-flex justify-content-center" style="text-align: center">
-            		<div><div class="mission_order"><span style="color:green">①</span> 구매하기</div><div style="font-size: 13px">미진행</div></div>
-            		<div class="solid"></div>
-            		<div><div class="mission_order"><span style="color:green">②</span> 리뷰</div><div style="font-size: 13px">미진행</div></div>
-            		<div class="solid"></div>
-            		<div><div class="mission_order"><span style="color:green">③</span> 포인트수령</div><div style="font-size: 13px">미진행</div></div>
-            	</div>
-            		<hr/>
-            
-              <div class="d-flex justify-content-center">
-                <button class="btn btn-outline-success" id="withdraw_btn">
-                  출금요청
-                </button>
-              </div>
-            </div>
           </div>
         </div>
       </div>

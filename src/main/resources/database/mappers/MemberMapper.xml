@@ -6,7 +6,7 @@
 <mapper namespace="com.shop.goodee.member.MemberMapper">
 	<!-- 회원가입 -->
 	<insert id="setJoin" parameterType="MemberVO">
-		INSERT INTO MEMBER VALUES (#{id},#{pw},#{name},#{email},#{birth},#{phone},0,0,0,NOW(),1,NULL,NULL,NOW(),#{social})
+		INSERT INTO MEMBER VALUES (#{id},#{pw},#{name},#{email},#{birth},#{phone},0,0,0,NOW(),1,NULL,NOW())
 	</insert>
 	<!-- 회원등급부여 -->
 	<insert id="setMemberRole" parameterType="MemberVO">
@@ -56,9 +56,7 @@
 		<result column="regDate" property="regDate"/>
 		<result column="status" property="status"/>
 		<result column="nickName" property="nickName"/>
-		<result column="nickName_N" property="nickName_N"/>
 		<result column="byeDate" property="byeDate"/>
-		<result column="social" property="social"/>
 		<collection property="roleVOs" javaType="List" ofType="RoleVO">
 			<id column="roleNum" property="roleNum"/>
 			<result column="roleName" property="roleName"/>
@@ -87,9 +85,7 @@
 		<result column="regDate" property="regDate"/>
 		<result column="status" property="status"/>
 		<result column="nickName" property="nickName"/>
-		<result column="nickName_N" property="nickName_N"/>
 		<result column="byeDate" property="byeDate"/>
-		<result column="social" property="social"/>
 		<collection property="memberFileVO" javaType="MemberFileVO" ofType="MemberFileVO">
 			<result column="fileName" property="fileName"/>
 			<result column="oriName" property="oriName"/>
@@ -212,14 +208,8 @@
 		</collection>
 	</resultMap>
 	
-	<!-- 쿠팡 닉네임 변경 -->
+	<!-- 닉네임 변경 -->
 	<update id="setNickName" parameterType="MemberVO">
 		UPDATE MEMBER SET NICKNAME=#{nickName} WHERE ID=#{id}
 	</update>
-	
-	<!-- 네이버 닉네임 변경 -->
-	<update id="setNickName_N" parameterType="MemberVO">
-		UPDATE MEMBER SET NICKNAME_N=#{nickName_N} WHERE ID=#{id}
-	</update>
-	
 </mapper>

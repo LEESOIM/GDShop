@@ -21,10 +21,7 @@ prefix="c" %>
     ><span style="padding: 0px 9px 0px 14px">|</span>
     </sec:authorize>
     <sec:authorize access="isAuthenticated()">
-	<form id="outForm" action="./member/logout" method="post" style="display: inline;">
-		<sec:csrfInput/>
-	    <a href="/member/logout">로그아웃</a><span style="padding: 0px 9px 0px 14px">|</span>
-	</form>
+    <a href="/member/logout">로그아웃</a><span style="padding: 0px 9px 0px 14px">|</span>
     </sec:authorize>
     <a href="/membership/membership">멤버십</a><span style="padding: 0px 9px 0px 14px">|</span>
     <div class="top-dropdown">

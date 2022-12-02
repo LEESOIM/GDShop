@@ -76,7 +76,3 @@ $("#pw").on("keyup", function (key) {
     }
   }
 });
-
-$("#logout").click(function () {
-  $("#outForm").submit();
-});

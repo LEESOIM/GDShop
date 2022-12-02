@@ -39,9 +39,7 @@ public class MemberVO implements UserDetails{
 	private Date regDate;
 	private boolean status;
 	private String nickName;
-	private String nickName_N;
-	private Date byeDate;
-	
+	private Date byeDate;	
 	//추가 memberVO
 	private Integer sum;
 	private Integer cnt;
@@ -71,7 +69,6 @@ public class MemberVO implements UserDetails{
 
 	//kakao, naver, google
 	private String social;
-	private String token;
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
