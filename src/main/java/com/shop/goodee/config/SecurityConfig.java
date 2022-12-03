@@ -61,6 +61,7 @@ public class SecurityConfig {
 					.antMatchers("/member/find_pw").permitAll()
 					.antMatchers("/admin").hasRole("ADMIN")
 					.antMatchers("/member/product").hasRole("SELLER")
+					.antMatchers("/my/campaign").permitAll()
 					.anyRequest().authenticated()
 					.and()
 				.formLogin()
