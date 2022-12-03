@@ -33,7 +33,7 @@ $("#standingRequest").on("click", function(e) {
 			type: "post",
 			url: "/seller/seller",
 			traditional: true,
-			contentType: 'application/json',
+			contentType: 'application/json;charset=utf-8',
 			data: JSON.stringify({
 				"id": id,
 				"name": name,
@@ -41,23 +41,26 @@ $("#standingRequest").on("click", function(e) {
 				"phone": phone,
 				"company": company
 			}),
-			success: function(response) {
-				swal({
+			success: function(result) {
+				Swal.fire({
 					title: "입점 신청이 완료되었습니다.",
 					icon: "success", //warning,error,success,info,question
-					buttons: true,
-					dangerMode: true
+					showCancelButton: true, 
+        			confirmButtonText: '확인',
+        			cancelButtonText: '취소', 
 				})
+				setTimeout(function() {
+					location.reload();
+				  }, 1000);
 				console.log("================ajax성공");
 			},
 			error: function() {
-				swal({
-					title: "입점 신청에 실패하였습니다.",
-					icon: "error", 
-					dangerMode: true
-				})
+				Swal.fire('이미 입점신청을 하였습니다.', '관리자의 승인을 기다려주세요', 'warning');
 				console.log("================ajax실패");
 			}
 		})
+	}
+	else{
+		Swal.fire('로그인이 필요합니다.', '', 'error');
 	}
 });
