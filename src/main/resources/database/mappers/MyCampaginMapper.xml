@@ -2,13 +2,58 @@
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-   
+
 <mapper namespace="com.shop.goodee.myCampaign.MyCampaignMapper">
-	<select id="getMyCampaignApply" parameterType="MissionVO" resultType="MissionVO">
-		SELECT * FROM MISSION WHERE ID=#{id} AND MYCAM=0
+
+	<select id="getMyCampaign" parameterType="MissionVO" resultType="MissionVO" resultMap="getListMissionVO">
+		
+		SELECT M.*,I.*,F.*
+		FROM MISSION M
+		LEFT OUTER JOIN
+		ITEM I
+		USING(ITEMNUM)
+		LEFT OUTER JOIN
+		ITEM_FILE F
+		USING(ITEMNUM)
+		WHERE M.ID=#{id} AND M.MYCAM=#{myCam}  
+		ORDER BY M.MISSIONNUM ASC
 	</select>
-	<select id="getMyCampaign" parameterType="MissionVO" resultType="MissionVO">
-		SELECT * FROM MISSION WHERE ID=#{id} AND MYCAM=#{myCam}
-<!-- 		SELECT * FROM MISSION WHERE ID=#{id} AND MYCAM=#{myCam} -->
-	</select>
+	
+	<resultMap type="MissionVO" id="getListMissionVO">
+		<id column="MISSIONNUM" property="missionNum"/>
+		<result column="ITEMNUM" property="itemNum"/>
+		<result column="ID" property="id"/>
+		<result column="APPLYDATE" property="applyDate"/>
+		<result column="FINISH" property="finish"/>
+		<result column="STATUS" property="status"/>
+		<result column="MYCAM" property="myCam"/>
+		
+		<association property="itemVO" javaType="ItemVO">
+			<id column="ITEMNUM" property="itemNum"/>
+			<result column="ID" property="id"/>
+			<result column="ITEMNAME" property="itemName"/>
+			<result column="PRICE" property="price"/>
+			<result column="TITLE" property="title"/>
+			<result column="TYPE" property="type"/>
+			<result column="ROLE" property="role"/>
+			<result column="POINT" property="point"/>
+			<result column="DETAIL" property="detail"/>
+			<result column="STOCK" property="stock"/>
+			<result column="COUNT" property="count"/>
+			<result column="SHOP" property="shop"/>
+			<result column="URL" property="url"/>
+			<result column="DATE" property="date"/>
+			<result column="HIT" property="hit"/>
+			<result column="STATUS" property="status"/>
+			<result column="SELLERSNS" property="sellerSNS"/>
+		</association>
+		
+		<collection property="itemFileVOs" javaType="List" ofType="ItemFileVO"> 
+			<id column="FILENUM" property="fileNum"/>
+			<result column="ITEMNUM" property="itemNum"/>
+			<result column="FILENAME" property="fileName"/>
+			<result column="ORINAME" property="oriName"/>		
+		</collection>	
+	</resultMap>
+	
 </mapper>

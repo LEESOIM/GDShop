@@ -16,15 +16,8 @@ public class MyCampaignService {
 	@Autowired
 	private MyCampaignMapper myCampaignMapper;
 	
-	public List<MissionVO> getMyCampaignApply(MissionVO missionVO) throws Exception{
-		
-		log.info("=============================={}",missionVO.getMyCam());
-		List<MissionVO> list = myCampaignMapper.getMyCampaignApply(missionVO);
-		return list;
-	}
 	public List<MissionVO> getMyCampaign(MissionVO missionVO) throws Exception{
 		
-		log.info("=============================={}",missionVO.getMyCam());
 		List<MissionVO> list = myCampaignMapper.getMyCampaign(missionVO);
 		return list;
 	}

@@ -8,7 +8,6 @@ import com.shop.goodee.item.ItemVO;
 
 @Mapper
 public interface MyCampaignMapper {
-	public List<MissionVO> getMyCampaignApply(MissionVO missionVO) throws Exception;
 	public List<MissionVO> getMyCampaign(MissionVO missionVO) throws Exception;
 
 }

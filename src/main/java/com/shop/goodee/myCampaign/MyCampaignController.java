@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("my")
+@RequestMapping("myCampaign")
 public class MyCampaignController {
 
 	@Autowired
@@ -32,44 +32,66 @@ public class MyCampaignController {
 	@Autowired
 	private MyCampaignService myCampaignService;
 	
-	@GetMapping("campaign")
-	public ModelAndView getMyCampaign(HttpSession session) throws Exception{
+	@GetMapping("apply")
+	public ModelAndView getMyCampaignApply(HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
 		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
 		MissionVO missionVO = new MissionVO();
 		missionVO.setId(memberVO.getId());
+		missionVO.setMyCam(0);
 		
-		List<MissionVO> list = myCampaignService.getMyCampaignApply(missionVO);
+		List<MissionVO> list = myCampaignService.getMyCampaign(missionVO);
 		mv.addObject("list",list);
-		mv.setViewName("/my/campaign");
+		mv.setViewName("/myCampaign/apply");
 		return mv;
 	}
-	@PostMapping("campaign")
-	@ResponseBody
-	public ModelAndView getMyCampaign(HttpSession session,MissionVO missionVO) throws Exception{
+	@GetMapping("choice")
+	public ModelAndView getMyCampaignChoice(HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
 		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
-		
+		MissionVO missionVO = new MissionVO();
 		missionVO.setId(memberVO.getId());
-		log.info("===================================={}",missionVO.getMyCam());
+		missionVO.setMyCam(1);
 		
-		
-//		log.info("{}",missionVO.getMyCam());
-//		log.info("{}",missionVO.getId());
-		
-		
-//		List<ItemVO> list = itemService.getList();
 		List<MissionVO> list = myCampaignService.getMyCampaign(missionVO);
-
-		mv.addObject("list", list);
-		
-//		mv.addObject("list",list);
-		mv.setViewName("/my/campaign");
+		mv.addObject("list",list);
+		mv.setViewName("/myCampaign/choice");
 		return mv;
 	}
+	@GetMapping("complete")
+	public ModelAndView getMyCampaignComplete(HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
+		MissionVO missionVO = new MissionVO();
+		missionVO.setId(memberVO.getId());
+		missionVO.setMyCam(2);
+		
+		List<MissionVO> list = myCampaignService.getMyCampaign(missionVO);
+		mv.addObject("list",list);
+		mv.setViewName("/myCampaign/complete");
+		return mv;
+	}
+	@GetMapping("cancel")
+	public ModelAndView getMyCampaignCancel(HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
+		MissionVO missionVO = new MissionVO();
+		missionVO.setId(memberVO.getId());
+		missionVO.setMyCam(3);
+		
+		List<MissionVO> list = myCampaignService.getMyCampaign(missionVO);
+		mv.addObject("list",list);
+		mv.setViewName("/myCampaign/cancel");
+		return mv;
+	}
+	
 
 }
