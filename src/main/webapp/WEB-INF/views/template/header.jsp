@@ -63,7 +63,7 @@ prefix="c" %>
 		      <sec:authorize access="hasRole('SELLER')">
 				      <a href="/member/product">내 상품</a>
 		       </sec:authorize>
-		      	<a href="#">내 캠페인</a>
+		      	<a href="/my/campaign">내 캠페인</a>
 		      </div>
 		    </div>
             

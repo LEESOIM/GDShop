@@ -4,5 +4,11 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    
 <mapper namespace="com.shop.goodee.myCampaign.MyCampaignMapper">
-
+	<select id="getMyCampaignApply" parameterType="MissionVO" resultType="MissionVO">
+		SELECT * FROM MISSION WHERE ID=#{id} AND MYCAM=0
+	</select>
+	<select id="getMyCampaign" parameterType="MissionVO" resultType="MissionVO">
+		SELECT * FROM MISSION WHERE ID=#{id} AND MYCAM=#{myCam}
+<!-- 		SELECT * FROM MISSION WHERE ID=#{id} AND MYCAM=#{myCam} -->
+	</select>
 </mapper>

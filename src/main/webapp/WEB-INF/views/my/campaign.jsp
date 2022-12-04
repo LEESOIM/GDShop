@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,16 +28,23 @@
 
 		<div style="margin-top: 3em; padding-bottom: 70px">
 
-			<h2>내 캠페인</h1>
-			<ul class="nav nav-tabs">
-				<li class="nav-item"><a class="nav-link" href="#" id="apply">지원</a></li>
-				<li class="nav-item"><a class="nav-link" href="#" id="choice">선정/미션중</a></li>
-				<li class="nav-item"><a class="nav-link" href="#" id="complete">미션완료</a></li>
-				<li class="nav-item"><a class="nav-link" href="#" id="cancel">취소</a></li>
-			</ul>
-
-
-
+			<h2>
+				내 캠페인
+				</h1>
+				<ul class="nav nav-tabs">
+					<li class="nav-item"><a class="nav-link select active" id="apply" data-value="0">지원</a></li>
+					<li class="nav-item"><a class="nav-link select" id="choice" data-value="1">선정/미션중</a></li>
+					<li class="nav-item"><a class="nav-link select" id="complete" data-value="2">미션완료</a></li>
+					<li class="nav-item"><a class="nav-link select" id="cancel" data-value="3">취소</a></li>
+				</ul>
+				
+				+_+
+				<c:forEach items="${list}" var="vo">
+						
+						<b>${vo.myCam }</b>
+									asd
+				</c:forEach>
+				
 		</div>
 
 
