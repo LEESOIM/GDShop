@@ -9,7 +9,7 @@ import com.shop.goodee.util.Pager;
 @Mapper
 public interface SellerMapper {
 	
-	public Integer setSellerAdd(SellerVO sellerVO) throws Exception;
+	public int setSellerAdd(SellerVO sellerVO) throws Exception;
 	public Long getTotalCount()throws Exception;
 	public List<SellerVO> getWaitList() throws Exception;
 	public List<SellerVO> getAcceptList() throws Exception;

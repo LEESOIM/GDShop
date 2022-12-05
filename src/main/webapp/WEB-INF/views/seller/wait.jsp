@@ -153,7 +153,7 @@ pageEncoding="UTF-8"%>
                  	<div style="margin-top: 3em; padding-bottom: 70px">
 
 			<div class="d-flex justify-content-center mt-4">
-				<div style="width: 80%; margin-bottom: 50px">
+				<div style="width: 100%; margin-bottom: 50px">
 					<h4>입점신청 현황</h4>
 
 					<ul class="nav nav-tabs">
@@ -194,67 +194,36 @@ pageEncoding="UTF-8"%>
 						</tbody>
 					</table>
 
+					<div id="page">
+						<nav aria-label="Page navigation example">
+							<ul class="pagination">
+								<li class="page-item" value="${pager.pre}" id="pre"><a
+									class="page-link" href="./seller?wait=${pager.page-1}"
+									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+								</a></li>
+
+								<c:forEach var="i" begin="${pager.startNum}"
+									end="${pager.lastNum}">
+									<li class="page-item ${pager.page==i? 'active':''}"><a
+										class="page-link" href="./seller?wait=${i}">${i}</a></li>
+								</c:forEach>
+
+								<li class="page-item ${pager.next?'':'disabled'}" id="next">
+									<a class="page-link" href="./seller?Wait=${pager.page+1}"
+									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+								</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+					<!-- End of Page -->
 				</div>
 			</div>
 
 		</div>
-                    </div>
+				</div>
 
-                    <div class="row" id="seller_list">
-                        <h1>판매자 목록</h1>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">아이디</th>
-                                    <th scope="col">이름</th>
-                                    <th scope="col">이메일</th>
-                                    <th scope="col">전화번호</th>
-                                    <th scope="col">기업명</th>
-                                    <th scope="col"></th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach items="${requestScope.vo}" var="dto">
-                                    <tr>
-                                        <th scope="row"></th>
-                                        <td>${dto.id}</td>
-                                        <td>${dto.name}</td>
-                                        <td>${dto.email}</td>
-                                        <td>${dto.phone}</td>
-                                        <td>${dto.company}</td>
-                                        <td><a href="#">O</a></td>
-                                        <td><a href="#">X</a></td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
                         
-                        <div id="page">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination">
-                                  <li class="page-item"  value="${pager.pre}" id="pre">
-                                    <a class="page-link" href="./seller?page=${pager.page-1}" aria-label="Previous">
-                                      <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                  </li>
-                
-                                  <c:forEach var="i" begin="${pager.startNum}" end="${pager.lastNum}">
-                                    <li class="page-item ${pager.page==i? 'active':''}">
-                                      <a class="page-link" href="./seller?page=${i}">${i}</a>
-                                    </li>
-                                  </c:forEach>
-                                  
-                                  <li class="page-item ${pager.next?'':'disabled'}" id="next">
-                                    <a class="page-link" href="./seller?page=${pager.page+1}" aria-label="Next">
-                                      <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                  </li>
-                                </ul>
-                              </nav>
-                        </div>
-                    </div>
                 </div>
                 <!-- /.container-fluid -->
             </div>

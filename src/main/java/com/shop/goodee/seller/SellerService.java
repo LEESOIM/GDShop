@@ -17,7 +17,7 @@ public class SellerService {
 	@Autowired
 	private SellerMapper sellerMapper;
 	
-	public Integer setSellerAdd(SellerVO sellerVO) throws Exception{
+	public int setSellerAdd(SellerVO sellerVO) throws Exception{
 		int result = sellerMapper.setSellerAdd(sellerVO);
 		return result;
 	}
