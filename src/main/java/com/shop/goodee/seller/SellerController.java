@@ -34,20 +34,16 @@ public class SellerController {
 	
 
 	@PostMapping("seller")
-	public String setSeller(@RequestBody SellerVO sellerVO) throws Exception{
-		log.info("=================Controller================");
-		log.info("=================SellerVO================");
+	@ResponseBody
+	public int setSeller(@RequestBody SellerVO sellerVO) throws Exception{
 		log.info("ID){}",sellerVO.getId());
-		log.info("roleNum){}",sellerVO.getRoleNum());
-		log.info("기업명){}",sellerVO.getCompany());
-		log.info("=================MemberVO================");
 		log.info("이름){}",sellerVO.getName());
 		log.info("이메일){}",sellerVO.getEmail());
 		log.info("전화번호){}",sellerVO.getPhone());
-		log.info("=============== SELLER COntroler");
+		log.info("기업명){}",sellerVO.getCompany());
 		notificationService.notifyApplyEvent(sellerVO.getId());
-		sellerService.setSellerAdd(sellerVO);
-		return "seller/sellerList";
+		int result = sellerService.setSellerAdd(sellerVO);
+		return result;
 	}
 			
 	@GetMapping("wait")

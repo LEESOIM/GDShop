@@ -49,6 +49,7 @@
       </li>
       </a>
       </form>
+      <a href="/myCampaign/apply" style="text-decoration: none">
       <li class="list-group-item">
         <i class="fa-solid fa-arrow-pointer ps-2 pe-3"></i>내 캠페인
       </li>

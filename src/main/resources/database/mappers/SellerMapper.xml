@@ -26,7 +26,7 @@
 	</select>
 
 	<insert id="setSellerAdd" parameterType="SellerVO">
-		INSERT INTO SELLER VALUES(#{id},#{company},#{status})
+		INSERT INTO SELLER VALUES(#{id},#{company},0)
 	</insert>
 	<select id="getWaitList" resultType="SellerVO">
 		SELECT M.ID, M.NAME,

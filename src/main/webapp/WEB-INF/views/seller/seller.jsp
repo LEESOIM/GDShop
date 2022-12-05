@@ -29,9 +29,9 @@
 </head>
 
 <body>
-	<section class="container" style="width: 75%">
 		<c:import url="../template/top_part.jsp"></c:import>
 		<c:import url="../template/header.jsp"></c:import>
+	<section class="container" style="width: 75%">
 		<div style="margin-top: 3em; padding-bottom: 70px">
 
 			<div class="d-flex justify-content-center mt-4">
@@ -45,7 +45,7 @@
 										<sec:authentication property="Principal" var="user"/>
 									<div class="mb-3">
 										<label for="id1">ID</label>
-										<input type="text" class="form-control" id="id1" value="${user.id}" disabled required>
+										<input type="text" class="form-control" id="id2" value="${user.id}" disabled>
 									</div>
 
 									<div class="mb-3">
@@ -90,68 +90,14 @@
 			</div>
 
 		</div>
-		<c:import url="../template/footer.jsp"></c:import>
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
 			integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
 			crossorigin="anonymous"></script>
 
-		<!-- <script>
-			function apply(){
-				console.log("apply")
-				const id = $("#id1").val();
-				const eventSource = new EventSource('/sub/'+id);
-				console.log(eventSource)
-				eventSource.addEventListener("connect",function(event){
-					let message = event.data;
-					alert(message)
-				})
-
-				eventSource.addEventListener("addApply",function(event){
-					let message = event.data;
-					alert(message)
-					
-					// let data = JSON.parse(event.data);
-					// console.log(data)
-					// (async()=>{
-					// 	const showNotificatoin = () =>{
-					// 		const notification = new Notification('알림',{
-					// 			body: data.content
-					// 		})
-	
-					// 		setTimeout(()=>{
-					// 			notification.close();
-					// 		},10*1000);
-	
-					// 		notification.addEventListener("click",()=>{
-					// 			window.open(data.url,'_blank');
-					// 		})
-					// 	}
-	
-					// 	let granted = false
-	
-					// 	if(Notification.permission ==='granted'){
-					// 		granted = true;
-					// 	}else if(Notification.permission!=='denied'){
-					// 		let permission = await Notification.requestPermission();
-					// 		granted = permission==='granted'
-					// 	}
-	
-					// 	if(granted){
-					// 		showNotificatoin();
-					// 	}
-	
-					// })();
-				})
-				eventSource.addEventListener("error", function(event) {
-            		eventSource.close()
-        		})
-			}
-
-		</script> -->
-
 
 	</section>
+		<c:import url="../template/footer.jsp"></c:import>
 	<script src="/js/seller/seller.js"></script>
 </body>
 </html>
