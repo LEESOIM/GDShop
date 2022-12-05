@@ -418,7 +418,6 @@ public class MemberController {
       MemberVO sessionMemberVO = (MemberVO) authentication.getPrincipal();
       
       memberVO.setId(sessionMemberVO.getId());
-      
       int result = memberService.setChangePhone(memberVO);
       
       return result;
