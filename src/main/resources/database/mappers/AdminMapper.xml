@@ -6,7 +6,11 @@
 
 <mapper namespace="com.shop.goodee.admin.AdminMapper">
 	
-	
+	<!-- 멤버 미션  -->
+	<!-- <select id="getMission" parameterType="Pager" resultType="Mission">
+		
+		
+	</select> -->
 	
 	<!-- 상품  -->
 	<select id="getCountPd" parameterType="Pager" resultType="Long">
@@ -15,10 +19,18 @@
 			INNER JOIN
 			SELLER S 
 			USING(ID)
-		WHERE I.STATUS=#{status}
+		WHERE I.STATUS=#{status}  <include refid="searchPd"></include>
 		ORDER BY I.DATE DESC 
 	</select>
 	
+	<sql id="searchPd">
+		AND
+			<choose>
+				<when test="kind == 'id'">S.ID</when>
+				<otherwise>S.COMPANY</otherwise>
+			</choose>
+		LIKE CONCAT('%',#{search},'%')
+	</sql>
 	
 	<select id="getPdRequest" parameterType="Pager" resultMap="getPdRequestResult">
 		SELECT * 
@@ -26,9 +38,9 @@
 			INNER JOIN
 			SELLER S 
 			USING(ID)
-		WHERE I.STATUS=#{status}
+		WHERE I.STATUS=#{status}  <include refid="searchPd"></include>
 		ORDER BY I.DATE DESC 
-		LIMIT 0, #{perPage}
+		LIMIT #{startRow}, #{perPage}
 		
 	</select>
 	<resultMap type="ItemVO" id="getPdRequestResult">

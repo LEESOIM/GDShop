@@ -40,7 +40,7 @@ pageEncoding="UTF-8"%>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Components:</h6>
-                <a class="collapse-item" href="./member">회원</a>
+                <a class="collapse-item" href="/admin/member">회원</a>
                 <a class="collapse-item" href="/admin/seller/wait">판매자</a>
             </div>
         </div>
@@ -57,8 +57,8 @@ pageEncoding="UTF-8"%>
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Utilities:</h6>
-                <a class="collapse-item" href="./product_request">상품 신청/수정/삭제</a>
-                <a class="collapse-item" href="./product_list">상품 리스트</a>
+                <a class="collapse-item" href="/admin/product_request">상품 신청/수정/삭제</a>
+                <a class="collapse-item" href="/admin/product_list">상품 리스트</a>
             </div>
         </div>
     </li>

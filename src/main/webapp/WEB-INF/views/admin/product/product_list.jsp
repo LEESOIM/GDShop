@@ -23,17 +23,17 @@ pageEncoding="UTF-8"%>
 
     <!-- Custom styles for this template-->
     <link href="/bootstrap/css/sb-admin-2.min.css" rel="stylesheet"/>
-
+    <script defer src="/js/admin/product_list.js"></script>
 </head>
 
 <body id="page-top">
-    <c:import url="../template/library.jsp"></c:import>
-    <c:import url="../template/header.jsp"></c:import>
+    <c:import url="../../template/library.jsp"></c:import>
+    <c:import url="../../template/header.jsp"></c:import>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <c:import url="./sidebar.jsp"></c:import>
+        <c:import url="../sidebar.jsp"></c:import>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -135,60 +135,17 @@ pageEncoding="UTF-8"%>
                         </div>
                     </div>
                     <!-- Content Row -->
-                    <div class="row" id="apply_list">
-                        <h1>상품 목록</h1>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">아이디</th>
-                                    <th scope="col">이름</th>
-                                    <th scope="col">이메일</th>
-                                    <th scope="col">전화번호</th>
-                                    <th scope="col">기업명</th>
-                                    <th scope="col"></th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach items="${requestScope.vo}" var="dto">
-                                    <tr>
-                                        <th scope="row"></th>
-                                        <td>${dto.id}</td>
-                                        <td>${dto.name}</td>
-                                        <td>${dto.email}</td>
-                                        <td>${dto.phone}</td>
-                                        <td>${dto.company}</td>
-                                        <td><a href="#">O</a></td>
-                                        <td><a href="#">X</a></td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                        
-                        <div id="page">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination">
-                                  <li class="page-item"  value="${pager.pre}" id="pre">
-                                    <a class="page-link" href="./seller?page=${pager.page-1}" aria-label="Previous">
-                                      <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                  </li>
-                
-                                  <c:forEach var="i" begin="${pager.startNum}" end="${pager.lastNum}">
-                                    <li class="page-item ${pager.page==i? 'active':''}">
-                                      <a class="page-link" href="./seller?page=${i}">${i}</a>
-                                    </li>
-                                  </c:forEach>
-                                  
-                                  <li class="page-item ${pager.next?'':'disabled'}" id="next">
-                                    <a class="page-link" href="./seller?page=${pager.page+1}" aria-label="Next">
-                                      <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                  </li>
-                                </ul>
-                              </nav>
-                        </div>
+                    <h1>상품 목록</h1>
+                    <div class="input-group">
+                        <select name="kind" class="form-select" id="kind">
+                            <option class="kinds" value="id">ID</option>
+                            <option class="kinds" value="company">기업명</option>
+                        </select>
+                        <input type="text" name="search" value="${param.search}" class="form-control" id="search" onKeypress="javascript:if(event.keyCode==13) {search_onclick_subm()}" >
+                        <button type="button" class="btn btn-primary" id="search_btn">검색</button>
+                    </div>
+                    <div class="row" id="product_list">
+                       
                     </div>
 
                 </div>
@@ -207,88 +164,6 @@ pageEncoding="UTF-8"%>
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Member Info Modal-->
-    <div class="modal fade" id="memberInfoModal" tabindex="-1" aria-labelledby="memberInfoModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="memberInfoModalLabel">New message</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <form action="update" method="post" onsubmit="return confirm('수정하시겠습니까?')">
-                <div class="mb-3">
-                  <label for="member-id" class="col-form-label">ID:</label>
-                  <input type="text" class="form-control" id="member-id" disabled>
-                </div>
-                <div class="mb-3">
-                    <label for="member-roleName" class="col-form-label">등급:</label>
-                    <select name="roleName" class="form-select" id="member-roleName">
-                        <option class="roleName" value="1">Admin</option>
-                        <option class="roleName" value="2">Seller</option>
-                        <option class="roleName" value="3">Vip</option>
-                        <option class="roleName" value="4">Member</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                  <label for="member-name" class="col-form-label">이름:</label>
-                  <input class="form-control" id="member-name" disabled></input>
-                </div>
-                <div class="mb-3">
-                    <label for="member-phone" class="col-form-label">전화번호:</label>
-                    <input class="form-control" id="member-phone" disabled></input>
-                </div>
-                <div class="mb-3">
-                    <label for="member-email" class="col-form-label">Email:</label>
-                    <input class="form-control" id="member-email" disabled></input>
-                </div>
-                <div class="mb-3">
-                    <label for="member-point" class="col-form-label">포인트:</label>
-                    <input class="form-control" id="member-point" name="point"></input>
-                </div>
-                <div class="mb-3">
-                    <label for="member-regDate" class="col-form-label">가입일:</label>
-                    <input class="form-control" id="member-regDate" disabled></input>
-                </div>
-                
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary">수정</button>
-                </div>
-              </div>
-              </form>
-            </div>
-        </div>
-      </div>
-
-      <!-- Member Mission Modal-->
-    <div class="modal fade" id="missionModal" tabindex="-1" aria-labelledby="missionModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="missionModalLabel">Mission</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <form>
-                <div class="mb-3">
-                  <label for="member-id" class="col-form-label">진행중인 미션:</label>
-                  <input type="text" class="form-control" id="member-id">
-                </div>
-                <div class="mb-3">
-                    <label for="member-roleName" class="col-form-label">완료 미션:</label>
-                    <input class="form-control" id="member-roleName"></input>
-                </div>
-              
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Send message</button>
-            </div>
-          </div>
-        </div>
-      </div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="/bootstrap/vendor/jquery/jquery.min.js"></script>

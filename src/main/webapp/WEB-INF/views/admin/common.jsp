@@ -122,7 +122,7 @@ pageEncoding="UTF-8"%>
         
         $.ajax({
             type:"POST",
-            URL:"member",
+            url:"member",
             data:{
                 roleName:$("input[name='roleName']:checked").val(),
                 page:page,

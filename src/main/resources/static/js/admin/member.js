@@ -75,12 +75,8 @@ function memberDetail(event){
             $("#roleNameDiv").empty()
             for(i=0; i<data.roleVOs.length;i++){
 
-                let input = "<div class='member-roleName'>"+data.roleVOs[i].roleName.split('_')[1]
-                if(data.roleVOs[i].roleName!="ROLE_MEMBER"){
-                    input += "<button class='deleteRole' type='button' data-roleNum='"+data.roleVOs[i].roleNum+"'>X</button></div>"
-                }else{
-                    input += "</div>"
-                }
+                let input = "<div class='member-roleName'>"+data.roleVOs[i].roleName.split('_')[1]+"</div>"
+                
                 
                 $("#roleNameDiv").append(input)
             }
