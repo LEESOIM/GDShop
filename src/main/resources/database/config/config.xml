@@ -21,6 +21,7 @@
 		<typeAlias type="com.shop.goodee.member.RoleVO" alias="RoleVO"/>
 		<typeAlias type="com.shop.goodee.item.ItemVO" alias="ItemVO"/>
 		<typeAlias type="com.shop.goodee.item.ItemFileVO" alias="ItemFileVO"/>
+		<typeAlias type="com.shop.goodee.mission.MissionVO" alias="MissionVO"/>
 		
 		<typeAlias type="java.lang.Long" alias="Long"/>
 		<typeAlias type="java.lang.String" alias="String"/>

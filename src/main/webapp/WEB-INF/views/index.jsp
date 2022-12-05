@@ -140,7 +140,8 @@
 				<c:forEach items="${listHit }" var="vo">
 					<div>
 						<div class="d-flex flex-column" style="width: 250px; height: 380px">
-							<div> <img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px"> </div>
+							<div> <a href="/item/detail?itemNum=${vo.itemNum }">
+							<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px"></a> </div>
 
 							<div class="d-flex flex-column" style="width: 250px; height: 130px">
 								<div class="d-flex justify-content-start pt-1" style="font-size: 14px">
@@ -223,7 +224,8 @@
 				<c:forEach items="${listVIP }" var="vo">
 					<div>
 						<div class="d-flex flex-column" style="width: 250px; height: 380px">
-							<div> <img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px"> </div>
+							<div> <a href="/item/detail?itemNum=${vo.itemNum }">
+							<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px"></a> </div>
 
 							<div class="d-flex flex-column" style="width: 250px; height: 130px">
 								<div class="d-flex justify-content-start pt-1" style="font-size: 14px">
@@ -307,7 +309,8 @@
 				<c:forEach items="${listHit }" var="vo">
 					<div>
 						<div class="d-flex flex-column" style="width: 250px; height: 380px">
-							<div> <img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px"> </div>
+							<div><a href="/item/detail?itemNum=${vo.itemNum }">
+							 <img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px"></a> </div>
 
 							<div class="d-flex flex-column" style="width: 250px; height: 130px">
 								<div class="d-flex justify-content-start pt-1" style="font-size: 14px">

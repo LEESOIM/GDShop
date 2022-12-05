@@ -1,7 +1,5 @@
 package com.shop.goodee.item;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.shop.goodee.member.MemberService;
 import com.shop.goodee.member.MemberVO;
 
 import lombok.extern.slf4j.Slf4j;
