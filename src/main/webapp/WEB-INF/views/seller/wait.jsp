@@ -152,51 +152,78 @@ pageEncoding="UTF-8"%>
                     <!-- Content Row -->
                  	<div style="margin-top: 3em; padding-bottom: 70px">
 
-                        <div class="d-flex justify-content-center mt-4">
-                            <div style="width: 80%; margin-bottom: 50px">
-                                <h4>입점신청 현황</h4>
+			<div class="d-flex justify-content-center mt-4">
+				<div style="width: 100%; margin-bottom: 50px">
+					<h4>입점신청 현황</h4>
 
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item"><a class="nav-link active" href="./wait">미승인</a></li>
                                     <li class="nav-item"><a class="nav-link" href="./accept">승인</a></li>
                                     <li class="nav-item"><a class="nav-link" href="./pay">결제완료</a></li>
 
-                                </ul>
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">아이디</th>
-                                            <th scope="col">이름</th>
-                                            <th scope="col">이메일</th>
-                                            <th scope="col">전화번호</th>
-                                            <th scope="col">기업명</th>
-                                            <th scope="col">상태</th>
-                                            <th scope="col"></th>
-                                            <th scope="col"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach items="${requestScope.vo}" var="dto">
-                                            <c:set var="i" value="${i+1}" />
-                                            <tr>
-                                                <th scope="row">${i}</th>
-                                                <td>${dto.id}</td>
-                                                <td>${dto.name}</td>
-                                                <td>${dto.email}</td>
-                                                <td>${dto.phone}</td>
-                                                <td>${dto.company}</td>
-                                                <td>${dto.status}</td>
-                                                <td class="wait"><a href="#">O</a></td>
-                                                <td class="waitNo"><a href="#">X</a></td>
-                                            </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-		            </div>
-                    
+					</ul>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">아이디</th>
+								<th scope="col">이름</th>
+								<th scope="col">이메일</th>
+								<th scope="col">전화번호</th>
+								<th scope="col">기업명</th>
+								<th scope="col">상태</th>
+								<th scope="col"></th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${requestScope.vo}" var="dto">
+								<c:set var="i" value="${i+1}" />
+								<tr>
+									<th scope="row">${i}</th>
+									<td>${dto.id}</td>
+									<td>${dto.name}</td>
+									<td>${dto.email}</td>
+									<td>${dto.phone}</td>
+									<td>${dto.company}</td>
+									<td>${dto.status}</td>
+									<td class="wait"><a href="#">O</a></td>
+									<td class="waitNo"><a href="#">X</a></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+
+					<div id="page">
+						<nav aria-label="Page navigation example">
+							<ul class="pagination">
+								<li class="page-item" value="${pager.pre}" id="pre"><a
+									class="page-link" href="./seller?wait=${pager.page-1}"
+									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+								</a></li>
+
+								<c:forEach var="i" begin="${pager.startNum}"
+									end="${pager.lastNum}">
+									<li class="page-item ${pager.page==i? 'active':''}"><a
+										class="page-link" href="./seller?wait=${i}">${i}</a></li>
+								</c:forEach>
+
+								<li class="page-item ${pager.next?'':'disabled'}" id="next">
+									<a class="page-link" href="./seller?Wait=${pager.page+1}"
+									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+								</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+					<!-- End of Page -->
+				</div>
+			</div>
+
+		</div>
+				</div>
+
+                        
                 </div>
                 <!-- /.container-fluid -->
             </div>

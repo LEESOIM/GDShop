@@ -9,7 +9,7 @@ prefix="c" %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
 
-	<c:import url="../template/library.jsp"></c:import>
+   <c:import url="../template/library.jsp"></c:import>
     <link rel="stylesheet" href="/css/mypage.css" />
     <link rel="stylesheet" href="/css/info.css" />
     <link rel="stylesheet" href="/css/index.css" />
@@ -44,7 +44,7 @@ prefix="c" %>
                 text-align: center;
               "
             >
-              <div class="pt-4" style="font-size: 20px"><b>본인확인</b></div>
+              <div class="pt-4" style="font-size: 20px"><b>본인확인<i class="fa-solid fa-circle-info ms-2" data-toggle="tooltip" data-bs-placement="top" data-custom-class="custom-tooltip" data-bs-title="소셜로그인 사용자는 내정보의 아이디를 입력하여주세요."></i></b></div>
               <div class="pt-3">
                 고객님의 소중한 개인정보보호를 위해서 본인확인을 진행합니다.
               </div>
@@ -76,47 +76,54 @@ prefix="c" %>
             
             <button id="pwCheck_modal" data-bs-toggle="modal" data-bs-target="#exampleModal_setPw_input" style="display: none"></button>
             <!-- 비밀번호 재입력안내 -->
-		    <div
-		      class="modal fade"
-		      id="exampleModal_setPw_input"
-		      tabindex="-1"
-		      aria-labelledby="exampleModalLabel"
-		      aria-hidden="true"
-		    >
-		      <div class="modal-dialog modal-dialog-centered">
-		        <div class="modal-content">
-		          <div class="modal-body">
-		            <div class="d-flex pt-4">
-		              <div class="ps-4 pe-3" style="font-size: 28px; color: red">
-		                <i class="fa-solid fa-triangle-exclamation"></i>
-		              </div>
-		              <div
-		                class="pt-2"
-		                style="color: red; font-size: 17px; line-height: 28px"
-		              >
-		                <b id="pwCheck_setText">비밀번호가 일치하지 않습니다.</b>
-		              </div>
-		            </div>
-		          </div>
-		          <div class="d-flex justify-content-end pb-4 ps-4 pe-4">
-		            <button
-		              type="button"
-		              class="btn btn-success"
-		              style="border-radius: 18px; padding: 6px 18px"
-		              data-bs-dismiss="modal"
-		            >
-		              확인
-		            </button>
-		          </div>
-		        </div>
-		      </div>
-		    </div>
+          <div
+            class="modal fade"
+            id="exampleModal_setPw_input"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <div class="d-flex pt-4">
+                    <div class="ps-4 pe-3" style="font-size: 28px; color: red">
+                      <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                    <div
+                      class="pt-2"
+                      style="color: red; font-size: 17px; line-height: 28px"
+                    >
+                      <b id="pwCheck_setText">비밀번호가 일치하지 않습니다.</b>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-end pb-4 ps-4 pe-4">
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    style="border-radius: 18px; padding: 6px 18px"
+                    data-bs-dismiss="modal"
+                  >
+                    확인
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
             <!-- 여기까지!! -->
           </div>
         </div>
       </div>
     </section>
       <c:import url="../template/footer.jsp"></c:import>
+      
+      <!-- 툴팁 활성화 -->
+    <script>
+     $(document).ready(function(){
+       $('[data-toggle="tooltip"]').tooltip();   
+     });
+   </script>
 
     <script src="/js/info.js"></script>
   </body>

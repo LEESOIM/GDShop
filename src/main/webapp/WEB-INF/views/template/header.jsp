@@ -3,14 +3,14 @@ pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
 prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-    <nav class="navbar navbar-expand-lg header" style="padding: 6px;">
+    <nav class="navbar navbar-expand-lg header">
       <div class="container-fluid" style="padding: 0px; width: 68%">
-        <a class="navbar-brand" href="/" style="margin-right: 2em"
+        <a class="navbar-brand" href="/" style="margin-right: 1.2em"
           ><img
             src="/images/h.png"
             alt="Logo"
-            width="170"
-            height="60"
+            width="169"
+            height="62"
             class="d-inline-block align-text-top"/></a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -51,21 +51,24 @@ prefix="c" %>
             <!-- 로그인후 해당 블록 보이기 -->
             <sec:authorize access="isAuthenticated()">
             <div class="me-3">
-              <b id="id1" style="font-size: 17.5px; color: rgb(9, 118, 31)"><sec:authentication property="Principal" var="user"/>${user.id}</b>님
+              <b id="id1" style="font-size: 17.5px; color: rgb(9, 118, 31)"><sec:authentication property="Principal" var="user"/>
+              <c:if test="${empty user.name}">${user.id}</c:if>
+              <c:if test="${not empty user.name}">${user.name}</c:if>
+              </b>님
               환영합니다!💚
             </div>
             
             <div class="top-dropdown">
-		      <div class="log">
+            <div class="log">
               <a href="/member/mypage"><b>마이페이지</b></a>
-           	  </div>
-		      <div class="dropdown-content">
-		      <sec:authorize access="hasRole('SELLER')">
-				      <a href="/member/product">내 상품</a>
-		       </sec:authorize>
-		      	<a href="#">내 캠페인</a>
-		      </div>
-		    </div>
+                </div>
+            <div class="dropdown-content">
+            <sec:authorize access="hasRole('SELLER')">
+                  <a href="/member/product">내 상품</a>
+             </sec:authorize>
+               <a href="/myCampaign/apply">내 캠페인</a>
+            </div>
+          </div>
             
             </sec:authorize>
           </div>
@@ -105,14 +108,14 @@ prefix="c" %>
               </div>
               <div style="height: 68px">
                 <div id="email_icon"><i class="fa-regular fa-user"></i></div>
-                <input type="text" placeholder="아이디" id="id" name="id" value="seller" />
+                <input type="text" placeholder="아이디" id="id" name="id" value="${cookie.userId.value}" />
                 <div class="inp" id="inp_id" style="display: none">아이디를 입력해주세요.</div>
               </div>
               <div style="height: 68px">
                 <div id="pw_icon">
                   <i class="fa-solid fa-lock"></i>
                 </div>
-                <input type="password" placeholder="비밀번호" id="pw" name="pw" value="sell1234!"/>
+                <input type="password" placeholder="비밀번호" id="pw" name="pw"/>
                 <div class="inp" id="inp_pw" style="display: none">비밀번호를 입력해주세요.</div>
               </div>
               <div
@@ -159,19 +162,19 @@ prefix="c" %>
                 >
                 <div class="d-flex justify-content-center pt-3">
                   <div class="pe-3">
-                  	<a href="/oauth2/authorization/kakao">
+                     <a href="/oauth2/authorization/kakao">
                     <img
                       src="/images/kakaotalk_logo_icon_147272.png"
                       style="width: 38px; height: 38px"
                     /></a>
                   </div>
                   <div class="pe-3">
-                  	<a href="#">
+                     <a href="/oauth2/authorization/naver">
                     <img src="/images/naver.png" style="width: 38px; height: 38px" />
-                  	</a>
+                     </a>
                   </div>
                   <div>
-                  	<a href="#">
+                     <a href="/oauth2/authorization/google">
                     <img
                       src="/images/google.png"
                       style="width: 38px; height: 38px"
@@ -186,7 +189,7 @@ prefix="c" %>
       </div>
     </div>
 
-    <script>
+<script>
    
       if($("#id1").text()!=""){
         
@@ -209,4 +212,4 @@ prefix="c" %>
         })
       }
   
-    </script>
+</script>

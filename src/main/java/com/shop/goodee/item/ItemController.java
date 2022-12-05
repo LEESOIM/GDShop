@@ -49,12 +49,18 @@ public class ItemController {
 		return mv;
 	}
 
+	//디테일
 	@GetMapping("detail")
-	public void getDetail() {
-
+	public ModelAndView getDetail(ItemVO itemVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		itemVO = itemService.getDetail(itemVO);
+		log.info("캠페인번호 {} :", itemVO.getItemNum());
+		mv.addObject("vo", itemVO);
+		mv.setViewName("/item/detail");
+		return mv;
 	}
 
-	// 상품수정요청
+	//상품수정요청
 	@GetMapping("update")
 	public ModelAndView setUpdate(ItemVO itemVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
@@ -84,7 +90,7 @@ public class ItemController {
 	}
 	
 
-	// 상품삭제요청
+	//상품삭제요청
 	@GetMapping("delete")
 	@ResponseBody
 	public int setStatusDel(HttpSession session, ItemVO itemVO) throws Exception {

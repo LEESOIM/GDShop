@@ -62,7 +62,6 @@
 		DELETE FROM ITEM_FILE WHERE FILENUM=#{fileNum}
 	</delete>
 	
-	
 	<update id="setStatusDel" parameterType="ItemVO">
 		UPDATE ITEM SET STATUS=3 WHERE ID=#{id} and ITEMNUM=#{itemNum}
 	</update>

@@ -4,212 +4,222 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    
 <mapper namespace="com.shop.goodee.member.MemberMapper">
-	<!-- 회원가입 -->
-	<insert id="setJoin" parameterType="MemberVO">
-		INSERT INTO MEMBER VALUES (#{id},#{pw},#{name},#{email},#{birth},#{phone},0,0,0,NOW(),1,NULL,NOW())
-	</insert>
-	<!-- 회원등급부여 -->
-	<insert id="setMemberRole" parameterType="MemberVO">
-		INSERT INTO MEMBER_ROLE VALUES (#{id},'4')
-	</insert>
-	<!-- 아이디 확인 -->
-	<select id="getIdCheck" parameterType="MemberVO" resultType="Integer">
-		SELECT COUNT(id) FROM MEMBER WHERE ID=#{id}
-	</select>
-	
-	<!-- 아이디 찾기 -->
-	<select id="getFindId" parameterType="MemberVO" resultType="String">
-		SELECT ID FROM MEMBER WHERE NAME=#{name} AND BIRTH=#{birth} AND PHONE=#{phone}
-	</select>
-	<!-- 비밀번호 찾기 -->
-	<select id="getFindPw" parameterType="MemberVO" resultType="String">
-		SELECT EMAIL FROM MEMBER WHERE ID =#{id} AND BIRTH=#{birth} AND PHONE=#{phone}
-	</select>
-	<!-- 임시비밀번호 변경 -->
-	<update id="setNewPw" parameterType="MemberVO">
-		UPDATE MEMBER SET pw=#{pw} WHERE email=#{email}
-	</update>
-	
-	<!-- 로그인 -->
-	<select id="getLogin" parameterType="String" resultMap="getLoginResult">
-		SELECT M.*, R.* 
-			FROM MEMBER M
-			INNER JOIN
-			MEMBER_ROLE MR
-			ON M.ID = MR.ID
-			INNER JOIN
-			ROLE R
-			ON MR.ROLENUM = R.ROLENUM
-		WHERE M.ID=#{username} AND M.STATUS=1
-	</select>
-	
-	<resultMap type="MemberVO" id="getLoginResult">
-		<id column="id" property="id"/>
-		<result column="pw" property="pw"/>
-		<result column="name" property="name"/>
-		<result column="email" property="email"/>
-		<result column="birth" property="birth"/>
-		<result column="phone" property="phone"/>
-		<result column="point" property="point"/>
-		<result column="point_3" property="point_3"/>
-		<result column="point_result" property="point_result"/>
-		<result column="regDate" property="regDate"/>
-		<result column="status" property="status"/>
-		<result column="nickName" property="nickName"/>
-		<result column="byeDate" property="byeDate"/>
-		<collection property="roleVOs" javaType="List" ofType="RoleVO">
-			<id column="roleNum" property="roleNum"/>
-			<result column="roleName" property="roleName"/>
-		</collection>
-	</resultMap>
-	
-	<!-- 마이페이지 -->
-	<select id="getMypage" parameterType="MemberVO" resultMap="getDetailResult">
-		SELECT M.*,MF.* FROM MEMBER M
-			INNER JOIN
-			MEMBER_FILE MF
-			ON (M.ID=MF.ID)
-		WHERE M.ID=#{id}
-	</select>
-	
-	<resultMap type="MemberVO" id="getDetailResult">
-		<id column="id" property="id"/>
-		<result column="pw" property="pw"/>
-		<result column="name" property="name"/>
-		<result column="email" property="email"/>
-		<result column="birth" property="birth"/>
-		<result column="phone" property="phone"/>
-		<result column="point" property="point"/>
-		<result column="point_3" property="point_3"/>
-		<result column="point_result" property="point_result"/>
-		<result column="regDate" property="regDate"/>
-		<result column="status" property="status"/>
-		<result column="nickName" property="nickName"/>
-		<result column="byeDate" property="byeDate"/>
-		<collection property="memberFileVO" javaType="MemberFileVO" ofType="MemberFileVO">
-			<result column="fileName" property="fileName"/>
-			<result column="oriName" property="oriName"/>
-		</collection>
-	</resultMap>
-	
-	<!-- 프로필사진 추가 -->
-	<insert id="setProfile" parameterType="MemberFileVO">
-		INSERT INTO MEMBER_FILE VALUES(NULL, #{id}, #{fileName}, #{oriName})
-	</insert>
-	<!-- 프로필사진 확인 -->
-	<select id="getProfile" parameterType="MemberFileVO" resultType="MemberFileVO">
-		SELECT * FROM MEMBER_FILE WHERE ID=#{id}
-	</select>
-	<!-- 프로필 사진 삭제 후 default이미지로 업데이트 -->
-	<update id="setProfileUpdate" parameterType="MemberFileVO">
-		UPDATE MEMBER_FILE SET FILENAME=#{fileName}, ORINAME=#{oriName} WHERE ID=#{id}
-	</update>
-	
-	<!-- 내 정보 확인 및 설정 -->
-	<!-- 본인확인(패스워드 일치 확인) -->
-	<select id="getPwCheck" parameterType="MemberVO" resultType="Integer">
-		SELECT COUNT(ID) FROM MEMBER WHERE ID=#{id} AND PW=#{password}
-	</select>
-	<!-- 메일주소 변경 -->
-	<update id="setChangeEmail" parameterType="MemberVO">
-		UPDATE MEMBER SET EMAIL=#{email} WHERE ID=#{id}
-	</update>
-	<!-- 폰번호 변경 -->
-	<update id="setChangePhone" parameterType="MemberVO">
-		UPDATE MEMBER SET PHONE=#{phone} WHERE ID=#{id}
-	</update>
-	<!-- 비밀번호 변경 -->
-	<update id="setChangePw" parameterType="MemberVO">
-		UPDATE MEMBER SET PW=#{pw} WHERE ID=#{id}
-	</update>
-	<!-- 회원 탈퇴 -->
-	<update id="setWithdrawal" parameterType="MemberVO">
-		UPDATE MEMBER SET STATUS=0, POINT=0, POINT_3=0, POINT_RESULT=0, REGDATE=NOW(), BYEDATE=DATE_ADD(REGDATE, INTERVAL 3 MONTH) WHERE ID=#{id}
-	</update>
-	<!-- 탈퇴일 +1씩 증가 (삭제날짜와 같아지면 DELETE)-->
-	<update id="setRegdateAdd" parameterType="MemberVO">
-		UPDATE MEMBER SET REGDATE=DATE_ADD(REGDATE, INTERVAL 1 DAY) WHERE id=#{id}
-	</update>
-	<!-- 탈퇴한 회원조회 -->
-	<select id="getWithdrawal" resultType="MemberVO">
-		SELECT ID, REGDATE, BYEDATE FROM MEMBER WHERE STATUS = 0
-	</select>
-	<!-- 탈퇴 회원삭제 -->
-	<delete id="setUserDelete" parameterType="MemberVO">
-		DELETE FROM MEMBER WHERE ID=#{id}
-	</delete>
-	
-	<!-- 내포인트 - 적립 예정 포인트 확인 -->
-	<select id="getPoint" parameterType="MemberVO" resultType="Integer">
-		SELECT POINT FROM MEMBER WHERE ID=#{id}
-	</select>
-	
-	<!-- 내포인트 - 3일 뒤 포인트 적립(적립예정포인트 : 0) -->
-	<update id="setPoint_3">
-		UPDATE MEMBER SET POINT_3=POINT+POINT_3, POINT=0
-	</update>
-	
-	<!-- 내포인트 - 3일 뒤 적립 된 포인트 조회 -->
-	<select id="getPoint_3" parameterType="MemberVO" resultType="Integer">
-		SELECT POINT_3 FROM MEMBER WHERE ID=#{id}
-	</select>
-	
-	<!-- 내포인트 - 출금신청 후 적립 포인트 변경 -->
-	<update id="setResultPoint_3" parameterType="MemberVO">
-		UPDATE MEMBER SET POINT_3=#{point_3} WHERE ID=#{id}
-	</update>
-	
-	<!-- 내포인트 - 출금신청 후 출금예정 포인트 변경 -->
-	<update id="setResultPoint" parameterType="MemberVO">
-		UPDATE MEMBER SET POINT_RESULT=#{point_result}+POINT_RESULT WHERE ID=#{id}
-	</update>
-	
-	<!-- 내등급 - VIP등급 확인 -->
-	<select id="getVIP" parameterType="MemberVO" resultType="Integer">
-		SELECT COUNT(id) FROM MEMBER_ROLE WHERE ROLENUM=3 AND ID=#{id}
-	</select>
-	
-	<!-- 내등급 - VIP등급 페이지 출력 -->
-	<select id="getVIPlist" parameterType="MemberVO" resultType="MemberVO">
-		SELECT * FROM MEMBER_ROLE WHERE ROLENUM=3 AND ID=#{id}
-	</select>
-	
-	<!-- 내 판매상품 - 상품등록 신청한 목록 확인(판매자 페이지) --> 
- 	<select id="getSellerProduct" parameterType="MemberVO" resultMap="getProductResult">
-		SELECT I.ITEMNUM, I.STATUS, I.TITLE, I.TYPE, I.COUNT, I.SHOP, I.PRICE, I.POINT, ITF.FILENAME 
-		FROM MEMBER M
-		INNER JOIN
-		MEMBER_ROLE MR
-		ON (M.ID=MR.ID)
-		INNER JOIN
-		ITEM I
-		ON (MR.ID=I.ID)
-		INNER JOIN
-		ITEM_FILE ITF
-		ON (I.ITEMNUM = ITF.ITEMNUM)
-		WHERE MR.ROLENUM=2 AND M.ID=#{id} 
-		GROUP BY I.ITEMNUM
-		ORDER BY I.ITEMNUM DESC
-	</select>
-	
-	<resultMap type="ItemVO" id="getProductResult">
-		<collection property="items" javaType="List" ofType="ItemVO">
-			<id column="itemNum" property="itemNum"/>
-			<result column="status" property="status"/>
-			<result column="title" property="title"/>
-			<result column="type" property="type"/>
-			<result column="count" property="count"/>
-			<result column="shop" property="shop"/>
-			<result column="price" property="price"/>
-			<result column="point" property="point"/>
-		</collection>
-		<collection property="itemFileVOs" javaType="List" ofType="ItemFileVO">
-			<result column="fileName" property="fileName"/>
-		</collection>
-	</resultMap>
-	
-	<!-- 닉네임 변경 -->
-	<update id="setNickName" parameterType="MemberVO">
-		UPDATE MEMBER SET NICKNAME=#{nickName} WHERE ID=#{id}
-	</update>
+   <!-- 회원가입 -->
+   <insert id="setJoin" parameterType="MemberVO">
+      INSERT INTO MEMBER VALUES (#{id},#{pw},#{name},#{email},#{birth},#{phone},0,0,0,NOW(),1,NULL,NULL,NOW(),#{social})
+   </insert>
+   <!-- 회원등급부여 -->
+   <insert id="setMemberRole" parameterType="MemberVO">
+      INSERT INTO MEMBER_ROLE VALUES (#{id},'4')
+   </insert>
+   <!-- 아이디 확인 -->
+   <select id="getIdCheck" parameterType="MemberVO" resultType="Integer">
+      SELECT COUNT(id) FROM MEMBER WHERE ID=#{id}
+   </select>
+   
+   <!-- 아이디 찾기 -->
+   <select id="getFindId" parameterType="MemberVO" resultType="String">
+      SELECT ID FROM MEMBER WHERE NAME=#{name} AND BIRTH=#{birth} AND PHONE=#{phone}
+   </select>
+   <!-- 비밀번호 찾기 -->
+   <select id="getFindPw" parameterType="MemberVO" resultType="String">
+      SELECT EMAIL FROM MEMBER WHERE ID =#{id} AND BIRTH=#{birth} AND PHONE=#{phone}
+   </select>
+   <!-- 임시비밀번호 변경 -->
+   <update id="setNewPw" parameterType="MemberVO">
+      UPDATE MEMBER SET pw=#{pw} WHERE email=#{email}
+   </update>
+   
+   <!-- 로그인 -->
+   <select id="getLogin" parameterType="String" resultMap="getLoginResult">
+      SELECT M.*, R.* 
+         FROM MEMBER M
+         INNER JOIN
+         MEMBER_ROLE MR
+         ON M.ID = MR.ID
+         INNER JOIN
+         ROLE R
+         ON MR.ROLENUM = R.ROLENUM
+      WHERE M.ID=#{username} AND M.STATUS=1
+   </select>
+   
+   <resultMap type="MemberVO" id="getLoginResult">
+      <id column="id" property="id"/>
+      <result column="pw" property="pw"/>
+      <result column="name" property="name"/>
+      <result column="email" property="email"/>
+      <result column="birth" property="birth"/>
+      <result column="phone" property="phone"/>
+      <result column="point" property="point"/>
+      <result column="point_3" property="point_3"/>
+      <result column="point_result" property="point_result"/>
+      <result column="regDate" property="regDate"/>
+      <result column="status" property="status"/>
+      <result column="nickName" property="nickName"/>
+      <result column="nickName_N" property="nickName_N"/>
+      <result column="byeDate" property="byeDate"/>
+      <result column="social" property="social"/>
+      <collection property="roleVOs" javaType="List" ofType="RoleVO">
+         <id column="roleNum" property="roleNum"/>
+         <result column="roleName" property="roleName"/>
+      </collection>
+   </resultMap>
+   
+   <!-- 마이페이지 -->
+   <select id="getMypage" parameterType="MemberVO" resultMap="getDetailResult">
+      SELECT M.*,MF.* FROM MEMBER M
+         INNER JOIN
+         MEMBER_FILE MF
+         ON (M.ID=MF.ID)
+      WHERE M.ID=#{id}
+   </select>
+   
+   <resultMap type="MemberVO" id="getDetailResult">
+      <id column="id" property="id"/>
+      <result column="pw" property="pw"/>
+      <result column="name" property="name"/>
+      <result column="email" property="email"/>
+      <result column="birth" property="birth"/>
+      <result column="phone" property="phone"/>
+      <result column="point" property="point"/>
+      <result column="point_3" property="point_3"/>
+      <result column="point_result" property="point_result"/>
+      <result column="regDate" property="regDate"/>
+      <result column="status" property="status"/>
+      <result column="nickName" property="nickName"/>
+      <result column="nickName_N" property="nickName_N"/>
+      <result column="byeDate" property="byeDate"/>
+      <result column="social" property="social"/>
+      <collection property="memberFileVO" javaType="MemberFileVO" ofType="MemberFileVO">
+         <result column="fileName" property="fileName"/>
+         <result column="oriName" property="oriName"/>
+      </collection>
+   </resultMap>
+   
+   <!-- 프로필사진 추가 -->
+   <insert id="setProfile" parameterType="MemberFileVO">
+      INSERT INTO MEMBER_FILE VALUES(NULL, #{id}, #{fileName}, #{oriName})
+   </insert>
+   <!-- 프로필사진 확인 -->
+   <select id="getProfile" parameterType="MemberFileVO" resultType="MemberFileVO">
+      SELECT * FROM MEMBER_FILE WHERE ID=#{id}
+   </select>
+   <!-- 프로필 사진 삭제 후 default이미지로 업데이트 -->
+   <update id="setProfileUpdate" parameterType="MemberFileVO">
+      UPDATE MEMBER_FILE SET FILENAME=#{fileName}, ORINAME=#{oriName} WHERE ID=#{id}
+   </update>
+   
+   <!-- 내 정보 확인 및 설정 -->
+   <!-- 본인확인(패스워드 일치 확인) -->
+   <select id="getPwCheck" parameterType="MemberVO" resultType="Integer">
+      SELECT COUNT(ID) FROM MEMBER WHERE ID=#{id} AND PW=#{password}
+   </select>
+   <!-- 메일주소 변경 -->
+   <update id="setChangeEmail" parameterType="MemberVO">
+      UPDATE MEMBER SET EMAIL=#{email} WHERE ID=#{id}
+   </update>
+   <!-- 폰번호 변경 -->
+   <update id="setChangePhone" parameterType="MemberVO">
+      UPDATE MEMBER SET PHONE=#{phone} WHERE ID=#{id}
+   </update>
+   <!-- 비밀번호 변경 -->
+   <update id="setChangePw" parameterType="MemberVO">
+      UPDATE MEMBER SET PW=#{pw} WHERE ID=#{id}
+   </update>
+   <!-- 회원 탈퇴 -->
+   <update id="setWithdrawal" parameterType="MemberVO">
+      UPDATE MEMBER SET STATUS=0, POINT=0, POINT_3=0, POINT_RESULT=0, REGDATE=NOW(), BYEDATE=DATE_ADD(REGDATE, INTERVAL 3 MONTH) WHERE ID=#{id}
+   </update>
+   <!-- 탈퇴일 +1씩 증가 (삭제날짜와 같아지면 DELETE)-->
+   <update id="setRegdateAdd" parameterType="MemberVO">
+      UPDATE MEMBER SET REGDATE=DATE_ADD(REGDATE, INTERVAL 1 DAY) WHERE id=#{id}
+   </update>
+   <!-- 탈퇴한 회원조회 -->
+   <select id="getWithdrawal" resultType="MemberVO">
+      SELECT ID, REGDATE, BYEDATE FROM MEMBER WHERE STATUS = 0
+   </select>
+   <!-- 탈퇴 회원삭제 -->
+   <delete id="setUserDelete" parameterType="MemberVO">
+      DELETE FROM MEMBER WHERE ID=#{id}
+   </delete>
+   
+   <!-- 내포인트 - 적립 예정 포인트 확인 -->
+   <select id="getPoint" parameterType="MemberVO" resultType="Integer">
+      SELECT POINT FROM MEMBER WHERE ID=#{id}
+   </select>
+   
+   <!-- 내포인트 - 3일 뒤 포인트 적립(적립예정포인트 : 0) -->
+   <update id="setPoint_3">
+      UPDATE MEMBER SET POINT_3=POINT+POINT_3, POINT=0
+   </update>
+   
+   <!-- 내포인트 - 3일 뒤 적립 된 포인트 조회 -->
+   <select id="getPoint_3" parameterType="MemberVO" resultType="Integer">
+      SELECT POINT_3 FROM MEMBER WHERE ID=#{id}
+   </select>
+   
+   <!-- 내포인트 - 출금신청 후 적립 포인트 변경 -->
+   <update id="setResultPoint_3" parameterType="MemberVO">
+      UPDATE MEMBER SET POINT_3=#{point_3} WHERE ID=#{id}
+   </update>
+   
+   <!-- 내포인트 - 출금신청 후 출금예정 포인트 변경 -->
+   <update id="setResultPoint" parameterType="MemberVO">
+      UPDATE MEMBER SET POINT_RESULT=#{point_result}+POINT_RESULT WHERE ID=#{id}
+   </update>
+   
+   <!-- 내등급 - VIP등급 확인 -->
+   <select id="getVIP" parameterType="MemberVO" resultType="Integer">
+      SELECT COUNT(id) FROM MEMBER_ROLE WHERE ROLENUM=3 AND ID=#{id}
+   </select>
+   
+   <!-- 내등급 - VIP등급 페이지 출력 -->
+   <select id="getVIPlist" parameterType="MemberVO" resultType="MemberVO">
+      SELECT * FROM MEMBER_ROLE WHERE ROLENUM=3 AND ID=#{id}
+   </select>
+   
+   <!-- 내 판매상품 - 상품등록 신청한 목록 확인(판매자 페이지) --> 
+    <select id="getSellerProduct" parameterType="MemberVO" resultMap="getProductResult">
+      SELECT I.ITEMNUM, I.STATUS, I.TITLE, I.TYPE, I.COUNT, I.SHOP, I.PRICE, I.POINT, ITF.FILENAME 
+      FROM MEMBER M
+      INNER JOIN
+      MEMBER_ROLE MR
+      ON (M.ID=MR.ID)
+      INNER JOIN
+      ITEM I
+      ON (MR.ID=I.ID)
+      INNER JOIN
+      ITEM_FILE ITF
+      ON (I.ITEMNUM = ITF.ITEMNUM)
+      WHERE MR.ROLENUM=2 AND M.ID=#{id}
+      GROUP BY I.ITEMNUM
+      ORDER BY I.ITEMNUM DESC
+   </select>
+   
+   <resultMap type="ItemVO" id="getProductResult">
+      <collection property="items" javaType="List" ofType="ItemVO">
+         <id column="itemNum" property="itemNum"/>
+         <result column="status" property="status"/>
+         <result column="title" property="title"/>
+         <result column="type" property="type"/>
+         <result column="count" property="count"/>
+         <result column="shop" property="shop"/>
+         <result column="price" property="price"/>
+         <result column="point" property="point"/>
+      </collection>
+      <collection property="itemFileVOs" javaType="List" ofType="ItemFileVO">
+         <result column="fileName" property="fileName"/>
+      </collection>
+   </resultMap>
+   
+   <!-- 쿠팡 닉네임 변경 -->
+   <update id="setNickName" parameterType="MemberVO">
+      UPDATE MEMBER SET NICKNAME=#{nickName} WHERE ID=#{id}
+   </update>
+   
+   <!-- 네이버 닉네임 변경 -->
+   <update id="setNickName_N" parameterType="MemberVO">
+      UPDATE MEMBER SET NICKNAME_N=#{nickName_N} WHERE ID=#{id}
+   </update>
+   
 </mapper>

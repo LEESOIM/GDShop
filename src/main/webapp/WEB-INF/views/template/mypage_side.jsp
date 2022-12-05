@@ -15,7 +15,7 @@
       "
     />
     <div class="ms-2">
-      <div><span style="color: green"><sec:authentication property="Principal.name"/></span> 회원님,</div>
+      <div><span style="color: green">${memberVO.name}</span> 회원님,</div>
       <div>커피 한 잔과 구디샵!</div>
     </div>
   </div>
@@ -49,17 +49,18 @@
       </li>
       </a>
       </form>
+      <a href="/myCampaign/apply" style="text-decoration: none">
       <li class="list-group-item">
         <i class="fa-solid fa-arrow-pointer ps-2 pe-3"></i>내 캠페인
       </li>
       <sec:authorize access="hasRole('SELLER')">
              <form action="product" method="get">
-      			<a href="./product" style="text-decoration: none">
-			      <li class="list-group-item" id="my_product">
-			        <i class="fa-brands fa-shopify ps-2 pe-3"></i>내 상품
-			      </li>
-			    </a>
-     		 </form>
+               <a href="./product" style="text-decoration: none">
+               <li class="list-group-item" id="my_product">
+                 <i class="fa-brands fa-shopify ps-2 pe-3"></i>내 상품
+               </li>
+             </a>
+            </form>
       </sec:authorize>
     </ol>
   </div>
