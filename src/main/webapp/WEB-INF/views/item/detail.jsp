@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,6 +30,7 @@
 	<c:import url="../template/header.jsp"></c:import>
 	<section class="container" style="width: 65%">
 		<div class="container">
+		<sec:authentication property="Principal" var="user"/>
 			<div class="content d-flex mt-4">
 				<div class="sidebar">
 					<div style="height: 260px; width: 260px">
@@ -57,14 +59,36 @@
 						<hr style="margin: 0;" />
 						<button class="btn btn-success w-100 mt-3" 
 							data-bs-target="#exampleModal_item" data-bs-whatever="@mdo" data-itemNum-num="${vo.itemNum }" id="applyCheck"><i class="fa-regular fa-pen-to-square me-2"></i>지원하기</button>
+						<a href="/mission/cancel?itemNum=${vo.itemNum}&id=${user.id}" class="applyCancel btn btn-outline-success w-100 mt-3" style="display: none">
+							<i class="fa-solid fa-x me-2"></i>지원취소</a>
 					</div>
 				</div>
+				
+				
 				<div style="width: 100%;">
 				<div id="mycam0" style="display: none;">
-				<div class="p-2" style="font-size:15px; border-radius: 4px; background-color: #fffbe6; border: 1px solid #ffe58f;">추첨형 캠페인에 지원 완료되었습니다. 모집 기간 동안 지원자를 모집한 후 랜덤으로 당첨자가 선정되며, 당첨자에게는 별도로 당첨 알림 톡이 발송됩니다.</div>
+				<div class="p-2" style="width: 90%; margin:0 auto; font-size:15px; border-radius: 4px; background-color: #fffbe6; border: 1px solid #ffe58f;">추첨형 캠페인에 지원 완료되었습니다. 모집 기간 동안 지원자를 모집한 후 랜덤으로 당첨자가 선정되며, 당첨자에게는 별도로 당첨 알림 톡이 발송됩니다.</div>
 				</div>
+			
+			
+			<div class="pb-4" id="mycam1" style="display: none;">
+				<div style="width: 90%; margin:0 auto; margin-bottom: 50px; margin-top: 30px">
+				<b class="title" style="font-size: 18px">지금 해야할 미션 - <span style="color: green">구매하기</span></b>
+				<div class="progress">
+				  <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+				</div>
+				<div class="py-2 ps-3 mt-4" style="font-size:15px; border-radius: 4px; background-color: #fff1f0; border: 1px solid #ffa39e;">2시간  내에 구매 후 인증을 마치지 않으실 경우 자동으로 지원취소됩니다.</div>
+				<div class="d-flex" style="float: right;">
+					<a href="/mission/cancel?itemNum=${vo.itemNum}&id=${user.id}" class="applyCancel btn btn-outline-success mt-3 me-2">
+							<i class="fa-solid fa-x me-2"></i>참여취소</a>
+					<button class="applyCancel btn btn-success mt-3" data-itemNum-num="${vo.itemNum }" onclick="mission/cancel">
+							<i class="fa-regular fa-face-smile me-2"></i>미션수행카드</button>
+				</div>
+				</div>
+			</div>
+			
 				
-				<div style="padding: 30px 40px">
+			<div style="padding: 30px 40px">
 				<div class="pb-4" id="mycam">
 					<b class="title" style="font-size: 18px">캠페인 진행 정보</b>
 					<div class="d-flex mt-2" style="margin: -6px;">
@@ -109,12 +133,6 @@
 					</div>
 				</div>
 				
-				<div class="pb-4" id="mycam1" style="display: none;">
-				<b class="title" style="font-size: 18px">지금 해야할 미션</b>
-				<div class="progress">
-				  <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-				</div>
-				</div>
 				
 				<div class="pb-4" id="mycam2" style="display: none;">
 				<b class="title" style="font-size: 18px">모든 미션을 완료한 캠페인입니다.</b>
@@ -127,7 +145,7 @@
 					<b class="title" style="font-size: 18px">캠페인 기본 정보</b>
 					<div class="d-flex py-3" style="color: #666666">
 						<div style="margin:auto 0; width: 20%;"><b>캠페인 유형</b></div>
-						<div style="width: 79%; border-bottom: solid 0.5px #f0f0f0; "><span>${vo.type }</span></div>
+						<div style="width: 79%; border-bottom: solid 0.5px #f0f0f0;" data-type="${vo.type }" id="type"><span>${vo.type }</span></div>
 					</div>
 					<div class="d-flex py-3" style="color: #666666">
 						<div style="margin:auto 0; width: 20%;"><b>구매 링크</b></div>
@@ -145,27 +163,27 @@
 					<div class="my-3" style="font-size: 14px">미션은 아래 중 랜덤으로 부여되며, 미션에 대한 자세한 정보는 캠페인 참여 시 미션 수행 카드에서 확인 가능합니다.</div>
 					
 					<div id="accordionExample" style="background-color:rgb(243, 243, 243);" class="py-3">
-					    <button class="accordion-button py-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
+					    <button class="accordion-button py-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
 					       <i class="fa-solid fa-angle-right mx-3"></i> 구매하기
 					    </button>
 					    <div id="collapse1" class="accordion-collapse collapse ps-5" data-bs-parent="#accordionExample" style="font-size: 14px">
 						• 구매링크 바로가기 버튼을 클릭하여 구매 가이드에 맞게 구매를 진행해 주세요.(2시간  이내 구매 인증 필수)
 					    </div>
 					    
-					    <button class="accordion-button py-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
+					    <button class="accordion-button py-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
 					        <i class="fa-solid fa-angle-right mx-3"></i> 텍스트 리뷰
 					    </button>
 					    <div id="collapse2" class="accordion-collapse collapse ps-5" data-bs-parent="#accordionExample" style="font-size: 14px">
 					    • 상품 수령 후 해당 캠페인의 가이드를 확인하여 사진없이 텍스트 리뷰를 작성해 주세요.
 					    </div>
-					    <button class="accordion-button py-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
+					    <button class="accordion-button py-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
 					       <i class="fa-solid fa-angle-right mx-3"></i> 포토 리뷰
 					    </button>
 					    <div id="collapse3" class="accordion-collapse collapse ps-5" data-bs-parent="#accordionExample" style="font-size: 14px">
 						• 상품 수령 후 해당 캠페인의 가이드를 확인하여 텍스트와 사진을 첨부해서 리뷰를 작성해 주세요.
 					    </div>
 					    
-					    <button class="accordion-button py-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4">
+					    <button class="accordion-button py-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4">
 					        <i class="fa-solid fa-angle-right mx-3"></i> 배송완료인증
 					    </button>
 					    <div id="collapse4" class="accordion-collapse collapse ps-5" data-bs-parent="#accordionExample" style="font-size: 14px">

@@ -5,13 +5,15 @@
    
 <mapper namespace="com.shop.goodee.mission.MissionMapper">
 
-	<!-- 즉석추첨형 -->
+	<!-- 추첨형 -->
 	<insert id="setApply" parameterType="MissionVO">
-		INSERT INTO MISSION(MISSIONNUM, ITEMNUM, ID, APPLYDATE, STATUS, MYCAM) VALUES(NULL, #{itemNum}, #{id}, NOW(), 1, 1)
+		INSERT INTO MISSION(MISSIONNUM, ITEMNUM, ID, APPLYDATE, STATUS, MYCAM) VALUES(NULL, #{itemNum}, #{id}, NOW(), 0, 0)
 	</insert>
 	
-	<!-- 추첨형 -->
-	
+	<!-- 즉석추첨형 -->
+	<insert id="setApply_baro" parameterType="MissionVO">
+		INSERT INTO MISSION(MISSIONNUM, ITEMNUM, ID, APPLYDATE, STATUS, MYCAM) VALUES(NULL, #{itemNum}, #{id}, NOW(), 0, 1)
+	</insert>
 	
 	<!-- 지원내역 -->
 	<select id="getApply" parameterType="MissionVO" resultType="MissionVO">
@@ -22,6 +24,11 @@
 	<select id="getApplyCheck" parameterType="MissionVO" resultType="Long">
 		SELECT COUNT(ID) FROM MISSION WHERE ITEMNUM=#{itemNum} AND ID=#{id}
 	</select>
+	
+	<!-- 지원취소 -->
+	<delete id="setCancel" parameterType="MissionVO">
+		DELETE FROM MISSION WHERE ITEMNUM=#{itemNum} AND ID=#{id}
+	</delete>
 
 
 </mapper>

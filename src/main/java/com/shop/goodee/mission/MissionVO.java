@@ -13,4 +13,11 @@ public class MissionVO {
 	private Date finish;
 	private Long status;
 	private Long myCam;
+	
+	public MissionVO() {} 
+	
+	public MissionVO(Long status, Long myCam) {
+		this.status=status;
+		this.myCam=myCam;
+	}
 }

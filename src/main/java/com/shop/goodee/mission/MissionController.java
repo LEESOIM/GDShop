@@ -43,15 +43,18 @@ public class MissionController {
 		missionVO.setId(memberVO.getId());
 		
 		//지원하기
-		int result = missionService.setApply(missionVO);
-		return result;
+		if(itemVO.getType().equals("추첨형")) {
+			return missionService.setApply(missionVO);
+		} else {
+			return missionService.setApply_baro(missionVO);
+		}
 	}
 	
 	
 	//지원내역
 	@PostMapping("applyList")
 	@ResponseBody
-	public Long getApply(HttpSession session, ItemVO itemVO, MissionVO missionVO) throws Exception {
+	public MissionVO getApply(HttpSession session, ItemVO itemVO, MissionVO missionVO) throws Exception {
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
 		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
@@ -60,12 +63,14 @@ public class MissionController {
 		missionVO.setId(memberVO.getId());
 		
 		missionVO = missionService.getApply(missionVO);
-		Long result = missionVO.getMyCam();
-		log.info("===========지원내역 : {}", missionVO);
-		return result;
+		
+		MissionVO my = new MissionVO(missionVO.getStatus(), missionVO.getMyCam());
+		log.info("=====지원내역 : {}", missionVO);
+		return my;
 	}
 	
 	
+
 	//중복지원확인
 	@PostMapping("applyCheck")
 	@ResponseBody
@@ -79,6 +84,15 @@ public class MissionController {
 		
 		Long result = missionService.getApplyCheck(missionVO);
 		return result;
+	}
+	
+	
+	//지원취소
+	@GetMapping("cancel")
+	public String setCancel(MissionVO missionVO, ItemVO itemVO) throws Exception {
+		missionVO.setItemNum(itemVO.getItemNum());
+		int result = missionService.setCancel(missionVO);
+		return "redirect:/item/detail?itemNum="+itemVO.getItemNum();
 	}
 	
 }
