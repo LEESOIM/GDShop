@@ -17,7 +17,6 @@ function getTimer() {
 
         console.log('시작시간', start)
         console.log('종료시간', end)
-        console.log('회차', count)
 
         if (now < endTime) {
             let sec = parseInt(endTime - now) / 1000;

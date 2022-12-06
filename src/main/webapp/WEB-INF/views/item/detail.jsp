@@ -55,12 +55,17 @@
 							</div>
 						</div>
 						<hr style="margin: 0;" />
-						<button class="btn btn-success w-100 mt-3" data-bs-toggle="modal"
-							data-bs-target="#exampleModal_item" data-bs-whatever="@mdo">지원하기</button>
+						<button class="btn btn-success w-100 mt-3" 
+							data-bs-target="#exampleModal_item" data-bs-whatever="@mdo" data-itemNum-num="${vo.itemNum }" id="applyCheck"><i class="fa-regular fa-pen-to-square me-2"></i>지원하기</button>
 					</div>
 				</div>
-				<div style="width: 100%; padding: 40px">
-				<div class="pb-4">
+				<div style="width: 100%;">
+				<div id="mycam0" style="display: none;">
+				<div class="p-2" style="font-size:15px; border-radius: 4px; background-color: #fffbe6; border: 1px solid #ffe58f;">추첨형 캠페인에 지원 완료되었습니다. 모집 기간 동안 지원자를 모집한 후 랜덤으로 당첨자가 선정되며, 당첨자에게는 별도로 당첨 알림 톡이 발송됩니다.</div>
+				</div>
+				
+				<div style="padding: 30px 40px">
+				<div class="pb-4" id="mycam">
 					<b class="title" style="font-size: 18px">캠페인 진행 정보</b>
 					<div class="d-flex mt-2" style="margin: -6px;">
 						<div style="padding: 6px;">
@@ -103,7 +108,21 @@
 						</div>
 					</div>
 				</div>
-
+				
+				<div class="pb-4" id="mycam1" style="display: none;">
+				<b class="title" style="font-size: 18px">지금 해야할 미션</b>
+				<div class="progress">
+				  <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+				</div>
+				</div>
+				
+				<div class="pb-4" id="mycam2" style="display: none;">
+				<b class="title" style="font-size: 18px">모든 미션을 완료한 캠페인입니다.</b>
+					<div class="progress">
+					  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Animated striped example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+					</div>
+				</div>
+				
 				<div class="py-4">
 					<b class="title" style="font-size: 18px">캠페인 기본 정보</b>
 					<div class="d-flex py-3" style="color: #666666">
@@ -112,7 +131,7 @@
 					</div>
 					<div class="d-flex py-3" style="color: #666666">
 						<div style="margin:auto 0; width: 20%;"><b>구매 링크</b></div>
-						<div style="width: 79%; border-bottom: solid 0.5px #f0f0f0;"><a class="btn btn-primary btn-sm py-0" href="${vo.url}" target="_blank">구매링크 바로가기</a></div>
+						<div style="width: 79%; border-bottom: solid 0.5px #f0f0f0;"><a class="btn btn-success btn-sm py-0" href="${vo.url}" target="_blank">구매링크 바로가기</a></div>
 					</div>
 					<div class="d-flex py-3" style="color: #666666">
 						<div style="margin:auto 0; width: 20%;"><b>제공 내역</b></div>
@@ -200,6 +219,7 @@
 					회원이 구디샵 및 관련 사이트 내에 광고주의 상품과 관련된 문장, 리뷰, 이미지, 동영상 등을 게시한 콘텐츠(인스타, 블로그, 쇼핑몰 리뷰, 초상권이 포함된 게시물 등)는 마케팅 및 광고에 활용 될 수 있습니다.
 					</div>
 				</div>		
+			</div>
 			</div>
 			</div>
 		</div>

@@ -51,7 +51,6 @@ public class ItemController {
 	public ModelAndView getDetail(ItemVO itemVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		itemVO = itemService.getDetail(itemVO);
-		log.info("캠페인번호 {} :", itemVO.getItemNum());
 		mv.addObject("vo", itemVO);
 		mv.setViewName("/item/detail");
 		return mv;

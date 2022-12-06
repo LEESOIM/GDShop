@@ -5,8 +5,23 @@
    
 <mapper namespace="com.shop.goodee.mission.MissionMapper">
 
-	<insert id="setAdd" parameterType="MissionVO">
-		INSERT INTO MISSION VALUES(NULL, #{itemNum}, #{id}, NOW(), #{finish}, #{status}, #{myCam})
+	<!-- 즉석추첨형 -->
+	<insert id="setApply" parameterType="MissionVO">
+		INSERT INTO MISSION(MISSIONNUM, ITEMNUM, ID, APPLYDATE, STATUS, MYCAM) VALUES(NULL, #{itemNum}, #{id}, NOW(), 1, 1)
 	</insert>
+	
+	<!-- 추첨형 -->
+	
+	
+	<!-- 지원내역 -->
+	<select id="getApply" parameterType="MissionVO" resultType="MissionVO">
+		SELECT * FROM MISSION WHERE ITEMNUM=#{itemNum} AND ID=#{id}
+	</select>
+	
+	<!-- 중복지원확인 -->
+	<select id="getApplyCheck" parameterType="MissionVO" resultType="Long">
+		SELECT COUNT(ID) FROM MISSION WHERE ITEMNUM=#{itemNum} AND ID=#{id}
+	</select>
+
 
 </mapper>
