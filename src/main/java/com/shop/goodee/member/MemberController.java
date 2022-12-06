@@ -186,7 +186,6 @@ public class MemberController {
    @PostMapping("login")
    @ResponseBody
    public String getLogin(MemberVO memberVO)throws Exception{
-      log.info("로그인중!!");
       memberSecurityService.loadUserByUsername(memberVO.getId());
       return "/";
    }
