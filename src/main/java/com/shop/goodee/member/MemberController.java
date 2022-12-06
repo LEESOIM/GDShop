@@ -186,7 +186,6 @@ public class MemberController {
    @PostMapping("login")
    @ResponseBody
    public String getLogin(MemberVO memberVO)throws Exception{
-      log.info("로그인중!!");
       memberSecurityService.loadUserByUsername(memberVO.getId());
       return "/";
    }
@@ -418,7 +417,6 @@ public class MemberController {
       MemberVO sessionMemberVO = (MemberVO) authentication.getPrincipal();
       
       memberVO.setId(sessionMemberVO.getId());
-      
       int result = memberService.setChangePhone(memberVO);
       
       return result;
