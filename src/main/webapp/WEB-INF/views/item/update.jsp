@@ -260,7 +260,7 @@
 		</div>
 	</section>
 		<c:import url="../template/footer.jsp"></c:import>
-		<script src="/js/itemUpdate.js"></script>
-		<script src="/js/itemFile.js"></script>
+		<script src="/js/item/itemUpdate.js"></script>
+		<script src="/js/item/itemFile.js"></script>
 </body>
 </html>

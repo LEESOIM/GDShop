@@ -44,7 +44,8 @@ prefix="c" %>
               <div class="row mb-5">
               <c:forEach items="${ar}" var="item">
                  <div class="d-flex product_box col-6 m-2">
-                  <div><img src="/file/item/${item.itemFileVOs[0].fileName}" style="width: 170px; height: 100%; border-radius: 5px"/></div>
+                  <div><a href="/item/detail?itemNum=${item.items[0].itemNum }">
+                  <img src="/file/item/${item.itemFileVOs[0].fileName}" style="width: 170px; height: 100%; border-radius: 5px"/></a></div>
                   <div class="ps-4" style="width:60%">
                   	<div class="pb-2 pt-1" style="font-size: 22px; color: green;"><b>
                   	<c:choose>
@@ -89,6 +90,6 @@ prefix="c" %>
       </div>
     </section>
       <c:import url="../template/footer.jsp"></c:import>
-      <script src="/js/product.js"></script>
+      <script src="/js/item/product.js"></script>
   </body>
 </html>
