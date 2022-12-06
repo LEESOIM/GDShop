@@ -216,10 +216,23 @@
    <update id="setNickName" parameterType="MemberVO">
       UPDATE MEMBER SET NICKNAME=#{nickName} WHERE ID=#{id}
    </update>
-   
    <!-- 네이버 닉네임 변경 -->
    <update id="setNickName_N" parameterType="MemberVO">
       UPDATE MEMBER SET NICKNAME_N=#{nickName_N} WHERE ID=#{id}
    </update>
+   
+   <!-- 내 프로필 - 참여 미션수 -->
+   <!-- 내 프로필 - 지원대기 -->
+   <select id="getMissionCount0" parameterType="MissionVO" resultType="Integer">
+   	SELECT COUNT(MISSIONNUM) FROM MISSION WHERE ID=#{id} AND MYCAM=0
+   </select>
+   <!-- 내 프로필 - 지원중 -->
+   <select id="getMissionCount1" parameterType="MissionVO" resultType="Integer">
+   	SELECT COUNT(MISSIONNUM) FROM MISSION WHERE ID=#{id} AND MYCAM=1
+   </select>
+   <!-- 내 프로필 - 완료 -->
+   <select id="getMissionCount2" parameterType="MissionVO" resultType="Integer">
+   	SELECT COUNT(MISSIONNUM) FROM MISSION WHERE ID=#{id} AND MYCAM=2
+   </select>
    
 </mapper>

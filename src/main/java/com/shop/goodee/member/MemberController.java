@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shop.goodee.item.ItemVO;
+import com.shop.goodee.myCampaign.MissionVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -197,8 +198,16 @@ public class MemberController {
       Authentication authentication = context.getAuthentication();
       memberVO = (MemberVO) authentication.getPrincipal();
       memberVO = memberService.getMypage(memberVO);
+      MissionVO missionVO = new MissionVO();
+      missionVO.setId(memberVO.getId());
+      int count0 = memberService.getMissionCount0(missionVO);
+      int count1 = memberService.getMissionCount1(missionVO);
+      int count2 = memberService.getMissionCount2(missionVO);
       
       mv.addObject("memberVO", memberVO);
+      mv.addObject("count0", count0);
+      mv.addObject("count1", count1);
+      mv.addObject("count2", count2);
       mv.setViewName("/member/mypage");
       return mv;   
    }

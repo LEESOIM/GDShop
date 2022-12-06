@@ -26,6 +26,7 @@ import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.shop.goodee.item.ItemVO;
+import com.shop.goodee.myCampaign.MissionVO;
 import com.shop.goodee.util.FileManager;
 
 import lombok.extern.slf4j.Slf4j;
@@ -351,6 +352,17 @@ public class MemberService {
    public int setNickName_N(MemberVO memberVO)throws Exception{
       return memberMapper.setNickName_N(memberVO);
    }
-   
 
+   /* 내 프로필 - 미션 지원대기수 */
+   public int getMissionCount0(MissionVO missionVO)throws Exception{
+	   return memberMapper.getMissionCount0(missionVO);
+   }
+   /* 내 프로필 - 참여 미션수 */
+   public int getMissionCount1(MissionVO missionVO)throws Exception{
+	   return memberMapper.getMissionCount1(missionVO);
+   }
+   /* 내 프로필 - 미션 완료수 */
+   public int getMissionCount2(MissionVO missionVO)throws Exception{
+	   return memberMapper.getMissionCount2(missionVO);
+   }
 }

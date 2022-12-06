@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.shop.goodee.item.ItemVO;
+import com.shop.goodee.myCampaign.MissionVO;
 
 @Mapper
 public interface MemberMapper {
@@ -90,5 +91,12 @@ public interface MemberMapper {
    
    /* 마이페이지 - 네이버 닉네임 변경 */
    public int setNickName_N(MemberVO memberVO)throws Exception;
+   
+   /* 내 프로필 - 미션 지원대기수 */
+   public int getMissionCount0(MissionVO missionVO)throws Exception;
+   /* 내 프로필 - 참여 미션수 */
+   public int getMissionCount1(MissionVO missionVO)throws Exception;
+   /* 내 프로필 - 미션 완료수 */
+   public int getMissionCount2(MissionVO missionVO)throws Exception;
    
 }
