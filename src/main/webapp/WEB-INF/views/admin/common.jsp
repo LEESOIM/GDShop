@@ -63,7 +63,7 @@ pageEncoding="UTF-8"%>
                         </c:if>
                     </div>
                 </td>
-                <td><button data-bs-toggle="modal" data-bs-target="#missionModal">미션</button></td>
+                <td><button onclick="setMissionModal(this)" data-bs-toggle="modal" data-bs-target="#missionModal">미션</button></td>
                 <td>${memberVO.status}</td>
             </tr>
         </c:forEach>

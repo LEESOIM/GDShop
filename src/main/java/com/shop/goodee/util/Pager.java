@@ -21,6 +21,8 @@ public class Pager {
 	private String kind;
 	private String search;
 	private Long status;
+	private String id;
+	private Long myCam;
 	
 	public Pager() {
 		this.page=1L;

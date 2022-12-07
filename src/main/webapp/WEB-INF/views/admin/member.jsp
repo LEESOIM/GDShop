@@ -284,7 +284,7 @@ pageEncoding="UTF-8"%>
 
       <!-- Member Mission Modal-->
     <div class="modal fade" id="missionModal" tabindex="-1" aria-labelledby="missionModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="missionModalLabel">Mission</h1>
@@ -292,20 +292,30 @@ pageEncoding="UTF-8"%>
             </div>
             <div class="modal-body">
               <form>
-                <div class="mb-3">
-                  <label for="member-id" class="col-form-label">진행중인 미션:</label>
-                  <input type="text" class="form-control" id="member-id">
-                </div>
-                <div class="mb-3">
-                    <label for="member-roleName" class="col-form-label">완료 미션:</label>
-                    <input class="form-control" id="member-roleName"></input>
-                </div>
+                <div style="width: 80%; margin-bottom: 50px">
+                    <span class="input-group">
+                      <select name="kind" class="form-select" id="missionKind">
+                          <option class="kinds" value="id">ID</option>
+                          <option class="kinds" value="company">기업명</option>
+                      </select>
+                    <input type="text" name="search" value="${param.search}" class="form-control" id="missionSearch" onKeypress="javascript:if(event.keyCode==13) {search_onclick_subm()}" >
+                    <button type="button" class="btn btn-primary" id="missionSearch_btn">검색</button>
+                   </span>
+                      <ul class="nav nav-tabs">
+                          <li class="nav-item"><a class="nav-link active" id="ongoing" data-kind="1"  onclick="onGoing(this)" href="#">진행중</a></li>
+                          <li class="nav-item"><a class="nav-link" id="completed" data-kind="2" onclick="completed(this)" href="#">완료</a></li>
+                          <li class="nav-item"><a class="nav-link" id="cancel" data-kind="3" onclick="cancel(this)" href="#">취소</a></li>
+                          <li class="nav-item"><a class="nav-link" id="total" data-kind="total" onclick="totalHistory(this)" href="#">지원 내역</a></li>
+                      </ul>
+                      <input type="text" hidden id="totalmission">
+                      <div id="missionList">   
+                      </div>
+                  </div>
               
               </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Send message</button>
             </div>
           </div>
         </div>

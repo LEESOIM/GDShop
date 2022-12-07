@@ -40,7 +40,8 @@ function getMemberAjax(page){
     let roleName = $("input[name='roleName']:checked").val()
     let kind = $("select[name='kind']").val()
     let search = $("#search").val()
-
+    console.log("search",search)
+    
     $.ajax({
         type:"POST",
         URL:"member",
@@ -160,3 +161,98 @@ $(".memberRole").click(function(event){
     })
 })
 
+//=================== 미션 관리 =============================
+let selected = $("#ongoing")
+
+function setMissionModal(event){
+    console.log($(event))
+    let id = $(event).parent().prev().prev().prev().prev().prev().text()
+    $("#missionModalLabel").text(id)
+    console.log(id)
+    $.ajax({
+        type:"GET",
+        url:"getMission",
+        data:{
+            id:id,
+            myCam:1
+        },
+        success:function(data){
+            $("#missionList").html(data)
+        }
+    })
+}
+
+function onGoing(event){
+    if(selected!=null){
+        selected.removeClass("active")
+        $(event).addClass("active")
+        selected=$("#ongoing")
+    }
+    getMission(1)
+}
+
+function completed(event){
+    if(selected!=null){
+        selected.removeClass("active")
+        $(event).addClass("active")
+        selected=$("#completed")
+    }
+    getMission(2)
+}
+
+function cancel(event){
+    if(selected!=null){
+        selected.removeClass("active")
+        $(event).addClass("active")
+        selected=$("#cancel")
+    }
+    getMission(3)
+}
+
+function totalHistory(event){
+    if(selected!=null){
+        selected.removeClass("active")
+        $(event).addClass("active")
+        selected=$("#total")
+    }
+    $.ajax({
+        type:"GET",
+        url:"getMission2",
+        data:{
+            id:id,
+        },
+        success:function(data){
+            $("#missionList").html(data)
+        }
+    })
+}
+
+function getMission(myCam){
+    id = $("#missionModalLabel").text()
+    console.log(id)
+    $.ajax({
+        type:"GET",
+        url:"getMission",
+        data:{
+            id:id,
+            myCam:myCam
+        },
+        success:function(data){
+            $("#missionList").html(data)
+        }
+    })
+}
+
+
+function setStatus(event){
+    console.log($(event).find(".status").text())
+    let status = $(event).find(".status").text()
+    
+    if(status=="0"){
+        $(event).next().find(".buy").addClass("cur-progress")
+    }else if(status=="1"){
+        $(event).next().find(".review").addClass("cur-progress")
+    }else{
+        $(event).next().find(".point").addClass("cur-progress")
+    }
+}
