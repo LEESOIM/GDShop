@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.shop.goodee.item.ItemService;
 import com.shop.goodee.item.ItemVO;
@@ -78,7 +77,7 @@ public class MissionController {
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
 		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
-		
+
 		missionVO.setItemNum(itemVO.getItemNum());
 		missionVO.setId(memberVO.getId());
 		
@@ -88,11 +87,19 @@ public class MissionController {
 	
 	
 	//지원취소
-	@GetMapping("cancel")
-	public String setCancel(MissionVO missionVO, ItemVO itemVO) throws Exception {
+	@PostMapping("cancel")
+	@ResponseBody
+	public String setCancel(HttpSession session, MissionVO missionVO, ItemVO itemVO) throws Exception {
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
 		missionVO.setItemNum(itemVO.getItemNum());
+		
+		missionVO.setItemNum(itemVO.getItemNum());
+		missionVO.setId(memberVO.getId());
+		
 		int result = missionService.setCancel(missionVO);
-		return "redirect:/item/detail?itemNum="+itemVO.getItemNum();
+		return "/item/detail?itemNum="+itemVO.getItemNum();
 	}
 	
 }
