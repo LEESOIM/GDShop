@@ -10,6 +10,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.shop.goodee.seller.SellerVO;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -62,6 +64,27 @@ public class MailService {
 		memberMapper.setNewPw(memberVO);
 		//메일 내용
 		simpleMessage.setText("회원님의 임시 비밀번호는 : "+resultNum+"입니다. 발급된 비밀번호로 로그인하여 반드시 마이페이지에서 비밀번호 변경 후 이용바랍니다.");		
+		//메일 발송
+		javaMailSender.send(simpleMessage);
+	}
+	
+	public void sendSellerMail(MemberVO memberVO)throws Exception {
+		//수신 대상을 담을 ArrayList
+		ArrayList<String> toUserList = new ArrayList<>();		
+		String email = memberVO.getEmail();
+		//수신 대상 추가
+		toUserList.add(email);		
+		//수신 대상 개수
+		int toUserSize = toUserList.size();		
+		//단순 텍스트 구성 메일 메시지 생성 할때 사용
+		SimpleMailMessage simpleMessage = new SimpleMailMessage();		
+		//수신자 설정
+		simpleMessage.setTo((String[]) toUserList.toArray(new String[toUserSize]));		
+		//메일 제목
+		simpleMessage.setSubject("입점신청이 승인되었습니다.");
+		
+		//메일 내용
+		simpleMessage.setText("url주소 입력해주세요!!!!!!!!");		
 		//메일 발송
 		javaMailSender.send(simpleMessage);
 	}
