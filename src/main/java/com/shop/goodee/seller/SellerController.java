@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shop.goodee.member.MemberVO;
+import com.shop.goodee.sns.SnsService;
 import com.shop.goodee.sse.NotificationService;
 import com.shop.goodee.util.Pager;
 
@@ -27,6 +28,8 @@ public class SellerController {
 	private NotificationService notificationService;
 	@Autowired
 	private SellerService sellerService;
+	@Autowired
+	private SnsService snsService;
 	
 	@GetMapping("seller")
 	public void getSeller() throws Exception{
@@ -41,6 +44,7 @@ public class SellerController {
 		log.info("이메일){}",sellerVO.getEmail());
 		log.info("전화번호){}",sellerVO.getPhone());
 		log.info("기업명){}",sellerVO.getCompany());
+		log.info("1250");
 		notificationService.notifyApplyEvent(sellerVO.getId());
 		int result = sellerService.setSellerAdd(sellerVO);
 		return result;
@@ -61,7 +65,15 @@ public class SellerController {
 	@ResponseBody
 	public int setWait(@RequestBody SellerVO sellerVO) throws Exception{
 		
-		int result = sellerService.setWait(sellerVO); 
+		int result = sellerService.setWait(sellerVO);
+		
+		String id= sellerVO.getId();
+		String text = id + "님의 입점신청이 승인되었습니다!!";
+		
+		MemberVO phone = sellerService.getAcceptPhone(sellerVO);
+		
+		snsService.goMessage(phone,text);
+		
 		return result;
 	}
 	
