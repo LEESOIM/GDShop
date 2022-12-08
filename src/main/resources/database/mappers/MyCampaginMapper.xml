@@ -5,7 +5,7 @@
 
 <mapper namespace="com.shop.goodee.myCampaign.MyCampaignMapper">
 
-	<select id="getMyCampaign" parameterType="MissionVO" resultType="MissionVO" resultMap="getListMissionVO">
+	<select id="getMyCampaign" parameterType="MyCampaignVO" resultType="MyCampaignVO" resultMap="getListMyCampaignVO">
 		
 		SELECT M.*,I.*,F.*
 		FROM MISSION M
@@ -19,7 +19,7 @@
 		ORDER BY M.MISSIONNUM ASC
 	</select>
 	
-	<resultMap type="MissionVO" id="getListMissionVO">
+	<resultMap type="MyCampaignVO" id="getListMyCampaignVO">
 		<id column="MISSIONNUM" property="missionNum"/>
 		<result column="ITEMNUM" property="itemNum"/>
 		<result column="ID" property="id"/>

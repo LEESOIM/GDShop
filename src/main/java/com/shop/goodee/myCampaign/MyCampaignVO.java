@@ -9,7 +9,7 @@ import com.shop.goodee.item.ItemVO;
 import lombok.Data;
 
 @Data
-public class MissionVO {
+public class MyCampaignVO {
 
 	private Integer missionNum;
 	private Integer itemNum;
