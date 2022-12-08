@@ -34,4 +34,6 @@ public class ItemVO {
 	private List<ItemFileVO> itemFileVOs; //상품파일(1:N)
 
 	private List<ItemVO> items; //판매상품 리스트
+	
+	private Long pointResult; //포인트 변화(잔액포인트)
 }

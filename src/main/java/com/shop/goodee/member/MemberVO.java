@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.shop.goodee.item.ItemFileVO;
 import com.shop.goodee.item.ItemVO;
+import com.shop.goodee.myCampaign.MissionVO;
 
 import lombok.Data;
 
@@ -57,6 +58,7 @@ public class MemberVO implements UserDetails, OAuth2User{
    private String dd;
    
    private Long roleNum;
+   private String order;
    
    //등급 여러개 가능
    private List<RoleVO> roleVOs;
@@ -64,6 +66,11 @@ public class MemberVO implements UserDetails, OAuth2User{
    private MultipartFile multipartFile;
    //프로필 사진 한개   
    private MemberFileVO memberFileVO;
+   
+   //아이템List
+   private List<ItemVO> items;
+   //미션List
+   private List<MissionVO> missions;
    
    //OAuth2User, Token등 정보 저장
    private Map<String, Object> attributes;

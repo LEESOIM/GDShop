@@ -21,4 +21,7 @@ public class MyCampaignVO {
 	
 	private ItemVO itemVO;
 	private List<ItemFileVO> itemFileVOs;
+	
+	//포인트 변화
+	private Date finish_3;
 }
