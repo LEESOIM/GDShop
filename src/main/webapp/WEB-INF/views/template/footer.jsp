@@ -49,9 +49,7 @@
                 <img src="/images/h.png" style="width: 140px" />
               </h6>
               <p>
-                Designed and built with all the love in the world by the
-                Bootstrap team with the help of our contributors. Code licensed
-                MIT, docs CC BY 3.0. Currently v5.2.2.
+                1분 미션, 초간단 체험단 | 구디샵
               </p>
             </div>
             <!-- Grid column -->
@@ -59,18 +57,18 @@
             <!-- Grid column -->
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
               <!-- Links -->
-              <h6 class="text-uppercase fw-bold mb-4">Products</h6>
+              <h6 class="text-uppercase fw-bold mb-4">구디샵</h6>
               <p>
-                <a href="#!" class="text-reset">Angular</a>
+                <a href="#!" class="text-reset" style="text-decoration: none">구디샵소개</a>
               </p>
               <p>
-                <a href="#!" class="text-reset">React</a>
+                <a href="#!" class="text-reset" style="text-decoration: none">구디샵영상</a>
               </p>
               <p>
-                <a href="#!" class="text-reset">Vue</a>
+                <a href="#!" class="text-reset" style="text-decoration: none">인재채용</a>
               </p>
               <p>
-                <a href="#!" class="text-reset">Laravel</a>
+                <a href="#!" class="text-reset" style="text-decoration: none">이용약관</a>
               </p>
             </div>
             <!-- Grid column -->
@@ -78,18 +76,18 @@
             <!-- Grid column -->
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
               <!-- Links -->
-              <h6 class="text-uppercase fw-bold mb-4">Useful links</h6>
+              <h6 class="text-uppercase fw-bold mb-4">고객센터</h6>
               <p>
-                <a href="#!" class="text-reset">Pricing</a>
+                <a href="#!" class="text-reset" style="text-decoration: none">1대1문의</a>
               </p>
               <p>
-                <a href="#!" class="text-reset">Settings</a>
+                <a href="#!" class="text-reset" style="text-decoration: none">채용문의</a>
               </p>
               <p>
-                <a href="#!" class="text-reset">Orders</a>
+                <a href="#!" class="text-reset" style="text-decoration: none">개인정보처리방침</a>
               </p>
               <p>
-                <a href="#!" class="text-reset">Help</a>
+                <a href="#!" class="text-reset" style="text-decoration: none">이용안내</a>
               </p>
             </div>
             <!-- Grid column -->

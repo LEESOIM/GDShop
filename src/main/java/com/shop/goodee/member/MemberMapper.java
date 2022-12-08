@@ -99,4 +99,12 @@ public interface MemberMapper {
    /* 내 프로필 - 미션 완료수 */
    public int getMissionCount2(MissionVO missionVO)throws Exception;
    
+   /* 내 포인트 - 포인트 변화 */
+   public List<MemberVO> getMissionPoint(MemberVO memberVO)throws Exception;
+   
+   /* 내 포인트 - 미션수 */
+   public int getMissionNum(MemberVO memberVO)throws Exception;
+   
+   
+   
 }

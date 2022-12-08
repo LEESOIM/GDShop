@@ -290,11 +290,17 @@ public class MemberController {
    
    /* 내포인트 */
    @GetMapping("point")
-   public ModelAndView getPoint(HttpSession session, MemberVO memberVO, ModelAndView mv)throws Exception {
+   public ModelAndView getPoint(HttpSession session, MemberVO memberVO, ModelAndView mv, String order)throws Exception {
       SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
       Authentication authentication = context.getAuthentication();
       memberVO = (MemberVO) authentication.getPrincipal();
       memberVO = memberService.getMypage(memberVO);
+      memberVO.setOrder(order);
+      //포인트 변화
+      List<MemberVO> ar = memberService.getMissionPoint(memberVO);
+      int count = memberService.getMissionNum(memberVO);
+      mv.addObject("count", count);
+      mv.addObject("pointList", ar);
       mv.addObject("memberVO", memberVO);
       mv.setViewName("/member/point");
       return mv;
@@ -347,7 +353,7 @@ public class MemberController {
       Long result= point_result+point;
       return result;
    }
-
+   
    
    /* 내등급 */
    @GetMapping("grade")

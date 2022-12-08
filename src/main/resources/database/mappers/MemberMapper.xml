@@ -235,4 +235,45 @@
    	SELECT COUNT(MISSIONNUM) FROM MISSION WHERE ID=#{id} AND MYCAM=2
    </select>
    
+   
+   
+   <!-- 내 포인트 - 포인트 변화 -->
+   <sql id="order">
+   	<choose>
+   		<when test="order == '2020'">AND YEAR(MS.FINISH)='2020'</when>
+   		<when test="order == '2021'">AND YEAR(MS.FINISH)='2021'</when>
+   		<when test="order == '2022'">AND YEAR(MS.FINISH)='2022'</when>
+   		<otherwise>'a'='a'</otherwise>
+   	</choose>
+   </sql>
+   
+   <select id="getMissionPoint" parameterType="MemberVO" resultMap="getMissionResult">
+   	SELECT MS.FINISH, I.TITLE, I.POINT, DATE_ADD(MS.FINISH, INTERVAL 3 DAY)FINISH_3, (M.POINT_3+I.POINT)POINTRESULT FROM MEMBER M
+		INNER JOIN
+		MISSION MS
+		ON (M.ID=MS.ID)
+		INNER JOIN
+		ITEM I
+		ON (MS.ID=I.ID)
+	WHERE M.ID=#{id} <include refid="order"></include> ORDER BY MS.FINISH DESC
+   </select>
+   
+   <resultMap type="MemberVO" id="getMissionResult">
+  	<result column="point_3" property="point_3"/>
+   	<collection property="items" javaType="List" ofType="ItemVO">
+   		<result column="title" property="title"/>
+   		<result column="point" property="point"/>
+   		<result column="pointResult" property="pointResult"/>
+   	</collection>
+   	<collection property="missions" javaType="List" ofType="MissionVO">
+   		<id column="missionNum" property="missionNum"/>
+   		<result column="finish" property="finish"/>
+   		<result column="finish_3" property="finish_3"/>
+   	</collection>
+   </resultMap>
+   
+   <!-- 내 포인트 - 미션수 -->
+   <select id="getMissionNum" parameterType="MemberVO" resultType="Integer">
+   	SELECT COUNT(MISSIONNUM) FROM MISSION WHERE ID=#{id}
+   </select>
 </mapper>

@@ -365,4 +365,14 @@ public class MemberService {
    public int getMissionCount2(MissionVO missionVO)throws Exception{
 	   return memberMapper.getMissionCount2(missionVO);
    }
+   
+   /* 내 포인트 - 포인트 변화 */
+   public List<MemberVO> getMissionPoint(MemberVO memberVO)throws Exception{
+	   return memberMapper.getMissionPoint(memberVO);
+   }
+   
+   /* 내 포인트 - 미션수 */
+   public int getMissionNum(MemberVO memberVO)throws Exception{
+	   return memberMapper.getMissionNum(memberVO);
+   }
 }
