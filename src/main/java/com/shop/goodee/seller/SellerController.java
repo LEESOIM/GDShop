@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shop.goodee.member.MailService;
+import com.shop.goodee.member.MemberMapper;
+import com.shop.goodee.member.MemberService;
 import com.shop.goodee.member.MemberVO;
 import com.shop.goodee.sns.SnsService;
 import com.shop.goodee.sse.NotificationService;
@@ -30,6 +33,11 @@ public class SellerController {
 	private SellerService sellerService;
 	@Autowired
 	private SnsService snsService;
+	@Autowired
+	private MailService mailService;
+	@Autowired
+	private MemberService memberService;
+	
 	
 	@GetMapping("seller")
 	public void getSeller() throws Exception{
@@ -66,6 +74,12 @@ public class SellerController {
 	public int setWait(@RequestBody SellerVO sellerVO) throws Exception{
 		
 		int result = sellerService.setWait(sellerVO);
+		
+		MemberVO memberVO = new MemberVO();
+		
+		memberVO.setId(sellerVO.getId());
+		memberVO = memberService.getMypage(memberVO);
+		mailService.sendSellerMail(memberVO);
 		
 		String id= sellerVO.getId();
 		String text = id + "님의 입점신청이 승인되었습니다!!";
