@@ -9,7 +9,7 @@
 		<typeAlias type="com.shop.goodee.purchase.PurchaseVO" alias="PurchaseVO"/>
 		<typeAlias type="com.shop.goodee.purchase.PurchaseFileVO" alias="PurchaseFileVO"/>
 		<typeAlias type="com.shop.goodee.seller.SellerVO" alias="SellerVO"/>
-		<typeAlias type="com.shop.goodee.myCampaign.MissionVO" alias="MissionVO"/>
+		<typeAlias type="com.shop.goodee.myCampaign.MyCampaignVO" alias="MyCampaignVO"/>
 		<!-- 하준 -->
 		<typeAlias type="com.shop.goodee.board.notice.NoticeVO" alias="NoticeVO"/>
 		<typeAlias type="com.shop.goodee.util.Pager" alias="Pager"/>

@@ -38,11 +38,11 @@ public class MyCampaignController {
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
 		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
-		MissionVO missionVO = new MissionVO();
-		missionVO.setId(memberVO.getId());
-		missionVO.setMyCam(0);
+		MyCampaignVO myCampaignVO = new MyCampaignVO();
+		myCampaignVO.setId(memberVO.getId());
+		myCampaignVO.setMyCam(0);
 		
-		List<MissionVO> list = myCampaignService.getMyCampaign(missionVO);
+		List<MyCampaignVO> list = myCampaignService.getMyCampaign(myCampaignVO);
 		mv.addObject("list",list);
 		mv.setViewName("/myCampaign/apply");
 		return mv;
@@ -53,11 +53,11 @@ public class MyCampaignController {
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
 		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
-		MissionVO missionVO = new MissionVO();
-		missionVO.setId(memberVO.getId());
-		missionVO.setMyCam(1);
+		MyCampaignVO myCampaignVO = new MyCampaignVO();
+		myCampaignVO.setId(memberVO.getId());
+		myCampaignVO.setMyCam(1);
 		
-		List<MissionVO> list = myCampaignService.getMyCampaign(missionVO);
+		List<MyCampaignVO> list = myCampaignService.getMyCampaign(myCampaignVO);
 		mv.addObject("list",list);
 		mv.setViewName("/myCampaign/choice");
 		return mv;
@@ -68,11 +68,11 @@ public class MyCampaignController {
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
 		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
-		MissionVO missionVO = new MissionVO();
-		missionVO.setId(memberVO.getId());
-		missionVO.setMyCam(2);
+		MyCampaignVO myCampaignVO = new MyCampaignVO();
+		myCampaignVO.setId(memberVO.getId());
+		myCampaignVO.setMyCam(2);
 		
-		List<MissionVO> list = myCampaignService.getMyCampaign(missionVO);
+		List<MyCampaignVO> list = myCampaignService.getMyCampaign(myCampaignVO);
 		mv.addObject("list",list);
 		mv.setViewName("/myCampaign/complete");
 		return mv;
@@ -83,11 +83,11 @@ public class MyCampaignController {
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
 		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
-		MissionVO missionVO = new MissionVO();
-		missionVO.setId(memberVO.getId());
-		missionVO.setMyCam(3);
+		MyCampaignVO myCampaignVO = new MyCampaignVO();
+		myCampaignVO.setId(memberVO.getId());
+		myCampaignVO.setMyCam(3);
 		
-		List<MissionVO> list = myCampaignService.getMyCampaign(missionVO);
+		List<MyCampaignVO> list = myCampaignService.getMyCampaign(myCampaignVO);
 		mv.addObject("list",list);
 		mv.setViewName("/myCampaign/cancel");
 		return mv;
