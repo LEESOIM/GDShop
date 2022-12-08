@@ -57,10 +57,43 @@
 						</div>
 						<hr style="margin: 0;" />
 						
+						<c:if test="${vo.status eq 1 }">
 						<button class="btn btn-success w-100 mt-3" 
 							data-bs-target="#exampleModal_item" data-bs-whatever="@mdo" data-itemNum-num="${vo.itemNum }" id="applyCheck"><i class="fa-regular fa-pen-to-square me-2"></i>지원하기</button>
+						
 						<button type="button" id="cancel" class="applyCancel btn btn-outline-success w-100 mt-3" style="display: none">
 						<i class="fa-solid fa-x me-2"></i>지원취소</button>
+						</c:if>
+						
+						<div class="mt-3">
+						<c:if test="${vo.status eq 0 }">
+							<div class="d-flex justify-content-center">
+								<b style="margin: auto 0">상품승인</b>
+								<div class="d-flex my-1">
+								<button class="btn btn-outline-success ms-2 me-1" data-itemNum-num="${vo.itemNum }"><b>O</b></button>
+								<button class="btn btn-outline-danger" data-itemNum-num="${vo.itemNum }"><b>X</b></button>
+								</div>
+							</div>
+						</c:if>
+						<c:if test="${vo.status eq 2 }">
+						<div class="d-flex justify-content-center">
+							<b style="margin: auto 0">수정승인</b>
+							<div class="d-flex my-1">
+							<button class="btn btn-outline-success ms-2 me-1" data-itemNum-num="${vo.itemNum }"><b>O</b></button>
+							<button class="btn btn-outline-danger" data-itemNum-num="${vo.itemNum }"><b>X</b></button>
+							</div>
+						</div>
+						</c:if>
+						<c:if test="${vo.status eq 3 }">
+							<div class="d-flex justify-content-center">
+								<b style="margin: auto 0">삭제승인</b>
+								<div class="d-flex my-1">
+								<button class="btn btn-outline-success ms-2 me-1" data-itemNum-num="${vo.itemNum }"><b>O</b></button>
+								<button class="btn btn-outline-danger" data-itemNum-num="${vo.itemNum }"><b>X</b></button>
+								</div>
+							</div>
+						</c:if>
+						</div>
 					</div>
 				</div>
 				
