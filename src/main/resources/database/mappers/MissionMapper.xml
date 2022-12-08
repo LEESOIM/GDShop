@@ -26,9 +26,9 @@
 	</select>
 	
 	<!-- 지원취소 -->
-	<delete id="setCancel" parameterType="MissionVO">
-		DELETE FROM MISSION WHERE ITEMNUM=#{itemNum} AND ID=#{id}
-	</delete>
+	<update id="setCancel" parameterType="MissionVO">
+		UPDATE MISSION SET MYCAM=3 WHERE ID=#{id} and ITEMNUM=#{itemNum}
+	</update>
 
 
 </mapper>
