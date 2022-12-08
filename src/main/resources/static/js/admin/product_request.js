@@ -23,6 +23,11 @@ function getAdd(event){
     $.ajax({
         type:"GET",
         url:"add_request",
+        data:{
+            page:1,
+            kind:$("select[name='kind']").val(),
+            search:$("#search").val()
+        },
         success:function(data){
             result = data  
             $("#pdList").html(result)
@@ -40,6 +45,11 @@ function getUpdate(event){
     $.ajax({
         type:"GET",
         url:"update_request",
+        data:{
+            page:1,
+            kind:$("select[name='kind']").val(),
+            search:$("#search").val()
+        },
         success:function(data){
             result = data
             $("#pdList").html(result)
@@ -56,6 +66,11 @@ function getDelete(event){
     $.ajax({
         type:"GET",
         url:"delete_request",
+        data:{
+            page:1,
+            kind:$("select[name='kind']").val(),
+            search:$("#search").val()
+        },
         success:function(data){
             result = data   
             $("#pdList").html(result)
@@ -72,6 +87,11 @@ function getReject(event){
     $.ajax({
         type:"GET",
         url:"reject_request",
+        data:{
+            page:1,
+            kind:$("select[name='kind']").val(),
+            search:$("#search").val()
+        },
         success:function(data){
             result = data   
             $("#pdList").html(result)

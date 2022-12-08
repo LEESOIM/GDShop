@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+		    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.shop.goodee.pay.PayMapper">
+	
+	<insert id="setSeller" parameterType="PayVO">
+		INSERT INTO MEMBER_ROLE VALUES(#{id},2)
+	</insert>
+	
+	<insert id="setVIP" parameterType="PayVO">
+		INSERT INTO MEMBER_ROLE VALUES(#{id},3)
+	</insert>
+	
+	<insert id="setPay" parameterType="PayVO">
+		INSERT INTO PAY VALUES(null,#{id},#{payMethod},#{amount},now(),#{cancelDate},#{orderNum},#{payName})
+	</insert>
+	
+	
+	
+</mapper>

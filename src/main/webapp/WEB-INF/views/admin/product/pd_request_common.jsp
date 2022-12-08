@@ -12,8 +12,8 @@ pageEncoding="UTF-8"%>
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col" onclick="sortTable(1)">상품번호</th>
-                <th scope="col" onclick="sortTable(2)">상품명</th>
+                <th scope="col" >상품번호</th>
+                <th scope="col" >상품명</th>
                 <th scope="col">캠페인</th>
                 <th scope="col">아이디</th>
                 <th scope="col">기업명</th>
@@ -65,47 +65,7 @@ pageEncoding="UTF-8"%>
 
 
 <script>
-    // function sortTable(n){
-    //     let table, rows, switching, i, x,y, shouldSwitch, dir, switchCount = 0;
-    //     table = document.getElementById("pdTable");
-    //     switching = true;
-    //     dir = "asc";
-    //     console.log(table.rows)
-
-    //     while (switching){
-    //         switching = false;
-    //         rows = table.rows;
-    //         for(i=1; i<(rows.length-1); i++){
-    //             shouldSwitch=false;
-    //             x=rows[i].getElementsByTagName("TD")[n];
-    //             y=rows[i+1].getElementsByTagName("TD")[n];
-    //             console.log("x",x)
-    //             console.log("y",y)
-
-    //             if(dir=="asc"){
-    //                 if(x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()){
-    //                     shouldSwitch = true;
-    //                     break;
-    //                 }
-    //             } else if(dir="desc"){
-    //                 if(x.innerHTML.toLowerCase()<y.innerHTML.toLowerCase()){
-    //                     shouldSwitch=true;
-    //                     break;
-    //                 }
-    //             }
-    //         }
-    //         if(shouldSwitch){
-    //             rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-    //             switching = true;
-    //             switchcount ++;
-    //         } else {        
-    //             if (switchcount == 0 && dir == "asc") {
-    //                 dir = "desc";
-    //                 switching = true;
-    //             }
-    //         }
-    //     }
-    // }
+    
     preCheck();
     // pagination previous 체크
     function preCheck(){
@@ -116,8 +76,11 @@ pageEncoding="UTF-8"%>
         }
     }
 
+    // 상품 리스트
     $('.product').click(function(event){
         let page = parseInt(event.target.dataset.page)
+        let kind = $("select[name='kind']").val()
+        let search = $("#search").val()
         if(event.target.dataset.dir=='prev'){
             page-=1
         }else if(event.target.dataset.dir=='next'){ 
@@ -125,11 +88,14 @@ pageEncoding="UTF-8"%>
         }else{
             page=parseInt(event.target.text)  
         }
+
         $.ajax({
             type:"GET",
             url:"getPdList",
             data:{
                 page:page,
+                kind:kind,
+                search:search
             },
             success:function(data){
                 result = data
@@ -138,8 +104,29 @@ pageEncoding="UTF-8"%>
         })
     })
 
+
+    // 상품 요청 리스트
+    function getRequest(url,page){
+        let kind = $("select[name='kind']").val()
+        let search = $("#search").val()
+        $.ajax({
+            type:"GET",
+            url:url,
+            data:{
+                page:page,
+                kind:kind,
+                search:search
+            },
+            success:function(data){
+                result = data
+                $("#pdList").html(result)
+            }
+        })
+    }
+
     $('.add').click(function(event){
         let page = parseInt(event.target.dataset.page)
+
         if(event.target.dataset.dir=='prev'){
             page-=1
         }else if(event.target.dataset.dir=='next'){ 
@@ -147,21 +134,24 @@ pageEncoding="UTF-8"%>
         }else{
             page=parseInt(event.target.text)  
         }
-        $.ajax({
-            type:"GET",
-            url:"add_request",
-            data:{
-                page:page,
-            },
-            success:function(data){
-                result = data
-                $("#pdList").html(result)
-            }
-        })
+        console.log(page)
+        getRequest("add_request",page)
+        // $.ajax({
+        //     type:"GET",
+        //     url:"add_request",
+        //     data:{
+        //         page:page,
+        //     },
+        //     success:function(data){
+        //         result = data
+        //         $("#pdList").html(result)
+        //     }
+        // })
     })
 
     $('.update').click(function(event){
         let page = parseInt(event.target.dataset.page)
+
         if(event.target.dataset.dir=='prev'){            
             page-=1           
         }else if(event.target.dataset.dir=='next'){            
@@ -169,22 +159,23 @@ pageEncoding="UTF-8"%>
         }else{
             page=parseInt(event.target.text)            
         }
-
-        $.ajax({
-            type:"GET",
-            url:"update_request",
-            data:{
-                page:page,
-            },
-            success:function(data){
-                result = data
-                $("#pdList").html(result)
-            }
-        })
+        getRequest("update_request",page)
+        // $.ajax({
+        //     type:"GET",
+        //     url:"update_request",
+        //     data:{
+        //         page:page,
+        //     },
+        //     success:function(data){
+        //         result = data
+        //         $("#pdList").html(result)
+        //     }
+        // })
     })
 
     $('.delete').click(function(event){
         let page = parseInt(event.target.dataset.page)
+  
         if(event.target.dataset.dir=='prev'){            
             page-=1           
         }else if(event.target.dataset.dir=='next'){            
@@ -192,22 +183,23 @@ pageEncoding="UTF-8"%>
         }else{
             page=parseInt(event.target.text)            
         }
-
-        $.ajax({
-            type:"GET",
-            url:"delete_request",
-            data:{
-                page:page,
-            },
-            success:function(data){
-                result = data
-                $("#pdList").html(result)
-            }
-        })
+        getRequest("delete_request",page)
+        // $.ajax({
+        //     type:"GET",
+        //     url:"delete_request",
+        //     data:{
+        //         page:page,
+        //     },
+        //     success:function(data){
+        //         result = data
+        //         $("#pdList").html(result)
+        //     }
+        // })
     })
 
     $('.reject').click(function(event){
         let page = parseInt(event.target.dataset.page)
+
         if(event.target.dataset.dir=='prev'){            
             page-=1           
         }else if(event.target.dataset.dir=='next'){            
@@ -215,18 +207,18 @@ pageEncoding="UTF-8"%>
         }else{
             page=parseInt(event.target.text)            
         }
-
-        $.ajax({
-            type:"GET",
-            url:"reject_request",
-            data:{
-                page:page,
-            },
-            success:function(data){
-                result = data
-                $("#pdList").html(result)
-            }
-        })
+        getRequest("reject_request",page)
+        // $.ajax({
+        //     type:"GET",
+        //     url:"reject_request",
+        //     data:{
+        //         page:page,
+        //     },
+        //     success:function(data){
+        //         result = data
+        //         $("#pdList").html(result)
+        //     }
+        // })
     })
 </script>
 </body>
