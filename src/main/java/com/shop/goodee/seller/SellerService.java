@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.shop.goodee.member.MemberVO;
 import com.shop.goodee.util.Pager;
 
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,11 @@ public class SellerService {
 	
 	@Autowired
 	private SellerMapper sellerMapper;
+	
+	public List<MemberVO> getAdminPhone() throws Exception{
+		List<MemberVO> phoneList = sellerMapper.getAdminPhone();
+		return phoneList;
+	}
 	
 	public int setSellerAdd(SellerVO sellerVO) throws Exception{
 		int result = sellerMapper.setSellerAdd(sellerVO);
@@ -60,5 +66,10 @@ public class SellerService {
 	public int setPayNo(SellerVO sellerVO) throws Exception{
 		int result = sellerMapper.setPayNo(sellerVO);
 		return result;
+	}
+	public MemberVO getAcceptPhone(SellerVO sellerVO) throws Exception{
+		MemberVO phone = sellerMapper.getAcceptPhone(sellerVO);
+		
+		return phone;
 	}
 }
