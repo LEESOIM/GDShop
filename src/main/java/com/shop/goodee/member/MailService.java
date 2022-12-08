@@ -84,7 +84,7 @@ public class MailService {
       simpleMessage.setSubject("입점신청이 승인되었습니다.");
       
       //메일 내용
-      simpleMessage.setText("url주소 입력해주세요!!!!!!!!");      
+      simpleMessage.setText("localhost:81/seller/account 로 접속하여 결제해 주세요.");      
       //메일 발송
       javaMailSender.send(simpleMessage);
    }
