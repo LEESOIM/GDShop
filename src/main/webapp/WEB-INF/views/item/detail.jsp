@@ -81,8 +81,7 @@
 				<div class="d-flex" style="float: right;">
 					<a href="/mission/cancel?itemNum=${vo.itemNum}&id=${user.id}" class="applyCancel btn btn-outline-success mt-3 me-2">
 							<i class="fa-solid fa-x me-2"></i>참여취소</a>
-					<button class="applyCancel btn btn-success mt-3" data-itemNum-num="${vo.itemNum }" onclick="mission/cancel">
-							<i class="fa-regular fa-face-smile me-2"></i>미션수행카드</button>
+					<button class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#missionModal"><i class="fa-regular fa-face-smile me-2"></i>미션수행카드</button>
 				</div>
 				</div>
 			</div>
