@@ -25,7 +25,7 @@ $(document).ready(function () {
     //---------------------------------------------------
     //캠페인유형에 따른 버튼 속성
     let type = $("#type").attr("data-type")
-    if(type=='추첨형') {
+    if (type == '추첨형') {
         $("#applyType").attr("style", "display:");
     } else {
         $("#applyBaroType").attr("style", "display:");
@@ -34,8 +34,9 @@ $(document).ready(function () {
     //강제클릭
     $("#applyCheck").click();
 
-    //미션상황!!
+
     let itemNum = $("#applyCheck").attr("data-itemNum-num")
+    //미션상황!!
     $.ajax({
         type: "POST",
         url: "/mission/applyList",
@@ -57,10 +58,10 @@ $(document).ready(function () {
             } else if (data.myCam == 3) { //취소
                 $("#applyCheck").html("이미 지원한 캠페인")
             }
-
             //alert(data.status)
         }
     })
+
 })
 
 
@@ -81,4 +82,24 @@ $("#applyCheck").click(function () {
             }
         }
     })
+})
+
+
+//지원취소버튼
+$("#cancel").click(function () {
+    let itemNum = $("#applyCheck").attr("data-itemNum-num")
+    let id = $("#id").val();
+    $.ajax({
+        type: "POST",
+        url: "/mission/cancel",
+        data: {
+            itemNum: itemNum,
+            id: id,
+        },
+        success: function (data) {
+            alert('캠페인이 취소되었습니다.')
+            location.reload();
+        }
+    })
+
 })
