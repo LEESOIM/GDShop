@@ -495,3 +495,7 @@ $("#nick_btn2").click(function () {
     },
   });
 });
+
+$(".order").change(function () {
+  $("#order_btn").click();
+});

@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shop.goodee.item.ItemVO;
+import com.shop.goodee.myCampaign.MissionVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -197,8 +198,16 @@ public class MemberController {
       Authentication authentication = context.getAuthentication();
       memberVO = (MemberVO) authentication.getPrincipal();
       memberVO = memberService.getMypage(memberVO);
+      MissionVO missionVO = new MissionVO();
+      missionVO.setId(memberVO.getId());
+      int count0 = memberService.getMissionCount0(missionVO);
+      int count1 = memberService.getMissionCount1(missionVO);
+      int count2 = memberService.getMissionCount2(missionVO);
       
       mv.addObject("memberVO", memberVO);
+      mv.addObject("count0", count0);
+      mv.addObject("count1", count1);
+      mv.addObject("count2", count2);
       mv.setViewName("/member/mypage");
       return mv;   
    }
@@ -281,11 +290,17 @@ public class MemberController {
    
    /* 내포인트 */
    @GetMapping("point")
-   public ModelAndView getPoint(HttpSession session, MemberVO memberVO, ModelAndView mv)throws Exception {
+   public ModelAndView getPoint(HttpSession session, MemberVO memberVO, ModelAndView mv, String order)throws Exception {
       SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
       Authentication authentication = context.getAuthentication();
       memberVO = (MemberVO) authentication.getPrincipal();
       memberVO = memberService.getMypage(memberVO);
+      memberVO.setOrder(order);
+      //포인트 변화
+      List<MemberVO> ar = memberService.getMissionPoint(memberVO);
+      int count = memberService.getMissionNum(memberVO);
+      mv.addObject("count", count);
+      mv.addObject("pointList", ar);
       mv.addObject("memberVO", memberVO);
       mv.setViewName("/member/point");
       return mv;
@@ -338,7 +353,7 @@ public class MemberController {
       Long result= point_result+point;
       return result;
    }
-
+   
    
    /* 내등급 */
    @GetMapping("grade")
