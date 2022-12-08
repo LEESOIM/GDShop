@@ -143,4 +143,9 @@ public class SellerController {
 		return result;
 	}
 	
+	@GetMapping("account")
+	public void getAccount()throws Exception{
+		
+	}
+	
 }

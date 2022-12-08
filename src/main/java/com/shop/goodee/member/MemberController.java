@@ -34,7 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("member/*")
 @Slf4j
 public class MemberController {
-   
+	
    @Autowired
    private MemberService memberService;
    
@@ -535,21 +535,5 @@ public class MemberController {
       mv.setViewName("/member/user_grade");
       return mv;
    }
-   
-   /* 마이페이지 - 닉네임 변경 */
-//   @PostMapping("nickName")
-//   public ModelAndView setNickName(HttpSession session ,MemberVO memberVO, ModelAndView mv)throws Exception{
-//      SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
-//      Authentication authentication = context.getAuthentication();
-//      MemberVO sessionMemberVO = (MemberVO) authentication.getPrincipal();
-//      memberVO.setId(sessionMemberVO.getId());
-//      
-//      memberService.setNickName(memberVO);
-//      memberService.setNickName_N(memberVO);
-//      mv.setViewName("/member/mypage");
-//      mv.addObject("nick", memberVO.getNickName());
-//      mv.addObject("nick_N", memberVO.getNickName_N());
-//      return mv;
-//   }
 
 }
