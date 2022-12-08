@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.shop.goodee.item.ItemVO;
-import com.shop.goodee.myCampaign.MissionVO;
+import com.shop.goodee.mission.MissionVO;
 
 @Mapper
 public interface MemberMapper {
