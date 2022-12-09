@@ -18,10 +18,11 @@ public class MainController {
 	List<RoomVO> roomList = new ArrayList<RoomVO>();
 	static int roomNumber = 0;
 
-	@RequestMapping("/chat")
+	@RequestMapping("/chatbot")
 	public ModelAndView chat() {
+		log.info("챗봇 진입-- ");
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("chat/chat");
+		mv.setViewName("chat/chatbot");
 		return mv;
 	}
 	
