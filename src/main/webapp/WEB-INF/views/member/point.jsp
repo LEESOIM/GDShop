@@ -103,45 +103,55 @@ prefix="c" %>
                 </div>
               </div>
             </div>
+            <form action="./point" method="get">
             <div class="d-flex justify-content-end">
               <select
-                class="mt-4 form-select"
+                class="order mt-4 form-select"
                 aria-label=".form-select-lg example"
                 style="width: 120px; font-size: 15px"
+                name="order"
               >
-                <option selected>전체년도</option>
-                <option value="1">2020</option>
-                <option value="2">2021</option>
-                <option value="3">2022</option>
+                <option class="orders" value="all">전체년도</option>
+                <option class="orders" value="2020">2020</option>
+                <option class="orders" value="2021">2021</option>
+                <option class="orders" value="2022">2022</option>
               </select>
             </div>
+            <button id="order_btn" style="display: none">정렬 버튼</button>
+            </form>
             <hr />
             <table class="table mb-4" style="text-align: center">
               <thead class="table-light">
                 <tr>
-                  <th scope="col" style="width: 15%">날짜(마감일)</th>
-                  <th scope="col" style="width: 40%">내용(캠페인제목)</th>
-                  <th scope="col" style="width: 15%">포인트 변화(보상포인트)</th>
-                  <th scope="col" style="width: 15%">출금 (가능)일(마감일+3일)</th>
-                  <th scope="col" style="width: 15%">잔액 포인트(포인트+보상포인트)</th>
+                  <th scope="col" style="width: 20%">날짜</th>
+                  <th scope="col" style="width: 30%">내용</th>
+                  <th scope="col" style="width: 20%">포인트 변화</th>
+                  <th scope="col" style="width: 20%">출금(가능)일</th>
                 </tr>
               </thead>
               <tbody>
               <!-- 캠페인 번호가 있으면 보이기 ${not empty missionVO.missionNum}-->
-              <c:if test="${user.point_3 ne 0}">
+              <c:if test="${count ne 0}">
+              <c:forEach items="${pointList}" var="list">
                  <tr>
-                  <td>2022-10-22</td>
-                  <td>프로바이오틱스</td>
-                  <td><b style="color:green">+1000</b></td>
-                  <td>2022-10-25</td>
-                  <td>2000</td>
+                  <td>${list.finish}</td>
+                  <td>${list.title}</td>
+                  <c:choose>
+                  	<c:when test="${list.status eq 0}">
+                  		<td><b style="color:blue">-${list.point}</b></td>
+                  	</c:when>
+                  	<c:otherwise>                  		
+	                  <td><b style="color:green">+${list.point}</b></td>
+                  	</c:otherwise>
+                  </c:choose>
+                  <td>${list.finish_3}</td>
                 </tr> 
-               </c:if>
+           	 </c:forEach>
+              </c:if>
               </tbody>
             </table>
-            
             <!-- 캠페인 번호가 없으면 보이기 ${empty missionVO.missionNum}-->
-            <c:if test="${user.point_3 eq 0}">
+            <c:if test="${count eq 0}">
             <div
               class="mb-5"
               style="
@@ -154,6 +164,7 @@ prefix="c" %>
               <div class="mb-2">포인트 내역이 없습니다.</div>
             </div>
             </c:if>
+            
             <!-- 포인트 안내 -->
             <div class="mb-3">
               <div
@@ -406,6 +417,17 @@ prefix="c" %>
      $(document).ready(function(){
        $('[data-toggle="tooltip"]').tooltip();   
      });
+   </script>
+   <script type="text/javascript">
+   const orders = document.getElementsByClassName('orders');
+   let o = '${param.order}';
+
+     for(let i =0;i < orders.length;i++){
+         if(o == orders[i].value){
+           orders[i].selected = true;
+           break;
+         }  
+   }
    </script>
     <script src="/js/info.js"></script>
   </body>

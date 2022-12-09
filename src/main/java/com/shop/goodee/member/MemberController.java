@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shop.goodee.item.ItemVO;
+import com.shop.goodee.mission.MissionVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,7 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("member/*")
 @Slf4j
 public class MemberController {
-   
+	
    @Autowired
    private MemberService memberService;
    
@@ -186,7 +187,6 @@ public class MemberController {
    @PostMapping("login")
    @ResponseBody
    public String getLogin(MemberVO memberVO)throws Exception{
-      log.info("로그인중!!");
       memberSecurityService.loadUserByUsername(memberVO.getId());
       return "/";
    }
@@ -198,8 +198,16 @@ public class MemberController {
       Authentication authentication = context.getAuthentication();
       memberVO = (MemberVO) authentication.getPrincipal();
       memberVO = memberService.getMypage(memberVO);
+      MissionVO missionVO = new MissionVO();
+      missionVO.setId(memberVO.getId());
+      int count0 = memberService.getMissionCount0(missionVO);
+      int count1 = memberService.getMissionCount1(missionVO);
+      int count2 = memberService.getMissionCount2(missionVO);
       
       mv.addObject("memberVO", memberVO);
+      mv.addObject("count0", count0);
+      mv.addObject("count1", count1);
+      mv.addObject("count2", count2);
       mv.setViewName("/member/mypage");
       return mv;   
    }
@@ -282,11 +290,17 @@ public class MemberController {
    
    /* 내포인트 */
    @GetMapping("point")
-   public ModelAndView getPoint(HttpSession session, MemberVO memberVO, ModelAndView mv)throws Exception {
+   public ModelAndView getPoint(HttpSession session, MemberVO memberVO, ModelAndView mv, String order)throws Exception {
       SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
       Authentication authentication = context.getAuthentication();
       memberVO = (MemberVO) authentication.getPrincipal();
       memberVO = memberService.getMypage(memberVO);
+      memberVO.setOrder(order);
+      //포인트 변화
+      List<PointVO> ar = memberService.getPointList(memberVO);
+      int count = memberService.getMissionNum(memberVO);
+      mv.addObject("count", count);
+      mv.addObject("pointList", ar);
       mv.addObject("memberVO", memberVO);
       mv.setViewName("/member/point");
       return mv;
@@ -339,7 +353,7 @@ public class MemberController {
       Long result= point_result+point;
       return result;
    }
-
+   
    
    /* 내등급 */
    @GetMapping("grade")
@@ -418,7 +432,6 @@ public class MemberController {
       MemberVO sessionMemberVO = (MemberVO) authentication.getPrincipal();
       
       memberVO.setId(sessionMemberVO.getId());
-      
       int result = memberService.setChangePhone(memberVO);
       
       return result;
@@ -522,21 +535,5 @@ public class MemberController {
       mv.setViewName("/member/user_grade");
       return mv;
    }
-   
-   /* 마이페이지 - 닉네임 변경 */
-//   @PostMapping("nickName")
-//   public ModelAndView setNickName(HttpSession session ,MemberVO memberVO, ModelAndView mv)throws Exception{
-//      SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
-//      Authentication authentication = context.getAuthentication();
-//      MemberVO sessionMemberVO = (MemberVO) authentication.getPrincipal();
-//      memberVO.setId(sessionMemberVO.getId());
-//      
-//      memberService.setNickName(memberVO);
-//      memberService.setNickName_N(memberVO);
-//      mv.setViewName("/member/mypage");
-//      mv.addObject("nick", memberVO.getNickName());
-//      mv.addObject("nick_N", memberVO.getNickName_N());
-//      return mv;
-//   }
 
 }

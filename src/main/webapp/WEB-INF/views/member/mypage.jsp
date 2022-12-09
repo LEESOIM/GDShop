@@ -89,31 +89,49 @@ prefix="c" %>
                   </div>
                   <div class="d-flex">
                     <div class="me-4">
-                      <div class="mb-2">캠페인 진행수</div>
+                      <div class="mb-2" style="text-align: center">미션 대기</div>
                       <div
                         style="
                           text-align: center;
                           font-size: 2.5em;
+                          width: 74px;
                           padding: 11px 10px 15px 10px;
                           background-color: rgba(220, 220, 220, 0.37);
                           border-radius: 5px;
                         "
                       >
-                        10
+                        ${count0}
                       </div>
                     </div>
-                    <div>
-                      <div><i class="fa-solid fa-chart-pie pe-2"></i>통계</div>
+                    <div class="me-4">
+                      <div class="mb-2" style="text-align: center">미션 진행</div>
                       <div
                         style="
                           text-align: center;
-                          width: 100%;
                           font-size: 2.5em;
+                          width: 74px;
                           padding: 11px 10px 15px 10px;
                           background-color: rgba(220, 220, 220, 0.37);
                           border-radius: 5px;
                         "
-                      ></div>
+                      >
+                        ${count1}
+                      </div>
+                    </div>
+                    <div>
+                      <div class="mb-2" style="text-align: center">미션 완료</div>
+                      <div
+                        style="
+                          text-align: center;
+                          font-size: 2.5em;
+                          width: 74px;
+                          padding: 11px 10px 15px 10px;
+                          background-color: rgba(220, 220, 220, 0.37);
+                          border-radius: 5px;
+                        "
+                      >
+                        ${count2}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -172,7 +190,7 @@ prefix="c" %>
                     <b>퀵메뉴</b>
                     <div class="row" style="margin-top: 8px">
                        <button class="qick col-4" onclick="location.href='/member/point'"><i class="fa-brands fa-product-hunt" style="font-size: 26px;padding: 6px 0px 2px 0px; color: blue"></i><div style="font-size: 10px;">포인트</div></button>
-                       <button class="qick col-4" onclick="location.href='#'"><i class="fa-solid fa-users"  style="font-size: 25px;padding: 6px 0px 2px 0px; color: green"></i><div style="font-size: 10px;">캠페인</div></button>
+                       <button class="qick col-4" onclick="location.href='/myCampaign/apply'"><i class="fa-solid fa-users"  style="font-size: 25px;padding: 6px 0px 2px 0px; color: green"></i><div style="font-size: 10px;">캠페인</div></button>
                        <button class="qick col-4" onclick="location.href='/member/set'"><i class="fa-solid fa-gear" style="font-size: 25px;padding: 6px 0px 2px 0px; color: grey"></i><div style="font-size: 10px;">설정</div></button>
                        <button class="qick col-4" onclick="location.href='/member/grade'"><i class="fa-regular fa-credit-card" style="font-size: 25px;padding: 6px 0px 2px 0px; color: #f4c430"></i><div style="font-size: 10px;">멤버십</div></button>
                        <button class="qick col-4" onclick="location.href='#'"><i class="fa-solid fa-headset" style="font-size: 25px;padding: 6px 0px 2px 0px; color: #323232"></i><div style="font-size: 10px;">1대1문의</div></button>

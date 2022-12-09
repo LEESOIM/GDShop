@@ -66,9 +66,6 @@ public class MemberSocialService extends DefaultOAuth2UserService{
       //회원가입 유무
       OAuth2User auth2User = super.loadUser(userRequest);
       log.info("==========   사용자 정보 =====================");
-      log.info("Name =>  {} ", auth2User.getName());
-      log.info("Attr =>  {} " , auth2User.getAttributes());
-      log.info("Auth => {}", auth2User.getAuthorities());
       
       Map<String, Object> map = auth2User.getAttributes();
       
@@ -110,11 +107,6 @@ public class MemberSocialService extends DefaultOAuth2UserService{
                memberMapper.setMemberRole(memberVO);
                memberMapper.setProfile(memberFileVO);
                
-               //memberVO확인
-               log.info("social memberId:{}", memberVO.getId());
-               log.info("social memberName:{}", memberVO.getName());
-               log.info("social memberEmail:{}", memberVO.getEmail());
-               
             }
          } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -145,10 +137,6 @@ public class MemberSocialService extends DefaultOAuth2UserService{
                memberMapper.setMemberRole(memberVO);
                memberMapper.setProfile(memberFileVO);
                
-               //memberVO확인
-               log.info("social memberId:{}", memberVO.getId());
-               log.info("social memberName:{}", memberVO.getName());
-               log.info("social memberEmail:{}", memberVO.getEmail());
                
             }
          } catch (Exception e) {
@@ -185,10 +173,6 @@ public class MemberSocialService extends DefaultOAuth2UserService{
                memberMapper.setMemberRole(memberVO);
                memberMapper.setProfile(memberFileVO);
                
-               //memberVO확인
-               log.info("social memberId:{}", memberVO.getId());
-               log.info("social memberName:{}", memberVO.getName());
-               log.info("social memberEmail:{}", memberVO.getEmail());
                
             }
          } catch (Exception e) {

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.shop.goodee.item.ItemVO;
+import com.shop.goodee.mission.MissionVO;
 
 @Mapper
 public interface MemberMapper {
@@ -76,6 +77,9 @@ public interface MemberMapper {
    /* 출금신청 후 출금 예정 포인트 변경 */
    public int setResultPoint(MemberVO memberVO)throws Exception;
    
+   /* 출금 신청 후 포인트 리스트 변화 */
+   public int getResultPoint(MemberVO memberVO)throws Exception;
+   
    /* 내등급 - VIP회원 확인 */
    public int getVIP(MemberVO memberVO)throws Exception;
    
@@ -90,5 +94,21 @@ public interface MemberMapper {
    
    /* 마이페이지 - 네이버 닉네임 변경 */
    public int setNickName_N(MemberVO memberVO)throws Exception;
+   
+   /* 내 프로필 - 미션 지원대기수 */
+   public int getMissionCount0(MissionVO missionVO)throws Exception;
+   /* 내 프로필 - 참여 미션수 */
+   public int getMissionCount1(MissionVO missionVO)throws Exception;
+   /* 내 프로필 - 미션 완료수 */
+   public int getMissionCount2(MissionVO missionVO)throws Exception;
+   
+   /* 내 포인트 - 포인트 변화 */
+   public List<MemberVO> getMissionPoint(MemberVO memberVO)throws Exception;
+   
+   /* 내 포인트 - 미션수 */
+   public int getMissionNum(MemberVO memberVO)throws Exception;
+   
+   /* 내 포인트 - 포인트 리스트 확인 */
+   public List<PointVO> getPointList(MemberVO memberVO)throws Exception;
    
 }

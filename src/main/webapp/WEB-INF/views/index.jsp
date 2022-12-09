@@ -31,13 +31,13 @@
 		<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
 		  <div class="carousel-inner">
 		    <div class="carousel-item active">
-		      <img src="/images/main2.avif" class="d-block w-100" alt="...">
+		      <img src="/images/pc_crop.jpg" class="d-block w-100" alt="...">
 		    </div>
 		    <div class="carousel-item">
-		      <img src="/images/main1.avif" class="d-block w-100" alt="...">
+		      <img src="/images/C1_PC1.jpg" class="d-block w-100" alt="...">
 		    </div>
 		    <div class="carousel-item">
-		      <img src="/images/main3.avif" class="d-block w-100" alt="...">
+		      <img src="/images/co.jpg" class="d-block w-100" alt="...">
 		    </div>
 		  </div>
 		  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -140,7 +140,8 @@
 				<c:forEach items="${listHit }" var="vo">
 					<div>
 						<div class="d-flex flex-column" style="width: 250px; height: 380px">
-							<div> <img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px"> </div>
+							<div> <a href="/item/detail?itemNum=${vo.itemNum }">
+							<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px"></a> </div>
 
 							<div class="d-flex flex-column" style="width: 250px; height: 130px">
 								<div class="d-flex justify-content-start pt-1" style="font-size: 14px">
@@ -223,7 +224,8 @@
 				<c:forEach items="${listVIP }" var="vo">
 					<div>
 						<div class="d-flex flex-column" style="width: 250px; height: 380px">
-							<div> <img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px"> </div>
+							<div> <a href="/item/detail?itemNum=${vo.itemNum }">
+							<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px"></a> </div>
 
 							<div class="d-flex flex-column" style="width: 250px; height: 130px">
 								<div class="d-flex justify-content-start pt-1" style="font-size: 14px">
@@ -307,7 +309,8 @@
 				<c:forEach items="${listHit }" var="vo">
 					<div>
 						<div class="d-flex flex-column" style="width: 250px; height: 380px">
-							<div> <img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px"> </div>
+							<div><a href="/item/detail?itemNum=${vo.itemNum }">
+							 <img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px"></a> </div>
 
 							<div class="d-flex flex-column" style="width: 250px; height: 130px">
 								<div class="d-flex justify-content-start pt-1" style="font-size: 14px">

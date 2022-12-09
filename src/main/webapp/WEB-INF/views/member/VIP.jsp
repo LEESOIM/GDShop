@@ -23,11 +23,11 @@ prefix="c" %>
   <div>
     <div>
       <div style="font-size: 14px">
-        이용기간 : <b>2020-05-22 ~ 2022-06-01</b>
+        이용기간 : <b>2022-12-07~ 2022-01-06</b>
       </div>
       <div class="pt-1" style="font-size: 14px">
         해지일 :
-        <span style="color: red">2022-06-01 해지예정</span>
+        <span style="color: red">2022-01-06 해지예정</span>
       </div>
     </div>
     <hr />

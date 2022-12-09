@@ -233,7 +233,7 @@ $("#phoneUpdate_btn").click(function () {
   if (phone == "") {
     $("#phoneUpdate_Check").attr("style", "color: red; font-size: 14px;");
     $("#phoneUpdate_b").text("빈칸을 입력해주세요.");
-  } else if (!/^(01[016789]{1})-?[0-9]{3,4}-?[0-9]{4}$/.test(콜)) {
+  } else if (!/^(01[016789]{1})-?[0-9]{3,4}-?[0-9]{4}$/) {
     $("#phoneUpdate_Check").attr("style", "color: red; font-size: 14px;");
     $("#phoneUpdate_b").text("휴대폰 정보를 확인해주세요.");
   } else if (phone.length < 11 || phone.length > 11) {
@@ -494,4 +494,8 @@ $("#nick_btn2").click(function () {
       }
     },
   });
+});
+
+$(".order").change(function () {
+  $("#order_btn").click();
 });

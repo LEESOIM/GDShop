@@ -9,7 +9,7 @@ import com.shop.goodee.item.ItemVO;
 import lombok.Data;
 
 @Data
-public class MissionVO {
+public class MyCampaignVO {
 
 	private Integer missionNum;
 	private Integer itemNum;
@@ -21,4 +21,7 @@ public class MissionVO {
 	
 	private ItemVO itemVO;
 	private List<ItemFileVO> itemFileVOs;
+	
+	//포인트 변화
+	private Date finish_3;
 }

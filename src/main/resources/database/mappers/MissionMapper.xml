@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="com.shop.goodee.mission.MissionMapper">
+
+	<!-- 추첨형 -->
+	<insert id="setApply" parameterType="MissionVO">
+		INSERT INTO MISSION(MISSIONNUM, ITEMNUM, ID, APPLYDATE, STATUS, MYCAM) VALUES(NULL, #{itemNum}, #{id}, NOW(), 0, 0)
+	</insert>
+	
+	<!-- 즉석추첨형 -->
+	<insert id="setApply_baro" parameterType="MissionVO">
+		INSERT INTO MISSION(MISSIONNUM, ITEMNUM, ID, APPLYDATE, STATUS, MYCAM) VALUES(NULL, #{itemNum}, #{id}, NOW(), 0, 1)
+	</insert>
+	
+	<!-- 지원내역 -->
+	<select id="getApply" parameterType="MissionVO" resultType="MissionVO">
+		SELECT * FROM MISSION WHERE ITEMNUM=#{itemNum} AND ID=#{id}
+	</select>
+	
+	<!-- 중복지원확인 -->
+	<select id="getApplyCheck" parameterType="MissionVO" resultType="Long">
+		SELECT COUNT(ID) FROM MISSION WHERE ITEMNUM=#{itemNum} AND ID=#{id}
+	</select>
+	
+	<!-- 지원취소 -->
+	<update id="setCancel" parameterType="MissionVO">
+		UPDATE MISSION SET MYCAM=3 WHERE ID=#{id} and ITEMNUM=#{itemNum}
+	</update>
+
+
+</mapper>

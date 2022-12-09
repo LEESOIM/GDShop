@@ -244,7 +244,7 @@
 		</div>
 	</section>
 	<c:import url="../template/footer.jsp"></c:import>
-	<script src="/js/itemAdd.js"></script>
-	<script src="/js/itemFile.js"></script>
+	<script src="/js/item/itemAdd.js"></script>
+	<script src="/js/item/itemFile.js"></script>
 </body>
 </html>

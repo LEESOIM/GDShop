@@ -18,6 +18,13 @@
 	</properties>
 	<dependencies>
 	
+		<!-- 카톡알림 API -->
+		<dependency>
+  			<groupId>net.nurigo</groupId>
+  			<artifactId>sdk</artifactId>
+  			<version>4.2.7</version>
+		</dependency>
+	
 		<!-- 메일전송 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

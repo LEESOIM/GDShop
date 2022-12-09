@@ -9,7 +9,7 @@
 		<typeAlias type="com.shop.goodee.purchase.PurchaseVO" alias="PurchaseVO"/>
 		<typeAlias type="com.shop.goodee.purchase.PurchaseFileVO" alias="PurchaseFileVO"/>
 		<typeAlias type="com.shop.goodee.seller.SellerVO" alias="SellerVO"/>
-		<typeAlias type="com.shop.goodee.myCampaign.MissionVO" alias="MissionVO"/>
+		<typeAlias type="com.shop.goodee.myCampaign.MyCampaignVO" alias="MyCampaignVO"/>
 		<!-- 하준 -->
 		<typeAlias type="com.shop.goodee.pay.PayVO" alias="PayVO"/>
 		<typeAlias type="com.shop.goodee.board.notice.NoticeVO" alias="NoticeVO"/>
@@ -19,10 +19,12 @@
 	
 		
 		<typeAlias type="com.shop.goodee.member.MemberVO" alias="MemberVO"/>
+		<typeAlias type="com.shop.goodee.member.PointVO" alias="PointVO"/>
 		<typeAlias type="com.shop.goodee.member.MemberFileVO" alias="MemberFileVO"/>
 		<typeAlias type="com.shop.goodee.member.RoleVO" alias="RoleVO"/>
 		<typeAlias type="com.shop.goodee.item.ItemVO" alias="ItemVO"/>
 		<typeAlias type="com.shop.goodee.item.ItemFileVO" alias="ItemFileVO"/>
+		<typeAlias type="com.shop.goodee.mission.MissionVO" alias="MissionVO"/>
 		
 		<typeAlias type="java.lang.Long" alias="Long"/>
 		<typeAlias type="java.lang.String" alias="String"/>

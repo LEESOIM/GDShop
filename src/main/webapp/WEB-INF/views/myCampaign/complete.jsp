@@ -37,11 +37,13 @@
 					<li class="nav-item"><a class="nav-link select active" href="./complete"  id="complete" data-value="2">미션완료</a></li>
 					<li class="nav-item"><a class="nav-link select" href="./cancel"  id="cancel" data-value="3">취소</a></li>
 				</ul>
-				
+				<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4" style="height: 380px">
 				<c:forEach items="${list }" var="vo">
 					<div>
 						<div class="d-flex flex-column" style="width: 250px; height: 380px">
-							<div> <img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px"> </div>
+							<div>
+							<a href="/item/detail?itemNum=${vo.itemNum }">
+							 <img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px"></a> </div>
 
 							<div class="d-flex flex-column" style="width: 250px; height: 130px">
 								<div class="d-flex justify-content-start pt-1" style="font-size: 14px">
@@ -109,7 +111,7 @@
 						</div>
 					</div>
 				</c:forEach>
-				
+				</div>
 		</div>
 
 

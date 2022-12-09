@@ -53,6 +53,7 @@
       <li class="list-group-item">
         <i class="fa-solid fa-arrow-pointer ps-2 pe-3"></i>내 캠페인
       </li>
+      </a>
       <sec:authorize access="hasRole('SELLER')">
              <form action="product" method="get">
                <a href="./product" style="text-decoration: none">
