@@ -18,6 +18,7 @@
 	
 		
 		<typeAlias type="com.shop.goodee.member.MemberVO" alias="MemberVO"/>
+		<typeAlias type="com.shop.goodee.member.PointVO" alias="PointVO"/>
 		<typeAlias type="com.shop.goodee.member.MemberFileVO" alias="MemberFileVO"/>
 		<typeAlias type="com.shop.goodee.member.RoleVO" alias="RoleVO"/>
 		<typeAlias type="com.shop.goodee.item.ItemVO" alias="ItemVO"/>

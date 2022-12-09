@@ -297,7 +297,7 @@ public class MemberController {
       memberVO = memberService.getMypage(memberVO);
       memberVO.setOrder(order);
       //포인트 변화
-      List<MemberVO> ar = memberService.getMissionPoint(memberVO);
+      List<PointVO> ar = memberService.getPointList(memberVO);
       int count = memberService.getMissionNum(memberVO);
       mv.addObject("count", count);
       mv.addObject("pointList", ar);
