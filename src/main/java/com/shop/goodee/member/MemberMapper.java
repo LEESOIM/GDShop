@@ -77,6 +77,9 @@ public interface MemberMapper {
    /* 출금신청 후 출금 예정 포인트 변경 */
    public int setResultPoint(MemberVO memberVO)throws Exception;
    
+   /* 출금 신청 후 포인트 리스트 변화 */
+   public int getResultPoint(MemberVO memberVO)throws Exception;
+   
    /* 내등급 - VIP회원 확인 */
    public int getVIP(MemberVO memberVO)throws Exception;
    
@@ -105,6 +108,7 @@ public interface MemberMapper {
    /* 내 포인트 - 미션수 */
    public int getMissionNum(MemberVO memberVO)throws Exception;
    
-   
+   /* 내 포인트 - 포인트 리스트 확인 */
+   public List<PointVO> getPointList(MemberVO memberVO)throws Exception;
    
 }

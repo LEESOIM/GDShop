@@ -134,10 +134,17 @@ prefix="c" %>
               <c:if test="${count ne 0}">
               <c:forEach items="${pointList}" var="list">
                  <tr>
-                  <td>${list.missions[0].finish}</td>
-                  <td>${list.items[0].title}</td>
-                  <td><b style="color:green">+${list.items[0].point}</b></td>
-                  <td>${list.missions[0].finish_3}</td>
+                  <td>${list.finish}</td>
+                  <td>${list.title}</td>
+                  <c:choose>
+                  	<c:when test="${list.status eq 0}">
+                  		<td><b style="color:blue">-${list.point}</b></td>
+                  	</c:when>
+                  	<c:otherwise>                  		
+	                  <td><b style="color:green">+${list.point}</b></td>
+                  	</c:otherwise>
+                  </c:choose>
+                  <td>${list.finish_3}</td>
                 </tr> 
            	 </c:forEach>
               </c:if>
