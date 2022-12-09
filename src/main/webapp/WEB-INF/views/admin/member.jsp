@@ -291,28 +291,26 @@ pageEncoding="UTF-8"%>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form>
-                <div style="width: 80%; margin-bottom: 50px">
-                    <span class="input-group">
-                      <select name="kind" class="form-select" id="missionKind">
-                          <option class="kinds" value="id">ID</option>
-                          <option class="kinds" value="company">기업명</option>
-                      </select>
-                    <input type="text" name="search" value="${param.search}" class="form-control" id="missionSearch" onKeypress="javascript:if(event.keyCode==13) {search_onclick_subm()}" >
-                    <button type="button" class="btn btn-primary" id="missionSearch_btn">검색</button>
-                   </span>
-                      <ul class="nav nav-tabs">
-                          <li class="nav-item"><a class="nav-link active" id="ongoing" data-kind="1"  onclick="onGoing(this)" href="#">진행중</a></li>
-                          <li class="nav-item"><a class="nav-link" id="completed" data-kind="2" onclick="completed(this)" href="#">완료</a></li>
-                          <li class="nav-item"><a class="nav-link" id="cancel" data-kind="3" onclick="cancel(this)" href="#">취소</a></li>
-                          <li class="nav-item"><a class="nav-link" id="total" data-kind="total" onclick="totalHistory(this)" href="#">지원 내역</a></li>
-                      </ul>
-                      <input type="text" hidden id="totalmission">
-                      <div id="missionList">   
-                      </div>
-                  </div>
-              
-              </form>
+                <div style=" text-align: center;">
+                    <div style="width: 90%; margin-bottom: 50px; display: inline-block;">
+                        <span class="input-group">
+                            <select name="kind" class="form-select" id="missionKind">
+                                <option class="kinds" value="id">ID</option>
+                                <option class="kinds" value="company">기업명</option>
+                            </select>
+                        <input type="text" name="search" value="${param.search}" class="form-control" id="missionSearch" onKeypress="javascript:if(event.keyCode==13) {search_onclick_subm()}" >
+                        <button type="button" class="btn btn-primary" id="missionSearch_btn">검색</button>
+                        </span>
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item"><a class="nav-link active" id="ongoing" data-kind="1"  onclick="onGoing(this)" href="#">진행중</a></li>
+                            <li class="nav-item"><a class="nav-link" id="completed" data-kind="2" onclick="completed(this)" href="#">완료</a></li>
+                            <li class="nav-item"><a class="nav-link" id="cancel" data-kind="3" onclick="cancel(this)" href="#">취소</a></li>
+                            <li class="nav-item"><a class="nav-link" id="total" data-kind="total" onclick="totalHistory(this)" href="#">지원 내역</a></li>
+                        </ul>
+                        <input type="text" hidden id="totalmission">
+                        <div id="missionList"></div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

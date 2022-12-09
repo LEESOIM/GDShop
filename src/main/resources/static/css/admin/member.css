@@ -61,6 +61,7 @@
     color: green; 
 }
 
-.solid{
-    border: 1px solid rgba(0,0,0,.25);
+.default{
+   color:  rgba(0,0,0,.25);
 }
+

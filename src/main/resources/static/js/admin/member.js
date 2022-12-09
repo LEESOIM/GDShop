@@ -249,10 +249,13 @@ function setStatus(event){
     let status = $(event).find(".status").text()
     
     if(status=="0"){
+        $(event).next().find(".buy").removeClass("default")
         $(event).next().find(".buy").addClass("cur-progress")
     }else if(status=="1"){
+        $(event).next().find(".review").removeClass("default")
         $(event).next().find(".review").addClass("cur-progress")
     }else{
+        $(event).next().find(".point").removeClass("default")
         $(event).next().find(".point").addClass("cur-progress")
     }
 }

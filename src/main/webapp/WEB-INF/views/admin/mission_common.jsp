@@ -53,21 +53,21 @@ pageEncoding="UTF-8"%>
                             <div class="ant-steps" style="text-align: center; width: 100%;" >
                                 <div>
                                    <div class="mission_order">
-                                      <i class="fa-regular fa-circle-check" style="color: green"></i> 구매하기
+                                      <i class="fa-regular fa-circle-check buy default" ></i> 구매하기
                                    </div>
                                    <div>미진행</div>
                                 </div>
-                                <div class="solid"></div>
+                                <hr width="15%" color="rgba(0,0,0,.25);" size="2">
                                 <div>
                                    <div class="mission_order">
-                                      <i class="fa-regular fa-circle-check" style="color: green"></i> 리뷰
+                                      <i class="fa-regular fa-circle-check review default"></i> 리뷰
                                    </div>
                                    <div>미진행</div>
                                 </div>
-                                <div class="solid"></div>
+                                <hr width="15%" color="rgba(0,0,0,.25);" size="2">
                                 <div>
                                    <div class="mission_order">
-                                      <i class="fa-regular fa-circle-check" style="color: green"></i> 포인트 수령
+                                      <i class="fa-regular fa-circle-check point default"></i> 포인트 수령
                                    </div>
                                    <div>미완료</div>
                                 </div>
