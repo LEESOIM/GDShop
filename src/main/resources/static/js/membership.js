@@ -2,7 +2,7 @@
 
 
 $("#membership_joinBtn").click(function () {
-   if($("#imemberName").text() == ""){
+   if($("#memberId").text() == ""){
         console.log("로그인필요")
         console.log($("#exampleModal"))
         alert("로그인 필요")
@@ -47,7 +47,8 @@ function requestPay(buyer_name, buyer_id) {
                 }
             }).done(function(data){
                 if(data==1){
-                    alert("결제 완료")
+                    alert("결제 완료. 다시 로그인해주세요.");
+                    location.href="/member/logout";   
                 }else{
                     alert("결제 실패1")
                 }

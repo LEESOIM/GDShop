@@ -49,7 +49,7 @@ public class SellerController {
 		log.info("====== sellerVO {}", sellerVO);
 		sellerVO = payService.sellerCheck(sellerVO);
 		log.info("sellerVO => {}", sellerVO);
-		if(!sellerVO.getStatus()) {
+		if(sellerVO.getStatus()) {
 			return true;
 		}else {
 			return false;			
