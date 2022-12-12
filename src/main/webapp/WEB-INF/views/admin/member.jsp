@@ -16,6 +16,7 @@ pageEncoding="UTF-8"%>
     <title>Admin - Dashboard</title>
 
     <link rel="stylesheet" href="../css/admin/member.css" />
+    <link rel="stylesheet" href="/css/header.css" />
     <script defer src="/js/admin/member.js"></script>
 
     <!-- Custom fonts for this template-->
@@ -53,100 +54,26 @@ pageEncoding="UTF-8"%>
                     </div>
 
                     <!-- Content Row -->
-                    <div class="row">
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Earnings (Monthly)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Earnings (Annual)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-info shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
-                                            </div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="progress progress-sm mr-2">
-                                                        <div class="progress-bar bg-info" role="progressbar"
-                                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Pending Requests Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Pending Requests</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <c:import url="./contentrow.jsp"></c:import>
                     <!-- Content Row -->
                     
-                    <div id="option">
+                    <div id="option" >
                         <div class="row row-cols-lg-auto g-3 align-items-center" id="form">
-                            <div>
-                                <label><input type="radio" name="roleName" value="" checked>전체</label>
-                                <label><input type="radio" name="roleName" value="ROLE_ADMIN">관리자</label>
-                                <label><input type="radio" name="roleName" value="ROLE_SELLER">판매자</label>
-                                <label><input type="radio" name="roleName" value="ROLE_VIP">VIP</label>
-                                <label><input type="radio" name="roleName" value="ROLE_MEMBER">멤버</label>
+                            <div class="btn-group">
+                                <input class="btn-check" type="radio" id="radio_all" name="roleName" value="" checked>
+                                <label class="btn btn-outline-success" for="radio_all">전체</label>
+
+                                <input class="btn-check" type="radio" id="radio_admin" name="roleName" value="ROLE_ADMIN">
+                                <label class="btn btn-outline-success" for="radio_admin">관리자</label>
+
+                                <input class="btn-check" type="radio" id="radio_seller" name="roleName" value="ROLE_SELLER">
+                                <label class="btn btn-outline-success" for="radio_seller">판매자</label>
+
+                                <input class="btn-check" type="radio" id="radio_vip" name="roleName" value="ROLE_VIP">
+                                <label class="btn btn-outline-success" for="radio_vip">VIP</label>
+
+                                <input class="btn-check" type="radio" id="radio_member" name="roleName" value="ROLE_MEMBER">
+                                <label class="btn btn-outline-success" for="radio_member">멤버</label>
                             </div>
                             
                             <div class="col-12">
@@ -157,13 +84,13 @@ pageEncoding="UTF-8"%>
                                         <option class="kinds" value="email">Email</option>
                                     </select>
                                   <input type="text" name="search" value="${param.search}" class="form-control" id="search" onKeypress="javascript:if(event.keyCode==13) {search_onclick_subm()}" >
-                                  <button type="button" class="btn btn-primary" id="search_btn">검색</button>
+                                  <button type="button" class="btn btn-success" id="search_btn">검색</button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row" id="member_list">
+                    <div class="row" id="member_list" style=" width: 98%; height: 95%; text-align: center;">
                         <table class="table table-hover" id="table">
                             <tr>
                                 <th>ID</th>
@@ -172,7 +99,6 @@ pageEncoding="UTF-8"%>
                                 <th>포인트</th>
                                 <th>등급</th>
                                 <th>미션</th> 
-                                <th>가입승인</th>
                             </tr>
                             <c:forEach items="${list}" var="memberVO">
                             	<tr onclick=""  data-bs-toggle="modal" data-bs-target="#memberInfoModal">
@@ -186,14 +112,13 @@ pageEncoding="UTF-8"%>
                                         </c:forEach>  
                                     </td>
                                     <td><button data-bs-toggle="modal" data-bs-target="#missionModal">미션</button></td>
-                            		<td>${memberVO.status}</td>
                             	</tr>
                             </c:forEach>
                         </table>
                         
                         <div id="page">
                             <nav aria-label="Page navigation example">
-                                <ul class="pagination">
+                                <ul class="pagination  justify-content-center">
                                     <li class="page-item"  value="${pager.pre}" id="pre">
                                         <a class="page-link"  aria-label="Previous">
                                             <span aria-hidden="true" data-dir="prev"  data-page="${pager.page}">previous</span>
@@ -236,45 +161,45 @@ pageEncoding="UTF-8"%>
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="memberInfoModalLabel">New message</h1>
+              <strong class="modal-title fs-5" id="memberInfoModalLabel">New message</strong>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <form action="update" method="post" onsubmit="return confirm('수정하시겠습니까?')">
                 <div class="mb-3">
-                  <label for="member-id" class="col-form-label">ID:</label>
+                  <label for="member-id" class="col-form-label"> <strong>ID :</strong> </label>
                   <input type="text" class="form-control" id="transfer-id" name="id" hidden>
                   <input type="text" class="form-control" id="member-id" disabled>
                 </div>
                 <div class="mb-3">
-                    <label for="member-roleName" class="col-form-label">등급:</label>
+                    <label for="member-roleName" class="col-form-label"><strong>등급:</strong></label>
                     <div id="roleNameDiv"></div>
                     
                 </div>
                 <div class="mb-3">
-                  <label for="member-name" class="col-form-label">이름:</label>
+                  <label for="member-name" class="col-form-label"><strong>이름:</strong> </label>
                   <input class="form-control" id="member-name" disabled></input>
                 </div>
                 <div class="mb-3">
-                    <label for="member-phone" class="col-form-label">전화번호:</label>
+                    <label for="member-phone" class="col-form-label"><strong>전화번호:</strong></label>
                     <input class="form-control" id="member-phone" disabled></input>
                 </div>
                 <div class="mb-3">
-                    <label for="member-email" class="col-form-label">Email:</label>
+                    <label for="member-email" class="col-form-label"><strong>Email</strong>:</label>
                     <input class="form-control" id="member-email" disabled></input>
                 </div>
                 <div class="mb-3">
-                    <label for="member-point" class="col-form-label">포인트:</label>
+                    <label for="member-point" class="col-form-label"><strong>포인트:</strong></label>
                     <input class="form-control" id="member-point" name="point"></input>
                 </div>
                 <div class="mb-3">
-                    <label for="member-regDate" class="col-form-label">가입일:</label>
+                    <label for="member-regDate" class="col-form-label"><strong>가입일:</strong></label>
                     <input class="form-control" id="member-regDate" disabled></input>
                 </div>
                 
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary">수정</button>
+                  <button type="submit" class="btn btn-success">수정</button>
                 </div>
               </div>
               </form>
@@ -287,20 +212,16 @@ pageEncoding="UTF-8"%>
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="missionModalLabel">Mission</h1>
+              <strong class="modal-title fs-5" id="missionModalLabel">Mission</strong>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div style=" text-align: center;">
                     <div style="width: 90%; margin-bottom: 50px; display: inline-block;">
-                        <span class="input-group">
-                            <select name="kind" class="form-select" id="missionKind">
-                                <option class="kinds" value="id">ID</option>
-                                <option class="kinds" value="company">기업명</option>
-                            </select>
-                        <input type="text" name="search" value="${param.search}" class="form-control" id="missionSearch" onKeypress="javascript:if(event.keyCode==13) {search_onclick_subm()}" >
-                        <button type="button" class="btn btn-primary" id="missionSearch_btn">검색</button>
-                        </span>
+                        <!-- <span class="input-group">
+                            <input type="text" name="search" value="${param.search}" placeholder="캠페인명 입력" class="form-control" id="missionSearch" onKeypress="javascript:if(event.keyCode==13) {search_onclick_subm()}" >
+                            <button type="button" class="btn btn-primary" id="missionSearch_btn">검색</button>
+                        </span> -->
                         <ul class="nav nav-tabs">
                             <li class="nav-item"><a class="nav-link active" id="ongoing" data-kind="1"  onclick="onGoing(this)" href="#">진행중</a></li>
                             <li class="nav-item"><a class="nav-link" id="completed" data-kind="2" onclick="completed(this)" href="#">완료</a></li>

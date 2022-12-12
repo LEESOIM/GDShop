@@ -17,6 +17,8 @@ import com.shop.goodee.member.MailService;
 import com.shop.goodee.member.MemberMapper;
 import com.shop.goodee.member.MemberService;
 import com.shop.goodee.member.MemberVO;
+import com.shop.goodee.pay.PayService;
+import com.shop.goodee.pay.PayVO;
 import com.shop.goodee.sns.SnsService;
 import com.shop.goodee.sse.NotificationService;
 import com.shop.goodee.util.Pager;
@@ -37,6 +39,38 @@ public class SellerController {
 	private MailService mailService;
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private PayService payService;
+	
+	@GetMapping("sellerCheck")
+	@ResponseBody
+	public boolean sellerCheck(SellerVO sellerVO)throws Exception{
+		log.info("====== sellerVO {}", sellerVO);
+		sellerVO = payService.sellerCheck(sellerVO);
+		log.info("sellerVO => {}", sellerVO);
+		if(!sellerVO.getStatus()) {
+			return true;
+		}else {
+			return false;			
+		}
+	}
+	
+	
+	@PostMapping("successPay")
+	@ResponseBody
+	public int successPaySeller(PayVO payVO)throws Exception{
+		log.info("==================================");
+		log.info("payVO => {}",payVO);
+		int result = 0;
+		int setPayResult = payService.setPay(payVO);
+		int setSellerResult = payService.setSeller(payVO);
+		if(setPayResult==1 && setSellerResult==1) {
+			result =1;
+		}
+		return result;
+	}
+	
 	
 	
 	@GetMapping("seller")

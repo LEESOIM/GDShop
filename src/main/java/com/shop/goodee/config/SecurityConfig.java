@@ -63,6 +63,7 @@ public class SecurityConfig {
             .authorizeRequests()
                .antMatchers("/").permitAll()
                .antMatchers("/tab/*").permitAll()
+               .antMatchers("/seller/seller").permitAll()
                .antMatchers("/board/notice").permitAll()
                .antMatchers("/chat/*").permitAll()
                .antMatchers("/item/detail").permitAll()

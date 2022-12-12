@@ -21,36 +21,33 @@ public class NotificationService {
 	@Autowired
 	private  AdminService adminService;
 	
-//	private static final Long DEFAULT_TIMEOUT = 60L*1000*60;
-//	public static Map<String, SseEmitter> sseEmitters = new ConcurrentHashMap<>();
-//	
-//	public SseEmitter subscribe(String id) {
-//		
-//		// 현재 클라이언트의 SseEmitter 생성
-//		SseEmitter sseEmitter = new SseEmitter(DEFAULT_TIMEOUT);
-//		
-//		try {
-//			// 연결
-//			sseEmitter.send(SseEmitter.event().name("connect"));
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		// 해당 유저의 Emitter 저장
-//		sseEmitters.put(id, sseEmitter);
-//		log.info("sseEmitters =>{}", sseEmitters);
-//		sseEmitter.onCompletion(() -> sseEmitters.remove(id));
-//		sseEmitter.onTimeout(()-> sseEmitters.remove(id));
-//		sseEmitter.onError((e) -> sseEmitters.remove(id));
-//		
-//		return sseEmitter;
-//	}
+	public void pdAddRequestEvent(String id)throws Exception{
+		List<MemberVO> adminList = adminService.getAdmin();
+		log.info("adminList => {}",adminList);
+		for(MemberVO admin: adminList) {
+			log.info("sseEmitters<> =>{}", sseEmitters);
+			if(sseEmitters.containsKey(admin.getId())) {
+				log.info("admin =>{}", admin);
+				SseEmitter sseEmitter = sseEmitters.get(admin.getId());
+				log.info("=========== Service===========");
+				log.info("sseEmitters<> =>{}", sseEmitters);
+				log.info("sseEmitter =>{}", sseEmitter);
+				try {
+					log.info("=========== pdAddRequest===========");
+					sseEmitter.send(SseEmitter.event().name("pdAddRequest").data(id+"상품등록 요청이 들어왔습니다"));					
+				} catch (Exception e) {
+					sseEmitters.remove(admin.getId());
+				}
+			}
+		}
+	}
+	
 	
 	public void notifyApplyEvent(String id)throws Exception {
 		List<MemberVO> adminList = adminService.getAdmin();
-		
+		log.info("adminList => {}",adminList);
 		for(MemberVO admin: adminList) {
+			log.info("sseEmitters<> =>{}", sseEmitters);
 			if(sseEmitters.containsKey(admin.getId())) {
 				log.info("admin =>{}", admin);
 				SseEmitter sseEmitter = sseEmitters.get(admin.getId());

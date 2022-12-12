@@ -38,6 +38,7 @@ public class SseController {
 		
 		// 해당 유저의 Emitter 저장
 		sseEmitters.put(id, sseEmitter);
+		log.info("id> =>{}", id);
 		log.info("=========== Sse Controller===========");
 		log.info("sseEmitter =>{}", sseEmitter);
 		log.info("sseEmitters<> =>{}", sseEmitters);

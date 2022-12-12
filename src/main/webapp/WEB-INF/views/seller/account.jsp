@@ -13,7 +13,11 @@ pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="../css/header.css" />
     <link rel="stylesheet" href="../css/login.css" />
     <link rel="stylesheet" href="../css/board.css" />
-    <script defer src="/js/notice/notice.js"></script>
+     <!-- jQuery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+  <!-- iamport.payment.js -->
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+    <script defer src="/js/account.js"></script>
   </head>
   <body>
     <c:import url="../template/top_part.jsp"></c:import>
@@ -42,7 +46,7 @@ pageEncoding="UTF-8"%>
           <div style="width: 100%; text-align: center; margin-top: 60px">
           <img alt="" src="/images/tt.png" style="width: 180px; position:relative; top: 55px">
           <div>
-           <button style="font-size:30px; font-family:monospace; width: 300px; height: 100px; border:none; border-radius:15px; background-color: transparent; box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;"><b>판매자 결제</b></button>
+           <button id="seller_joinBtn" style="font-size:30px; font-family:monospace; width: 300px; height: 100px; border:none; border-radius:15px; background-color: transparent; box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;"><b>판매자 결제</b></button>
 		  </div>
           </div>
         </div>

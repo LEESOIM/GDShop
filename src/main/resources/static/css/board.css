@@ -89,10 +89,24 @@ tr.colored:hover td{
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  border-bottom: solid 1px lightgray;
+  padding-bottom: 10px;
 }
 
 .fileItem{
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+}
+
+#fileList{
+  margin-top: 10px;
+}
+
+.file_list_header_title{
+  padding-top: 7px;
+}
+
+.file_list_header_volume{
+  padding-top: 7px;
 }

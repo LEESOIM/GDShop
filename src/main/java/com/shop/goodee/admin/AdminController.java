@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.shop.goodee.item.ItemVO;
 import com.shop.goodee.member.MemberVO;
-import com.shop.goodee.myCampaign.MissionVO;
+import com.shop.goodee.myCampaign.MyCampaignVO;
 import com.shop.goodee.seller.SellerService;
 import com.shop.goodee.seller.SellerVO;
 import com.shop.goodee.util.Pager;
@@ -38,7 +38,7 @@ public class AdminController {
 		log.info("====================================");
 		log.info("pager =>{}",pager);
 		ModelAndView mv = new ModelAndView();
-		List<MissionVO> list = adminService.getMission2(pager);
+		List<MyCampaignVO> list = adminService.getMission2(pager);
 		mv.addObject("list",list);
 		mv.setViewName("/admin/mission_common");
 		mv.addObject("status","ongoing");
@@ -52,7 +52,7 @@ public class AdminController {
 		log.info("====================================");
 		log.info("pager =>{}",pager);
 		ModelAndView mv = new ModelAndView();
-		List<MissionVO> list = adminService.getMission(pager);
+		List<MyCampaignVO> list = adminService.getMission(pager);
 		mv.addObject("list",list);
 		mv.setViewName("/admin/mission_common");
 		mv.addObject("status","ongoing");

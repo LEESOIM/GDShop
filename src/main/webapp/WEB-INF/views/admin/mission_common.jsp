@@ -26,7 +26,12 @@ pageEncoding="UTF-8"%>
         <tbody>
             <c:forEach items="${list}" var="mission">
                 <tr data-bs-toggle="collapse" data-bs-target="#num${mission.missionNum}" onclick="setStatus(this)">
-                    <th scope="row"><i class="bi bi-chevron-down"></i></th>
+                    <c:if test="${mission.myCam==1}">
+                        <th scope="row"><i class="bi bi-chevron-down"></i></th>
+                    </c:if>
+                    <c:if test="${mission.myCam==0 || mission.myCam==2 || mission.myCam==3 }">
+                        <th scope="row"></th>
+                    </c:if>
                     <td>${mission.missionNum}</td>
                     <td>${mission.itemVO.title}</td>
                     <td>${mission.itemVO.type}</td>
@@ -47,73 +52,45 @@ pageEncoding="UTF-8"%>
                         <td>취소</td>
                     </c:if>
                 </tr>
-                <tr class="accordion-collapse collapse" id="num${mission.missionNum}">
-                    <div class="accordion-body">
-                        <td colspan="8">
-                            <div class="ant-steps" style="text-align: center; width: 100%;" >
-                                <div>
-                                   <div class="mission_order">
-                                      <i class="fa-regular fa-circle-check buy default" ></i> 구매하기
-                                   </div>
-                                   <div>미진행</div>
-                                </div>
-                                <hr width="15%" color="rgba(0,0,0,.25);" size="2">
-                                <div>
-                                   <div class="mission_order">
-                                      <i class="fa-regular fa-circle-check review default"></i> 리뷰
-                                   </div>
-                                   <div>미진행</div>
-                                </div>
-                                <hr width="15%" color="rgba(0,0,0,.25);" size="2">
-                                <div>
-                                   <div class="mission_order">
-                                      <i class="fa-regular fa-circle-check point default"></i> 포인트 수령
-                                   </div>
-                                   <div>미완료</div>
-                                </div>
-                             </div>
-                            <!-- <div class="ant-steps ant-steps-horizontal ant-steps-small ant-steps-label-horizontal">
-                                <div class="ant-steps-item ant-steps-item-wait mission-step" style="padding: 0px;">
-                                    <div class="ant-steps-item-container">
-                                        <div class="ant-steps-item-tail"></div>
-                                        <div class="ant-steps-item-icon buy"><span class="ant-steps-icon">1</span></div>
-                                        <div class="ant-steps-item-content">
-                                            <div class="ant-steps-item-title">구매 확인</div>
-                                            <div class="ant-steps-item-description">미진행</div>
-                                        </div>
+                <c:if test="${mission.myCam==1}">
+
+                    <tr class="accordion-collapse collapse" id="num${mission.missionNum}">
+                        <div class="accordion-body">
+                            <td colspan="8">
+                                <div class="ant-steps" style="text-align: center; width: 100%;" >
+                                    <div>
+                                       <div class="mission_order">
+                                          <i class="fa-regular fa-circle-check buy default" ></i> <span class="buyText">구매하기</span>
+                                       </div>
+                                       <div class="buyState">미진행</div>
                                     </div>
-                                </div>
-                                <div class="ant-steps-item ant-steps-item-wait mission-step" style="padding: 0px;">
-                                    <div class="ant-steps-item-container">
-                                        <div class="ant-steps-item-tail solid"></div>
-                                        <div class="ant-steps-item-icon review"><span class="ant-steps-icon">2</span></div>
-                                        <div class="ant-steps-item-content">
-                                            <div class="ant-steps-item-title">포토 확인</div>
-                                            <div class="ant-steps-item-description">미진행</div>
-                                        </div>
+                                    <hr width="15%" color="rgba(0,0,0,.25);" size="2">
+                                    <div>
+                                       <div class="mission_order">
+                                          <i class="fa-regular fa-circle-check review default"></i> <span class="reviewText">리뷰</span>
+                                       </div>
+                                       <div class="reviewState">미진행</div>
                                     </div>
-                                </div>
-                                <div class="ant-steps-item ant-steps-item-wait mission-step" style="padding: 0px;">
-                                    <div class="ant-steps-item-container">
-                                        <div class="ant-steps-item-tail"></div>
-                                        <div class="ant-steps-item-icon point"><span class="ant-steps-icon">3</span></div>
-                                        <div class="ant-steps-item-content">
-                                            <div class="ant-steps-item-title">포인트 수령</div>
-                                            <div class="ant-steps-item-description">미완료</div>
-                                        </div>
+                                    <hr width="15%" color="rgba(0,0,0,.25);" size="2">
+                                    <div>
+                                       <div class="mission_order">
+                                          <i class="fa-regular fa-circle-check point default"></i> <span class="pointText">포인트 수령</span>
+                                       </div>
+                                       <div class="pointState">미완료</div>
                                     </div>
-                                </div>
-                            </div> -->
-                        </td>
-                    </div>
-                </tr>
+                                 </div>
+    
+                            </td>
+                        </div>
+                    </tr>
+                </c:if>
             </c:forEach>
         </tbody>
     </table>
     
     <div id="missionPage">
         <nav aria-label="Page navigation example">
-            <ul class="pagination">
+            <ul class="pagination justify-content-center">
               <li class="page-item ${request} pre"  value="${pager.pre}" id="missionPre">
                 <a class="page-link" aria-label="Previous">
                   <span aria-hidden="true"  data-dir="prev"  data-page="${pager.page}">previous</span>

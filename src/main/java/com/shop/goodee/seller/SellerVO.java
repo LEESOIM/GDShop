@@ -11,4 +11,7 @@ public class SellerVO extends MemberVO{
 	private String company;
 	private boolean status;
 	
+	public boolean getStatus() {
+		return this.status;
+	}
 }

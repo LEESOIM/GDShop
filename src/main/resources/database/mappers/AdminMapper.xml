@@ -31,7 +31,7 @@
 		WHERE M.ID=#{id} AND M.MYCAM LIKE CONCAT('%',#{myCam},'%')
 	</select>
 	
-	<resultMap type="MissionVO" id="getMissionResult">
+	<resultMap type="MyCampaignVO" id="getMissionResult">
 		<id column="MISSIONNUM" property="missionNum"/>
 		<result column="ITEMNUM" property="itemNum"/>
 		<result column="ID" property="id"/>

@@ -6,6 +6,10 @@
 
 <mapper namespace="com.shop.goodee.pay.PayMapper">
 	
+	<select id="sellerCheck" parameterType="SellerVO" resultType="SellerVO">
+		SELECT * FROM SELLER WHERE ID=#{id}
+	</select>
+	
 	<insert id="setSeller" parameterType="PayVO">
 		INSERT INTO MEMBER_ROLE VALUES(#{id},2)
 	</insert>

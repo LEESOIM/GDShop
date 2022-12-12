@@ -41,7 +41,7 @@ pageEncoding="UTF-8"%>
     
     <div id="page">
         <nav aria-label="Page navigation example">
-            <ul class="pagination">
+            <ul class="pagination  justify-content-center">
               <li class="page-item ${request} pre"  value="${pager.pre}" id="pre">
                 <a class="page-link" aria-label="Previous">
                   <span aria-hidden="true"  data-dir="prev"  data-page="${pager.page}">previous</span>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -42,7 +43,7 @@ pageEncoding="UTF-8"%>
           <div style="width: 100%;">
             <div class="board_top p-3 mt-3 mb-3">공지사항</div>
 
-            <div>
+            <div style="width: 100%;">
               <div class="board_list ">
                 <table class="table table-hover" id="list">
                   <tr>
@@ -64,30 +65,35 @@ pageEncoding="UTF-8"%>
                 </table>
               </div>
 
-              <button onclick="location.href='./write'">글작성</button>
-
-              <div>
-                <nav aria-label="Page navigation example">
-                  <ul class="pagination">
-                    <li class="page-item"  value="${pager.pre}" id="pre">
-                      <a class="page-link" href="./notice?page=${pager.page-1}" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                      </a>
-                    </li>
-  
-                    <c:forEach var="i" begin="${pager.startNum}" end="${pager.lastNum}">
-                      <li class="page-item ${pager.page==i? 'active':''}">
-                        <a class="page-link" href="./notice?page=${i}">${i}</a>
+              <div style="display: flex; justify-content: space-evenly">
+          
+                <div>
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination ">
+                      <li class="page-item"  value="${pager.pre}" id="pre">
+                        <a class="page-link" href="./notice?page=${pager.page-1}" aria-label="Previous">
+                          <span aria-hidden="true">&laquo;</span>
+                        </a>
                       </li>
-                    </c:forEach>
-                    
-                    <li class="page-item ${pager.next?'':'disabled'}" id="next">
-                      <a class="page-link" href="./notice?page=${pager.page+1}" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
+    
+                      <c:forEach var="i" begin="${pager.startNum}" end="${pager.lastNum}">
+                        <li class="page-item ${pager.page==i? 'active':''}">
+                          <a class="page-link" href="./notice?page=${i}">${i}</a>
+                        </li>
+                      </c:forEach>
+                      
+                      <li class="page-item ${pager.next?'':'disabled'}" id="next">
+                        <a class="page-link" href="./notice?page=${pager.page+1}" aria-label="Next">
+                          <span aria-hidden="true">&raquo;</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+
+                <sec:authorize access="hasRole('ADMIN')">
+                    <button class="btn btn-success" onclick="location.href='./write'" style="height: 35px;">글작성</button>
+                </sec:authorize>
               </div>
 
             </div>

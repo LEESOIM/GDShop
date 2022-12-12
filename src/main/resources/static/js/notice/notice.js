@@ -46,8 +46,8 @@ function addFileList(fileArr){
             byteUnit=setByteUnit(size).get("unit")
             size=setByteUnit(size).get("size")
     
-            let li = $('<li class="fileItem" id="'+fileArr[i].lastModified+'"></li>')
-            li.append('<div class="remove"><button type="button" data-index="'+fileArr[i].lastModified +'" class="remove_button">X</button></div>')
+            let li = $('<div class="fileItem" id="'+fileArr[i].lastModified+'"></div>')
+            li.append('<div class="remove"><button type="button" data-index="'+fileArr[i].lastModified +'" class="btn remove_button"><i class="bi bi-x-circle"></i></button></div>')
             li.append('<div class="fileName">'+fileArr[i].name+'</div>')
             li.append('<div class="fileSize">'+size+byteUnit+'</div>')
             $("#fileList").append(li)
@@ -87,8 +87,8 @@ function removeFile(){
     $("#fileList").click(function(event){
         console.log("removeFile")
         let fileArr = document.getElementById("files").files
-        if(event.target.className=='remove_button'){
-            targetFile = event.target.dataset.index 
+        if($(event.target).parent().hasClass('remove_button')){
+            targetFile = $(event.target).parent().attr("data-index")
             
             for(var i=0; i<dataTransfer.files.length; i++){
                 if(dataTransfer.files[i].lastModified==targetFile){

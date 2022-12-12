@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shop.goodee.member.MemberVO;
+import com.shop.goodee.sse.NotificationService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,7 +22,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/item/*")
 @Slf4j
 public class ItemController {
-
+	@Autowired
+	private NotificationService notificationService;
 	@Autowired
 	private ItemService itemService;
 
@@ -41,7 +43,7 @@ public class ItemController {
 		ModelAndView mv = new ModelAndView();
 		int result = itemService.setAdd(itemVO);
 		log.info("==id=={}", itemVO.getId());
-
+		notificationService.pdAddRequestEvent(itemVO.getId());
 		mv.setViewName("redirect:../member/product");
 		return mv;
 	}

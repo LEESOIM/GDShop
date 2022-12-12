@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -43,7 +44,7 @@ pageEncoding="UTF-8"%>
           </div>
 
           <div style="width: 100%;">
-            <div class="board_top p-3 mt-3 mb-3">Detail Page</div>
+            <div class="board_top p-3 mt-3 mb-3">공지사항</div>
 
               <!-- <div id="title">
                 <h1>${noticeVO.title}</h3>
@@ -69,21 +70,21 @@ pageEncoding="UTF-8"%>
                 </colgroup>
                 <tbody>
                   <tr>
-                    <th scope="row">글 번호</th>
+                    <th scope="row" style="background-color: #f1f3f5;">글 번호</th>
                     <td>
                       ${noticeVO.noticeNum }
                     </td>
-                    <th scope="row">조회수</th>
+                    <th scope="row" style="background-color: #f1f3f5;">조회수</th>
                     <td>${noticeVO.hit}</td>
                   </tr>
                   <tr>
-                    <th scope="row">작성자</th>
+                    <th scope="row" style="background-color: #f1f3f5;">작성자</th>
                     <td>${noticeVO.id}</td>
-                    <th scope="row">작성일</th>
+                    <th scope="row" style="background-color: #f1f3f5;">작성일</th>
                     <td>${noticeVO.regDate}</td>
                   </tr>
                   <tr>
-                    <th scope="row">제목</th>
+                    <th scope="row" style="background-color: #f1f3f5;">제목</th>
                     <td colspan="3">
                       ${noticeVO.title}
                     </td>
@@ -94,9 +95,9 @@ pageEncoding="UTF-8"%>
                     </td>
                   </tr>
                   <tr>
-                    <th scope="row">첨부파일</th>
+                    <th scope="row" style="background-color: #f1f3f5;">첨부파일</th>
                     <td colspan="3">
-                      <div id="files">
+                      <div id="files" style="border: none;">
                         <c:forEach items="${noticeVO.fileVOs}" var="fileVOs">
                            <a href="/fileDown/notice?fileNum=${fileVOs.fileNum}">${fileVOs.oriName}</a> 
                         </c:forEach>
@@ -105,9 +106,11 @@ pageEncoding="UTF-8"%>
                   </tr>
                 </tbody>
               </table>
-              <a href="javascript:history.back();" class="btn" id="list">목록으로</a>
-              <a href="./update?noticeNum=${noticeVO.noticeNum}" class="btn" id="update">수정</a>
-              <a href="./delete?noticeNum=${noticeVO.noticeNum}" class="btn" id="delete">삭제</a>
+              <a href="javascript:history.back();" class="btn btn-success" id="list">목록으로</a>
+              <sec:authorize access="hasRole('ADMIN')">
+                <a href="./update?noticeNum=${noticeVO.noticeNum}" class="btn btn-success" id="update">수정</a>
+                <a href="./delete?noticeNum=${noticeVO.noticeNum}" class="btn btn-success" id="delete"  onclick="return confirm('삭제하시겠습니까?');")>삭제</a>
+              </sec:authorize>
 
         </div>
       </div>
