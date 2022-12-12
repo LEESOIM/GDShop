@@ -3,7 +3,7 @@
 
 $("#seller_joinBtn").click(function () {
     let check;
-   if($("#id1").text() == ""){
+   if($("#memberName").text() == ""){
         console.log("로그인필요")
         console.log($("#exampleModal"))
         alert("로그인 필요")

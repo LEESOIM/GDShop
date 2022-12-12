@@ -2,7 +2,7 @@
 
 
 $("#membership_joinBtn").click(function () {
-   if($("#id1").text() == ""){
+   if($("#imemberName").text() == ""){
         console.log("로그인필요")
         console.log($("#exampleModal"))
         alert("로그인 필요")
