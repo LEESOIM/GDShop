@@ -86,7 +86,7 @@ $("#applyCheck").click(function () {
 
 
 //지원취소버튼
-$("#cancel").click(function () {
+$(".applyCancel").click(function () {
     let itemNum = $("#applyCheck").attr("data-itemNum-num")
     let id = $("#id").val();
     $.ajax({
@@ -101,5 +101,6 @@ $("#cancel").click(function () {
             location.reload();
         }
     })
-
 })
+
+

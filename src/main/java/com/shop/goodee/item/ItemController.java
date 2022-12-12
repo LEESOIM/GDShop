@@ -57,6 +57,7 @@ public class ItemController {
 		mv.setViewName("/item/detail");
 		return mv;
 	}
+	
 
 	//상품수정요청
 	@GetMapping("update")
