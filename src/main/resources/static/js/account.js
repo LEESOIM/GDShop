@@ -3,13 +3,10 @@
 
 $("#seller_joinBtn").click(function () {
     let check;
-   if($("#memberName").text() == ""){
-        console.log("로그인필요")
-        console.log($("#exampleModal"))
+   if($("#memberId").text() == ""){
         alert("로그인 필요")
        $("#exampleModal").modal('show')
    }else{
-        console.log("로그인")
         $.ajax({
             type:"GET",
             url:"/seller/sellerCheck",
@@ -17,7 +14,7 @@ $("#seller_joinBtn").click(function () {
                 id:$("#memberId").text()
             },
             success:function(data){
-                console.log(typeof(data));
+                alert(data)
                 check = data
                 if(check){
                     requestPay($("#memberName").text(), $("#memberId").text());
@@ -61,7 +58,8 @@ function requestPay(buyer_name, buyer_id) {
                 }
             }).done(function(data){
                 if(data==1){
-                    alert("결제 완료")
+					alert("결제 완료. 다시 로그인 해주세요.");
+                    location.href="/member/logout";   
                 }else{
                     alert("결제 실패1")
                 }

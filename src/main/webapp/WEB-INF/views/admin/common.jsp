@@ -7,6 +7,11 @@ pageEncoding="UTF-8"%>
 <head>
    
 </head>
+<style>
+	#mission_btn:hover{
+		font-weight: bold;
+	}
+</style>
 <body>
     <div style="height: 90%;">
 
@@ -17,7 +22,7 @@ pageEncoding="UTF-8"%>
                 <th>Email</th>
                 <th>포인트</th>
                 <th>등급</th>
-                <th>미션</th> 
+                <th>미션 상태</th> 
     
             </tr>
             <c:forEach items="${list}" var="memberVO">
@@ -65,14 +70,14 @@ pageEncoding="UTF-8"%>
                             </c:if>
                         </div>
                     </td>
-                    <td style="display:table-cell;vertical-align:middle;"><button onclick="setMissionModal(this)" data-bs-toggle="modal" data-bs-target="#missionModal">미션</button></td>
+                    <td style="display:table-cell;vertical-align:middle;"><button onclick="setMissionModal(this)" data-bs-toggle="modal" data-bs-target="#missionModal" id="mission_btn" style="border: none; background-color: transparent; font-size: 30px">🎮</button></td>
     
                 </tr>
             </c:forEach>
         </table>
     </div>
     
-    <div id="page" style="margin-top: 10px;">
+    <div id="page" style="margin-top: 30px;">
         <nav aria-label="Page navigation example">
             <ul class="pagination  justify-content-center" >
                 <li class="page-item"  value="${pager.pre}" id="pre">

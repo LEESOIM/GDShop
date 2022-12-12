@@ -17,6 +17,7 @@ pageEncoding="UTF-8"%>
 
     <link rel="stylesheet" href="../css/admin/member.css" />
     <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/index.css" />
     <script defer src="/js/admin/member.js"></script>
 
     <!-- Custom fonts for this template-->
@@ -49,34 +50,29 @@ pageEncoding="UTF-8"%>
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Member</h1>
-                    </div>
 
                     <!-- Content Row -->
-                    <c:import url="./contentrow.jsp"></c:import>
-                    <!-- Content Row -->
                     
-                    <div id="option" >
+                    <div id="option" style="margin-top: 50px;">
                         <div class="row row-cols-lg-auto g-3 align-items-center" id="form">
                             <div class="btn-group">
                                 <input class="btn-check" type="radio" id="radio_all" name="roleName" value="" checked>
-                                <label class="btn btn-outline-success" for="radio_all">전체</label>
+                                <label class="btn btn-outline-dark" for="radio_all">전체</label>
 
                                 <input class="btn-check" type="radio" id="radio_admin" name="roleName" value="ROLE_ADMIN">
-                                <label class="btn btn-outline-success" for="radio_admin">관리자</label>
+                                <label class="btn btn-outline-dark" for="radio_admin">관리자</label>
 
                                 <input class="btn-check" type="radio" id="radio_seller" name="roleName" value="ROLE_SELLER">
-                                <label class="btn btn-outline-success" for="radio_seller">판매자</label>
+                                <label class="btn btn-outline-dark" for="radio_seller">판매자</label>
 
                                 <input class="btn-check" type="radio" id="radio_vip" name="roleName" value="ROLE_VIP">
-                                <label class="btn btn-outline-success" for="radio_vip">VIP</label>
+                                <label class="btn btn-outline-dark" for="radio_vip">VIP</label>
 
                                 <input class="btn-check" type="radio" id="radio_member" name="roleName" value="ROLE_MEMBER">
-                                <label class="btn btn-outline-success" for="radio_member">멤버</label>
+                                <label class="btn btn-outline-dark" for="radio_member">멤버</label>
                             </div>
                             
-                            <div class="col-12">
+                            <div class="col-12" style="padding-bottom: 11px">
                                 <div class="input-group">
                                     <select name="kind" class="form-select" id="kind">
                                         <option class="kinds" value="id">ID</option>
@@ -84,14 +80,14 @@ pageEncoding="UTF-8"%>
                                         <option class="kinds" value="email">Email</option>
                                     </select>
                                   <input type="text" name="search" value="${param.search}" class="form-control" id="search" onKeypress="javascript:if(event.keyCode==13) {search_onclick_subm()}" >
-                                  <button type="button" class="btn btn-success" id="search_btn">검색</button>
+                                  <button type="button" class="btn btn-dark" id="search_btn">검색</button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="row" id="member_list" style=" width: 98%; height: 95%; text-align: center;">
-                        <table class="table table-hover" id="table">
+                        <%-- <table class="table table-hover" id="table">
                             <tr>
                                 <th>ID</th>
                                 <th>이름</th>
@@ -114,7 +110,7 @@ pageEncoding="UTF-8"%>
                                     <td><button data-bs-toggle="modal" data-bs-target="#missionModal">미션</button></td>
                             	</tr>
                             </c:forEach>
-                        </table>
+                        </table> --%>
                         
                         <div id="page">
                             <nav aria-label="Page navigation example">
@@ -250,12 +246,11 @@ pageEncoding="UTF-8"%>
             </div>
             <div class="modal-body">
               <form>
-                  <label for="member-id" class="col-form-label">현재 등급:</label>
-                <div class="mb-3" id="roleDiv">
-                  <div class="memberRole" id="admin" data-rolenum="1">Admin</div>
-                  <div class="memberRole" id="seller" data-rolenum="2">Seller</div>
-                  <div class="memberRole" id="vip" data-rolenum="3">VIP</div>
-                  <div  id="member" data-rolenum="4">Member</div>
+                <div class="mb-3 mt-3" id="roleDiv">
+                  <div class="memberRole" id="admin" data-rolenum="1" style="font-size: 25px">Admin</div>
+                  <div class="memberRole" id="seller" data-rolenum="2" style="font-size: 25px">Seller</div>
+                  <div class="memberRole" id="vip" data-rolenum="3" style="font-size: 25px">VIP</div>
+                  <div  id="member" data-rolenum="4" style="font-size: 25px">Member</div>
                 </div>
               </form>
             </div>
