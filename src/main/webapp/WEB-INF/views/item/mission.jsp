@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!-- 모달창 -->
-
 <div class="modal fade" id="exampleModal_item" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1" >
   <div class="modal-dialog" >
     <div class="modal-content" style="width: 560px">
@@ -21,6 +21,7 @@
 		  <input class="form-check-input" type="checkbox" id="check">
 		  <label class="form-check-label" for="check">
 		    <b>캠페인 유의사항을 확인하였으며, 이에 동의합니다. </b>
+		   </label>
 		</div>
       </div>
       <div class="modal-footer">
@@ -105,12 +106,12 @@
 				</h1>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
-			<form action="/purchase/setPurchase" method="post" enctype="multipart/form-data">
 			<div class="modal-body p-3" style="font-size: 14px">
+	<div id="mStatus0">
 				<div class="d-flex justify-content-center" style="text-align: center">
-					<div>
+					<div style="font-weight: bold;">
 						<div class="mission_order">
-							<i class="fa-regular fa-circle-check" style="color: green"></i> 구매하기
+							<i class="fa-solid fa-circle-check" style="color: green"></i> 구매하기
 						</div>
 						<div>미진행</div>
 					</div>
@@ -130,6 +131,9 @@
 					</div>
 				</div>
 				<hr />
+		
+				<form id="ocr" action="/purchase/setPurchase" method="post" enctype="multipart/form-data">
+				<div>		
 				<div class="pe-4 pb-4">
 				<div class="d-flex py-2">
 					<div style="margin:auto 0; width: 30%; text-align: right;">
@@ -144,9 +148,8 @@
 						<b>미션 가이드 라인</b>
 					</div>
 					<div style="width: 80%; margin-left: 15px; ">
-					<div style="color: #198754; font-weight: bold;">✅구디샵에 등록된 계정과 실제 구매를 진행하는 계정이 서로 동일한 지 구매 전 반드시 확인해 주세요.<br>
+					<div class="mb-2" style="color: #198754; font-weight: bold;">✅구디샵에 등록된 계정과 실제 구매를 진행하는 계정이 서로 동일한 지 구매 전 반드시 확인해 주세요.<br>
 						등록되지 않은 계정으로 제품 구매 시 포인트가 지급되지 않습니다.<br>
-						✅구매링크 바로가기 클릭<br>
 						✅옵션 : ${vo.detail }<br>
 						✅결제금액 : <fmt:formatNumber value="${vo.price }" pattern="###,###,###" />원<br></div>
 						쿠팡 제품의 경우, 쿠팡 자체적으로 금액이 변동되기 때문에 구디샵에서 제시된 구매금액과 실제 구매금액이 다를 수 있습니다.<br>
@@ -159,19 +162,29 @@
 					</div>
 				</div>
 				<div class="d-flex py-1">
+				<c:if test="${vo.shop eq '쿠팡' }">
 					<div style="margin:auto 0; width: 30%; text-align: right;">
 						<b><span style="color: red">*</span>쿠팡 닉네임</b>
 					</div>
 					<div style="width: 80%; margin-left: 25px">
-						<input class="form-control p-1" type="text" name="nIcM" style="width: 300px">
+						<input class="form-control p-1" type="text" id="nickname" name="nickname" style="width: 300px">
 					</div>
+				</c:if>
+				<c:if test="${vo.shop eq '네이버' }">
+					<div style="margin:auto 0; width: 30%; text-align: right;">
+						<b><span style="color: red">*</span>네이버 닉네임</b>
+					</div>
+					<div style="width: 80%; margin-left: 25px">
+						<input class="form-control p-1" type="text" id="nickname_n" name="nickname_n" style="width: 300px">
+					</div>
+				</c:if>
 				</div>
 				<div class="d-flex py-1">
 					<div style="margin:auto 0; width: 30%; text-align: right;">
 						<b><span style="color: red">*</span>주문번호</b>
 					</div>
 					<div style="width: 80%; margin-left: 25px">
-						<input class="form-control p-1" type="text" name="purNumM" style="width: 300px">
+						<input class="form-control p-1" type="text" id="purNumM" name="purNumM" style="width: 300px">
 					</div>
 				</div>
 				<div class="d-flex py-1">
@@ -179,7 +192,7 @@
 						<b><span style="color: red">*</span>결제금액</b>
 					</div>
 					<div style="width: 80%; margin-left: 25px">
-						<input class="form-control p-1" type="text" name="priceM" style="width: 300px">
+						<input class="form-control p-1" type="text" id="priceM" name="priceM" style="width: 300px">
 					</div>
 				</div>
 				<div class="d-flex py-1">
@@ -187,7 +200,7 @@
 						<b><span style="color: red">*</span>인증샷</b>
 					</div>
 					<div style="width: 80%; margin-left: 25px">
-			  				<input type="file" class="form-control p-1" name="f" style="width: 300px">
+			  				<input type="file" class="form-control p-1" id="f" name="f" style="width: 300px">
 					</div>
 				</div>
 				<div class="d-flex py-1">
@@ -203,7 +216,90 @@
 					<button class="btn btn-outline-success" type="submit" id="withdraw_btn"><b>전송</b></button>
 				</div>
 			</div>
+		</form>
+</div>
+		
+<div id="mStatus1">
+		<div>	
+			<form id="crawling" action="" method="post" >
+			<div class="modal-body p-3" style="font-size: 14px">
+				<div class="d-flex justify-content-center" style="text-align: center">
+					<div>
+						<div class="mission_order">
+							<i class="fa-regular fa-circle-check" style="color: green"></i> 구매하기
+						</div>
+						<div>완료</div>
+					</div>
+					<div class="solid"></div>
+					<div style="font-weight: bold;">
+						<div class="mission_order">
+							<i class="fa-solid fa-circle-check" style="color: green"></i> 리뷰
+						</div>
+						<div>미진행</div>
+					</div>
+					<div class="solid"></div>
+					<div>
+						<div class="mission_order">
+							<i class="fa-regular fa-circle-check" style="color: green"></i> 포인트 수령
+						</div>
+						<div>미완료</div>
+					</div>
+				</div>
+				<hr />
+				<div class="pe-4 pb-4">
+				<div class="d-flex py-2">
+					<div style="width: 30%; text-align: right;">
+						<b>미션 가이드라인</b>
+					</div>
+					<div style="width: 80%; margin-left: 15px; ">
+						<div style="color: red; font-weight: bold;">
+						1) 사진 없이, 텍스트 50자 이상<br>
+						2) 실제 제품 사용 리뷰로 작성해 주세요.
+						</div>
+						<br>
+						[추가 안내 사항]<br>
+						- 미션 마감일 이내 미션을 완료하지 않으시면 캠페인이 취소되어 포인트 지급이 불가합니다.<br>
+						- 판매자의 요청에 따라 리뷰 수정 요청이 있을 수 있으며 수정 요청에 불응 시 추후 캠페인 이용에 제한이 있을 수 있는 점 양해 부탁드립니다.<br>
+						- 체험 후 작성된 리뷰는 6개월 이상 업로드 상태를 유지해 주셔야 합니다. 등록한 컨텐츠의 유지 기간 (6개월) 미준수 시 제공 내역에 대한 비용이 청구될 수 있습니다.<br>
+						- 자연스럽고 긍정적인 리뷰를 작성해 주세요
+						
+					</div>
+				</div>
+				
+				<div class="d-flex pt-4">
+					<div style="margin:auto 0; width: 30%; text-align: right;">
+						<b><span style="color: red">*</span>닉네임</b>
+					</div>
+					<div style="width: 80%; margin-left: 25px">
+						<input class="form-control p-1" type="text" id="nIcM" name="nIcM" style="width: 300px">
+					</div>
+				</div>
+				<div class="d-flex">
+					<div style="margin:auto 0; width: 30%; text-align: right;">
+					</div>
+					<div style="width: 80%; margin-left: 25px; font-size: 13px; color: green">
+					<b>위의 닉네임과 동일한 계정으로 리뷰 등록 후 확인 요청 버튼을 눌러주세요.</b>
+					</div>
+				</div>
+				<div class="d-flex py-3">
+					<div style="margin:auto 0; width: 30%; text-align: right;">
+						<b><span style="color: red">*</span>작성일</b>
+					</div>
+					<div style="width: 80%; margin-left: 25px">
+						<input class="form-control" type="date" id="purNumM" name="purNumM" style="width: 300px">
+					</div>
+				</div>
+				</div>
+
+				<div class="modal-footer d-flex justify-content-center">
+					<button class="btn btn-outline-success" type="submit" id="withdraw_btn"><b>전송</b></button>
+				</div>
+			</div>
 			</form>
+		</div>
+</div>
+		
+		</div>
 		</div>
 	</div>
 </div>

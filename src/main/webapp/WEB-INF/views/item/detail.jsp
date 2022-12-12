@@ -37,10 +37,10 @@
 						<img src="/file/item/${vo.itemFileVOs[0].fileName}" alt="" style="height: 260px; width: 260px; border-radius: 5px" />
 					</div>
 					<div class="p-4" style="height: 260px; width: 260px;">
-						<div class="d-flex">
+						<div class="d-flex" style="font-size: 15px">
 							<div>${vo.shop }</div>
 							<div class="mx-1">|</div>
-							<div>기업명</div>
+							<div>${vo.sellerVO.company }</div>
 						</div>
 						<div class="my-1" style="font-size: 18px"><b>${vo.title }</b></div>
 						<div style="font-size: 12px; text-align: right; color: rgb(124, 121, 132)">캠페인번호 : ${vo.itemNum }</div>

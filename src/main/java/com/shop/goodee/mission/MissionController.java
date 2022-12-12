@@ -6,11 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.shop.goodee.item.ItemService;
 import com.shop.goodee.item.ItemVO;
@@ -60,13 +58,11 @@ public class MissionController {
 
 		missionVO.setItemNum(itemVO.getItemNum());
 		missionVO.setId(memberVO.getId());
-
 		missionVO = missionService.getApply(missionVO);
-
-		MissionVO my = new MissionVO(missionVO.getStatus(), missionVO.getMyCam());
-		log.info("=====지원내역 : {}", missionVO);
-		return my;
+		log.info("미션지원내역==={} ", missionVO);
+		return missionVO;
 	}
+
 
 	// 중복지원확인
 	@PostMapping("applyCheck")

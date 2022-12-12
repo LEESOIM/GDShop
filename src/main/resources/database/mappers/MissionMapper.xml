@@ -29,6 +29,15 @@
 	<update id="setCancel" parameterType="MissionVO">
 		UPDATE MISSION SET MYCAM=3 WHERE ID=#{id} and ITEMNUM=#{itemNum}
 	</update>
-
-
+	
+	<!-- 네이버 닉네임 등록 -->
+	<update id="setNicN" parameterType="PurchaseVO">
+		UPDATE MEMBER SET NICKNAME_N=#{nickname_n} WHERE ID=#{id}
+	</update>
+	
+	<!-- 쿠팡 닉네임 등록 -->
+	<update id="setNicC" parameterType="PurchaseVO">
+		UPDATE MEMBER SET NICKNAME=#{nickname} WHERE ID=#{id}
+	</update>	
+	
 </mapper>
