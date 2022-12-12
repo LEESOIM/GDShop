@@ -198,6 +198,7 @@ public class MemberController {
       Authentication authentication = context.getAuthentication();
       memberVO = (MemberVO) authentication.getPrincipal();
       memberVO = memberService.getMypage(memberVO);
+      memberVO.setPhone(memberVO.phone_format(memberVO.getPhone()));
       MissionVO missionVO = new MissionVO();
       missionVO.setId(memberVO.getId());
       int count0 = memberService.getMissionCount0(missionVO);
@@ -400,6 +401,7 @@ public class MemberController {
 
       memberVO = memberService.getMypage(memberVO);
       memberVO.setPhone(memberVO.getPhone());
+      memberVO.setPhone(memberVO.phone_format(memberVO.getPhone()));
       
       mv.addObject("memberVO", memberVO);
       mv.setViewName("/member/set_up");
