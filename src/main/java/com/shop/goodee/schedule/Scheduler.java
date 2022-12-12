@@ -49,5 +49,12 @@ public class Scheduler {
 	
 	//30일 이후, VIP등급 삭제
 	//30일 이후, 판매자등급 삭제
+	
+	
+	//2시간내 미션안하면 자동취소
+	@Scheduled(cron = "0 */72 * * * *")
+	public void setCancel() throws Exception {
+		
+	}
 
 }
