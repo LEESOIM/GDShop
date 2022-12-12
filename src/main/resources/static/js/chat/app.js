@@ -11,7 +11,9 @@ function setConnected(connected) {
 
 function connect() {
     var socket = new SockJS('/ws');
+    console.log(socket);
     stompClient = Stomp.over(socket);
+    console.log(stompClient)
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);

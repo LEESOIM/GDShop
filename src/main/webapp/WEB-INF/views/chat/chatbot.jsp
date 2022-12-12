@@ -72,7 +72,7 @@
             </div>
         </div>
     </div>
-    <a href="./chat/room">챗</a>
+    <a href="./room">챗</a>
 </body>
 
 </html>

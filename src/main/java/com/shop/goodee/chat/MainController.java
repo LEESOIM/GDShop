@@ -51,6 +51,7 @@ public class MainController {
 	@RequestMapping("/moveChating")
 	public ModelAndView chating(RoomVO roomVO) {
 		ModelAndView mv = new ModelAndView();
+		log.info("roomname => {}", roomVO);
 		mv.addObject("room", roomVO);
 		mv.setViewName("chat/chat");
 		return mv;
