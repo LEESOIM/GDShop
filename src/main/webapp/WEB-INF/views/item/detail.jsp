@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,11 +57,52 @@
 							</div>
 						</div>
 						<hr style="margin: 0;" />
-						
+
+						<sec:authorize access="hasRole('MEMBER')">
+						<c:if test="${vo.status eq 1 }">
 						<button class="btn btn-success w-100 mt-3" 
 							data-bs-target="#exampleModal_item" data-bs-whatever="@mdo" data-itemNum-num="${vo.itemNum }" id="applyCheck"><i class="fa-regular fa-pen-to-square me-2"></i>지원하기</button>
-						<button type="button" id="cancel" class="applyCancel btn btn-outline-success w-100 mt-3" style="display: none">
+						
+						<button type="button" class="applyCancel btn btn-outline-success w-100 mt-3" style="display: none">
 						<i class="fa-solid fa-x me-2"></i>지원취소</button>
+						</c:if>
+						<c:if test="${vo.status ne 1}">
+						<button class="btn btn-danger w-100 mt-3" disabled="disabled"><i class="fa-solid fa-ban me-2"></i>일시중지</button>
+						</c:if>
+						</sec:authorize>
+						
+						
+						<sec:authorize access="hasRole('ADMIN')">
+						<div class="mt-3">
+						<c:if test="${vo.status eq 0 }">
+							<div class="d-flex justify-content-center">
+								<b style="margin: auto 0">상품승인</b>
+								<div class="d-flex my-1">
+								<button class="btn btn-outline-success ms-2 me-1" data-itemNum-num="${vo.itemNum }"><b>O</b></button>
+								<button class="btn btn-outline-danger" data-itemNum-num="${vo.itemNum }"><b>X</b></button>
+								</div>
+							</div>
+						</c:if>
+						<c:if test="${vo.status eq 2 }">
+						<div class="d-flex justify-content-center">
+							<b style="margin: auto 0">수정승인</b>
+							<div class="d-flex my-1">
+							<button class="btn btn-outline-success ms-2 me-1" data-itemNum-num="${vo.itemNum }"><b>O</b></button>
+							<button class="btn btn-outline-danger" data-itemNum-num="${vo.itemNum }"><b>X</b></button>
+							</div>
+						</div>
+						</c:if>
+						<c:if test="${vo.status eq 3 }">
+							<div class="d-flex justify-content-center">
+								<b style="margin: auto 0">삭제승인</b>
+								<div class="d-flex my-1">
+								<button class="btn btn-outline-success ms-2 me-1" data-itemNum-num="${vo.itemNum }"><b>O</b></button>
+								<button class="btn btn-outline-danger" data-itemNum-num="${vo.itemNum }"><b>X</b></button>
+								</div>
+							</div>
+						</c:if>
+						</div>
+						</sec:authorize>
 					</div>
 				</div>
 				
@@ -79,8 +121,8 @@
 				</div>
 				<div class="py-2 ps-3 mt-4" style="font-size:15px; border-radius: 4px; background-color: #fff1f0; border: 1px solid #ffa39e;">2시간  내에 구매 후 인증을 마치지 않으실 경우 자동으로 지원취소됩니다.</div>
 				<div class="d-flex" style="float: right;">
-					<button type="button" class="applyCancel btn btn-outline-success mt-3 me-2">
-							<i class="fa-solid fa-x me-2"></i>참여취소</button>
+					<button type="button" class="applyCancel btn btn-outline-success mt-3 me-2" >
+						<i class="fa-solid fa-x me-2"></i>참여취소</button>
 					<button class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#missionModal"><i class="fa-regular fa-face-smile me-2"></i>미션수행카드</button>
 				</div>
 				</div>
@@ -242,7 +284,7 @@
 		</div>
 
 	</section>
-<c:import url="./modal.jsp"></c:import>
+<c:import url="./mission.jsp"></c:import>
 	<c:import url="../template/footer.jsp"></c:import>
 	<script src="/js/timer.js"></script>
 	<script src="/js/item/itemDetail.js"></script>

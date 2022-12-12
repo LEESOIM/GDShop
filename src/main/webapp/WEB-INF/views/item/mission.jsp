@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!-- 모달창 -->
 
 <div class="modal fade" id="exampleModal_item" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1" >
@@ -19,7 +21,6 @@
 		  <input class="form-check-input" type="checkbox" id="check">
 		  <label class="form-check-label" for="check">
 		    <b>캠페인 유의사항을 확인하였으며, 이에 동의합니다. </b>
-		  </label>
 		</div>
       </div>
       <div class="modal-footer">
@@ -104,6 +105,7 @@
 				</h1>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
+			<form action="/purchase/setPurchase" method="post" enctype="multipart/form-data">
 			<div class="modal-body p-3" style="font-size: 14px">
 				<div class="d-flex justify-content-center" style="text-align: center">
 					<div>
@@ -128,11 +130,12 @@
 					</div>
 				</div>
 				<hr />
+				<div class="pe-4 pb-4">
 				<div class="d-flex py-2">
 					<div style="margin:auto 0; width: 30%; text-align: right;">
 						<b>구매 URL</b>
 					</div>
-					<div style="width: 90%; margin-left: 15px">
+					<div style="width: 80%; margin-left: 15px">
 						<a class="btn btn-success btn-sm py-0" href="${vo.url}" target="_blank">구매링크 바로가기</a>
 					</div>
 				</div>
@@ -140,12 +143,12 @@
 					<div style="width: 30%; text-align: right;">
 						<b>미션 가이드 라인</b>
 					</div>
-					<div style="width: 90%; margin-left: 15px; ">
+					<div style="width: 80%; margin-left: 15px; ">
 					<div style="color: #198754; font-weight: bold;">✅구디샵에 등록된 계정과 실제 구매를 진행하는 계정이 서로 동일한 지 구매 전 반드시 확인해 주세요.<br>
-						등록되지 않은 계정으로 제품 구매 시 포인트가 지급되지 않습니다.<br><br>
+						등록되지 않은 계정으로 제품 구매 시 포인트가 지급되지 않습니다.<br>
 						✅구매링크 바로가기 클릭<br>
-						✅옵션: ㅇㅇㅇ<br>
-						✅결제금액: ㅇㅇㅇ<br></div>
+						✅옵션 : ${vo.detail }<br>
+						✅결제금액 : <fmt:formatNumber value="${vo.price }" pattern="###,###,###" />원<br></div>
 						쿠팡 제품의 경우, 쿠팡 자체적으로 금액이 변동되기 때문에 구디샵에서 제시된 구매금액과 실제 구매금액이 다를 수 있습니다.<br>
 						(상이한 금액으로 제품을 구매하시는 경우, 차액을 부담하여 구매하시거나 캠페인 참여 취소하실 수 있습니다. 포인트는 구디샵에 기재된 만큼만 지급됩니다.)<br><br>
 						[추가 안내사항]<br>
@@ -155,52 +158,54 @@
 						-제품 품절의 경우, 캠페인 진행이 어려우므로 캠페인 취소를 부탁드립니다.<br>
 					</div>
 				</div>
-				<div class="d-flex py-2">
-					<div style="margin:auto 0; width: 25%; text-align: right;">
+				<div class="d-flex py-1">
+					<div style="margin:auto 0; width: 30%; text-align: right;">
 						<b><span style="color: red">*</span>쿠팡 닉네임</b>
 					</div>
-					<div style="width: 90%; margin-left: 25px">
-						<input class="form-control p-1" type="text" style="width: 350px">
+					<div style="width: 80%; margin-left: 25px">
+						<input class="form-control p-1" type="text" name="nIcM" style="width: 300px">
 					</div>
 				</div>
-				<div class="d-flex py-2">
-					<div style="margin:auto 0; width: 25%; text-align: right;">
+				<div class="d-flex py-1">
+					<div style="margin:auto 0; width: 30%; text-align: right;">
 						<b><span style="color: red">*</span>주문번호</b>
 					</div>
-					<div style="width: 90%; margin-left: 25px">
-						<input class="form-control p-1" type="text" style="width: 350px">
+					<div style="width: 80%; margin-left: 25px">
+						<input class="form-control p-1" type="text" name="purNumM" style="width: 300px">
 					</div>
 				</div>
-				<div class="d-flex py-2">
-					<div style="margin:auto 0; width: 25%; text-align: right;">
+				<div class="d-flex py-1">
+					<div style="margin:auto 0; width: 30%; text-align: right;">
 						<b><span style="color: red">*</span>결제금액</b>
 					</div>
-					<div style="width: 90%; margin-left: 25px">
-						<input class="form-control p-1" type="text" style="width: 350px">
+					<div style="width: 80%; margin-left: 25px">
+						<input class="form-control p-1" type="text" name="priceM" style="width: 300px">
 					</div>
 				</div>
-				<div class="d-flex py-2">
-					<div style="margin:auto 0; width: 25%; text-align: right;">
+				<div class="d-flex py-1">
+					<div style="margin:auto 0; width: 30%; text-align: right;">
 						<b><span style="color: red">*</span>인증샷</b>
 					</div>
-					<div style="width: 90%; margin-left: 25px">
-						<input class="form-control p-1" type="file" style="width: 350px">
+					<div style="width: 80%; margin-left: 25px">
+			  				<input type="file" class="form-control p-1" name="f" style="width: 300px">
 					</div>
 				</div>
-				<div class="d-flex py-2">
-					<div style="margin:auto 0; width: 25%; text-align: right;"></div>
-					<div style="width: 90%; margin-left: 20px">
+				<div class="d-flex py-1">
+					<div style="margin:auto 0; width: 30%; text-align: right;"></div>
+					<div style="width: 80%; margin-left: 20px">
 						✅인증샷은 주문일, 주문번호, 구매상품(옵션포함), 총 결제금액이 확인되는 사진으로 등록해 주세요.<br>
 						✅구디샵에 제출하신 주문정보와 실제 주문정보가 일치하지 않거나, 구매 미션 가이드에 안내된 방법과 다르게 구매한 것이 적발될 경우 추후 캠페인 취소로 진행될 수 있으며, 이에 따른 불이익(ex.포인트 미지급, 반품비 발생 등)은 구디샵에서 책임지지 않습니다.
 					</div>
 				</div>
+				</div>
 
 				<div class="modal-footer d-flex justify-content-center">
-					<button class="btn btn-outline-success" id="withdraw_btn">다음</button>
+					<button class="btn btn-outline-success" type="submit" id="withdraw_btn"><b>전송</b></button>
 				</div>
 			</div>
+			</form>
 		</div>
 	</div>
 </div>
 
-<script src="/js/item/modal.js"></script>
+<script src="/js/item/mission.js"></script>

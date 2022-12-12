@@ -23,20 +23,30 @@ public class PurchaseController {
 	
 	@GetMapping("purchase")
 	public void purchase() throws Exception{
+		
 	}
 	
 	
 	@PostMapping("setPurchase")
 	@ResponseBody
-	public PurchaseVO setPurchase(MultipartFile f) throws Exception{
+	public PurchaseVO setPurchase(MultipartFile f, PurchaseVO purchaseVO) throws Exception{
 		PurchaseVO finalPurchaseVO = purchaseService.getPurchase(f);
 		
 		log.info("=========Controller==========");
 		log.info("주문일){}",finalPurchaseVO.getPurDate());
 		log.info("주문번호){}",finalPurchaseVO.getPurNum());
 		log.info("가격){}",finalPurchaseVO.getPrice());
+		
+		log.info("M닉네임){}",purchaseVO.getNIcM());
+		log.info("M주문번호){}",purchaseVO.getPriceM());
+		log.info("M가격){}",purchaseVO.getPurNumM());
 		log.info("=============================");
-		return finalPurchaseVO;
+		
+		if(finalPurchaseVO.getPurNum().equals(purchaseVO.getPriceM())) {
+			return finalPurchaseVO;
+		} else {
+			log.info("OCR 인증 안됨");
+			return null;
+		}
 	}
-
 }
