@@ -85,7 +85,10 @@ public class MemberVO implements UserDetails, OAuth2User{
    private Integer sum;
    private Integer cnt;
    
-   
+   public String phone_format(String number) {
+	   String regEx = "(\\d{3})(\\d{3,4})(\\d{4})";
+	   return number.replaceAll(regEx, "$1-$2-$3");
+   }
    
    @Override
    public Collection<? extends GrantedAuthority> getAuthorities() {
