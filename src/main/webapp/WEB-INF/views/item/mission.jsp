@@ -16,7 +16,7 @@
       <div class="modal-body py-3 px-4 my-3">
      	<b>추첨형 캠페인에 지원하기 전에 아래 사항을 확인해주세요.</b><br><br>
 		<b style="color: #eb2f96">아직 구매하지 마세요! 당첨된 것이 아닙니다.</b><br>
-		추첨형 캠페인은 모집 기간 동안 지원자를 모집한 후 랜덤으로 당첨자를 선정합니다.<br>당첨자에게는 별도로 당첨 알림 톡이 발송됩니다.
+		추첨형 캠페인은 모집 기간 동안 지원자를 모집한 후 랜덤으로 당첨자를 선정합니다.<br>당첨자에게는 별도로 당첨 알림 문자가 발송됩니다.
       	<div class="pt-3">
 		  <input class="form-check-input" type="checkbox" id="check">
 		  <label class="form-check-label" for="check">
@@ -62,7 +62,7 @@
     <div class="modal-content p-2">
       <div class="modal-body my-2">
 		<div><i class="fa-regular fa-circle-check me-2" style="color: #44D62C; font-size: 18px;"></i><b>추첨형 캠페인 지원 완료</b></div>
-		<div class="mt-3">추첨형 캠페인에 지원 완료되었습니다.<br>모집 기간 동안 지원자를 모집한 후 랜덤으로 당첨자가 선정되며, 당첨자에게는 별도로 당첨 알림톡이 발송됩니다.</div>
+		<div class="mt-3">추첨형 캠페인에 지원 완료되었습니다.<br>모집 기간 동안 지원자를 모집한 후 랜덤으로 당첨자가 선정되며, 당첨자에게는 별도로 당첨 알림문자가 발송됩니다.</div>
       </div>
       <div class="modal-footer">
         <button class="btn btn-success" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" class="okBtn" 
@@ -93,7 +93,6 @@
     </div>
   </div>
 </div>
-
 
 
 

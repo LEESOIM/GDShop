@@ -106,7 +106,7 @@
 				
 				<div style="width: 100%;">
 				<div id="mycam0" style="display: none;">
-				<div class="p-2" style="width: 90%; margin:0 auto; font-size:15px; border-radius: 4px; background-color: #fffbe6; border: 1px solid #ffe58f;">추첨형 캠페인에 지원 완료되었습니다. 모집 기간 동안 지원자를 모집한 후 랜덤으로 당첨자가 선정되며, 당첨자에게는 별도로 당첨 알림 톡이 발송됩니다.</div>
+				<div class="p-2" style="width: 90%; margin:0 auto; font-size:15px; border-radius: 4px; background-color: #fffbe6; border: 1px solid #ffe58f;">추첨형 캠페인에 지원 완료되었습니다. 모집 기간 동안 지원자를 모집한 후 랜덤으로 당첨자가 선정되며, 당첨자에게는 별도로 당첨 알림 문자가 발송됩니다.</div>
 				</div>
 			
 			
@@ -163,7 +163,7 @@
 									<div>
 										<div>현재 모집률</div> 
 										<div id="applyRate" style="font-size: 19px; font-weight: bold;"></div>
-										<input type="hidden" value="${rate }" id="rate">
+										<input type="hidden" id="rate">
 										<input type="hidden" value="${vo.stock }" id="stock">
 									</div>
 								</div>

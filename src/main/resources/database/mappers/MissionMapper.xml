@@ -12,7 +12,7 @@
 	
 	<!-- 즉석추첨형 -->
 	<insert id="setApply_baro" parameterType="MissionVO">
-		INSERT INTO MISSION(MISSIONNUM, ITEMNUM, ID, APPLYDATE, FINISH, STATUS, MYCAM, TIME) VALUES(NULL, #{itemNum}, #{id}, NOW(), DATE_ADD(NOW(), INTERVAL 2 HOUR), 0, 1, NOW())
+		INSERT INTO MISSION(MISSIONNUM, ITEMNUM, ID, APPLYDATE, FINISH, STATUS, MYCAM, TIME, APPLYCOUNT) VALUES(NULL, #{itemNum}, #{id}, NOW(), DATE_ADD(NOW(), INTERVAL 2 HOUR), 0, 1, NOW(), #{applyCount})
 	</insert>
 	
 	<!-- 지원내역 -->
@@ -52,7 +52,7 @@
 	
 	<!-- 모집률 -->
 	<select id="getApplyRate" parameterType="MissionVO" resultType="Integer">
-		SELECT COUNT(MISSIONNUM) FROM MISSION WHERE ITEMNUM=#{itemNum}
+		SELECT COUNT(MISSIONNUM) FROM MISSION WHERE ITEMNUM=#{itemNum} AND APPLYCOUNT=#{applyCount}
 	</select>
 	
 	<!-- 구매인증미션 진행중인 회원 -->

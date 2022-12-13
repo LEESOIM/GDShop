@@ -22,9 +22,21 @@ $(document).ready(function () {
     }
 
     //캠페인모집률
-    let rate = $("#rate").val()
-    let stock = $("#stock").val()
-    $("#applyRate").html(rate/stock*100+"%")
+    let itemNum = $("#applyCheck").attr("data-itemNum-num")
+    let applyCount = $("#nowCount").html()
+    $.ajax({
+        type: "POST",
+        url: "/mission/rate",
+        data: {
+            itemNum: itemNum,
+            applyCount: applyCount,
+        },
+        success: function (data) {
+            let stock = $("#stock").val()
+            $("#applyRate").html(data/stock*100+"%")
+        }
+    })
+
 
     //---------------------------------------------------
     //캠페인유형에 따른 버튼 속성
@@ -41,8 +53,7 @@ $(document).ready(function () {
         $("#applyCheck").click();
     }
 
-    
-    let itemNum = $("#applyCheck").attr("data-itemNum-num")
+
     $.ajax({
         type: "POST",
         url: "/mission/applyList",
@@ -115,21 +126,4 @@ $("#applyCheck").click(function () {
 })
 
 
-//지원취소버튼
-$(".applyCancel").click(function () {
-    let itemNum = $("#applyCheck").attr("data-itemNum-num")
-    let id = $("#id").val();
-    $.ajax({
-        type: "POST",
-        url: "/mission/cancel",
-        data: {
-            itemNum: itemNum,
-            id: id,
-        },
-        success: function (data) {
-            alert('캠페인이 취소되었습니다.')
-            location.reload();
-        }
-    })
-})
 

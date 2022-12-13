@@ -1,3 +1,14 @@
+//등록날짜
+let start = new Date($('.date').val());
+//현재날짜
+let now = new Date();
+//경과시간
+let result = now.getTime() - start.getTime();
+let day = Math.abs(result / (1000 * 60 * 60 * 24))
+//몇번째 회차에 지원했는지
+let applyCount = Math.ceil(day)
+
+
 //캠페인 약관 동의
 $("#check").click(function () {
     if ($("#check").is(":checked")) {
@@ -24,8 +35,10 @@ $("#apply").click(function () {
         url: "/mission/apply",
         data: {
             itemNum: itemNum,
+            applyCount: applyCount,
         },
         success: function (data) {
+            alert(count)
             if (data == 1) {
                 $(".okBtn").click(function () {
                     $(".okBtn").attr("onclick", "location.href=item/detail?" + itemNum);
@@ -49,6 +62,7 @@ $("#applyBaro").click(function () {
         url: "/mission/apply",
         data: {
             itemNum: itemNum,
+            applyCount: applyCount,
         },
         success: function (data) {
             if (data == 1) {
@@ -59,4 +73,3 @@ $("#applyBaro").click(function () {
         }
     })
 })
-

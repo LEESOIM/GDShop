@@ -14,6 +14,7 @@ public class MissionVO {
 	private Long status;
 	private Long myCam;
 	private Date time;
+	private Long applyCount;
 	
 	//내 포인트 - 출금가능일
 	private Date finish_3;
