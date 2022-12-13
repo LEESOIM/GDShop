@@ -168,6 +168,11 @@
       UPDATE MEMBER SET POINT_RESULT=#{point_result}+POINT_RESULT WHERE ID=#{id}
    </update>
    
+   <!-- 출금 신청 후 포인트 리스트 변화 -->
+    <insert id="getResultPoint" parameterType="MemberVO">
+    	INSERT INTO POINT VALUES (NULL, #{id}, NULL, NOW(), '출금신청', #{point_result}, DATE_ADD(FINISH, INTERVAL 3 DAY), 0)
+    </insert>
+   
    <!-- 내등급 - VIP등급 확인 -->
    <select id="getVIP" parameterType="MemberVO" resultType="Integer">
       SELECT COUNT(id) FROM MEMBER_ROLE WHERE ROLENUM=3 AND ID=#{id}
@@ -276,4 +281,37 @@
    <select id="getMissionNum" parameterType="MemberVO" resultType="Integer">
    	SELECT COUNT(MISSIONNUM) FROM MISSION WHERE ID=#{id}
    </select>
+   
+   
+   <!-- 내 포인트 - 포인트 변화 -->
+   <sql id="order2">
+   	<choose>
+   		<when test="order == '2020'">AND YEAR(FINISH)='2020'</when>
+   		<when test="order == '2021'">AND YEAR(FINISH)='2021'</when>
+   		<when test="order == '2022'">AND YEAR(FINISH)='2022'</when>
+   		<otherwise>'a'='a'</otherwise>
+   	</choose>
+   </sql>
+   
+   <select id="getPointList" parameterType="MemberVO" resultType="PointVO">
+   	SELECT * FROM POINT WHERE ID=#{id} <include refid="order2"></include> ORDER BY FINISH DESC
+   </select>
+   
+   <!-- 멤버십 결제일,해지일 -->
+   <select id="getMembershipPay" parameterType="PayVO" resultType="PayVO">
+   	SELECT PAYDATE, CANCELDATE FROM PAY WHERE ID=#{id} AND PAYNAME='멤버십'
+   </select>
+   
+   <select id="getPay" parameterType="PayVO" resultType="PayVO">
+   	SELECT * FROM PAY
+   </select>
+   
+   <!-- 결제일 +1씩 증가 (해지일과 같아지면 DELETE)-->
+   <update id="setPayAdd">
+      UPDATE PAY SET PAYDATE=DATE_ADD(PAYDATE, INTERVAL 1 DAY)
+   </update>
+   
+   <delete id="setPayDelete" parameterType="PayVO">
+   	DELETE FROM PAY WHERE PAYNUM=#{payNum}
+   </delete>
 </mapper>

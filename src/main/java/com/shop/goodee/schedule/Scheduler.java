@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.shop.goodee.member.MemberMapper;
 import com.shop.goodee.member.MemberVO;
+import com.shop.goodee.pay.PayVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,14 +41,37 @@ public class Scheduler {
 		}		
 	}
 	
+	//결제 회원 30일 이후 해지(판매자, VIP)
+	@Scheduled(cron = "0 */720 * * * *")
+	public void setMemberShipPay() throws Exception{
+		
+		PayVO payVO = new PayVO();
+		List<PayVO> ar = new ArrayList<>(); 
+		ar = memberMapper.getPay(payVO);
+		
+		memberMapper.setPayAdd();
+		for(int i =0;i < ar.size(); i++) {
+			if(ar.get(i).getPayDate().equals(ar.get(i).getCancelDate())) {
+				log.info("===============삭제================");
+				int result = memberMapper.setPayDelete(ar.get(i));
+			}
+		}		
+	}
+	
 	//72시간마다 적립예정포인트를 -> 3일 후 적립되는 포인트로 업데이트
 	@Scheduled(cron = "0 */72 * * * *")
 	public void setPoint()throws Exception{
 		int result = memberMapper.setPoint_3();
-		log.info("result : {}", result);
 	}
 	
-	//30일 이후, VIP등급 삭제
-	//30일 이후, 판매자등급 삭제
+	
+	//2시간내 미션안하면 자동취소
+	@Scheduled(cron = "0 */2 * * * *")
+	public void setCancel() throws Exception {
+		//미션 table리스트 가져오기
+		
+		//2시간뒤에 취소 update??
+		
+	}
 
 }

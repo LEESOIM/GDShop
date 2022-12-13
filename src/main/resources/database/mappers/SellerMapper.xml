@@ -4,6 +4,23 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.shop.goodee.seller.SellerMapper">
+
+	<select id="getAcceptPhone" resultType="MemberVO" parameterType="SellerVO">
+		SELECT *
+		FROM SELLER S
+		INNER JOIN MEMBER M
+		USING(ID)
+		WHERE ID=#{id}
+	</select>
+	
+	<select id="getAdminPhone" resultType="MemberVO">
+		SELECT M.PHONE 
+		FROM MEMBER M
+		INNER JOIN MEMBER_ROLE MR
+		USING(ID)
+		WHERE MR.ROLENUM=1;
+	</select>
+
 	<select id="getApproveSeller" resultType="SellerVO">
 		SELECT *
 		FROM seller s

@@ -6,6 +6,60 @@
 
 <mapper namespace="com.shop.goodee.admin.AdminMapper">
 	
+	<!-- 멤버 미션  -->
+	<select id="getCountMi2" parameterType="Pager" resultType="Long">
+		SELECT COUNT(*) FROM MISSION WHERE ID=#{id}
+	</select>
+	
+	<select id="getMission2" parameterType="Pager" resultMap="getMissionResult">
+		SELECT * FROM MISSION M
+				LEFT OUTER JOIN
+				ITEM I
+				USING(ITEMNUM)
+		WHERE M.ID=#{id}
+	</select>
+	
+	<select id="getCountMi" parameterType="Pager" resultType="Long">
+		SELECT COUNT(*) FROM MISSION WHERE ID=#{id} AND MYCAM LIKE CONCAT('%',#{myCam},'%')
+	</select>
+	
+	<select id="getMission" parameterType="Pager" resultMap="getMissionResult">
+		SELECT * FROM MISSION M
+				LEFT OUTER JOIN
+				ITEM I
+				USING(ITEMNUM)
+		WHERE M.ID=#{id} AND M.MYCAM LIKE CONCAT('%',#{myCam},'%')
+	</select>
+	
+	<resultMap type="MyCampaignVO" id="getMissionResult">
+		<id column="MISSIONNUM" property="missionNum"/>
+		<result column="ITEMNUM" property="itemNum"/>
+		<result column="ID" property="id"/>
+		<result column="APPLYDATE" property="applyDate"/>
+		<result column="FINISH" property="finish"/>
+		<result column="STATUS" property="status"/>
+		<result column="MYCAM" property="myCam"/>
+		
+		<association property="itemVO" javaType="ItemVO">
+			<id column="ITEMNUM" property="itemNum"/>
+			<result column="ID" property="id"/>
+			<result column="ITEMNAME" property="itemName"/>
+			<result column="PRICE" property="price"/>
+			<result column="TITLE" property="title"/>
+			<result column="TYPE" property="type"/>
+			<result column="ROLE" property="role"/>
+			<result column="POINT" property="point"/>
+			<result column="DETAIL" property="detail"/>
+			<result column="STOCK" property="stock"/>
+			<result column="COUNT" property="count"/>
+			<result column="SHOP" property="shop"/>
+			<result column="URL" property="url"/>
+			<result column="DATE" property="date"/>
+			<result column="HIT" property="hit"/>
+			<result column="STATUS" property="status"/>
+			<result column="SELLERSNS" property="sellerSNS"/>
+		</association>
+	</resultMap>
 	
 	
 	<!-- 상품  -->
@@ -15,10 +69,18 @@
 			INNER JOIN
 			SELLER S 
 			USING(ID)
-		WHERE I.STATUS=#{status}
+		WHERE I.STATUS=#{status}  <include refid="searchPd"></include>
 		ORDER BY I.DATE DESC 
 	</select>
 	
+	<sql id="searchPd">
+		AND
+			<choose>
+				<when test="kind == 'id'">S.ID</when>
+				<otherwise>S.COMPANY</otherwise>
+			</choose>
+		LIKE CONCAT('%',#{search},'%')
+	</sql>
 	
 	<select id="getPdRequest" parameterType="Pager" resultMap="getPdRequestResult">
 		SELECT * 
@@ -26,9 +88,9 @@
 			INNER JOIN
 			SELLER S 
 			USING(ID)
-		WHERE I.STATUS=#{status}
+		WHERE I.STATUS=#{status}  <include refid="searchPd"></include>
 		ORDER BY I.DATE DESC 
-		LIMIT 0, #{perPage}
+		LIMIT #{startRow}, #{perPage}
 		
 	</select>
 	<resultMap type="ItemVO" id="getPdRequestResult">

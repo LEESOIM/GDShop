@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.shop.goodee.item.ItemVO;
 import com.shop.goodee.member.MemberVO;
+import com.shop.goodee.myCampaign.MyCampaignVO;
 import com.shop.goodee.seller.SellerService;
 import com.shop.goodee.seller.SellerVO;
 import com.shop.goodee.util.Pager;
@@ -31,75 +32,124 @@ public class AdminController {
 	@Autowired
 	private SellerService sellerService;
 	
-	@GetMapping("product_list")
-	public void getProductList()throws Exception{
-		
+	@GetMapping("getMission2")
+	@ResponseBody
+	public ModelAndView getMission2(Pager pager)throws Exception{
+		log.info("====================================");
+		log.info("pager =>{}",pager);
+		ModelAndView mv = new ModelAndView();
+		List<MyCampaignVO> list = adminService.getMission2(pager);
+		mv.addObject("list",list);
+		mv.setViewName("/admin/mission_common");
+		mv.addObject("status","ongoing");
+		return mv;
 	}
 	
-	@GetMapping("deleteRequest")
+	
+	@GetMapping("getMission")
+	@ResponseBody
+	public ModelAndView getMission(Pager pager)throws Exception{
+		log.info("====================================");
+		log.info("pager =>{}",pager);
+		ModelAndView mv = new ModelAndView();
+		List<MyCampaignVO> list = adminService.getMission(pager);
+		mv.addObject("list",list);
+		mv.setViewName("/admin/mission_common");
+		mv.addObject("status","ongoing");
+		return mv;
+	}
+	
+	
+	
+	
+	@GetMapping("getPdList")
+	@ResponseBody
+	public ModelAndView getPdList(Pager pager)throws Exception{
+		// 삭제 요청
+		log.info("Delete Request => {}",pager);
+		ModelAndView mv = new ModelAndView();
+		pager.setStatus(1L);
+		List<ItemVO> list = adminService.getPdRequest(pager);
+		mv.addObject("list",list);
+		mv.addObject("pager",pager);
+		mv.addObject("request","product");
+		mv.setViewName("/admin/product/pd_request_common");
+		return mv;
+	}
+	
+	@GetMapping("product_list")
+	public ModelAndView getProductList()throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("admin/product/product_list");
+		return mv;
+	}
+	
+	@GetMapping("reject_request")
+	@ResponseBody
+	public ModelAndView getRejectRequest(Pager pager)throws Exception{
+		// 삭제 요청
+		log.info("Delete Request => {}",pager);
+		ModelAndView mv = new ModelAndView();
+		pager.setStatus(4L);
+		List<ItemVO> list = adminService.getPdRequest(pager);
+		mv.addObject("list",list);
+		mv.addObject("pager",pager);
+		mv.addObject("request","delete");
+		mv.setViewName("/admin/product/pd_request_common");
+		return mv;
+	}
+	
+	@GetMapping("delete_request")
 	@ResponseBody
 	public ModelAndView getDelRequest(Pager pager)throws Exception{
 		// 삭제 요청
+		log.info("Delete Request => {}",pager);
 		ModelAndView mv = new ModelAndView();
 		pager.setStatus(3L);
 		List<ItemVO> list = adminService.getPdRequest(pager);
 		mv.addObject("list",list);
 		mv.addObject("pager",pager);
 		mv.addObject("request","delete");
-		mv.setViewName("admin/pd_request_common");
+		mv.setViewName("/admin/product/pd_request_common");
 		return mv;
 	}
 	
-	@GetMapping("updateRequest")
+	@GetMapping("update_request")
 	@ResponseBody
 	public ModelAndView getUpRequest(Pager pager)throws Exception{
 		// 수정 요청
+		log.info("Update Request => {}",pager);
 		ModelAndView mv = new ModelAndView();
 		pager.setStatus(2L);
 		List<ItemVO> list = adminService.getPdRequest(pager); 
 		mv.addObject("list",list);
 		mv.addObject("pager",pager);
 		mv.addObject("request","update");
-		mv.setViewName("admin/pd_request_common");
+		mv.setViewName("/admin/product/pd_request_common");
 		return mv;
 	}
 	
-	@GetMapping("addRequest")
+	@GetMapping("add_request")
 	@ResponseBody
 	public ModelAndView getAddRequest(Pager pager)throws Exception{
 		// 등록 요청
+		log.info("Add Request => {}",pager);
 		ModelAndView mv = new ModelAndView();
 		pager.setStatus(0L);
 		List<ItemVO> list = adminService.getPdRequest(pager); 
 		mv.addObject("list",list);
 		mv.addObject("pager",pager);
 		mv.addObject("request","add");
-		mv.setViewName("admin/pd_request_common");
+		mv.setViewName("/admin/product/pd_request_common");
 		return mv;
 	}
 	
 	
 	
 	@GetMapping("product_request")
-	public void getProductRequest(Pager pager, ModelAndView mv)throws Exception{
-//		// 등록 요청
-//		pager.setStatus(0L);
-//		List<ItemVO> addList = adminService.getPdRequest(pager); 
-//		// 수정 요청
-//		pager.setStatus(2L);
-//		List<ItemVO> upList = adminService.getPdRequest(pager); 
-//		// 삭제 요청
-//		pager.setStatus(3L);
-//		List<ItemVO> delList = adminService.getPdRequest(pager);
-//		
-//		mv.addObject("addList",addList);
-//		mv.addObject("delList",delList);
-//		mv.addObject("upList",upList);
-//		mv.addObject("pager",pager);
-//		
-//		mv.setViewName("admin/product_request");
-//		
-//		return mv;
+	public ModelAndView getProductRequest(Pager pager, ModelAndView mv)throws Exception{
+		mv.setViewName("admin/product/product_request");
+		return mv;
 	}
 	
 	

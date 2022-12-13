@@ -40,7 +40,8 @@ function getMemberAjax(page){
     let roleName = $("input[name='roleName']:checked").val()
     let kind = $("select[name='kind']").val()
     let search = $("#search").val()
-
+    console.log("search",search)
+    
     $.ajax({
         type:"POST",
         URL:"member",
@@ -75,12 +76,8 @@ function memberDetail(event){
             $("#roleNameDiv").empty()
             for(i=0; i<data.roleVOs.length;i++){
 
-                let input = "<div class='member-roleName'>"+data.roleVOs[i].roleName.split('_')[1]
-                if(data.roleVOs[i].roleName!="ROLE_MEMBER"){
-                    input += "<button class='deleteRole' type='button' data-roleNum='"+data.roleVOs[i].roleNum+"'>X</button></div>"
-                }else{
-                    input += "</div>"
-                }
+                let input = "<div class='member-roleName'>"+data.roleVOs[i].roleName.split('_')[1]+"</div>"
+                
                 
                 $("#roleNameDiv").append(input)
             }
@@ -164,3 +161,125 @@ $(".memberRole").click(function(event){
     })
 })
 
+//=================== 미션 관리 =============================
+let selected = $("#ongoing")
+
+function setMissionModal(event){
+    console.log($(event))
+    let id = $(event).parent().prev().prev().prev().prev().prev().text()
+    $("#missionModalLabel").text(id)
+    console.log(id)
+    $.ajax({
+        type:"GET",
+        url:"getMission",
+        data:{
+            id:id,
+            myCam:1
+        },
+        success:function(data){
+            $("#missionList").html(data)
+        }
+    })
+}
+
+function onGoing(event){
+    if(selected!=null){
+        selected.removeClass("active")
+        $(event).addClass("active")
+        selected=$("#ongoing")
+    }
+    getMission(1)
+}
+
+function completed(event){
+    if(selected!=null){
+        selected.removeClass("active")
+        $(event).addClass("active")
+        selected=$("#completed")
+    }
+    getMission(2)
+}
+
+function cancel(event){
+    if(selected!=null){
+        selected.removeClass("active")
+        $(event).addClass("active")
+        selected=$("#cancel")
+    }
+    getMission(3)
+}
+
+function totalHistory(event){
+    if(selected!=null){
+        selected.removeClass("active")
+        $(event).addClass("active")
+        selected=$("#total")
+    }
+    $.ajax({
+        type:"GET",
+        url:"getMission2",
+        data:{
+            id:id,
+        },
+        success:function(data){
+            $("#missionList").html(data)
+        }
+    })
+}
+
+function getMission(myCam){
+    id = $("#missionModalLabel").text()
+    console.log(id)
+    $.ajax({
+        type:"GET",
+        url:"getMission",
+        data:{
+            id:id,
+            myCam:myCam
+        },
+        success:function(data){
+            $("#missionList").html(data)
+        }
+    })
+}
+
+
+function setStatus(event){
+    console.log($(event).find(".status").text())
+    let status = $(event).find(".status").text()
+    
+    if(status=="0"){
+        $(event).next().find(".buy").removeClass("default")
+        $(event).next().find(".buy").addClass("cur-progress")
+        $(event).next().find(".buyState").text("완료")
+        $(event).next().find(".buyState").addClass("bold")
+        $(event).next().find(".buyText").addClass("bold")
+    }else if(status=="1"){
+        $(event).next().find(".buy").removeClass("default")
+        $(event).next().find(".buy").addClass("cur-progress")
+        $(event).next().find(".review").removeClass("default")
+        $(event).next().find(".review").addClass("cur-progress")
+        $(event).next().find(".buyState").text("완료")
+        $(event).next().find(".reviewState").text("완료")
+        $(event).next().find(".buyState").addClass("bold")
+        $(event).next().find(".buyText").addClass("bold")
+        $(event).next().find(".reviewState").addClass("bold")
+        $(event).next().find(".reviewText").addClass("bold")
+    }else{
+        $(event).next().find(".buy").removeClass("default")
+        $(event).next().find(".buy").addClass("cur-progress")
+        $(event).next().find(".review").removeClass("default")
+        $(event).next().find(".review").addClass("cur-progress")
+        $(event).next().find(".point").removeClass("default")
+        $(event).next().find(".point").addClass("cur-progress")
+        $(event).next().find(".buyState").text("완료")
+        $(event).next().find(".reviewState").text("완료")
+        $(event).next().find(".pointState").text("완료")
+        $(event).next().find(".buyState").addClass("bold")
+        $(event).next().find(".buyText").addClass("bold")
+        $(event).next().find(".reviewState").addClass("bold")
+        $(event).next().find(".reviewText").addClass("bold")
+        $(event).next().find(".pointState").addClass("bold")
+        $(event).next().find(".pointText").addClass("bold")
+    }
+}

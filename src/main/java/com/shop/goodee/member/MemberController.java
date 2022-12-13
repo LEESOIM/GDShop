@@ -1,6 +1,9 @@
 package com.shop.goodee.member;
 
+import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.shop.goodee.item.ItemVO;
 import com.shop.goodee.mission.MissionVO;
+import com.shop.goodee.pay.PayVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,7 +38,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("member/*")
 @Slf4j
 public class MemberController {
-   
+	
    @Autowired
    private MemberService memberService;
    
@@ -198,6 +202,7 @@ public class MemberController {
       Authentication authentication = context.getAuthentication();
       memberVO = (MemberVO) authentication.getPrincipal();
       memberVO = memberService.getMypage(memberVO);
+      memberVO.setPhone(memberVO.phone_format(memberVO.getPhone()));
       MissionVO missionVO = new MissionVO();
       missionVO.setId(memberVO.getId());
       int count0 = memberService.getMissionCount0(missionVO);
@@ -297,7 +302,7 @@ public class MemberController {
       memberVO = memberService.getMypage(memberVO);
       memberVO.setOrder(order);
       //포인트 변화
-      List<MemberVO> ar = memberService.getMissionPoint(memberVO);
+      List<PointVO> ar = memberService.getPointList(memberVO);
       int count = memberService.getMissionNum(memberVO);
       mv.addObject("count", count);
       mv.addObject("pointList", ar);
@@ -400,6 +405,7 @@ public class MemberController {
 
       memberVO = memberService.getMypage(memberVO);
       memberVO.setPhone(memberVO.getPhone());
+      memberVO.setPhone(memberVO.phone_format(memberVO.getPhone()));
       
       mv.addObject("memberVO", memberVO);
       mv.setViewName("/member/set_up");
@@ -536,20 +542,22 @@ public class MemberController {
       return mv;
    }
    
-   /* 마이페이지 - 닉네임 변경 */
-//   @PostMapping("nickName")
-//   public ModelAndView setNickName(HttpSession session ,MemberVO memberVO, ModelAndView mv)throws Exception{
-//      SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
-//      Authentication authentication = context.getAuthentication();
-//      MemberVO sessionMemberVO = (MemberVO) authentication.getPrincipal();
-//      memberVO.setId(sessionMemberVO.getId());
-//      
-//      memberService.setNickName(memberVO);
-//      memberService.setNickName_N(memberVO);
-//      mv.setViewName("/member/mypage");
-//      mv.addObject("nick", memberVO.getNickName());
-//      mv.addObject("nick_N", memberVO.getNickName_N());
-//      return mv;
-//   }
+   /* 멤버십 결제일,해지일 */
+   @PostMapping("membershipPay")
+   @ResponseBody
+   public Map<String, Date> getMembershipPay(HttpSession session, MemberVO memberVO, ModelAndView mv)throws Exception{
+	   SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+       Authentication authentication = context.getAuthentication();
+       memberVO = (MemberVO) authentication.getPrincipal();
+       PayVO payVO = new PayVO();
+       payVO.setId(memberVO.getId());
+       payVO = memberService.getMembershipPay(payVO);
+       Date date = payVO.getPayDate();
+       Date endDate = payVO.getCancelDate();
+       Map<String, Date> ar = new HashMap<>();
+       ar.put("start", date);
+       ar.put("end", endDate);
+	   return ar;
+   }
 
 }

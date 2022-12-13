@@ -11,6 +11,7 @@
 		<typeAlias type="com.shop.goodee.seller.SellerVO" alias="SellerVO"/>
 		<typeAlias type="com.shop.goodee.myCampaign.MyCampaignVO" alias="MyCampaignVO"/>
 		<!-- 하준 -->
+		<typeAlias type="com.shop.goodee.pay.PayVO" alias="PayVO"/>
 		<typeAlias type="com.shop.goodee.board.notice.NoticeVO" alias="NoticeVO"/>
 		<typeAlias type="com.shop.goodee.util.Pager" alias="Pager"/>
 		<typeAlias type="com.shop.goodee.board.notice.NoticeFileVO" alias="NoticeFileVO"/>
@@ -18,6 +19,7 @@
 	
 		
 		<typeAlias type="com.shop.goodee.member.MemberVO" alias="MemberVO"/>
+		<typeAlias type="com.shop.goodee.member.PointVO" alias="PointVO"/>
 		<typeAlias type="com.shop.goodee.member.MemberFileVO" alias="MemberFileVO"/>
 		<typeAlias type="com.shop.goodee.member.RoleVO" alias="RoleVO"/>
 		<typeAlias type="com.shop.goodee.item.ItemVO" alias="ItemVO"/>

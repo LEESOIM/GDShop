@@ -15,7 +15,7 @@ public class MissionVO {
 	private Long myCam;
 	
 	//내 포인트 - 출금가능일
-	private String finish_3;
+	private Date finish_3;
 	public MissionVO() {} 
 	
 	public MissionVO(Long status, Long myCam) {

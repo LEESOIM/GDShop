@@ -440,6 +440,15 @@ function getVIPlist() {
     data: {},
     success: function (data) {
       $("#grade_box").html(data);
+      $.ajax({
+        type: "POST",
+        url: "/member/membershipPay",
+        data: {},
+        success: function (data) {
+          $(".start").text(data.start);
+          $(".end").text(data.end);
+        },
+      });
     },
   });
 }
@@ -451,6 +460,18 @@ function getUserGrade() {
     data: {},
     success: function (data) {
       $("#grade_box").html(data);
+    },
+  });
+}
+
+function membershipPay() {
+  $.ajax({
+    type: "POST",
+    url: "/member/membershipPay",
+    data: {},
+    success: function (data) {
+      alert(data);
+      alert(data.start, data.end);
     },
   });
 }

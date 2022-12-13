@@ -13,7 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shop.goodee.member.MailService;
+import com.shop.goodee.member.MemberMapper;
+import com.shop.goodee.member.MemberService;
 import com.shop.goodee.member.MemberVO;
+import com.shop.goodee.pay.PayService;
+import com.shop.goodee.pay.PayVO;
+import com.shop.goodee.sns.SnsService;
 import com.shop.goodee.sse.NotificationService;
 import com.shop.goodee.util.Pager;
 
@@ -27,6 +33,45 @@ public class SellerController {
 	private NotificationService notificationService;
 	@Autowired
 	private SellerService sellerService;
+	@Autowired
+	private SnsService snsService;
+	@Autowired
+	private MailService mailService;
+	@Autowired
+	private MemberService memberService;
+	
+	@Autowired
+	private PayService payService;
+	
+	@GetMapping("sellerCheck")
+	@ResponseBody
+	public boolean sellerCheck(SellerVO sellerVO)throws Exception{
+		log.info("====== sellerVO {}", sellerVO);
+		sellerVO = payService.sellerCheck(sellerVO);
+		log.info("sellerVO => {}", sellerVO);
+		if(sellerVO.getStatus()) {
+			return true;
+		}else {
+			return false;			
+		}
+	}
+	
+	
+	@PostMapping("successPay")
+	@ResponseBody
+	public int successPaySeller(PayVO payVO)throws Exception{
+		log.info("==================================");
+		log.info("payVO => {}",payVO);
+		int result = 0;
+		int setPayResult = payService.setPay(payVO);
+		int setSellerResult = payService.setSeller(payVO);
+		if(setPayResult==1 && setSellerResult==1) {
+			result =1;
+		}
+		return result;
+	}
+	
+	
 	
 	@GetMapping("seller")
 	public void getSeller() throws Exception{
@@ -41,6 +86,7 @@ public class SellerController {
 		log.info("이메일){}",sellerVO.getEmail());
 		log.info("전화번호){}",sellerVO.getPhone());
 		log.info("기업명){}",sellerVO.getCompany());
+		log.info("1250");
 		notificationService.notifyApplyEvent(sellerVO.getId());
 		int result = sellerService.setSellerAdd(sellerVO);
 		return result;
@@ -61,7 +107,21 @@ public class SellerController {
 	@ResponseBody
 	public int setWait(@RequestBody SellerVO sellerVO) throws Exception{
 		
-		int result = sellerService.setWait(sellerVO); 
+		int result = sellerService.setWait(sellerVO);
+		
+		MemberVO memberVO = new MemberVO();
+		
+		memberVO.setId(sellerVO.getId());
+		memberVO = memberService.getMypage(memberVO);
+		mailService.sendSellerMail(memberVO);
+		
+		String id= sellerVO.getId();
+		String text = id + "님의 입점신청이 승인되었습니다!!";
+		
+		MemberVO phone = sellerService.getAcceptPhone(sellerVO);
+		
+		snsService.goMessage(phone,text);
+		
 		return result;
 	}
 	
@@ -115,6 +175,11 @@ public class SellerController {
 		log.info("=================={}",sellerVO.getId());
 		int result = sellerService.setPayNo(sellerVO); 
 		return result;
+	}
+	
+	@GetMapping("account")
+	public void getAccount()throws Exception{
+		
 	}
 	
 }

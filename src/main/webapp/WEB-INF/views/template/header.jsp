@@ -3,6 +3,7 @@ pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
 prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <nav class="navbar navbar-expand-lg header">
       <div class="container-fluid" style="padding: 0px; width: 68%">
         <a class="navbar-brand" href="/" style="margin-right: 1.2em"
@@ -50,12 +51,14 @@ prefix="c" %>
             ></sec:authorize>
             <!-- 로그인후 해당 블록 보이기 -->
             <sec:authorize access="isAuthenticated()">
-            <div class="me-3">
-              <b id="id1" style="font-size: 17.5px; color: rgb(9, 118, 31)"><sec:authentication property="Principal" var="user"/>
-              <c:if test="${empty user.name}">${user.id}</c:if>
-              <c:if test="${not empty user.name}">${user.name}</c:if>
-              </b>님
-              환영합니다!💚
+              <div class="me-3">
+                <b style="font-size: 17.5px; color: rgb(9, 118, 31)"><sec:authentication property="Principal" var="user"/>
+                  <c:if test="${empty user.name}">${user.id}</c:if>
+                  <c:if test="${not empty user.name}">${user.name}</c:if>
+                </b>님
+                환영합니다!💚
+                <h4 id="memberName" hidden>${user.name}</h4>
+                <h4 id="memberId" hidden>${user.id}</h4>
             </div>
             
             <div class="top-dropdown">
@@ -189,13 +192,26 @@ prefix="c" %>
       </div>
     </div>
 
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 10;">
+      <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+        <div class="toast-header">
+          <i class="bi bi-alarm"></i>
+          <strong class="me-auto" id="type" style="margin-left: 11px;"></strong>
+          <small id="time"></small>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" id="toastMsg"></div>
+      </div>
+    </div>
 <script>
-   
-      if($("#id1").text()!=""){
+      const toastLiveExample = document.getElementById('liveToast')
+      let today = new Date();   
+      if($("#memberId").text()!=""){
         
         $(document).ready(function(){
           console.log("sse 저장")
-          const id = $("#id1").text();
+          const id = $("#memberId").text();
           const eventSource = new EventSource('/sub/'+id);
           console.log(eventSource)
           eventSource.addEventListener("connect",function(event){
@@ -204,6 +220,21 @@ prefix="c" %>
           })
           eventSource.addEventListener("addApply",function(event){
             let message = event.data;
+            $("#type").text("  입점 신청")
+            $("#time").text(today.toLocaleTimeString())
+            $("#toastMsg").text(message)
+            const toast = new bootstrap.Toast(toastLiveExample)
+            toast.show()
+            // alert(message)
+          })
+          eventSource.addEventListener("pdAddRequest",function(event){
+            console.log("상품등록요청")
+            let message = event.data;
+            $("#type").text("  상품등록 요청")
+            $("#time").text(today.toLocaleTimeString())
+            $("#toastMsg").text(message)
+            const toast = new bootstrap.Toast(toastLiveExample)
+            toast.show()
             alert(message)
           })
           eventSource.addEventListener("error", function(event) {

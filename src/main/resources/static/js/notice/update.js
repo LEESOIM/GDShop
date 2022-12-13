@@ -16,7 +16,7 @@ $(document).ready(function(){
                 byteUnit=setByteUnit(data.fileVOs[i].size).get("unit")
                 size=setByteUnit(data.fileVOs[i].size).get("size")
                 let li = $('<li class="fileItem" id="'+data.fileVOs[i].fileNum+'"></li>')
-                li.append('<div class="remove"><button type="button" data-filenum="'+data.fileVOs[i].fileNum +'"data-filename="'+data.fileVOs[i].fileName+'"data-size="'+data.fileVOs[i].size+'"class="remove_button_uploaded">X</button></div>')
+                li.append('<div class="remove"><button type="button" data-filenum="'+data.fileVOs[i].fileNum +'"data-filename="'+data.fileVOs[i].fileName+'"data-size="'+data.fileVOs[i].size+'"class="btn remove_button_uploaded"><i class="bi bi-x-circle"></i></button></div>')
                 li.append('<div class="fileName">'+data.fileVOs[i].oriName+'</div>')
                 li.append('<div class="fileSize">'+size+byteUnit+'</div>')
                 $("#fileList").append(li)
@@ -67,7 +67,7 @@ function addFileList(fileArr){
             size=setByteUnit(size).get("size")
     
             let li = $('<li class="fileItem" id="'+fileArr[i].lastModified+'"></li>')
-            li.append('<div class="remove"><button type="button" data-index="'+fileArr[i].lastModified +'" class="remove_button">X</button></div>')
+            li.append('<div class="remove"><button type="button" data-index="'+fileArr[i].lastModified +'" class="btn remove_button"><i class="bi bi-x-circle"></i></button></div>')
             li.append('<div class="fileName">'+fileArr[i].name+'</div>')
             li.append('<div class="fileSize">'+size+byteUnit+'</div>')
             $("#fileList").append(li)
@@ -108,18 +108,19 @@ function setByteUnit(size){
 function removeFile(){
     $("#fileList").click(function(event){
         console.log("removeFile")
+        console.log($(event.target).parent())
         // 원래 올라갔던 파일 제거 버튼
-        if(event.target.className=='remove_button_uploaded'){
+        if($(event.target).parent().hasClass('remove_button_uploaded')){
             // fileName[], fileNum[] 
-            let inputName = '<input type="text" name="fileName" value="'+ event.target.dataset.filename+'">'
-            let inputNum = '<input type="text" name="fileNum" value="'+ parseInt(event.target.dataset.filenum)+'">'
+            let inputName = '<input type="text" name="fileName" value="'+ $(event.target).parent().attr("data-filename")+'" hidden>'
+            let inputNum = '<input type="text" name="fileNum" value="'+ parseInt($(event.target).parent().attr("data-filenum"))+'"hidden>'
             $("#form").append(inputName)
             $("#form").append(inputNum)
             
-            const removeTarget = document.getElementById(event.target.dataset.filenum);
+            const removeTarget = document.getElementById($(event.target).parent().attr("data-filenum"));
             removeTarget.remove();
 
-            total_file_size-=event.target.dataset.size
+            total_file_size-=$(event.target).parent().attr("data-size")
             unit = setByteUnit(total_file_size).get("unit")
             total_size = setByteUnit(total_file_size).get("size")
             $("#fileSize").text(total_size+unit)
@@ -127,8 +128,8 @@ function removeFile(){
         }
 
         // 추가할 파일 제거 버튼
-        if(event.target.className=='remove_button'){
-            targetFile = event.target.dataset.index 
+        if($(event.target).parent().hasClass('remove_button')){
+            targetFile = $(event.target).parent().attr("data-index")
             
             for(var i=0; i<dataTransfer.files.length; i++){
                 if(dataTransfer.files[i].lastModified==targetFile){
@@ -162,8 +163,8 @@ $("#removeAll_button").click(function(){
     if($(".remove_button_uploaded").length>0){
         console.log($(".remove_button_uploaded"))
         for(i=0; i<$(".remove_button_uploaded").length; i++){
-            let inputName = '<input type="text" name="fileName" value="'+ $(".remove_button_uploaded")[i].dataset.filename+'">'
-            let inputNum = '<input type="text" name="fileNum" value="'+ parseInt($(".remove_button_uploaded")[i].dataset.filenum)+'">'
+            let inputName = '<input type="text" name="fileName" value="'+ $(".remove_button_uploaded")[i].dataset.filename+'"hidden>'
+            let inputNum = '<input type="text" name="fileNum" value="'+ parseInt($(".remove_button_uploaded")[i].dataset.filenum)+'"hidden>'
             $("#form").append(inputName)
             $("#form").append(inputNum)
         }

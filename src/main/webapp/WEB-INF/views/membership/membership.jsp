@@ -13,6 +13,11 @@ prefix="c" %>
     <link rel="stylesheet" href="/css/index.css" />
     <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" href="/css/login.css" />
+    <!-- jQuery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+  <!-- iamport.payment.js -->
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+  <script defer src="/js/membership.js"></script>
   </head>
   <body>
       <c:import url="../template/top_part.jsp"></c:import>
@@ -89,10 +94,6 @@ prefix="c" %>
 
     </section>
       <c:import url="../template/footer.jsp"></c:import>
-    <script type="text/javascript">
-      $("#membership_joinBtn").click(function () {
-        alert("결제창으로 이동~~");
-      });
-    </script>
+   
   </body>
 </html>

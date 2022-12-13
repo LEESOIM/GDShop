@@ -37,6 +37,7 @@ public class ItemService {
 		}
 
 		for (MultipartFile f : itemVO.getFiles()) {
+			log.info("getFiles()ㅡㅡㅡㅡ : {}", f);
 			if (!f.isEmpty()) {
 				log.info("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡfileName : {}", f.getOriginalFilename());
 				String fileName = fileManager.saveFile(f, path);
