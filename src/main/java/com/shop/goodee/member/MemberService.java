@@ -27,6 +27,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.shop.goodee.item.ItemVO;
 import com.shop.goodee.mission.MissionVO;
+import com.shop.goodee.pay.PayVO;
 import com.shop.goodee.util.FileManager;
 
 import lombok.extern.slf4j.Slf4j;
@@ -379,5 +380,10 @@ public class MemberService {
    /* 내 포인트 - 미션수 */
    public int getMissionNum(MemberVO memberVO)throws Exception{
 	   return memberMapper.getMissionNum(memberVO);
+   }
+   
+   /* 멤버십 결제일,해지일 */
+   public PayVO getMembershipPay(PayVO payVO)throws Exception{
+	   return memberMapper.getMembershipPay(payVO);
    }
 }
