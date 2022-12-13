@@ -1,6 +1,5 @@
 package com.shop.goodee.purchase;
 
-import java.sql.Date;
 
 import lombok.Data;
 

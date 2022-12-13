@@ -60,18 +60,3 @@ $("#applyBaro").click(function () {
     })
 })
 
-
-//OCR
-$("#withdraw_btn").click(function () {
-
-    $.ajax({
-        type: "POST",
-        url: "/purchase/setPurchase",
-        data: {
-        },
-        success: function (data) {
-            alert(data)
-        }
-    })
-})
-

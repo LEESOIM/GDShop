@@ -1,5 +1,23 @@
 $(document).ready(function () {
 
+    //로그인내역
+    $.ajax({
+        type: "POST",
+        url: "/mission/member",
+        data: {
+        },
+        success: function (data) {
+            alert($("#id1"))
+            $("#applyCheck").click(function(){
+                if(data.id==null) {
+                    
+                }
+
+            })
+        },
+    });
+
+    //---------------------------------------------------
     //등록날짜
     let start = new Date($('.date').val());
     //현재날짜
@@ -24,7 +42,7 @@ $(document).ready(function () {
 
     //---------------------------------------------------
     //캠페인유형에 따른 버튼 속성
-    let type = $("#type").attr("data-type")
+    let type = $("#camType").val();
     if (type == "추첨형") {
         $("#applyType").attr("style", "display:");
     } else {
@@ -43,6 +61,9 @@ $(document).ready(function () {
             itemNum: itemNum,
         },
         success: function (data) {
+            //미션번호
+            $("#missionNum").val(data.missionNum);
+
             //내캠페인
             if (data.myCam == 0) { //지원
                 $("#mycam0").attr("style", "display:");
@@ -60,12 +81,18 @@ $(document).ready(function () {
             }
 
             //미션진행상황
-            if(data.status == 0) {
-                $("#mStatus0").show();
-                $("#mStatus1").hide();
-            } else if(data.status == 1) {
-                $("#mStatus0").hide();
-                $("#mStatus1").show();
+            if (data.status == 0) { //구매인증(OCR)
+                $(".mStatus0").show();
+                $(".mStatus1").hide();
+                $(".mStatus2").hide();
+            } else if (data.status == 1) { //리뷰인증(크롤링)
+                $(".mStatus0").hide();
+                $(".mStatus1").show();
+                $(".mStatus2").hide();
+            } else if (data.status == 2) { //포인트수령
+                $(".mStatus0").hide();
+                $(".mStatus1").hide();
+                $(".mStatus2").show();
             }
         }
     })
@@ -86,6 +113,7 @@ $("#applyCheck").click(function () {
             if (data > 0) {
                 $("#applyCheck").attr("disabled", "disabled");
             } else {
+
                 $("#applyCheck").attr("data-bs-toggle", "modal")
             }
         }

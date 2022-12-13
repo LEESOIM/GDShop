@@ -32,21 +32,22 @@ public class PurchaseController {
 	@Autowired
 	private MissionService missionService;
 
+	private int result;
+
 	@GetMapping("purchase")
 	public void purchase() throws Exception {
 
 	}
 
 	@PostMapping("setPurchase")
-	@ResponseBody
-	public PurchaseVO setPurchase(HttpSession session, MemberVO memberVO, MultipartFile f, PurchaseVO purchaseVO)
-			throws Exception {
-
+	public int setPurchase(HttpSession session, MemberVO memberVO, MultipartFile f, PurchaseVO purchaseVO) throws Exception {
+		//ID
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
 		memberVO = (MemberVO) authentication.getPrincipal();
 		purchaseVO.setId(memberVO.getId());
 
+		//구매사진
 		PurchaseVO finalPurchaseVO = purchaseService.getPurchase(f);
 		purchaseVO.setPurDate(finalPurchaseVO.getPurDate());
 		purchaseVO.setPurNum(finalPurchaseVO.getPurNum());
@@ -61,16 +62,15 @@ public class PurchaseController {
 		log.info("=============================");
 
 		//닉네임 등록
-		if (finalPurchaseVO.getPurNum().equals(purchaseVO.getPurNumM())) {
+		if (finalPurchaseVO.getPurNum().equals(purchaseVO.getPurNumM()) && finalPurchaseVO.getPrice().equals(purchaseVO.getPrice())) {
 			if (purchaseVO.getNickname() == null) {
-				int result = missionService.setNicN(purchaseVO);
+				missionService.setNicN(purchaseVO);
 			} else {
-				int result = missionService.setNicC(purchaseVO);
+				missionService.setNicC(purchaseVO);
 			}
-			return purchaseVO;
+			return missionService.setMiStatus1(purchaseVO);
 		} else {
-			log.info("OCR 인식 실패");
-			return null;
+			return 0;
 		}
 	}
 }

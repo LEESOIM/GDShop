@@ -38,6 +38,16 @@
 	<!-- 쿠팡 닉네임 등록 -->
 	<update id="setNicC" parameterType="PurchaseVO">
 		UPDATE MEMBER SET NICKNAME=#{nickname} WHERE ID=#{id}
-	</update>	
+	</update>
+	
+	<!-- 미션진행 status 변경(구매하기->리뷰) -->
+	<update id="setMiStatus1" parameterType="MissionVO">
+		UPDATE MISSION SET STATUS=1 WHERE MISSIONNUM=#{missionNum}
+	</update>
+	
+	<!-- 미션진행 status 변경(리뷰->포인트수령), 미션완료 -->
+	<update id="setMiStatus2" parameterType="MissionVO">
+		UPDATE MISSION SET STATUS=2, MYCAM=2 WHERE MISSIONNUM=#{missionNum}
+	</update>
 	
 </mapper>

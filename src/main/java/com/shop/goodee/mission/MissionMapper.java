@@ -20,4 +20,8 @@ public interface MissionMapper {
 	public int setNicN(PurchaseVO purchaseVO) throws Exception;
 	
 	public int setNicC(PurchaseVO purchaseVO) throws Exception;
+	
+	public int setMiStatus1(PurchaseVO purchaseVO) throws Exception;
+	
+	public int setMiStatus2(PurchaseVO purchaseVO) throws Exception;
 }

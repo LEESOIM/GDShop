@@ -9,10 +9,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import com.shop.goodee.item.ItemService;
 import com.shop.goodee.item.ItemVO;
+import com.shop.goodee.member.MemberSecurityService;
+import com.shop.goodee.member.MemberService;
 import com.shop.goodee.member.MemberVO;
+import com.shop.goodee.sse.SseController;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,7 +31,32 @@ public class MissionController {
 
 	@Autowired
 	private ItemService itemService;
+	
+	@Autowired
+	private MemberService memberService;
 
+	
+	// 회원정보조회
+	@PostMapping("member")
+	@ResponseBody
+	public MemberVO getMember(HttpSession session) throws Exception {
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
+		log.info("회원아이디{}",memberVO.getId());
+		String user = memberVO.getId();
+		if(user != null) {
+			long role = memberService.getVIP(memberVO);
+			if(role>0) {
+				memberVO.setRoleNum(role);
+				return memberVO;
+			}
+			return memberVO;
+		}
+		return null;
+	}
+	
+	
 	// 지원하기
 	@PostMapping("apply")
 	@ResponseBody
@@ -63,7 +93,6 @@ public class MissionController {
 		return missionVO;
 	}
 
-
 	// 중복지원확인
 	@PostMapping("applyCheck")
 	@ResponseBody
@@ -94,8 +123,5 @@ public class MissionController {
 		int result = missionService.setCancel(missionVO);
 		return "/item/detail?itemNum=" + itemVO.getItemNum();
 	}
-
-	
-
 
 }

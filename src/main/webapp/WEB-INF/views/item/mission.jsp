@@ -104,11 +104,10 @@
 				<h1 class="modal-title fs-5" id="exampleModalLabel">
 					<b>미션수행카드</b>
 				</h1>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
-			<div class="modal-body p-3" style="font-size: 14px">
-	<div id="mStatus0">
-				<div class="d-flex justify-content-center" style="text-align: center">
+			<div class="modal-body p-3"">
+	<div class="mStatus0">
+				<div class="d-flex justify-content-center my-2" style="text-align: center">
 					<div style="font-weight: bold;">
 						<div class="mission_order">
 							<i class="fa-solid fa-circle-check" style="color: green"></i> 구매하기
@@ -133,9 +132,9 @@
 				<hr />
 		
 				<form id="ocr" action="/purchase/setPurchase" method="post" enctype="multipart/form-data">
-				<div>		
-				<div class="pe-4 pb-4">
-				<div class="d-flex py-2">
+				<input id="missionNum" name="missionNum" type="hidden">
+				<div class="pe-4 py-4" style="font-size: 14px">
+				<div class="d-flex pb-2">
 					<div style="margin:auto 0; width: 30%; text-align: right;">
 						<b>구매 URL</b>
 					</div>
@@ -149,7 +148,6 @@
 					</div>
 					<div style="width: 80%; margin-left: 15px; ">
 					<div class="mb-2" style="color: #198754; font-weight: bold;">✅구디샵에 등록된 계정과 실제 구매를 진행하는 계정이 서로 동일한 지 구매 전 반드시 확인해 주세요.<br>
-						등록되지 않은 계정으로 제품 구매 시 포인트가 지급되지 않습니다.<br>
 						✅옵션 : ${vo.detail }<br>
 						✅결제금액 : <fmt:formatNumber value="${vo.price }" pattern="###,###,###" />원<br></div>
 						쿠팡 제품의 경우, 쿠팡 자체적으로 금액이 변동되기 때문에 구디샵에서 제시된 구매금액과 실제 구매금액이 다를 수 있습니다.<br>
@@ -161,7 +159,7 @@
 						-제품 품절의 경우, 캠페인 진행이 어려우므로 캠페인 취소를 부탁드립니다.<br>
 					</div>
 				</div>
-				<div class="d-flex py-1">
+				<div class="d-flex py-2">
 				<c:if test="${vo.shop eq '쿠팡' }">
 					<div style="margin:auto 0; width: 30%; text-align: right;">
 						<b><span style="color: red">*</span>쿠팡 닉네임</b>
@@ -170,16 +168,16 @@
 						<input class="form-control p-1" type="text" id="nickname" name="nickname" style="width: 300px">
 					</div>
 				</c:if>
-				<c:if test="${vo.shop eq '네이버' }">
+				<c:if test="${vo.shop ne '쿠팡' }">
 					<div style="margin:auto 0; width: 30%; text-align: right;">
-						<b><span style="color: red">*</span>네이버 닉네임</b>
+						<b><span style="color: red">*</span>아이디</b>
 					</div>
 					<div style="width: 80%; margin-left: 25px">
 						<input class="form-control p-1" type="text" id="nickname_n" name="nickname_n" style="width: 300px">
 					</div>
 				</c:if>
 				</div>
-				<div class="d-flex py-1">
+				<div class="d-flex py-2">
 					<div style="margin:auto 0; width: 30%; text-align: right;">
 						<b><span style="color: red">*</span>주문번호</b>
 					</div>
@@ -187,7 +185,7 @@
 						<input class="form-control p-1" type="text" id="purNumM" name="purNumM" style="width: 300px">
 					</div>
 				</div>
-				<div class="d-flex py-1">
+				<div class="d-flex py-2">
 					<div style="margin:auto 0; width: 30%; text-align: right;">
 						<b><span style="color: red">*</span>결제금액</b>
 					</div>
@@ -195,7 +193,7 @@
 						<input class="form-control p-1" type="text" id="priceM" name="priceM" style="width: 300px">
 					</div>
 				</div>
-				<div class="d-flex py-1">
+				<div class="d-flex py-2">
 					<div style="margin:auto 0; width: 30%; text-align: right;">
 						<b><span style="color: red">*</span>인증샷</b>
 					</div>
@@ -203,7 +201,7 @@
 			  				<input type="file" class="form-control p-1" id="f" name="f" style="width: 300px">
 					</div>
 				</div>
-				<div class="d-flex py-1">
+				<div class="d-flex py-2">
 					<div style="margin:auto 0; width: 30%; text-align: right;"></div>
 					<div style="width: 80%; margin-left: 20px">
 						✅인증샷은 주문일, 주문번호, 구매상품(옵션포함), 총 결제금액이 확인되는 사진으로 등록해 주세요.<br>
@@ -212,18 +210,15 @@
 				</div>
 				</div>
 
-				<div class="modal-footer d-flex justify-content-center">
-					<button class="btn btn-outline-success" type="submit" id="withdraw_btn"><b>전송</b></button>
+				<div class="modal-footer d-flex justify-content-center pb-0">
+					<button class="btn btn-outline-success" type="submit" id="withdraw_btn" onClick="window.location.reload()"><b>전송</b></button>
 				</div>
-			</div>
 		</form>
 </div>
 		
-<div id="mStatus1">
-		<div>	
+<div class="mStatus1">
 			<form id="crawling" action="" method="post" >
-			<div class="modal-body p-3" style="font-size: 14px">
-				<div class="d-flex justify-content-center" style="text-align: center">
+				<div class="d-flex justify-content-center my-2" style="text-align: center">
 					<div>
 						<div class="mission_order">
 							<i class="fa-regular fa-circle-check" style="color: green"></i> 구매하기
@@ -246,7 +241,7 @@
 					</div>
 				</div>
 				<hr />
-				<div class="pe-4 pb-4">
+				<div class="pe-4 pb-4" style="font-size: 15px">
 				<div class="d-flex py-2">
 					<div style="width: 30%; text-align: right;">
 						<b>미션 가이드라인</b>
@@ -266,22 +261,25 @@
 					</div>
 				</div>
 				
-				<div class="d-flex pt-4">
+				<div class="d-flex pt-3">
+					<c:if test="${vo.shop eq '쿠팡' }">
 					<div style="margin:auto 0; width: 30%; text-align: right;">
-						<b><span style="color: red">*</span>닉네임</b>
+						<b><span style="color: red">*</span>쿠팡 닉네임</b>
 					</div>
 					<div style="width: 80%; margin-left: 25px">
-						<input class="form-control p-1" type="text" id="nIcM" name="nIcM" style="width: 300px">
+						<input class="form-control p-1" type="text" id="nickname" name="nickname" style="width: 300px">
 					</div>
-				</div>
-				<div class="d-flex">
+				</c:if>
+				<c:if test="${vo.shop ne '쿠팡' }">
 					<div style="margin:auto 0; width: 30%; text-align: right;">
+						<b><span style="color: red">*</span>아이디</b>
 					</div>
-					<div style="width: 80%; margin-left: 25px; font-size: 13px; color: green">
-					<b>위의 닉네임과 동일한 계정으로 리뷰 등록 후 확인 요청 버튼을 눌러주세요.</b>
+					<div style="width: 80%; margin-left: 25px">
+						<input class="form-control p-1" type="text" id="nickname_n" name="nickname_n" style="width: 300px">
 					</div>
+				</c:if>
 				</div>
-				<div class="d-flex py-3">
+				<div class="d-flex py-2">
 					<div style="margin:auto 0; width: 30%; text-align: right;">
 						<b><span style="color: red">*</span>작성일</b>
 					</div>
@@ -291,14 +289,43 @@
 				</div>
 				</div>
 
-				<div class="modal-footer d-flex justify-content-center">
-					<button class="btn btn-outline-success" type="submit" id="withdraw_btn"><b>전송</b></button>
+				<div class="modal-footer d-flex justify-content-center pb-0">
+					<button class="btn btn-outline-success" type="button" id="withdraw_btn"><b>전송</b></button>
 				</div>
-			</div>
 			</form>
-		</div>
 </div>
-		
+<div class="mStatus2">
+			<form id="getPoint" action="" method="post" >
+				<div class="d-flex justify-content-center my-2" style="text-align: center">
+					<div>
+						<div class="mission_order">
+							<i class="fa-regular fa-circle-check" style="color: green"></i> 구매하기
+						</div>
+						<div>완료</div>
+					</div>
+					<div class="solid"></div>
+					<div>
+						<div class="mission_order">
+							<i class="fa-regular fa-circle-check" style="color: green"></i> 리뷰
+						</div>
+						<div>완료</div>
+					</div>
+					<div class="solid"></div>
+					<div style="font-weight: bold;">
+						<div class="mission_order">
+							<i class="fa-solid fa-circle-check" style="color: green"></i> 포인트 수령
+						</div>
+						<div>미완료</div>
+					</div>
+				</div>
+				<hr />
+				<div class="p-3" style="font-size: 15px; text-align: center;">
+					<img src="/images/santa.png" width="250px">
+					<div style="font-size: 30px; color: #44D62C"><b><fmt:formatNumber value="${vo.price }" pattern="###,###,###" />P</b></div>
+					<button class="btn btn-success py-2 px-3" style="background-color: #44D62C; border-radius: 20px" type="button" id="withdraw_btn"><i class="fa-solid fa-check"></i> <b>포인트받기</b></button>
+				</div>
+			</form>
+</div>		
 		</div>
 		</div>
 	</div>

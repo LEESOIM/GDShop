@@ -45,4 +45,13 @@ public class MissionService {
 	public int setNicC(PurchaseVO purchaseVO) throws Exception {
 		return missionMapper.setNicC(purchaseVO);
 	}
+	
+	//미션 상황 status 변경
+	public int setMiStatus1(PurchaseVO purchaseVO) throws Exception{
+		return missionMapper.setMiStatus1(purchaseVO);
+	}
+	
+	public int setMiStatus2(PurchaseVO purchaseVO) throws Exception{
+		return missionMapper.setMiStatus2(purchaseVO);
+	}
 }
