@@ -23,7 +23,9 @@
 			<div class="row justify-content-center col-9">
 			
 			<form action="./add" method="post" enctype="multipart/form-data">
-				<div class="d-flex pt-5">
+				<div class="pt-5">
+				<b style="color: red; font-size: 14px">*캠페인 유형을 먼저 선택해주세요</b>
+				<div class="d-flex">
 					<div>
 						<div class="btn-group">
 						  <input type="radio" class="btn-check" name="type" id="type1" value="추첨형">
@@ -37,7 +39,7 @@
 						</div>
 					</div>
 				</div>
-				
+				</div>
 				
 				<div class="mission1 pt-5">
 				<div style="border-bottom: solid;">

@@ -54,4 +54,9 @@ public class MissionService {
 	public int setMiStatus2(PurchaseVO purchaseVO) throws Exception{
 		return missionMapper.setMiStatus2(purchaseVO);
 	}
+	
+	//모집률
+	public int getApplyRate(MissionVO missionVO) throws Exception {
+		return missionMapper.getApplyRate(missionVO);
+	}
 }

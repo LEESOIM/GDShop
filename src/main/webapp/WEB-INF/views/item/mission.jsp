@@ -13,7 +13,7 @@
       <div class="modal-header p-3" id="exampleModalToggleLabel" style="background-color: #4AB34A; color: white; font-weight: bold">
 			<h1 class="modal-title fs-5" id="exampleModalLabel"><b>추첨형 캠페인 지원</b></h1>
 		</div>
-      <div class="modal-body py-3 px-4 my-3" >
+      <div class="modal-body py-3 px-4 my-3">
      	<b>추첨형 캠페인에 지원하기 전에 아래 사항을 확인해주세요.</b><br><br>
 		<b style="color: #eb2f96">아직 구매하지 마세요! 당첨된 것이 아닙니다.</b><br>
 		추첨형 캠페인은 모집 기간 동안 지원자를 모집한 후 랜덤으로 당첨자를 선정합니다.<br>당첨자에게는 별도로 당첨 알림 톡이 발송됩니다.
@@ -33,10 +33,11 @@
       <!-- 즉석추첨형 -->	
       <div id="applyBaroType" style="display: none">
       	<div class="modal-header p-3" id="exampleModalToggleLabel" style="background-color: #4AB34A; color: white; font-weight: bold">
-			<h1 class="modal-title fs-5" id="exampleModalLabel"><b>즉석 추첨형 캠페인 지원</b></h1>
+			<h1 class="modal-title fs-5" id="exampleModalLabel">
+			<c:if test="${vo.type eq '즉석추첨형' }"><b>즉석 추첨형 캠페인 지원</b></c:if><c:if test="${vo.type eq 'SNS미션' }"><b>SNS 미션 캠페인 지원</b></c:if></h1>
 		</div>
-      <div class="modal-body py-3 px-4 my-3" >
-     	<b>즉석 추첨형 캠페인에 지원하기 전에 아래 사항을 확인해주세요.</b><br><br>
+      <div class="modal-body py-3 px-4 my-3">
+     	<b><c:if test="${vo.type eq '즉석추첨형' }"><b>즉석 추첨형</b></c:if><c:if test="${vo.type eq 'SNS미션' }"><b>SNS 미션</b></c:if> 캠페인에 지원하기 전에 아래 사항을 확인해주세요.</b><br><br>
 		<b style="color: #eb2f96">캠페인에 선정되시면 2시간 내에 미션수행카드에서 구매하기 미션까지 마쳐주세요.</b><br>
 		2시간 내에 미션수행카드에서 구매하기까지 완료하지 않으시면 실제 구매를 진행하셨더라도 캠페인이 자동 취소되어 포인트를 받으실 수 없으며, 동일 캠페인 재지원이 불가합니다.
       	<div class="pt-3">

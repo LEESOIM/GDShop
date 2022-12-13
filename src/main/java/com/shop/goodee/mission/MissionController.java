@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,32 +32,8 @@ public class MissionController {
 
 	@Autowired
 	private ItemService itemService;
-	
-	@Autowired
-	private MemberService memberService;
 
-	
-	// 회원정보조회
-	@PostMapping("member")
-	@ResponseBody
-	public MemberVO getMember(HttpSession session) throws Exception {
-		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
-		Authentication authentication = context.getAuthentication();
-		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
-		log.info("회원아이디{}",memberVO.getId());
-		String user = memberVO.getId();
-		if(user != null) {
-			long role = memberService.getVIP(memberVO);
-			if(role>0) {
-				memberVO.setRoleNum(role);
-				return memberVO;
-			}
-			return memberVO;
-		}
-		return null;
-	}
-	
-	
+
 	// 지원하기
 	@PostMapping("apply")
 	@ResponseBody
@@ -123,5 +100,6 @@ public class MissionController {
 		int result = missionService.setCancel(missionVO);
 		return "/item/detail?itemNum=" + itemVO.getItemNum();
 	}
+
 
 }

@@ -1,5 +1,7 @@
 package com.shop.goodee.mission;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.shop.goodee.purchase.PurchaseVO;
@@ -24,4 +26,17 @@ public interface MissionMapper {
 	public int setMiStatus1(PurchaseVO purchaseVO) throws Exception;
 	
 	public int setMiStatus2(PurchaseVO purchaseVO) throws Exception;
+	
+	public int getApplyRate(MissionVO missionVO) throws Exception;
+	
+	public List<MissionVO> getStatus0Ing() throws Exception;
+	
+	public int set2hour(MissionVO missionVO) throws Exception;
+	
+	public List<MissionVO> getStatus1Ing() throws Exception;
+	
+	public int set14day(MissionVO missionVO) throws Exception;
+	
+	public int setAutoCancel(MissionVO missionVO) throws Exception;
+	
 }

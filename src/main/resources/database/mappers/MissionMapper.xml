@@ -12,7 +12,7 @@
 	
 	<!-- 즉석추첨형 -->
 	<insert id="setApply_baro" parameterType="MissionVO">
-		INSERT INTO MISSION(MISSIONNUM, ITEMNUM, ID, APPLYDATE, STATUS, MYCAM) VALUES(NULL, #{itemNum}, #{id}, NOW(), 0, 1)
+		INSERT INTO MISSION(MISSIONNUM, ITEMNUM, ID, APPLYDATE, FINISH, STATUS, MYCAM, TIME) VALUES(NULL, #{itemNum}, #{id}, NOW(), DATE_ADD(NOW(), INTERVAL 2 HOUR), 0, 1, NOW())
 	</insert>
 	
 	<!-- 지원내역 -->
@@ -42,12 +42,37 @@
 	
 	<!-- 미션진행 status 변경(구매하기->리뷰) -->
 	<update id="setMiStatus1" parameterType="MissionVO">
-		UPDATE MISSION SET STATUS=1 WHERE MISSIONNUM=#{missionNum}
+		UPDATE MISSION SET FINISH=DATE_ADD(APPLYDATE, INTERVAL 14 DAY), STATUS=1 WHERE MISSIONNUM=#{missionNum}
 	</update>
 	
 	<!-- 미션진행 status 변경(리뷰->포인트수령), 미션완료 -->
 	<update id="setMiStatus2" parameterType="MissionVO">
 		UPDATE MISSION SET STATUS=2, MYCAM=2 WHERE MISSIONNUM=#{missionNum}
+	</update>
+	
+	<!-- 모집률 -->
+	<select id="getApplyRate" parameterType="MissionVO" resultType="Integer">
+		SELECT COUNT(MISSIONNUM) FROM MISSION WHERE ITEMNUM=#{itemNum}
+	</select>
+	
+	<!-- 구매인증미션 진행중인 회원 -->
+	<select id="getStatus0Ing" resultType="MissionVO">
+		SELECT * FROM MISSION WHERE STATUS=0 AND MYCAM=1
+	</select>
+	
+	<!-- 미션시간 1분씩 증가(2시간이내 구매인증안하면 자동취소) -->
+	<update id="set2hour" parameterType="MissionVO">
+		UPDATE MISSION SET TIME=DATE_ADD(TIME, INTERVAL 1 MINUTE) WHERE MISSIONNUM=#{missionNum}
+	</update>
+	
+	<!-- 리뷰인증미션 진행중인 회원 -->
+	<select id="getStatus1Ing" resultType="MissionVO">
+		SELECT * FROM MISSION WHERE STATUS=1 AND MYCAM=1
+	</select>
+	
+	<!-- 미션시간 1일씩 증가(14일이내 리뷰인증안하면 자동취소) -->
+	<update id="set14day" parameterType="MissionVO">
+		UPDATE MISSION SET TIME=DATE_ADD(TIME, INTERVAL 1 DAY) WHERE MISSIONNUM=#{missionNum}
 	</update>
 	
 </mapper>

@@ -59,6 +59,12 @@ public class ItemController {
 		ModelAndView mv = new ModelAndView();
 		itemVO = itemService.getDetail(itemVO);
 		mv.addObject("vo", itemVO);
+		
+		MissionVO missionVO = new MissionVO();
+		missionVO.setItemNum(itemVO.getItemNum());
+		int result = missionService.getApplyRate(missionVO);
+		mv.addObject("rate", result);
+		
 		mv.setViewName("/item/detail");
 		return mv;
 	}

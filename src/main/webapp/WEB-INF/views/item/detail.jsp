@@ -41,16 +41,16 @@
 							<div class="mx-1">|</div>
 							<div>${vo.sellerVO.company }</div>
 						</div>
-						<div class="my-1" style="font-size: 18px"><b>${vo.title }</b></div>
+						<div class="mt-1 mb-2" style="font-size: 18px"><b>${vo.title }</b></div>
 						<div style="font-size: 12px; text-align: right; color: rgb(124, 121, 132)">캠페인번호 : ${vo.itemNum }</div>
 						<hr style="margin: 0;" />
 						<div class="mt-4 mb-4">
-							<div class="d-flex">
+							<div class="d-flex justify-content-center">
 								<div class="me-4" style="font-size: 14px; margin: auto 0"><b>결제금액</b></div>
 								<div style="font-size: 19px;"><b><fmt:formatNumber value="${vo.price }" pattern="###,###,###" />원</b></div>
 								
 							</div>
-							<div class="d-flex">
+							<div class="d-flex justify-content-center">
 								<div class="me-4" style="font-size: 14px; margin: auto 0"><b>완료보상</b></div>
 								<div style="font-size: 19px;"><b><fmt:formatNumber value="${vo.point }" pattern="###,###,###" /></b><i class="fa-brands fa-product-hunt" style="color: #44D62C"></i></div>
 							</div>
@@ -113,7 +113,7 @@
 			<div class="pb-4" id="mycam1" style="display: none;">
 				<div style="width: 90%; margin:0 auto; margin-bottom: 50px; margin-top: 30px">
 			<div class="mStatus0">	
-				<b class="title" style="font-size: 18px">지금 해야할 미션 - <c:if test="${vo.shop ne '인스타그램' }"><span style="color: #4f15ff">구매하기</span></c:if><c:if test="${vo.shop eq '인스타그램' }"><span style="color: #4f15ff">참여하기</span></c:if>
+				<b class="title" style="font-size: 18px">지금 해야할 미션 - <c:if test="${vo.shop ne '인스타그램' }"><span style="color: #4f15ff">구매하기</span></c:if><c:if test="${vo.shop eq '인스타그램' }"><span style="color: #4f15ff">참여하기</span></c:if></b>
 				<div class="progress mt-2">
 				  <div class="progress-bar" role="progressbar" aria-label="Basic example" style="background-color: #4f15ff; width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 				</div>
@@ -135,13 +135,13 @@
 				<div class="d-flex" style="float: right;">
 					<div class="mStatus0">	<button type="button" class="applyCancel btn btn-outline-success mt-3 me-2" >
 						<i class="fa-solid fa-x me-2"></i>참여취소</button></div>
-					<button class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#missionModal"><i class="fa-solid fa-puzzle-piece me-2"></i>미션수행카드</button>
+					<button class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#missionModal">미션수행카드</button>
 				</div>
 				</div>
 			</div>
 			
 				
-			<div style="padding: 30px 40px">
+			<div style="padding: 20px 40px">
 				<div class="pb-4" id="mycam">
 					<b class="title" style="font-size: 18px">캠페인 진행 정보</b>
 					<div class="d-flex mt-2" style="margin: -6px;">
@@ -162,7 +162,9 @@
 									<img src="/images/2모집률img.svg" alt="회차별 지원 현황" class="ps-3 pe-2" style="width: 65px">
 									<div>
 										<div>현재 모집률</div> 
-										<div style="font-size: 19px"><b>0%</b></div>
+										<div id="applyRate" style="font-size: 19px; font-weight: bold;"></div>
+										<input type="hidden" value="${rate }" id="rate">
+										<input type="hidden" value="${vo.stock }" id="stock">
 									</div>
 								</div>
 							</div>
@@ -196,6 +198,7 @@
 				
 				<div class="py-4">
 					<b class="title" style="font-size: 18px">캠페인 기본 정보</b>
+					<div style="font-size: 15px">
 					<div class="d-flex py-3" style="color: #666666">
 						<div style="margin:auto 0; width: 20%;"><b>캠페인 유형</b></div>
 						<div style="width: 79%; border-bottom: solid 0.5px #f0f0f0;">${vo.type }</div>
@@ -208,6 +211,7 @@
 					<div class="d-flex py-3" style="color: #666666">
 						<div style="margin:auto 0; width: 20%;"><b>제공 내역</b></div>
 						<div style="width: 79%; border-bottom: solid 0.5px #f0f0f0; "><span>${vo.detail }</span></div>
+					</div>
 					</div>
 				</div>
 				

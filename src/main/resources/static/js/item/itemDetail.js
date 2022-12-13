@@ -1,23 +1,5 @@
 $(document).ready(function () {
 
-    //로그인내역
-    $.ajax({
-        type: "POST",
-        url: "/mission/member",
-        data: {
-        },
-        success: function (data) {
-            alert($("#id1"))
-            $("#applyCheck").click(function(){
-                if(data.id==null) {
-                    
-                }
-
-            })
-        },
-    });
-
-    //---------------------------------------------------
     //등록날짜
     let start = new Date($('.date').val());
     //현재날짜
@@ -39,6 +21,10 @@ $(document).ready(function () {
         $("#nowCount").html(Math.ceil(day)) //올림
     }
 
+    //캠페인모집률
+    let rate = $("#rate").val()
+    let stock = $("#stock").val()
+    $("#applyRate").html(rate/stock*100+"%")
 
     //---------------------------------------------------
     //캠페인유형에 따른 버튼 속성
@@ -49,10 +35,13 @@ $(document).ready(function () {
         $("#applyBaroType").attr("style", "display:");
     }
 
+
     //강제클릭
-    $("#applyCheck").click();
+    if ($("#memberId").text() != "") {
+        $("#applyCheck").click();
+    }
 
-
+    
     let itemNum = $("#applyCheck").attr("data-itemNum-num")
     $.ajax({
         type: "POST",
@@ -61,6 +50,7 @@ $(document).ready(function () {
             itemNum: itemNum,
         },
         success: function (data) {
+
             //미션번호
             $("#missionNum").val(data.missionNum);
 
@@ -96,7 +86,6 @@ $(document).ready(function () {
             }
         }
     })
-
 })
 
 
@@ -110,11 +99,16 @@ $("#applyCheck").click(function () {
             itemNum: itemNum,
         },
         success: function (data) {
+
             if (data > 0) {
                 $("#applyCheck").attr("disabled", "disabled");
             } else {
-
-                $("#applyCheck").attr("data-bs-toggle", "modal")
+                if ($("#memberId").text() == "") {
+                    alert("로그인 후 이용해주세요 💚")
+                    $("#exampleModal").modal('show')
+                } else {
+                    $("#applyCheck").attr("data-bs-toggle", "modal")
+                }
             }
         }
     })
@@ -138,5 +132,4 @@ $(".applyCancel").click(function () {
         }
     })
 })
-
 
