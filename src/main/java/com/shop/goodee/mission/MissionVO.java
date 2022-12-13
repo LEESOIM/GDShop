@@ -18,8 +18,4 @@ public class MissionVO {
 	private Date finish_3;
 	public MissionVO() {} 
 	
-	public MissionVO(Long status, Long myCam) {
-		this.status=status;
-		this.myCam=myCam;
-	}
 }
