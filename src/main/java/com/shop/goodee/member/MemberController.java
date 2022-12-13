@@ -1,6 +1,9 @@
 package com.shop.goodee.member;
 
+import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.shop.goodee.item.ItemVO;
 import com.shop.goodee.mission.MissionVO;
+import com.shop.goodee.pay.PayVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -536,6 +540,24 @@ public class MemberController {
       memberVO = memberService.getVIPlist(memberVO);
       mv.setViewName("/member/user_grade");
       return mv;
+   }
+   
+   /* 멤버십 결제일,해지일 */
+   @PostMapping("membershipPay")
+   @ResponseBody
+   public Map<String, Date> getMembershipPay(HttpSession session, MemberVO memberVO, ModelAndView mv)throws Exception{
+	   SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+       Authentication authentication = context.getAuthentication();
+       memberVO = (MemberVO) authentication.getPrincipal();
+       PayVO payVO = new PayVO();
+       payVO.setId(memberVO.getId());
+       payVO = memberService.getMembershipPay(payVO);
+       Date date = payVO.getPayDate();
+       Date endDate = payVO.getCancelDate();
+       Map<String, Date> ar = new HashMap<>();
+       ar.put("start", date);
+       ar.put("end", endDate);
+	   return ar;
    }
 
 }

@@ -50,11 +50,15 @@ public class SecurityConfig {
             .antMatchers("/css/**")
             .antMatchers("/js/**")
             .antMatchers("/favicon/**")
-            .antMatchers("/resources/**");
+            .antMatchers("/resources/**")
+            .antMatchers("/chat/*")
+            .antMatchers("/ws/*")
+            .antMatchers("/chating/*");
    }
 
    @Bean
    SecurityFilterChain fiterChain(HttpSecurity httpSecurity)throws Exception{
+	   httpSecurity.headers().frameOptions().sameOrigin();
       httpSecurity
                .cors()
                .and()
@@ -82,6 +86,7 @@ public class SecurityConfig {
                .antMatchers("/admin").hasRole("ADMIN")
                .antMatchers("/member/product").hasRole("SELLER")
                .anyRequest().authenticated()
+               .and().headers().frameOptions().sameOrigin()
                .and()
             .formLogin()
                .loginPage("/")

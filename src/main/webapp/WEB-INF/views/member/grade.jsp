@@ -24,6 +24,10 @@ prefix="c" %>
         border-right: solid 3.5px green;
       }
     </style>
+    <!-- jQuery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+  <!-- iamport.payment.js -->
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
   </head>
   <body>
       <c:import url="../template/top_part.jsp"></c:import>
@@ -117,11 +121,9 @@ prefix="c" %>
       <c:import url="../template/footer.jsp"></c:import>
 
     <script src="/js/info.js"></script>
+    <script src="/js/membership.js"></script>
     <script type="text/javascript">
     getVIP();
-      $("#membership_joinBtn").click(function () {
-        alert("결제창으로 이동~~");
-      });
     </script>
   </body>
 </html>

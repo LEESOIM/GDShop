@@ -15,6 +15,14 @@ pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="../css/login.css" />
     <link rel="stylesheet" href="../css/board.css" />
     <script defer src="/js/notice/notice.js"></script>
+    <style>
+      #notice_tab {
+        background-color: rgba(216, 246, 181, 0.803);
+        font-weight: 600;
+        cursor: pointer;
+        border-right: solid 3.5px green;
+      }
+    </style>
   </head>
   <body>
     <c:import url="../template/top_part.jsp"></c:import>
@@ -27,12 +35,8 @@ pageEncoding="UTF-8"%>
             <div style="height: 260px; width: 220px">
               <div class="list_top p-3 mt-4">고객센터</div>
               <ol class="list-group list-group-flush">
-                <li class="list-group-item">
+                <li class="list-group-item" id="notice_tab" onclick="location.href='/board/notice'">
                   <i class="fa-solid fa-headphones ps-2 pe-3"></i>공지사항
-                </li>
-                <li class="list-group-item">
-                  <i class="fa-solid fa-circle-question ps-2 pe-3"></i
-                  >자주묻는질문
                 </li>
                 <li class="list-group-item">
                   <i class="fa-solid fa-circle-info ps-2 pe-3"></i>1대 1문의

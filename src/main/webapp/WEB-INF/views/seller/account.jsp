@@ -53,6 +53,6 @@ pageEncoding="UTF-8"%>
       </div>
     </section>
     <c:import url="../template/footer.jsp"></c:import>
-
+	<script src="/js/seller/account.js"></script>
   </body>
 </html>

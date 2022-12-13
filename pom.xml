@@ -17,14 +17,24 @@
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
-	
+		
 		<!-- 카톡알림 API -->
+	    <dependency>
+	         <groupId>net.nurigo</groupId>
+	         <artifactId>sdk</artifactId>
+	         <version>4.2.7</version>
+	    </dependency>
+		<!-- 웹소캣 -->
 		<dependency>
-  			<groupId>net.nurigo</groupId>
-  			<artifactId>sdk</artifactId>
-  			<version>4.2.7</version>
+			 <groupId>com.googlecode.json-simple</groupId>
+			 <artifactId>json-simple</artifactId>
+			 <version>1.1.1</version>
 		</dependency>
-	
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
+		
 		<!-- 메일전송 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -380,13 +380,13 @@
 				</c:forEach>
 			</div>
 		</div>
-
+		<a href="/chat/chatbot"> 채팅 입ㅈ아</a>
 
 		<!-- 챗봇 -->
 		<div>
 			<div id="chat_ev" style="display: none">궁금한 부분 질문주세요!</div>
-			<a class="btn" id="chat_bot"> <img id="chat_img"
-				src="/images/16208041651620804165203.png" />
+			<a class="btn" id="chat_bot" href="/chat/chatbot"> <img id="chat_img"
+				src="/images/16208041651620804165203.png"/>
 				<div class="pt-2">
 					<b>구디 챗봇</b>
 				</div> <span

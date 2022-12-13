@@ -19,7 +19,7 @@
 	</insert>
 	
 	<insert id="setPay" parameterType="PayVO">
-		INSERT INTO PAY VALUES(null,#{id},#{payMethod},#{amount},now(),#{cancelDate},#{orderNum},#{payName})
+		INSERT INTO PAY VALUES(null,#{id},#{payMethod},#{amount},now(),DATE_ADD(PAYDATE, INTERVAL 1 MONTH),#{orderNum},#{payName})
 	</insert>
 	
 	

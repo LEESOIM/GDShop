@@ -146,6 +146,7 @@ $(".btnPw_change").click(function () {
         );
       } else if (data == 0) {
         $("#pwText_1").text("비밀번호가 일치하지 않습니다.");
+        $("#cur_pw").val("");
         $("#new_pw").val("");
         $("#new_pwCheck").val("");
         $("#pwText_2").text("");
@@ -174,6 +175,7 @@ $(".btnPw_change").click(function () {
             "style",
             "font-size: 14px; color: red; padding: 2px 2px;"
           );
+          $("#new_pw").val("");
           $("#new_pwCheck").val("");
           $("#pwText_3").text("");
         } else if (newPw.length < 8 || newPw.length > 20) {
@@ -182,6 +184,7 @@ $(".btnPw_change").click(function () {
             "style",
             "font-size: 14px; color: red; padding: 2px 2px;"
           );
+          $("#new_pw").val("");
           $("#new_pwCheck").val("");
           $("#pwText_3").text("");
         } else if (newPw.search(/\s/) != -1) {
@@ -190,6 +193,7 @@ $(".btnPw_change").click(function () {
             "style",
             "font-size: 14px; color: red; padding: 2px 2px;"
           );
+          $("#new_pw").val("");
           $("#new_pwCheck").val("");
           $("#pwText_3").text("");
         } else if (newPw != newPwCheck) {
@@ -199,6 +203,7 @@ $(".btnPw_change").click(function () {
             "style",
             "font-size: 14px; color: red; padding: 2px 2px;"
           );
+          $("#new_pwCheck").val("");
         } else {
           $("#pwText_3").attr("style", "display:none");
           $.ajax({
@@ -440,6 +445,15 @@ function getVIPlist() {
     data: {},
     success: function (data) {
       $("#grade_box").html(data);
+      $.ajax({
+        type: "POST",
+        url: "/member/membershipPay",
+        data: {},
+        success: function (data) {
+          $(".start").text(data.start);
+          $(".end").text(data.end);
+        },
+      });
     },
   });
 }
@@ -451,6 +465,18 @@ function getUserGrade() {
     data: {},
     success: function (data) {
       $("#grade_box").html(data);
+    },
+  });
+}
+
+function membershipPay() {
+  $.ajax({
+    type: "POST",
+    url: "/member/membershipPay",
+    data: {},
+    success: function (data) {
+      alert(data);
+      alert(data.start, data.end);
     },
   });
 }
