@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shop.goodee.member.MemberService;
 import com.shop.goodee.member.MemberVO;
 import com.shop.goodee.mission.MissionService;
 import com.shop.goodee.mission.MissionVO;
@@ -29,6 +30,9 @@ public class ItemController {
 	private NotificationService notificationService;
 	@Autowired
 	private ItemService itemService;
+	
+	@Autowired
+	private MemberService memberService;
 
 	// 상품등록
 	@GetMapping("add")
@@ -59,6 +63,19 @@ public class ItemController {
 		mv.addObject("vo", itemVO);
 		mv.setViewName("/item/detail");
 		return mv;
+	}
+	
+	//VIP회원만 지원가능
+	@GetMapping("VIPCheck")
+	@ResponseBody
+	public int getDetail(HttpSession session) throws Exception {
+		MemberVO memberVO = new MemberVO();
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+        Authentication authentication = context.getAuthentication();
+        memberVO = (MemberVO) authentication.getPrincipal();
+		
+		int count = memberService.getVIP(memberVO);
+		return count;
 	}
 
 

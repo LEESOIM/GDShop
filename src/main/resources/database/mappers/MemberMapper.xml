@@ -323,4 +323,6 @@
    <delete id="setPayDelete" parameterType="PayVO">
    	DELETE FROM PAY WHERE PAYNUM=#{payNum}
    </delete>
+   
+    
 </mapper>
