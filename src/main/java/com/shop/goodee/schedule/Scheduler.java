@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.shop.goodee.member.MemberMapper;
 import com.shop.goodee.member.MemberVO;
+import com.shop.goodee.member.PointVO;
 import com.shop.goodee.pay.PayVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +23,7 @@ public class Scheduler {
 	private MemberMapper memberMapper;
 	
 	//30일 이후, 탈퇴회원 삭제
-	@Scheduled(cron = "0 */720 * * * *")
+	@Scheduled(cron = "0 0 0 * * *")
 	public void cron() throws Exception{
 		
 		MemberVO memberVO = new MemberVO();
@@ -42,7 +43,7 @@ public class Scheduler {
 	}
 	
 	//결제 회원 30일 이후 해지(판매자, VIP)
-	@Scheduled(cron = "0 */720 * * * *")
+	@Scheduled(cron = "0 0 0 * * *")
 	public void setMemberShipPay() throws Exception{
 		
 		PayVO payVO = new PayVO();
@@ -59,14 +60,23 @@ public class Scheduler {
 	}
 	
 	//72시간마다 적립예정포인트를 -> 3일 후 적립되는 포인트로 업데이트
-	@Scheduled(cron = "0 */72 * * * *")
+	@Scheduled(cron = "0 0 0 * * *")
 	public void setPoint()throws Exception{
-		int result = memberMapper.setPoint_3();
+		PointVO pointVO = new PointVO();
+		List<PointVO> ar = new ArrayList<>();
+		ar = memberMapper.getPointScheduler(pointVO);
+		
+		memberMapper.setPointAdd();
+		for(int i =0;i < ar.size(); i++) {
+			if(ar.get(i).getFinish().equals(ar.get(i).getFinish_3())) {
+				int result = memberMapper.setPoint_3();
+			}
+		}
 	}
 	
 	
 	//2시간내 미션안하면 자동취소
-	@Scheduled(cron = "0 */2 * * * *")
+	@Scheduled(cron = "0 * * * * *")
 	public void setCancel() throws Exception {
 		//미션 table리스트 가져오기
 		

@@ -3,40 +3,55 @@
     padding:0;
 }
 .container{
+	border-radius: 20px;
     width: 500px;
-    margin: 0 auto;
-    padding: 25px
+    margin: 40px auto 0px auto;
+    padding: 25px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 .container h1{
-    text-align: left;
-    padding: 5px 5px 5px 15px;
-    color: #FFBB00;
-    border-left: 3px solid #FFBB00;
+    text-align: center;
+    padding: 0px 5px 0px 15px;
+    color: #32CD32;
+}
+.container h2{
+    text-align: center;
+    padding: 0px 5px 5px 15px;
+    color: #32CD32;
     margin-bottom: 20px;
 }
 .roomContainer{
-    background-color: #F6F6F6;
-    width: 500px;
-    height: 500px;
+    background-color: transparent;
+    width: 400px;
+    margin: auto;
+    height: 450px;
     overflow: auto;
 }
 .roomList{
     border: none;
 }
 .roomList th{
-    border: 1px solid #FFBB00;
-    background-color: #fff;
-    color: #FFBB00;
+	text-align: center;
+	padding: 10px;
+	background-color: #32CD32;
+    border: 1px solid white;
+    color: white;
 }
 .roomList td{
-    border: 1px solid #FFBB00;
+    border: 1px solid #32CD32;
     background-color: #fff;
     text-align: left;
-    color: #FFBB00;
+    color: black;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 .roomList .num{
-    width: 75px;
+    width: 70px;
+    font-weight: bold;
     text-align: center;
+    color: #32CD32;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 .roomList .room{
     width: 350px;
@@ -46,18 +61,35 @@
     text-align: center;
 }
 button{
-    background-color: #FFBB00;
-    font-size: 14px;
-    color: #000;
-    border: 1px solid #000;
+    background-color: transparent;
+    font-size: 15px;
+    color: green;
+    font-weight: bold;
+    border: none;
     border-radius: 5px;
     padding: 3px;
     margin: 3px;
 }
+button:hover{
+	background-color: #d5f1bc;
+}
+.inputTable {
+	margin: auto;
+}
 .inputTable th{
-    padding: 5px;
+    padding: 8px;
+    font-size: 18px;
 }
 .inputTable input{
-    width: 330px;
-    height: 25px;
+    width: 250px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    padding:18px;
+    height: 30px;
+    border: none;
+    outline: none;
+}
+
+#createRoom{
+	font-size: 18px;
+	padding: 5px;
 }
