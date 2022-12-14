@@ -131,8 +131,9 @@
 				</div>
 				<hr />
 		
-				<form id="ocr" action="/purchase/setPurchase" method="post" enctype="multipart/form-data">
+				<form id="ocr" action="/mission/ocr" method="post" enctype="multipart/form-data">
 				<input id="missionNum" name="missionNum" type="hidden">
+				<input id="itemNum" name="itemNum" type="hidden" value="${vo.itemNum }">
 				<div class="pe-4 py-4" style="font-size: 14px">
 				<div class="d-flex pb-2">
 					<div style="margin:auto 0; width: 30%; text-align: right;">
@@ -211,7 +212,8 @@
 				</div>
 
 				<div class="modal-footer d-flex justify-content-center pb-0">
-				<button type="submit" class="btn btn-outline-success" data-bs-target="#missionModal2" data-bs-toggle="modal" id="goReview">전송</button> 
+				<button type="button" class="btn btn-success" data-bs-dismiss="modal" aria-label="Close">취소</button>
+				<button type="submit" class="btn btn-outline-success" data-bs-target="#missionModal2" data-bs-toggle="modal">전송</button> 
 				</div>
 		</form>
 		</div>
@@ -306,6 +308,7 @@
 				</div>
 
 				<div class="modal-footer d-flex justify-content-center pb-0">
+				<button type="button" class="btn btn-success" data-bs-dismiss="modal" aria-label="Close">취소</button>
 				<button type="submit" class="btn btn-outline-success" data-bs-target="#missionModal3" data-bs-toggle="modal" >전송</button> 
 				</div>
 			</form>
