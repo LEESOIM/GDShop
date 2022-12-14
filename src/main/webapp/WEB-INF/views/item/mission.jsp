@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!-- 모달창 -->
-<div class="modal fade" id="exampleModal_item" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1" >
+<div class="modal fade" data-bs-backdrop="static" id="exampleModal_item" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1" >
   <div class="modal-dialog" >
     <div class="modal-content" style="width: 560px">
       
@@ -98,8 +98,8 @@
 
 <!-- 미션 -->
 <div class="mStatus0">
-<div class="modal fade" id="missionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
+<div data-bs-backdrop="static" class=" modal fade" id="missionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog mStatus0" >
 		<div class="modal-content" style="width: 600px">
 			<div class="modal-header" style="background-color: #4AB34A; color: white; font-weight: bold">
 				<h1 class="modal-title fs-5" id="exampleModalLabel">
@@ -221,8 +221,7 @@
 	</div>
 </div>
 </div>
-
-
+</div>
 
 <div class="mStatus1">
 <div data-bs-backdrop="static" class="modal fade" id="missionModal2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
