@@ -21,22 +21,39 @@ $(document).ready(function () {
         $("#nowCount").html(Math.ceil(day)) //올림
     }
 
+    //캠페인모집률
+    let itemNum = $("#applyCheck").attr("data-itemNum-num")
+    let applyCount = $("#nowCount").html()
+    $.ajax({
+        type: "POST",
+        url: "/mission/rate",
+        data: {
+            itemNum: itemNum,
+            applyCount: applyCount,
+        },
+        success: function (data) {
+            // let stock = $("#stock").val()
+            // $("#applyRate").html(data/stock*100+"%")
+        }
+    })
+
 
     //---------------------------------------------------
     //캠페인유형에 따른 버튼 속성
-    let type = $("#type").attr("data-type")
-    if (type == '추첨형') {
+    let type = $("#camType").val();
+    if (type == "추첨형") {
         $("#applyType").attr("style", "display:");
     } else {
         $("#applyBaroType").attr("style", "display:");
     }
 
+
     //강제클릭
-    $("#applyCheck").click();
+    if ($("#memberId").text() != "") {
+        $("#applyCheck").click();
+    }
 
 
-    let itemNum = $("#applyCheck").attr("data-itemNum-num")
-    //미션상황!!
     $.ajax({
         type: "POST",
         url: "/mission/applyList",
@@ -44,6 +61,11 @@ $(document).ready(function () {
             itemNum: itemNum,
         },
         success: function (data) {
+
+            //미션번호
+            $("#missionNum").val(data.missionNum);
+
+            //내캠페인
             if (data.myCam == 0) { //지원
                 $("#mycam0").attr("style", "display:");
                 $("#applyCheck").attr("style", "display: none");
@@ -58,10 +80,26 @@ $(document).ready(function () {
             } else if (data.myCam == 3) { //취소
                 $("#applyCheck").html("이미 지원한 캠페인")
             }
-            //alert(data.status)
+
+            //미션진행상황
+            if (data.status == 0) { //구매인증(OCR)
+                $("#missionCard").attr("data-bs-target", "#missionModal")
+                $(".mStatus0").show();
+                $(".mStatus1").hide();
+                $(".mStatus2").hide();
+            } else if (data.status == 1) { //리뷰인증(크롤링)
+                $("#missionCard").attr("data-bs-target", "#missionModal2")
+                $(".mStatus0").hide();
+                $(".mStatus1").show();
+                $(".mStatus2").hide();
+            } else if (data.status == 2) { //포인트수령
+                $("#missionCard").attr("data-bs-target", "#missionModal3")
+                $(".mStatus0").hide();
+                $(".mStatus1").hide();
+                $(".mStatus2").show();
+            }
         }
     })
-
 })
 
 
@@ -75,32 +113,20 @@ $("#applyCheck").click(function () {
             itemNum: itemNum,
         },
         success: function (data) {
+
             if (data > 0) {
                 $("#applyCheck").attr("disabled", "disabled");
             } else {
-                $("#applyCheck").attr("data-bs-toggle", "modal")
+                if ($("#memberId").text() == "") {
+                    alert("로그인 후 이용해주세요 💚")
+                    $("#exampleModal").modal('show')
+                } else {
+                    $("#applyCheck").attr("data-bs-toggle", "modal")
+                }
             }
         }
     })
 })
 
-
-//지원취소버튼
-$(".applyCancel").click(function () {
-    let itemNum = $("#applyCheck").attr("data-itemNum-num")
-    let id = $("#id").val();
-    $.ajax({
-        type: "POST",
-        url: "/mission/cancel",
-        data: {
-            itemNum: itemNum,
-            id: id,
-        },
-        success: function (data) {
-            alert('캠페인이 취소되었습니다.')
-            location.reload();
-        }
-    })
-})
 
 

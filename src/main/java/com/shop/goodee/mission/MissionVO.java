@@ -1,6 +1,6 @@
 package com.shop.goodee.mission;
 
-import java.sql.Date;
+import java.util.Date;
 
 import lombok.Data;
 
@@ -13,13 +13,11 @@ public class MissionVO {
 	private Date finish;
 	private Long status;
 	private Long myCam;
+	private Date time;
+	private Long applyCount;
 	
 	//내 포인트 - 출금가능일
 	private Date finish_3;
 	public MissionVO() {} 
 	
-	public MissionVO(Long status, Long myCam) {
-		this.status=status;
-		this.myCam=myCam;
-	}
 }

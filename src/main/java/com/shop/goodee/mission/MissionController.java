@@ -11,10 +11,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import com.shop.goodee.item.ItemService;
 import com.shop.goodee.item.ItemVO;
+import com.shop.goodee.member.MemberSecurityService;
+import com.shop.goodee.member.MemberService;
 import com.shop.goodee.member.MemberVO;
+import com.shop.goodee.sns.SnsService;
+import com.shop.goodee.sse.SseController;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,18 +34,32 @@ public class MissionController {
 	@Autowired
 	private ItemService itemService;
 
+	@Autowired
+	private SnsService snsService;
+
+	
+	
+	// 모집률
+	@PostMapping("rate")
+	@ResponseBody
+	public int getApplyRate(MissionVO missionVO) throws Exception {
+		return missionService.getApplyRate(missionVO);
+	}
+	
+
 	// 지원하기
 	@PostMapping("apply")
 	@ResponseBody
-	public int setApply(HttpSession session, ItemVO itemVO, MissionVO missionVO) throws Exception {
+	public int setApply(HttpSession session, MissionVO missionVO, ItemVO itemVO) throws Exception {
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
 		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
+		missionVO.setId(memberVO.getId());
 
 		// 상품테이블에 있는 값을 미션테이블로 담기
+		// missionVO.setItemNum(itemVO.getItemNum());
+		// missionVO.setApplyCount(itemVO.getCount());
 		itemVO = itemService.getDetail(itemVO);
-		missionVO.setItemNum(itemVO.getItemNum());
-		missionVO.setId(memberVO.getId());
 
 		// 지원하기
 		if (itemVO.getType().equals("추첨형")) {
@@ -60,12 +79,9 @@ public class MissionController {
 
 		missionVO.setItemNum(itemVO.getItemNum());
 		missionVO.setId(memberVO.getId());
-
 		missionVO = missionService.getApply(missionVO);
-
-		MissionVO my = new MissionVO(missionVO.getStatus(), missionVO.getMyCam());
-		log.info("=====지원내역 : {}", missionVO);
-		return my;
+		log.info("미션지원내역==={} ", missionVO);
+		return missionVO;
 	}
 
 	// 중복지원확인
@@ -98,8 +114,5 @@ public class MissionController {
 		int result = missionService.setCancel(missionVO);
 		return "/item/detail?itemNum=" + itemVO.getItemNum();
 	}
-
-	
-
 
 }

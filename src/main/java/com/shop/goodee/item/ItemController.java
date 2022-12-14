@@ -2,6 +2,7 @@ package com.shop.goodee.item;
 
 import javax.servlet.http.HttpSession;
 
+import org.checkerframework.checker.units.qual.min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextImpl;
@@ -14,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shop.goodee.member.MemberVO;
+import com.shop.goodee.mission.MissionService;
+import com.shop.goodee.mission.MissionVO;
 import com.shop.goodee.sse.NotificationService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -57,7 +60,7 @@ public class ItemController {
 		mv.setViewName("/item/detail");
 		return mv;
 	}
-	
+
 
 	//상품수정요청
 	@GetMapping("update")
