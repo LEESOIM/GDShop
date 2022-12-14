@@ -97,6 +97,7 @@
 
 
 <!-- 미션 -->
+<div class="mStatus0">
 <div class="modal fade" id="missionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content" style="width: 600px">
@@ -105,8 +106,7 @@
 					<b>미션수행카드</b>
 				</h1>
 			</div>
-			<div class="modal-body p-3"">
-	<div class="mStatus0">
+			<div class="modal-body p-3">
 				<div class="d-flex justify-content-center my-2" style="text-align: center">
 					<div style="font-weight: bold;">
 						<div class="mission_order">
@@ -211,13 +211,27 @@
 				</div>
 
 				<div class="modal-footer d-flex justify-content-center pb-0">
-					<button class="btn btn-outline-success" type="submit" id="withdraw_btn" onClick="window.location.reload()"><b>전송</b></button>
+				<button type="submit" class="btn btn-outline-success" data-bs-target="#missionModal2" data-bs-toggle="modal" id="goReview">전송</button> 
 				</div>
 		</form>
+		</div>
+		</div>
+	</div>
 </div>
-		
+</div>
+
+
+
 <div class="mStatus1">
-			<form id="crawling" action="" method="post" >
+<div data-bs-backdrop="static" class="modal fade" id="missionModal2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content" style="width: 600px">
+			<div class="modal-header" style="background-color: #4AB34A; color: white; font-weight: bold">
+				<h1 class="modal-title fs-5" id="exampleModalLabel">
+					<b>미션수행카드</b>
+				</h1>
+			</div>
+			<div class="modal-body p-3">
 				<div class="d-flex justify-content-center my-2" style="text-align: center">
 					<div>
 						<div class="mission_order">
@@ -241,6 +255,8 @@
 					</div>
 				</div>
 				<hr />
+		
+				<form id="crawling" action="" method="post" >
 				<div class="pe-4 pb-4" style="font-size: 15px">
 				<div class="d-flex py-2">
 					<div style="width: 30%; text-align: right;">
@@ -290,12 +306,28 @@
 				</div>
 
 				<div class="modal-footer d-flex justify-content-center pb-0">
-					<button class="btn btn-outline-success" type="button" id="withdraw_btn"><b>전송</b></button>
+				<button type="submit" class="btn btn-outline-success" data-bs-target="#missionModal3" data-bs-toggle="modal" >전송</button> 
 				</div>
 			</form>
+		</div>
+		</div>
+	</div>
 </div>
+</div>
+
+
+
+
 <div class="mStatus2">
-			<form id="getPoint" action="" method="post" >
+<div data-bs-backdrop="static" class="modal fade" id="missionModal3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content" style="width: 600px">
+			<div class="modal-header" style="background-color: #4AB34A; color: white; font-weight: bold">
+				<h1 class="modal-title fs-5" id="exampleModalLabel">
+					<b>미션수행카드</b>
+				</h1>
+			</div>
+			<div class="modal-body p-3">
 				<div class="d-flex justify-content-center my-2" style="text-align: center">
 					<div>
 						<div class="mission_order">
@@ -319,16 +351,18 @@
 					</div>
 				</div>
 				<hr />
+				<form id="getPoint" action="" method="post" >
 				<div class="p-3" style="font-size: 15px; text-align: center;">
 					<img src="/images/santa.png" width="250px">
 					<div style="font-size: 30px; color: #44D62C"><b><fmt:formatNumber value="${vo.price }" pattern="###,###,###" />P</b></div>
 					<button class="btn btn-success py-2 px-3" style="background-color: #44D62C; border-radius: 20px" type="button" id="withdraw_btn"><i class="fa-solid fa-check"></i> <b>포인트받기</b></button>
 				</div>
 			</form>
-</div>		
 		</div>
 		</div>
 	</div>
 </div>
+</div>
+
 
 <script src="/js/item/mission.js"></script>

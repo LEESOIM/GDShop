@@ -135,7 +135,7 @@
 				<div class="d-flex" style="float: right;">
 					<div class="mStatus0">	<button type="button" class="applyCancel btn btn-outline-success mt-3 me-2" >
 						<i class="fa-solid fa-x me-2"></i>참여취소</button></div>
-					<button class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#missionModal">미션수행카드</button>
+					<button class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#missionModal" id="missionCard">미션수행카드</button>
 				</div>
 				</div>
 			</div>

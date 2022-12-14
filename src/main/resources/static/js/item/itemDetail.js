@@ -32,8 +32,8 @@ $(document).ready(function () {
             applyCount: applyCount,
         },
         success: function (data) {
-            let stock = $("#stock").val()
-            $("#applyRate").html(data/stock*100+"%")
+            // let stock = $("#stock").val()
+            // $("#applyRate").html(data/stock*100+"%")
         }
     })
 
@@ -83,14 +83,17 @@ $(document).ready(function () {
 
             //미션진행상황
             if (data.status == 0) { //구매인증(OCR)
+                $("#missionCard").attr("data-bs-target", "#missionModal")
                 $(".mStatus0").show();
                 $(".mStatus1").hide();
                 $(".mStatus2").hide();
             } else if (data.status == 1) { //리뷰인증(크롤링)
+                $("#missionCard").attr("data-bs-target", "#missionModal2")
                 $(".mStatus0").hide();
                 $(".mStatus1").show();
                 $(".mStatus2").hide();
             } else if (data.status == 2) { //포인트수령
+                $("#missionCard").attr("data-bs-target", "#missionModal3")
                 $(".mStatus0").hide();
                 $(".mStatus1").hide();
                 $(".mStatus2").show();

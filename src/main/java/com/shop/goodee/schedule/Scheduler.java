@@ -28,7 +28,7 @@ public class Scheduler { // 초(0-59) 분(0-59) 시(0-23) 일(1-31) 월(1-12) �
 	private MissionMapper missionMapper;
 
 	// 30일 이후, 탈퇴회원 삭제
-	@Scheduled(cron = "0 */720 * * * *")
+	@Scheduled(cron = "0 0 0 * * *")
 	public void cron() throws Exception {
 
 		MemberVO memberVO = new MemberVO();
@@ -48,7 +48,7 @@ public class Scheduler { // 초(0-59) 분(0-59) 시(0-23) 일(1-31) 월(1-12) �
 	}
 
 	// 결제 회원 30일 이후 해지(판매자, VIP)
-	@Scheduled(cron = "0 */720 * * * *")
+	@Scheduled(cron = "0 0 0 * * *")
 	public void setMemberShipPay() throws Exception {
 
 		PayVO payVO = new PayVO();
@@ -65,7 +65,7 @@ public class Scheduler { // 초(0-59) 분(0-59) 시(0-23) 일(1-31) 월(1-12) �
 	}
 
 	// 72시간마다 적립예정포인트를 -> 3일 후 적립되는 포인트로 업데이트
-	@Scheduled(cron = "0 */72 * * * *")
+	@Scheduled(cron = "0 * */72 * * *")
 	public void setPoint() throws Exception {
 		int result = memberMapper.setPoint_3();
 	}

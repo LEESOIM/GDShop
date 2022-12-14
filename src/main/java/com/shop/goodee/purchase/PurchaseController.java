@@ -40,7 +40,7 @@ public class PurchaseController {
 	}
 
 	@PostMapping("setPurchase")
-	public int setPurchase(HttpSession session, MemberVO memberVO, MultipartFile f, PurchaseVO purchaseVO) throws Exception {
+	public String setPurchase(HttpSession session, MemberVO memberVO, MultipartFile f, PurchaseVO purchaseVO) throws Exception {
 		//ID
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
@@ -61,16 +61,16 @@ public class PurchaseController {
 		log.info("M가격){}", purchaseVO.getPriceM());
 		log.info("=============================");
 
-		//닉네임 등록
+		int result = 0;
 		if (finalPurchaseVO.getPurNum().equals(purchaseVO.getPurNumM()) && finalPurchaseVO.getPrice().equals(purchaseVO.getPrice())) {
-			if (purchaseVO.getNickname() == null) {
+			if (purchaseVO.getNickname() == null) { //닉네임 등록
 				missionService.setNicN(purchaseVO);
 			} else {
 				missionService.setNicC(purchaseVO);
 			}
-			return missionService.setMiStatus1(purchaseVO);
-		} else {
-			return 0;
+			result = missionService.setMiStatus1(purchaseVO); //status 0->1
 		}
+		
+		return "redirect:../";
 	}
 }
