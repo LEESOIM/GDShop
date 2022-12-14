@@ -12,6 +12,9 @@ import org.springframework.stereotype.Component;
 
 import com.shop.goodee.member.MemberMapper;
 import com.shop.goodee.member.MemberVO;
+
+import com.shop.goodee.member.PointVO;
+
 import com.shop.goodee.mission.MissionMapper;
 import com.shop.goodee.mission.MissionVO;
 import com.shop.goodee.pay.PayVO;
@@ -31,6 +34,7 @@ public class Scheduler { // 초(0-59) 분(0-59) 시(0-23) 일(1-31) 월(1-12) �
 	@Scheduled(cron = "0 0 0 * * *")
 	public void cron() throws Exception {
 
+
 		MemberVO memberVO = new MemberVO();
 		List<MemberVO> ar = new ArrayList<>();
 		// 탈퇴 회원 조회
@@ -47,9 +51,11 @@ public class Scheduler { // 초(0-59) 분(0-59) 시(0-23) 일(1-31) 월(1-12) �
 		}
 	}
 
+
 	// 결제 회원 30일 이후 해지(판매자, VIP)
 	@Scheduled(cron = "0 0 0 * * *")
 	public void setMemberShipPay() throws Exception {
+
 
 		PayVO payVO = new PayVO();
 		List<PayVO> ar = new ArrayList<>();
@@ -64,11 +70,23 @@ public class Scheduler { // 초(0-59) 분(0-59) 시(0-23) 일(1-31) 월(1-12) �
 		}
 	}
 
-	// 72시간마다 적립예정포인트를 -> 3일 후 적립되는 포인트로 업데이트
-	@Scheduled(cron = "0 * */72 * * *")
-	public void setPoint() throws Exception {
-		int result = memberMapper.setPoint_3();
+	
+	//72시간마다 적립예정포인트를 -> 3일 후 적립되는 포인트로 업데이트
+	@Scheduled(cron = "0 0 0 * * *")
+	public void setPoint()throws Exception{
+		PointVO pointVO = new PointVO();
+		List<PointVO> ar = new ArrayList<>();
+		ar = memberMapper.getPointScheduler(pointVO);
+		
+		memberMapper.setPointAdd();
+		for(int i =0;i < ar.size(); i++) {
+			if(ar.get(i).getFinish().equals(ar.get(i).getFinish_3())) {
+				int result = memberMapper.setPoint_3();
+			}
+		}
 	}
+	
+
 
 	// 2시간내 구매인증 안하면 자동취소
 	@Scheduled(cron = "0 * * * * *")
