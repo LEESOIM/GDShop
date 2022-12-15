@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -71,7 +72,7 @@
 										</c:otherwise>
 									</c:choose>
 									<span class="px-1" style="color: grey">|</span>
-									<div style="color: grey"></div>
+									<div style="color: grey">${vo.sellerVO.company }</div>
 								</div>
 							</div>
 							<div class="my-1">

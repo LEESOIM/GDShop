@@ -7,7 +7,7 @@
 
 	<select id="getMyCampaign" parameterType="MyCampaignVO" resultType="MyCampaignVO" resultMap="getListMyCampaignVO">
 		
-		SELECT M.*,I.*,F.*
+		SELECT M.*,I.*,F.*,S.*
 		FROM MISSION M
 		LEFT OUTER JOIN
 		ITEM I
@@ -15,6 +15,9 @@
 		LEFT OUTER JOIN
 		ITEM_FILE F
 		USING(ITEMNUM)
+		LEFT OUTER JOIN
+		SELLER S
+		ON I.ID=S.ID
 		WHERE M.ID=#{id} AND M.MYCAM=#{myCam}  
 		ORDER BY M.MISSIONNUM ASC
 	</select>
@@ -46,6 +49,12 @@
 			<result column="HIT" property="hit"/>
 			<result column="STATUS" property="status"/>
 			<result column="SELLERSNS" property="sellerSNS"/>
+		</association>
+		
+		<association property="sellerVO" javaType="SellerVO">
+			<id column="ID" property="id"/>
+			<result column="COMPANY" property="company"/>
+			<result column="STATUS" property="status"/>
 		</association>
 		
 		<collection property="itemFileVOs" javaType="List" ofType="ItemFileVO"> 
