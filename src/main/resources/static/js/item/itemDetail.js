@@ -143,4 +143,6 @@ function VIPCheck() {
     },
   });
 }
-VIPCheck();
+if ($("#itemRole").val() == "VIP") {
+  VIPCheck();
+}
