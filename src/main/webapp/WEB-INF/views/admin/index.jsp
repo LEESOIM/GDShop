@@ -27,6 +27,8 @@ pageEncoding="UTF-8"%>
     <!-- Custom styles for this template-->
     <link href="/bootstrap/css/sb-admin-2.min.css" rel="stylesheet"/>
 
+    <!-- D3 JS -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
 </head>
 
 <body id="page-top">

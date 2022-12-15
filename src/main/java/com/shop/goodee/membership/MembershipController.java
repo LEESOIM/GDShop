@@ -2,6 +2,8 @@ package com.shop.goodee.membership;
 
 import java.io.Console;
 import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -30,6 +32,32 @@ public class MembershipController {
 	
 	@Autowired
 	private PayService payService;
+	
+	
+	@GetMapping("alreadyPayCheck")
+	@ResponseBody
+	public boolean alreadyPayCheck(PayVO payVO)throws Exception{
+		payVO = payService.aleadyPayCheck(payVO);
+		log.info("=============== payVO -> {}",payVO);
+		if(payVO==null) {
+			return true;
+		}else {
+			
+			String nowfm = new SimpleDateFormat("yyyy-MM-dd").format(new Date(System.currentTimeMillis()));
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			
+			Date now = new Date(dateFormat.parse(nowfm).getTime());
+			
+			int compare = payVO.getCancelDate().compareTo(now);
+			
+			if(compare>0) {
+				return false;
+			}else {
+				return true;
+			}
+		}
+	}
+	
 	
 	@PostMapping("successPay")
 	@ResponseBody

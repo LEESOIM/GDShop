@@ -23,6 +23,7 @@ public class Pager {
 	private Long status;
 	private String id;
 	private Long myCam;
+	private Long roleNum;
 	
 	public Pager() {
 		this.page=1L;

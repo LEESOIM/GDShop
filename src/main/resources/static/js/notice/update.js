@@ -182,10 +182,12 @@ const file_drag = document.getElementById("file_drag")
 
 file_drag.addEventListener("dragover",function(e){
     console.log("드래그 오버")
+    $(".file_drag").addClass("dragOver")
     e.preventDefault();
 })
 file_drag.addEventListener("drop",function(e){
     console.log("드랍")
+    $(".file_drag").toggleClass("dragOver")
     e.preventDefault();
     
     arr= e.dataTransfer.files;

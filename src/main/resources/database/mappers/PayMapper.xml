@@ -6,6 +6,14 @@
 
 <mapper namespace="com.shop.goodee.pay.PayMapper">
 	
+	<select id="aleadyPayCheck" parameterType="PayVO" resultType="PayVO">
+		SELECT *
+		FROM PAY
+		WHERE ID=#{id} AND PAYNAME=#{payName}
+		ORDER BY PAYDATE
+		LIMIT 0,1;
+	</select>
+	
 	<select id="sellerCheck" parameterType="SellerVO" resultType="SellerVO">
 		SELECT * FROM SELLER WHERE ID=#{id}
 	</select>

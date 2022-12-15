@@ -33,19 +33,20 @@
 	</select>
 
 
-	<select id="getTotalCount" resultType="Long">
+	<select id="getTotalCount" parameterType="Pager" resultType="Long">
 		SELECT COUNT(*)
 		FROM seller s
 		LEFT JOIN MEMBER_ROLE mr
 		ON s.id=mr.id
 		INNER JOIN MEMBER m
 		ON mr.id=m.id
+		WHERE S.STATUS=#{status} AND MR.ROLENUM=#{roleNum}
 	</select>
 
 	<insert id="setSellerAdd" parameterType="SellerVO">
 		INSERT INTO SELLER VALUES(#{id},#{company},0)
 	</insert>
-	<select id="getWaitList" resultType="SellerVO">
+	<select id="getWaitList" parameterType="Pager" resultType="SellerVO">
 		SELECT M.ID, M.NAME,
 		M.EMAIL, M.PHONE, S.COMPANY, S.STATUS
 		FROM SELLER S
@@ -56,10 +57,10 @@
 		INNER JOIN MEMBER M
 		ON MR.ID=M.ID
 		WHERE
-		S.STATUS=0 AND MR.ROLENUM=4
-
+		S.STATUS=#{status} AND MR.ROLENUM=#{roleNum}
+		LIMIT #{startRow},#{perPage}
 	</select>
-	<select id="getAcceptList" resultType="SellerVO">
+	<select id="getAcceptList" parameterType="Pager" resultType="SellerVO">
 		SELECT M.ID, M.NAME,
 		M.EMAIL, M.PHONE, S.COMPANY, S.STATUS
 		FROM SELLER S
@@ -70,9 +71,10 @@
 		INNER JOIN MEMBER M
 		ON MR.ID=M.ID
 		WHERE
-		S.STATUS=1 AND MR.ROLENUM=4
+		S.STATUS=#{status} AND MR.ROLENUM=#{roleNum}
+		LIMIT #{startRow},#{perPage}
 	</select>
-	<select id="getPayList" resultType="SellerVO">
+	<select id="getPayList" parameterType="Pager" resultType="SellerVO">
 		SELECT M.ID, M.NAME, M.EMAIL, M.PHONE, S.COMPANY, S.STATUS
 		FROM SELLER S
 		LEFT JOIN
@@ -81,7 +83,8 @@
 		INNER JOIN MEMBER M
 		ON MR.ID=M.ID
 		WHERE
-		S.STATUS=1 AND MR.ROLENUM=2
+		S.STATUS=#{status} AND MR.ROLENUM=#{roleNum}
+		LIMIT #{startRow},#{perPage}
 	</select>
 	<update id="setWait" parameterType="SellerVO">
 		UPDATE SELLER SET STATUS=1 WHERE ID=#{id}

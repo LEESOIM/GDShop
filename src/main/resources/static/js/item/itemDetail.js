@@ -104,3 +104,21 @@ $(".applyCancel").click(function () {
 })
 
 
+function requestOX(status,url,event){
+    itemNum = $(event).attr("data-itemNum-num")
+    console.log(parseInt(itemNum))
+    $.ajax({
+        type:"POST",
+        url:url,
+        data:{
+            itemNum:itemNum,
+            status:status
+        },
+        success:function(data){
+            console.log(data)
+            if(data==1){
+                location.href="javascript:history.back();"
+            }
+        }
+    })
+ }

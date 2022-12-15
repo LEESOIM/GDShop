@@ -299,7 +299,7 @@
    
    <!-- 멤버십 결제일,해지일 -->
    <select id="getMembershipPay" parameterType="PayVO" resultType="PayVO">
-   	SELECT PAYDATE, CANCELDATE FROM PAY WHERE ID=#{id} AND PAYNAME='멤버십'
+   	SELECT PAYDATE, CANCELDATE FROM PAY WHERE ID=#{id} AND PAYNAME='ROLE_VIP'
    </select>
    
    <select id="getPay" parameterType="PayVO" resultType="PayVO">

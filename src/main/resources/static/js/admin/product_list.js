@@ -42,4 +42,8 @@ function getPdAjax(){
 }
 
 
-
+function getDetail(event){
+    console.log($(event).children("td.itemnum").text())
+    itemNum = $(event).children("td.itemnum").text()
+    location.href="/item/detail?itemNum="+itemNum
+}

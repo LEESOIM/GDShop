@@ -66,6 +66,7 @@ public class AdminController {
 	@ResponseBody
 	public ModelAndView getPdList(Pager pager)throws Exception{
 		// 삭제 요청
+		log.info("=============================");
 		log.info("Delete Request => {}",pager);
 		ModelAndView mv = new ModelAndView();
 		pager.setStatus(1L);
@@ -133,9 +134,9 @@ public class AdminController {
 	@ResponseBody
 	public ModelAndView getAddRequest(Pager pager)throws Exception{
 		// 등록 요청
-		log.info("Add Request => {}",pager);
 		ModelAndView mv = new ModelAndView();
 		pager.setStatus(0L);
+		log.info("Add Request => {}",pager);
 		List<ItemVO> list = adminService.getPdRequest(pager); 
 		mv.addObject("list",list);
 		mv.addObject("pager",pager);
@@ -186,7 +187,7 @@ public class AdminController {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		List<SellerVO> ar = sellerService.getWaitList(); 
+		List<SellerVO> ar = sellerService.getWaitList(pager); 
 		
 		mv.addObject("vo", ar);
 		mv.addObject("pager",pager);
@@ -198,7 +199,7 @@ public class AdminController {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		List<SellerVO> ar = sellerService.getAcceptList(); 
+		List<SellerVO> ar = sellerService.getAcceptList(pager); 
 		
 		mv.addObject("vo", ar);
 		mv.addObject("pager",pager);
@@ -210,7 +211,7 @@ public class AdminController {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		List<SellerVO> ar = sellerService.getPayList(); 
+		List<SellerVO> ar = sellerService.getPayList(pager); 
 		
 		mv.addObject("vo", ar);
 		mv.addObject("pager",pager);
