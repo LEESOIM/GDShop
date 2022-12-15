@@ -22,7 +22,7 @@ $(document).ready(function () {
 
   //캠페인모집률
   let itemNum = $("#applyCheck").attr("data-itemNum-num");
-  let applyCount = $("#nowCount").html();
+  let applyCount = Math.ceil(day);
   $.ajax({
     type: "POST",
     url: "/mission/rate",
@@ -31,8 +31,8 @@ $(document).ready(function () {
       applyCount: applyCount,
     },
     success: function (data) {
-      // let stock = $("#stock").val()
-      // $("#applyRate").html(data/stock*100+"%")
+      let stock = $("#stock").val()
+      $("#applyRate").html(data/stock*100+"%")
     },
   });
 
@@ -90,6 +90,7 @@ $(document).ready(function () {
       } else if (data.status == 1) {
         //리뷰인증(크롤링)
         $("#missionCard").attr("data-bs-target", "#missionModal2");
+        $("#missionCard").click();
         $(".mStatus0").hide();
         $(".mStatus1").show();
         $(".mStatus2").hide();

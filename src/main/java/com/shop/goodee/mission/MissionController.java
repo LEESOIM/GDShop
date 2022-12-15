@@ -1,5 +1,10 @@
 package com.shop.goodee.mission;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,17 +45,59 @@ public class MissionController {
 	@Autowired
 	private PurchaseService purchaseService;
 	
+	@Autowired
+	private SnsService snsService;
 	
-	//OCR
+
+	// 추첨형미션 랜덤 추첨
+	@PostMapping("win")
+	@ResponseBody
+	public int setWin(MissionVO missionVO, ItemVO itemVO) throws Exception {
+		// 추첨대기중 회원리스트
+		List<MissionVO> ar = new ArrayList<>();
+		ar = missionService.getWaiting(missionVO);
+		
+		// 랜덤숫자 뽑기
+		Random random = new Random();
+		int [] numArray = new int[itemVO.getStock().intValue()];
+		int temp;
+		for(int i=0; i<itemVO.getStock(); i++) {
+			numArray[i] = random.nextInt(ar.size())+1;
+			
+			for(int j=0; j<i; j++) { //중복제거
+				if(numArray[i]==numArray[j]) {
+					i--;
+					break;
+				}
+			}
+			
+			// 당첨된 회원 MYCAM 0->1 UPDATE
+			int result = missionService.setWin(ar.get(numArray[i]));
+		
+			if(result>0) {
+				//알람문자
+				String id= missionVO.getId();
+				String text = "[구디샵] "+id+"님 지원하신 추첨형 캠페인에 당첨되셨습니다! 2시간 내에 구매하기 미션을 완료해주세요";
+				MemberVO phone = missionService.getPhone(missionVO);
+				snsService.goMessage(phone,text);
+				return result;
+			}
+		}
+		return 0;
+	}
+
+	
+	// OCR
 	@PostMapping("ocr")
-	public ModelAndView setPurchase(HttpSession session, ItemVO itemVO, MemberVO memberVO, MultipartFile f, PurchaseVO purchaseVO) throws Exception {
-		//ID
+	public ModelAndView setPurchase(HttpSession session, ItemVO itemVO, MemberVO memberVO, MultipartFile f,
+			PurchaseVO purchaseVO) throws Exception {
+		// ID
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
 		memberVO = (MemberVO) authentication.getPrincipal();
 		purchaseVO.setId(memberVO.getId());
 
-		//구매사진
+		// 구매사진
 		PurchaseVO finalPurchaseVO = purchaseService.getPurchase(f);
 		purchaseVO.setPurDate(finalPurchaseVO.getPurDate());
 		purchaseVO.setPurNum(finalPurchaseVO.getPurNum());
@@ -65,29 +112,27 @@ public class MissionController {
 		log.info("=============================");
 
 		ModelAndView mv = new ModelAndView();
-		if (finalPurchaseVO.getPurNum().equals(purchaseVO.getPurNumM()) && finalPurchaseVO.getPrice().equals(purchaseVO.getPrice())) {
-			if (purchaseVO.getNickname() == null) { //닉네임 등록
+		if (finalPurchaseVO.getPurNum().equals(purchaseVO.getPurNumM())
+				&& finalPurchaseVO.getPrice().equals(purchaseVO.getPrice())) {
+			if (purchaseVO.getNickname() == null) { // 닉네임 등록
 				missionService.setNicN(purchaseVO);
 			} else {
 				missionService.setNicC(purchaseVO);
 			}
-			int result = missionService.setMiStatus1(purchaseVO); //status 0->1
+			int result = missionService.setMiStatus1(purchaseVO); // status 0->1
+			mv.setViewName("redirect:/item/detail?itemNum=" + itemVO.getItemNum());
+			return mv;
+		} else {
+			return mv;
 		}
-		
-		mv.setViewName("redirect:/item/detail?itemNum="+itemVO.getItemNum());
-		return mv;
 	}
-	
 
-	
-	
 	// 모집률
 	@PostMapping("rate")
 	@ResponseBody
 	public int getApplyRate(MissionVO missionVO) throws Exception {
 		return missionService.getApplyRate(missionVO);
 	}
-	
 
 	// 지원하기
 	@PostMapping("apply")

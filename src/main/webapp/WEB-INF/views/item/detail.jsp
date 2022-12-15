@@ -10,7 +10,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ItemDetail</title>
-
 <c:import url="../template/library.jsp"></c:import>
 <link rel="stylesheet" href="/css/index.css" />
 <link rel="stylesheet" href="/css/header.css" />
@@ -24,6 +23,12 @@
     border-radius: 50%;
 }
 </style>
+<base target="_self" />
+<script type="text/javascript">
+	window.name = "dialogPopup";
+	form.target = "dialogPopup";
+	form.submit();
+</script>
 </head>
 <body>
 	<c:import url="../template/top_part.jsp"></c:import>
