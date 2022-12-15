@@ -153,7 +153,7 @@
 			</c:if>
 				<hr />
 		<c:if test="${vo.type eq '즉석추첨형' }">
-				<form id="ocr" action="/mission/ocr" method="post" enctype="multipart/form-data">
+				<form id="ocr" action="/purchase/setPurchase" method="post" enctype="multipart/form-data">
 				<input id="missionNum" name="missionNum" type="hidden">
 				<input id="itemNum" name="itemNum" type="hidden" value="${vo.itemNum }">
 				<div class="pe-4 py-4" style="font-size: 14px">
