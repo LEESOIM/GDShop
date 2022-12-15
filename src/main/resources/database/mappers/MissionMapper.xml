@@ -77,7 +77,7 @@
 	
 	<!-- 미션 선정 대기 중인 회원 -->
 	<select id="getWaiting" parameterType="MissionVO" resultType="MissionVO">
-		SELECT * FROM MISSION WHERE STATUS=0 AND MYCAM=0 WHERE ITEMNUM=#{itemNum}
+		SELECT * FROM MISSION WHERE STATUS=0 AND MYCAM=0 AND ITEMNUM=#{itemNum}
 	</select>
 	
 	<!-- 추첨형미션 당첨 -->

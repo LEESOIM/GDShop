@@ -42,9 +42,11 @@ public class MissionController {
 	@ResponseBody
 	public int setWin(MissionVO missionVO, ItemVO itemVO) throws Exception {
 		// 추첨대기중 회원리스트
+		log.info("========1====={}",missionVO.getItemNum());
+		log.info("========2====={}",itemVO.getItemNum());
 		List<MissionVO> ar = new ArrayList<>();
 		ar = missionService.getWaiting(missionVO);
-		
+		itemVO = itemService.getDetail(itemVO);
 		// 랜덤숫자 뽑기
 		Random random = new Random();
 		int [] numArray = new int[itemVO.getStock().intValue()];
