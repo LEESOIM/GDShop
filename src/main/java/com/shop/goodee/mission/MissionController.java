@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shop.goodee.item.ItemService;
 import com.shop.goodee.item.ItemVO;
+import com.shop.goodee.member.MemberMapper;
 import com.shop.goodee.member.MemberVO;
 import com.shop.goodee.sns.SnsService;
 
@@ -36,6 +37,8 @@ public class MissionController {
 	@Autowired
 	private SnsService snsService;
 	
+	@Autowired
+	private MemberMapper memberMapper;
 
 	// 추첨형미션 랜덤 추첨
 	@PostMapping("win")
@@ -45,34 +48,42 @@ public class MissionController {
 		log.info("========1====={}",missionVO.getItemNum());
 		log.info("========2====={}",itemVO.getItemNum());
 		List<MissionVO> ar = new ArrayList<>();
-		ar = missionService.getWaiting(missionVO);
+		ar = missionService.getWaiting(missionVO);//지원인원 100
 		itemVO = itemService.getDetail(itemVO);
 		// 랜덤숫자 뽑기
 		Random random = new Random();
-		int [] numArray = new int[itemVO.getStock().intValue()];
+		int [] numArray = new int[itemVO.getStock().intValue()]; //모집인원 10
 		int temp;
+		
 		for(int i=0; i<itemVO.getStock(); i++) {
 			numArray[i] = random.nextInt(ar.size())+1;
+//			for(int j=0; j<i; j++) { //중복제거
+//				if(numArray[i]==numArray[j]) {
+//					i--;
+//					break;
+//				}
+//				
+//			}
+			log.info("ar.get(i){}", ar.get(i).getId());
+			MemberVO memberVO = new MemberVO();
+			memberVO.setId(ar.get(i).getId());		
+			log.info("==================id{}", memberVO.getId());
 			
-			for(int j=0; j<i; j++) { //중복제거
-				if(numArray[i]==numArray[j]) {
-					i--;
-					break;
-				}
-			}
+			String phone = memberMapper.getPhone(ar.get(i).getId());
+			log.info("==================phone{}", phone);
 			
 			// 당첨된 회원 MYCAM 0->1 UPDATE
 			int result = missionService.setWin(ar.get(numArray[i]));
-		
+			
 			if(result>0) {
 				//알람문자
 				String id= missionVO.getId();
-				String text = "[구디샵] "+id+"님 지원하신 추첨형 캠페인에 당첨되셨습니다! 2시간 내에 구매하기 미션을 완료해주세요";
-				MemberVO phone = missionService.getPhone(missionVO);
-				snsService.goMessage(phone,text);
-				return result;
+				String text = "[구디샵] "+"지원하신 추첨형 캠페인에 당첨되셨습니다! 2시간 내에 구매하기 미션을 완료해주세요";//o
+
+				snsService.goMessage(phone,text);//x
 			}
-		}
+			}
+			
 		return 0;
 	}
 
