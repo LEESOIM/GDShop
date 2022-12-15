@@ -32,6 +32,7 @@
 		<div class="container">
 			<div class="content d-flex mt-4">
 				<div class="sidebar">
+				<input type="hidden" value="${vo.role}" id="itemRole"/>
 					<div style="height: 260px; width: 260px">
 						<img src="/file/item/${vo.itemFileVOs[0].fileName}" alt="" style="height: 260px; width: 260px; border-radius: 5px" />
 					</div>
@@ -48,7 +49,6 @@
 							<div class="d-flex justify-content-center">
 								<div class="me-4" style="font-size: 14px; margin: auto 0"><b>결제금액</b></div>
 								<div style="font-size: 19px;"><b><fmt:formatNumber value="${vo.price }" pattern="###,###,###" />원</b></div>
-								
 							</div>
 							<div class="d-flex justify-content-center">
 								<div class="me-4" style="font-size: 14px; margin: auto 0"><b>완료보상</b></div>

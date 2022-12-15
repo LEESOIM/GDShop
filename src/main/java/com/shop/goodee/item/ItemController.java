@@ -73,7 +73,6 @@ public class ItemController {
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
         Authentication authentication = context.getAuthentication();
         memberVO = (MemberVO) authentication.getPrincipal();
-		
 		int count = memberService.getVIP(memberVO);
 		return count;
 	}
