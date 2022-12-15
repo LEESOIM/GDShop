@@ -1,9 +1,17 @@
 package com.shop.goodee.mission;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import javax.mail.internet.MimeBodyPart;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shop.goodee.member.MemberVO;
 import com.shop.goodee.purchase.PurchaseVO;
+import com.shop.goodee.seller.SellerVO;
 
 @Service
 public class MissionService {
@@ -58,5 +66,19 @@ public class MissionService {
 	//모집률
 	public int getApplyRate(MissionVO missionVO) throws Exception {
 		return missionMapper.getApplyRate(missionVO);
+	}
+	
+	//미션 선정 대기 중인 회원
+	public List<MissionVO> getWaiting(MissionVO missionVO) throws Exception {
+		return missionMapper.getWaiting(missionVO);
+	}
+	
+	//추첨형미션 당첨
+	public int setWin(MissionVO missionVO) throws Exception {
+		return missionMapper.setWin(missionVO);
+	}
+	
+	public MemberVO getPhone(MissionVO missionVO) throws Exception{
+		return missionMapper.getPhone(missionVO);
 	}
 }

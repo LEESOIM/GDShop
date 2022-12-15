@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.shop.goodee.member.MemberVO;
 import com.shop.goodee.purchase.PurchaseVO;
+import com.shop.goodee.seller.SellerVO;
 
 @Mapper
 public interface MissionMapper {
@@ -39,4 +41,9 @@ public interface MissionMapper {
 	
 	public int setAutoCancel(MissionVO missionVO) throws Exception;
 	
+	public List<MissionVO> getWaiting(MissionVO missionVO) throws Exception;
+	
+	public int setWin(MissionVO missionVO) throws Exception;
+	
+	public MemberVO getPhone(MissionVO missionVO) throws Exception;
 }

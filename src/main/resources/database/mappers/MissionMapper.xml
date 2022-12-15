@@ -45,7 +45,7 @@
 		UPDATE MISSION SET FINISH=DATE_ADD(APPLYDATE, INTERVAL 14 DAY), STATUS=1 WHERE MISSIONNUM=#{missionNum}
 	</update>
 	
-	<!-- 미션진행 status 변경(리뷰->포인트수령), 미션완료 -->
+	<!-- 미션진행 status 변경(리뷰->포인트수령), mycam 미션완료 -->
 	<update id="setMiStatus2" parameterType="MissionVO">
 		UPDATE MISSION SET STATUS=2, MYCAM=2 WHERE MISSIONNUM=#{missionNum}
 	</update>
@@ -74,5 +74,25 @@
 	<update id="set14day" parameterType="MissionVO">
 		UPDATE MISSION SET TIME=DATE_ADD(TIME, INTERVAL 1 DAY) WHERE MISSIONNUM=#{missionNum}
 	</update>
+	
+	<!-- 미션 선정 대기 중인 회원 -->
+	<select id="getWaiting" parameterType="MissionVO" resultType="MissionVO">
+		SELECT * FROM MISSION WHERE STATUS=0 AND MYCAM=0 WHERE ITEMNUM=#{itemNum}
+	</select>
+	
+	<!-- 추첨형미션 당첨 -->
+	<update id="setWin" parameterType="MissionVO">
+		UPDATE MISSION SET MYCAM=1 WHERE ID=#{id} and ITEMNUM=#{itemNum}
+	</update>
+	
+	<!-- 문자발신 폰번호 -->
+	<select id="getPhone" parameterType="MissionVO" resultType="MemberVO" >
+		SELECT PHONE
+		FROM MISSION MI
+		INNER JOIN
+		MEMBER M
+		USING(ID)
+		WHERE ID=#{id}
+	</select>
 	
 </mapper>

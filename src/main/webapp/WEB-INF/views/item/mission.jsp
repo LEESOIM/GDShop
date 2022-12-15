@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!-- 모달창 -->
-<div class="modal fade" id="exampleModal_item" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1" >
+<div class="modal fade" data-bs-backdrop="static" id="exampleModal_item" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1" >
   <div class="modal-dialog" >
     <div class="modal-content" style="width: 560px">
       
@@ -52,9 +52,12 @@
 	     <button type="button" class="btn btn-success" data-bs-target="#ModalToggle2" data-bs-toggle="modal" id="applyBaro" disabled data-itemNum-num="${vo.itemNum }">지원하기</button> 
       </div>
       </div>
+
     </div>
   </div>
 </div>
+
+
 
 <!-- 추첨형 지원완료 -->
 <div data-bs-backdrop="static" class="modal fade" id="ModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
@@ -79,7 +82,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header p-3" style="background-color: #4AB34A; color: white; font-weight: bold">
-        <h1 class="modal-title fs-5" id="exampleModalToggleLabel2"><b>즉석추첨</b></h1>
+        <h1 class="modal-title fs-5" id="exampleModalToggleLabel2"><b><c:if test="${vo.type eq '즉석추첨형' }">즉석 추첨</c:if><c:if test="${vo.type eq 'SNS미션' }">SNS 미션</c:if></b></h1>
       </div>
       <div class="modal-body">
         <img style="margin-left:100px; padding-top:10px; padding-bottom:20px; width:55%" src="/images/roulette.gif">
@@ -98,8 +101,8 @@
 
 <!-- 미션 -->
 <div class="mStatus0">
-<div class="modal fade" id="missionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
+<div data-bs-backdrop="static" class=" modal fade" id="missionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog mStatus0" >
 		<div class="modal-content" style="width: 600px">
 			<div class="modal-header" style="background-color: #4AB34A; color: white; font-weight: bold">
 				<h1 class="modal-title fs-5" id="exampleModalLabel">
@@ -107,6 +110,7 @@
 				</h1>
 			</div>
 			<div class="modal-body p-3">
+			<c:if test="${vo.type eq '즉석추첨형' }">
 				<div class="d-flex justify-content-center my-2" style="text-align: center">
 					<div style="font-weight: bold;">
 						<div class="mission_order">
@@ -129,8 +133,26 @@
 						<div>미완료</div>
 					</div>
 				</div>
+			</c:if>
+			<c:if test="${vo.type eq 'SNS미션' }">				
+				<div class="d-flex justify-content-center my-2" style="text-align: center">
+					<div style="font-weight: bold;">
+						<div class="mission_order">
+							<i class="fa-solid fa-circle-check" style="color: green"></i> 참여하기
+						</div>
+						<div>미진행</div>
+					</div>
+					<div class="solid"></div>
+					<div>
+						<div class="mission_order">
+							<i class="fa-regular fa-circle-check" style="color: green"></i> 포인트 수령
+						</div>
+						<div>미완료</div>
+					</div>
+				</div>
+			</c:if>
 				<hr />
-		
+		<c:if test="${vo.type eq '즉석추첨형' }">
 				<form id="ocr" action="/mission/ocr" method="post" enctype="multipart/form-data">
 				<input id="missionNum" name="missionNum" type="hidden">
 				<input id="itemNum" name="itemNum" type="hidden" value="${vo.itemNum }">
@@ -216,13 +238,60 @@
 				<button type="submit" class="btn btn-outline-success" data-bs-target="#missionModal2" data-bs-toggle="modal">전송</button> 
 				</div>
 		</form>
+		</c:if>
+			<c:if test="${vo.type eq 'SNS미션' }">	
+			<form id="ocr" action="/mission/ocr" method="post" enctype="multipart/form-data">
+				<input id="missionNum" name="missionNum" type="hidden">
+				<input id="itemNum" name="itemNum" type="hidden" value="${vo.itemNum }">
+				<div class="pe-4 py-4" style="font-size: 15px">
+				<div class="d-flex pb-2">
+					<div style="margin:auto 0; width: 30%; text-align: right;">
+						<b>구매 URL</b>
+					</div>
+					<div style="width: 80%; margin-left: 15px">
+						<a class="btn btn-success btn-sm py-0" href="${vo.url}" target="_blank">구매링크 바로가기</a>
+					</div>
+				</div>
+				<div class="d-flex py-2">
+					<div style="width: 30%; text-align: right;">
+						<b>미션 가이드 라인</b>
+					</div>
+					<div style="width: 80%; margin-left: 15px; ">
+					<div class="mb-2" style="color: #198754; font-weight: bold;">✅미션종류 : 인스타 팔로우<br>
+						✅구매 링크로 들어가셔서 해당 인스타 팔로우 하시고 인증해 주세요<br>
+						✅${vo.sellerSNS }<br><br>
+						</div>
+					</div>
+				</div>
+				<div class="d-flex py-2">
+					<div style="margin:auto 0; width: 30%; text-align: right;">
+						<b><span style="color: red">*</span>아이디</b>
+					</div>
+					<div style="width: 80%; margin-left: 25px">
+						<input class="form-control p-1" type="text" id="nickname_n" name="nickname_n" style="width: 300px">
+					</div>
+				</div>
+				<div class="d-flex py-2">
+					<div style="margin:auto 0; width: 30%; text-align: right;">
+						<b><span style="color: red">*</span>인증샷</b>
+					</div>
+					<div style="width: 80%; margin-left: 25px">
+			  				<input type="file" class="form-control p-1" id="f" name="f" style="width: 300px">
+					</div>
+				</div>
+				</div>
+
+				<div class="modal-footer d-flex justify-content-center pb-0">
+				<button type="button" class="btn btn-success" data-bs-dismiss="modal" aria-label="Close">취소</button>
+				<button type="submit" class="btn btn-outline-success" data-bs-target="#missionModal2" data-bs-toggle="modal">전송</button> 
+				</div>
+		</form>
+			</c:if>
 		</div>
 		</div>
 	</div>
 </div>
 </div>
-
-
 
 <div class="mStatus1">
 <div data-bs-backdrop="static" class="modal fade" id="missionModal2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
