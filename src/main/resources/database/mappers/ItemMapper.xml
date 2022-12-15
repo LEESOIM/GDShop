@@ -19,6 +19,9 @@
 		LEFT JOIN
 		ITEM_FILE F
 		USING(ITEMNUM)
+		LEFT JOIN
+		SELLER S
+		USING(ID)
 		WHERE ITEMNUM=#{itemNum}
 	</select>
 	

@@ -112,6 +112,12 @@ public interface MemberMapper {
    /* 내 포인트 - 포인트 리스트 확인 */
    public List<PointVO> getPointList(MemberVO memberVO)throws Exception;
    
+   /* 내 포인트 - 포인트 리스트 */
+   public List<PointVO> getPointScheduler(PointVO pointVO)throws Exception;
+   
+   /* 포인트 finish+1 */
+   public int setPointAdd()throws Exception;
+   
    /* 멤버십 결제일,해지일 */
    public PayVO getMembershipPay(PayVO payVO)throws Exception;
    

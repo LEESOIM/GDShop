@@ -41,8 +41,6 @@
 
 			<div class="search mb-5" style="border-bottom: 1px solid #d8d8d8;">
 				<div class="available">
-					<input type="checkbox" value="" id="able">
-					<label for="able">지원 가능</label> 
 				</div>
 				<div class="order">
 					<button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">최신순
