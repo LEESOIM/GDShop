@@ -37,12 +37,12 @@ public class PurchaseController {
 	}
 
 	@PostMapping("setPurchase")
-	public ModelAndView setPurchase(HttpSession session, MemberVO memberVO, PurchaseVO purchaseVO, MultipartFile f, MissionVO missionVO) throws Exception {
+	public ModelAndView setPurchase(HttpSession session, PurchaseVO purchaseVO, MultipartFile f, MissionVO missionVO) throws Exception {
 
 		// ID
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
-		memberVO = (MemberVO) authentication.getPrincipal();
+		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
 		missionVO.setId(memberVO.getId());
 		
 		// 미션번호

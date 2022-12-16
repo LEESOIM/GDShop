@@ -78,9 +78,9 @@ prefix="c" %>
                   		<button class="upBtn product_request me-1 mt-2 me-1" data-itemNum-num="${item.items[0].itemNum}" type="button"><b>수정</b></button>
                   		<button class="delBtn product_request mt-2" data-itemNum-num="${item.items[0].itemNum}" type="button"><b>삭제</b></button>
                   		</c:if>
+                  	</div>
+                  	</div>
                   		<button class="test" data-itemnum="${item.items[0].itemNum}">test</button>
-                  	</div>
-                  	</div>
                   </div>
                 </div>
                </c:forEach>

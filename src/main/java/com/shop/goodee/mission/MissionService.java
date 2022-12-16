@@ -9,6 +9,7 @@ import javax.mail.internet.MimeBodyPart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shop.goodee.item.ItemVO;
 import com.shop.goodee.member.MemberVO;
 import com.shop.goodee.purchase.PurchaseVO;
 import com.shop.goodee.review.ReviewVO;
@@ -77,6 +78,16 @@ public class MissionService {
 	//추첨형미션 당첨
 	public int setWin(MissionVO missionVO) throws Exception {
 		return missionMapper.setWin(missionVO);
+	}
+	
+	//포인트 수령
+	public int setReceivePoint(ItemVO itemVO) throws Exception {
+		return missionMapper.setReceivePoint(itemVO);
+	}
+	
+	//미션완료(MYCAM=3)
+	public int setEnd(ItemVO itemVO) throws Exception {
+		return missionMapper.setEnd(itemVO);
 	}
 
 }

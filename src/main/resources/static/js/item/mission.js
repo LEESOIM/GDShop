@@ -74,3 +74,23 @@ $("#applyBaro").click(function () {
         }
     })
 })
+
+
+
+//포인트 수령
+$("#pointBtn").click(function () {
+    let point = $("#pointResult").val();
+    let itemNum = $("#itemNumResult").val();
+    $.ajax({
+        type: "POST",
+        url: "/mission/point",
+        data: {
+            point: point,
+            itemNum: itemNum,
+        },
+        success: function (data) {
+            alert("🎊 모든 미션이 완료되었습니다 🎊")
+            location.reload();
+        }
+    })
+})

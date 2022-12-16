@@ -45,7 +45,7 @@ public class ReviewController {
 
 	@PostMapping("getReview")
 	@ResponseBody
-	public ModelAndView getReview(HttpSession session, MemberVO memberVO, TestVO testVO, MissionVO missionVO) throws Exception {
+	public ModelAndView getReview(HttpSession session, TestVO testVO, MissionVO missionVO) throws Exception {
 		ReviewVO finalReviewVO = reviewService.getReview(testVO);
 		
 		log.info("=========Controller========");
@@ -62,7 +62,7 @@ public class ReviewController {
 		// ID
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
-		memberVO = (MemberVO) authentication.getPrincipal();
+		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
 		missionVO.setId(memberVO.getId());
 		reviewVO.setId(memberVO.getId());
 

@@ -45,7 +45,7 @@
 		UPDATE MISSION SET FINISH=DATE_ADD(APPLYDATE, INTERVAL 14 DAY), STATUS=1 WHERE MISSIONNUM=#{missionNum}
 	</update>
 	
-	<!-- 미션진행 status 변경(리뷰->포인트수령), mycam 미션완료 -->
+	<!-- 미션진행 status 변경(리뷰->포인트수령) -->
 	<update id="setMiStatus2" parameterType="MissionVO">
 		UPDATE MISSION SET STATUS=2 WHERE MISSIONNUM=#{missionNum}
 	</update>
@@ -85,5 +85,14 @@
 		UPDATE MISSION SET MYCAM=1 WHERE ID=#{id} and ITEMNUM=#{itemNum}
 	</update>
 	
+	<!-- 포인트 수령 -->
+	<update id="setReceivePoint" parameterType="ItemVO">
+		UPDATE MEMBER SET POINT=POINT+#{point} WHERE ID=#{id}
+	</update>
+	
+	<!-- 미션완료(MYCAM1->2) -->
+	<update id="setEnd" parameterType="MissionVO">
+		UPDATE MISSION SET MYCAM=2 WHERE ID=#{id} and ITEMNUM=#{itemNum}
+	</update>
 	
 </mapper>
