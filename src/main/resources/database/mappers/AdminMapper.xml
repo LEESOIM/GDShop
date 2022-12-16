@@ -6,6 +6,15 @@
 
 <mapper namespace="com.shop.goodee.admin.AdminMapper">
 	
+	<!-- 매출 차트  -->
+	<select id="getRevenue" resultType="PayVO">
+		SELECT p.PAYDATE, SUM(AMOUNT) amount
+		FROM PAY p
+		GROUP BY PAYDATE
+		LIMIT 0,10;
+	</select>
+	
+	
 	<!-- 멤버 미션  -->
 	<select id="getCountMi2" parameterType="Pager" resultType="Long">
 		SELECT COUNT(*) FROM MISSION WHERE ID=#{id}

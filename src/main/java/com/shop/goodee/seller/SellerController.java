@@ -120,17 +120,17 @@ public class SellerController {
 		int result = sellerService.setSellerAdd(sellerVO);
 		return result;
 	}
-			
-	@GetMapping("wait")
-	public ModelAndView getWaitList() throws Exception{
-		ModelAndView mv = new ModelAndView();
-		
-		List<SellerVO> ar = sellerService.getWaitList(); 
-		
-		mv.addObject("vo", ar);
-		mv.setViewName("/seller/wait");
-		return mv;
-	}
+//			
+//	@GetMapping("wait")
+//	public ModelAndView getWaitList(Pager pager) throws Exception{
+//		ModelAndView mv = new ModelAndView();
+//		
+//		List<SellerVO> ar = sellerService.getWaitList(); 
+//		
+//		mv.addObject("vo", ar);
+//		mv.setViewName("/seller/wait");
+//		return mv;
+//	}
 	
 	@PostMapping("wait")
 	@ResponseBody
@@ -163,16 +163,16 @@ public class SellerController {
 		return result;
 	}
 	
-	@GetMapping("accept")
-	public ModelAndView getAcceptList() throws Exception{
-		ModelAndView mv = new ModelAndView();
-		
-		List<SellerVO> ar = sellerService.getAcceptList(); 
-		
-		mv.addObject("vo", ar);
-		mv.setViewName("/seller/accept");
-		return mv;
-	}
+//	@GetMapping("accept")
+//	public ModelAndView getAcceptList() throws Exception{
+//		ModelAndView mv = new ModelAndView();
+//		
+//		List<SellerVO> ar = sellerService.getAcceptList(); 
+//		
+//		mv.addObject("vo", ar);
+//		mv.setViewName("/seller/accept");
+//		return mv;
+//	}
 	@PostMapping("accept")
 	@ResponseBody
 	public int setAccept(@RequestBody SellerVO sellerVO) throws Exception{
@@ -188,16 +188,16 @@ public class SellerController {
 		return result;
 	}
 	
-	@GetMapping("pay")
-	public ModelAndView getPayList() throws Exception{
-		ModelAndView mv = new ModelAndView();
-		
-		List<SellerVO> ar = sellerService.getPayList(); 
-		
-		mv.addObject("vo", ar);
-		mv.setViewName("/seller/pay");
-		return mv;
-	}
+//	@GetMapping("pay")
+//	public ModelAndView getPayList() throws Exception{
+//		ModelAndView mv = new ModelAndView();
+//		
+//		List<SellerVO> ar = sellerService.getPayList(); 
+//		
+//		mv.addObject("vo", ar);
+//		mv.setViewName("/seller/pay");
+//		return mv;
+//	}
 	@PostMapping("payNo")
 	@ResponseBody
 	public int setPayNo(SellerVO sellerVO) throws Exception{
