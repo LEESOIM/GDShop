@@ -70,13 +70,37 @@ function memberDetail(event){
             id:id
         },
         success:function(data){
+            console.log(data)
             $("#memberInfoModalLabel").text(data.id+"님의 정보")
             $("#transfer-id").val(data.id)
             $("#member-id").val(data.id)
             $("#roleNameDiv").empty()
-            for(i=0; i<data.roleVOs.length;i++){
+            let vip;
+            let seller;
+            console.log(data.payVOs)
 
-                let input = "<div class='member-roleName'>"+data.roleVOs[i].roleName.split('_')[1]+"</div>"
+            if(data.payVOs.length>0){
+                for(i=0; i<data.payVOs.length;i++){
+                    if(data.payVOs[i].payName=="ROLE_SELLER"){
+                        seller = '('+ data.payVOs[i].payDate +"~"+ data.payVOs[i].cancelDate +')'
+                        console.log(seller)
+                    }
+                    if(data.payVOs[i].payName=="ROLE_VIP"){
+                        vip = '('+ data.payVOs[i].payDate +"~"+ data.payVOs[i].cancelDate +')'
+                        console.log(vip)
+                    }
+                }
+                
+            }
+
+            for(i=0; i<data.roleVOs.length;i++){
+                let input = "<div class='member-roleName'><strong>"+data.roleVOs[i].roleName.split('_')[1]+"</strong></div>"
+                if(data.roleVOs[i].roleName=="ROLE_SELLER" && seller!=null){
+                    input = "<div class='member-roleName'><strong>"+data.roleVOs[i].roleName.split('_')[1]+ "</strong> <span style='bold; color: rgb(52, 88, 52);'>"+ seller+"</span></div>"
+                }
+                else if(data.roleVOs[i].roleName=="ROLE_VIP" && vip!=null){
+                    input = "<div class='member-roleName'><strong>"+data.roleVOs[i].roleName.split('_')[1]+ "</strong> <span style='color: rgb(52, 88, 52);'>"+ vip+"</span></div>"
+                }
                 
                 
                 $("#roleNameDiv").append(input)

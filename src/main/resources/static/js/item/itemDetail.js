@@ -32,7 +32,14 @@ $(document).ready(function () {
     },
     success: function (data) {
       let stock = $("#stock").val()
-      $("#applyRate").html(data / stock * 100 + "%")
+      let rate = data / stock * 100;
+      $("#applyRate").html(rate + "%")
+
+      //모집률 100%되면 지원마감
+      if(rate>=100) {
+        $("#applyCheck").html("지원마감");
+        $("#applyCheck").attr("disabled", "disabled");
+      }
     },
   });
 
@@ -154,6 +161,7 @@ $(".applyCancel").click(function () {
 
 
 
+//VIP권한
 function VIPCheck() {
   $.ajax({
     type: "GET",
@@ -172,3 +180,21 @@ function VIPCheck() {
 if ($("#itemRole").val() == "VIP") {
   VIPCheck();
 }
+function requestOX(status,url,event){
+    itemNum = $(event).attr("data-itemNum-num")
+    console.log(parseInt(itemNum))
+    $.ajax({
+        type:"POST",
+        url:url,
+        data:{
+            itemNum:itemNum,
+            status:status
+        },
+        success:function(data){
+            console.log(data)
+            if(data==1){
+                location.href="javascript:history.back();"
+            }
+        }
+    })
+ }

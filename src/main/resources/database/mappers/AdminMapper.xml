@@ -6,6 +6,15 @@
 
 <mapper namespace="com.shop.goodee.admin.AdminMapper">
 	
+	<!-- 매출 차트  -->
+	<select id="getRevenue" resultType="PayVO">
+		SELECT p.PAYDATE, SUM(AMOUNT) amount
+		FROM PAY p
+		GROUP BY PAYDATE
+		LIMIT 0,10;
+	</select>
+	
+	
 	<!-- 멤버 미션  -->
 	<select id="getCountMi2" parameterType="Pager" resultType="Long">
 		SELECT COUNT(*) FROM MISSION WHERE ID=#{id}
@@ -64,7 +73,7 @@
 	
 	<!-- 상품  -->
 	<select id="getCountPd" parameterType="Pager" resultType="Long">
-		SELECT COUNT(*)
+		SELECT COUNT(DISTINCT ITEMNUM)
 		FROM ITEM I
 			INNER JOIN
 			SELLER S 
@@ -89,6 +98,7 @@
 			SELLER S 
 			USING(ID)
 		WHERE I.STATUS=#{status}  <include refid="searchPd"></include>
+		GROUP BY ITEMNUM
 		ORDER BY I.DATE DESC 
 		LIMIT #{startRow}, #{perPage}
 		
@@ -152,7 +162,7 @@
 	</update>
 	
 
-	<select id="getMemberDetail" parameterType="MemberVO" resultMap="getMemberResult">
+	<select id="getMemberDetail" parameterType="MemberVO" resultMap="getMemberDetailResult">
 		SELECT * FROM MEMBER M
 			INNER JOIN
 			MEMBER_ROLE MR
@@ -160,9 +170,35 @@
 			INNER JOIN
 			ROLE R
 			ON MR.ROLENUM = R.ROLENUM 
+			left JOIN 
+			pay p 
+			ON R.ROLENAME =p.PAYNAME AND M.ID=p.ID
 		WHERE M.ID=#{id}
 	</select>
-
+	<resultMap type="MemberVO" id="getMemberDetailResult">
+		<id column="id" property="id"/>
+		<result column="pw" property="pw"/>
+		<result column="name" property="name"/>
+		<result column="email" property="email"/>
+		<result column="birth" property="birth"/>
+		<result column="phone" property="phone"/>
+		<result column="point" property="point"/>
+		<result column="regDate" property="regDate"/>
+		<result column="status" property="status"/>
+		<result column="nickName" property="nickName"/>
+		<result column="sum" property="sum"/>
+		<result column="cnt" property="cnt"/>
+		<collection property="roleVOs" javaType="List" ofType="RoleVO">
+			<id column="roleNum" property="roleNum"/>
+			<result column="roleName" property="roleName"/>
+		</collection>
+		<collection property="payVOs" javaType="List" ofType="PayVO">
+			<id column="payNum" property="payNum"/>
+			<result column="payDate" property="payDate"/>
+			<result column="cancelDate" property="cancelDate"/>
+			<result column="payName" property="payName"/>
+		</collection>
+	</resultMap>
 	
 	
 	<sql id="search">

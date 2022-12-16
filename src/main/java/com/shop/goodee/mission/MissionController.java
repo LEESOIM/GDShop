@@ -40,6 +40,23 @@ public class MissionController {
 	@Autowired
 	private MemberMapper memberMapper;
 
+	//포인트 수령
+	@PostMapping("point")
+	@ResponseBody
+	public int setReceivePoint(HttpSession session, ItemVO itemVO) throws Exception {
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
+		itemVO.setId(memberVO.getId());
+		log.info("포인트{}",itemVO);
+		//포인트 수령
+		missionService.setReceivePoint(itemVO);
+		//status 1->2
+		int result = missionService.setEnd(itemVO);
+		return result;
+	}
+	
+	
 	// 추첨형미션 랜덤 추첨
 	@PostMapping("win")
 	@ResponseBody
@@ -53,7 +70,6 @@ public class MissionController {
 		// 랜덤숫자 뽑기
 		Random random = new Random();
 		int [] numArray = new int[itemVO.getStock().intValue()]; //모집인원 10
-		int temp;
 		
 		for(int i=0; i<itemVO.getStock(); i++) {
 			numArray[i] = random.nextInt(ar.size())+1;
@@ -93,6 +109,7 @@ public class MissionController {
 	@PostMapping("rate")
 	@ResponseBody
 	public int getApplyRate(MissionVO missionVO) throws Exception {
+		log.info("모집률{}", missionVO);
 		return missionService.getApplyRate(missionVO);
 	}
 

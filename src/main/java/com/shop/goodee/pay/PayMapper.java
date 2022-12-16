@@ -7,6 +7,7 @@ import com.shop.goodee.seller.SellerVO;
 
 @Mapper
 public interface PayMapper {
+	public PayVO aleadyPayCheck(PayVO payVO)throws Exception;
 	public SellerVO sellerCheck(SellerVO sellerVO)throws Exception;
 	public int setSeller(PayVO payVO)throws Exception;
 	public int setVIP(PayVO payVO)throws Exception;

@@ -76,9 +76,10 @@ tr.colored:hover td{
   font-size: 14px;
   color: #767678;
   color: var(--color-sub-info-1);
-  line-height: 20px;
+  line-height: 50px;
   letter-spacing: 0;
   text-align: center;
+
 }
 
 #files{
@@ -109,4 +110,8 @@ tr.colored:hover td{
 
 .file_list_header_volume{
   padding-top: 7px;
+}
+
+.dragOver{
+  border: solid skyblue;
 }

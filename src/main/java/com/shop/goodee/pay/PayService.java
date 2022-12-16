@@ -12,6 +12,10 @@ public class PayService {
 	@Autowired
 	private PayMapper payMapper;
 	
+	public PayVO aleadyPayCheck(PayVO payVO)throws Exception{
+		return payMapper.aleadyPayCheck(payVO);
+	}
+	
 	public SellerVO sellerCheck(SellerVO sellerVO)throws Exception{
 		return payMapper.sellerCheck(sellerVO);
 	}

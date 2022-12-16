@@ -80,12 +80,12 @@
 <!-- 즉석추첨형 지원완료(룰렛) -->
 <div data-bs-backdrop="static" class="modal fade" id="ModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content" style="width: 550px">
       <div class="modal-header p-3" style="background-color: #4AB34A; color: white; font-weight: bold">
         <h1 class="modal-title fs-5" id="exampleModalToggleLabel2"><b><c:if test="${vo.type eq '즉석추첨형' }">즉석 추첨</c:if><c:if test="${vo.type eq 'SNS미션' }">SNS 미션</c:if></b></h1>
       </div>
       <div class="modal-body">
-        <img style="margin-left:100px; padding-top:10px; padding-bottom:20px; width:55%" src="/images/roulette.gif">
+        <img style="margin-left:130px; padding-top:15px; padding-bottom:30px; width:50%" src="/images/roulette.gif">
 		<div id="roulette" style="text-align : center; margin-bottom: 10px; display: none; "><b style="color: #eb2f96">축하해요!<br>캠페인에 선정되셨습니다!</b>
 		<div style="font-size: 14px">2시간 내에 미션수행카드에서 구매하기 미션까지 인증을 완료해 주세요.<br>미완료 시 캠페인이 자동 취소되어 포인트를 받을 수 없으며, <br>동일 캠페인 재지원이 불가합니다.</div></div>
       </div>
@@ -154,7 +154,6 @@
 				<hr />
 		<c:if test="${vo.type eq '즉석추첨형' }">
 				<form id="ocr" action="/purchase/setPurchase" method="post" enctype="multipart/form-data">
-				<input id="missionNum" name="missionNum" type="hidden">
 				<input name="itemNum" type="hidden" value="${vo.itemNum }">
 				<div class="pe-4 py-4" style="font-size: 14px">
 				<div class="d-flex pb-2">
@@ -223,7 +222,6 @@
 		</c:if>
 			<c:if test="${vo.type eq 'SNS미션' }">	
 			<form id="ocr" action="" method="post" enctype="multipart/form-data">
-				<input id="missionNum" name="missionNum" type="hidden">
 				<input name="itemNum" type="hidden" value="${vo.itemNum }">
 				<div class="pe-4 py-4" style="font-size: 15px">
 				<div class="d-flex pb-2">
@@ -342,7 +340,6 @@
 				</div>
 				<c:if test="${vo.shop eq '쿠팡' }">
 				 <form id="reviewC" action="/review/getReview" method="POST" >
-					<input id="missionNum" name="missionNum" type="hidden" value="">
 					<input name="itemNum" type="hidden" value="${vo.itemNum }">
 					<div class="d-flex pt-3">
 						<div style="margin:auto 0; width: 30%; text-align: right;">
@@ -370,6 +367,7 @@
 				
 				<c:if test="${vo.shop ne '쿠팡' }">
 				<form id="reviewN" action="/review/getReviewNaver" method="POST" >
+					<input name="itemNum" type="hidden" value="${vo.itemNum }">
 					<div class="d-flex pt-3">
 						<div style="margin:auto 0; width: 30%; text-align: right;">
 							<b><span style="color: red">*</span>아이디</b>
@@ -437,11 +435,13 @@
 					</div>
 				</div>
 				<hr />
-				<form id="getPoint" action="" method="post" >
-				<div class="p-3" style="font-size: 15px; text-align: center;">
+			<form id="getPoint" action="" method="post" >
+				<div class="p-4" style="font-size: 15px; text-align: center;">
+				<input type="hidden" id="pointResult" value="${vo.price }">
+				<input type="hidden" id="itemNumResult" value="${vo.itemNum }">
 					<img src="/images/santa.png" width="250px">
 					<div style="font-size: 30px; color: #44D62C"><b><fmt:formatNumber value="${vo.price }" pattern="###,###,###" />P</b></div>
-					<button class="btn btn-success py-2 px-3" style="background-color: #44D62C; border-radius: 20px" type="button" id="withdraw_btn"><i class="fa-solid fa-check"></i> <b>포인트받기</b></button>
+					<button class="btn btn-success py-2 px-3" style="background-color: #44D62C; border-radius: 20px; border:none;" type="button" id="pointBtn"><i class="fa-solid fa-check"></i> <b>포인트받기</b></button>
 				</div>
 			</form>
 		</div>

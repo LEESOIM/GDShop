@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.shop.goodee.item.ItemVO;
 import com.shop.goodee.member.MemberVO;
 import com.shop.goodee.myCampaign.MyCampaignVO;
+import com.shop.goodee.pay.PayVO;
 import com.shop.goodee.util.Pager;
 
 @Service
@@ -15,6 +16,10 @@ public class AdminService {
 
 	@Autowired
 	private AdminMapper adminMapper;
+	
+	public List<PayVO> getRevenue()throws Exception{
+		return adminMapper.getRevenue();
+	}
 	
 	public List<MyCampaignVO> getMission2(Pager pager)throws Exception{
 		Long totalCount = adminMapper.getCountMi2(pager);

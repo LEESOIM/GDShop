@@ -23,6 +23,8 @@ pageEncoding="UTF-8"%>
 
     <!-- Custom styles for this template-->
     <link href="/bootstrap/css/sb-admin-2.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/header.css" />
     <script defer src="/js/admin/product_list.js"></script>
 </head>
 
@@ -44,24 +46,18 @@ pageEncoding="UTF-8"%>
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">상품목록</h1>
+                    <div class="input-group" style="margin-top: 30px; display: flex; justify-content: right;">
+                        <div style="display: flex;">
+                            <select name="kind" class="form-select" id="kind" style="width: 30%; height: 40px;">
+                                <option class="kinds" value="id">ID</option>
+                                <option class="kinds" value="company">기업명</option>
+                            </select>
+                      
+                            <input style="width: 50%; height: 40px;" type="text" name="search" value="${param.search}" class="form-control" id="search" onKeypress="javascript:if(event.keyCode==13) {search_onclick_subm()}" >
+                            <button type="button" class="btn btn-dark" id="search_btn">검색</button>
+                        </div>
                     </div>
-
-                    <!-- Content Row -->
-                    <c:import url="../contentrow.jsp"></c:import>
-                    <!-- Content Row -->
-
-                    <div class="input-group" style="width: 95%; margin: auto;">
-                        <select name="kind" class="form-select" id="kind">
-                            <option class="kinds" value="id">ID</option>
-                            <option class="kinds" value="company">기업명</option>
-                        </select>
-                        <input type="text" name="search" value="${param.search}" class="form-control" id="search" onKeypress="javascript:if(event.keyCode==13) {search_onclick_subm()}" >
-                        <button type="button" class="btn btn-primary" id="search_btn">검색</button>
-                    </div>
-                    <div class="row" id="product_list" style="width: 95%; margin: auto;">
+                    <div class="row" id="product_list" style="width: 95%; margin: auto; margin-top: 10px;">
                        
                     </div>
 

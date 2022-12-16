@@ -30,9 +30,23 @@ public class ItemController {
 	private NotificationService notificationService;
 	@Autowired
 	private ItemService itemService;
-	
 	@Autowired
 	private MemberService memberService;
+	
+	@PostMapping("setRequest")
+	@ResponseBody
+	public int setRequest(ItemVO itemVO)throws Exception {
+		int result = itemService.setRequest(itemVO);
+		return result;
+	}
+	
+	@PostMapping("setDelRequest")
+	@ResponseBody
+	public int setDelRequest(ItemVO itemVO)throws Exception {
+		int result = itemService.setDelRequest(itemVO);
+		return result;
+	}
+	
 
 	// 상품등록
 	@GetMapping("add")

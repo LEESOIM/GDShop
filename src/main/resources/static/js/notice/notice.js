@@ -132,14 +132,16 @@ $("#removeAll_button").click(function(){
 
 const file_drag = document.getElementById("file_drag")
 
+// Drag and Drop
 file_drag.addEventListener("dragover",function(e){
     console.log("드래그 오버")
+    $(".file_drag").addClass("dragOver")
     e.preventDefault();
 })
 file_drag.addEventListener("drop",function(e){
     console.log("드랍")
     e.preventDefault();
-    
+    $(".file_drag").toggleClass("dragOver")
     arr= e.dataTransfer.files;
     addFileList(arr)
     for(var i=0; i<arr.length; i++){

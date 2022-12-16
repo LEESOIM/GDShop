@@ -157,39 +157,39 @@ pageEncoding="UTF-8"%>
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <strong class="modal-title fs-5" id="memberInfoModalLabel">New message</strong>
+              <strong class="modal-title fs-5" id="memberInfoModalLabel" style="  font-size: 25px; font-weight: bold; color: rgb(52, 88, 52);">New message</strong>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <form action="update" method="post" onsubmit="return confirm('수정하시겠습니까?')">
                 <div class="mb-3">
-                  <label for="member-id" class="col-form-label"> <strong>ID :</strong> </label>
+                  <label for="member-id" class="col-form-label"> <strong style=" font-size: 20px; font-weight: bold; color: rgb(52, 88, 52);">ID :</strong> </label>
                   <input type="text" class="form-control" id="transfer-id" name="id" hidden>
                   <input type="text" class="form-control" id="member-id" disabled>
                 </div>
                 <div class="mb-3">
-                    <label for="member-roleName" class="col-form-label"><strong>등급:</strong></label>
+                    <label for="member-roleName" class="col-form-label"><strong style=" font-size: 20px; font-weight: bold; color: rgb(52, 88, 52);">등급:</strong></label>
                     <div id="roleNameDiv"></div>
                     
                 </div>
                 <div class="mb-3">
-                  <label for="member-name" class="col-form-label"><strong>이름:</strong> </label>
+                  <label for="member-name" class="col-form-label"><strong style=" font-size: 20px; font-weight: bold; color: rgb(52, 88, 52);">이름:</strong> </label>
                   <input class="form-control" id="member-name" disabled></input>
                 </div>
                 <div class="mb-3">
-                    <label for="member-phone" class="col-form-label"><strong>전화번호:</strong></label>
+                    <label for="member-phone" class="col-form-label"><strong style=" font-size: 20px; font-weight: bold; color: rgb(52, 88, 52);">전화번호:</strong></label>
                     <input class="form-control" id="member-phone" disabled></input>
                 </div>
                 <div class="mb-3">
-                    <label for="member-email" class="col-form-label"><strong>Email</strong>:</label>
+                    <label for="member-email" class="col-form-label"><strong style=" font-size: 20px; font-weight: bold; color: rgb(52, 88, 52);">Email</strong>:</label>
                     <input class="form-control" id="member-email" disabled></input>
                 </div>
                 <div class="mb-3">
-                    <label for="member-point" class="col-form-label"><strong>포인트:</strong></label>
+                    <label for="member-point" class="col-form-label"><strong style=" font-size: 20px; font-weight: bold; color: rgb(52, 88, 52);">포인트:</strong></label>
                     <input class="form-control" id="member-point" name="point"></input>
                 </div>
                 <div class="mb-3">
-                    <label for="member-regDate" class="col-form-label"><strong>가입일:</strong></label>
+                    <label for="member-regDate" class="col-form-label"><strong style=" font-size: 20px; font-weight: bold; color: rgb(52, 88, 52);">가입일:</strong></label>
                     <input class="form-control" id="member-regDate" disabled></input>
                 </div>
                 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.shop.goodee.item.ItemVO;
 import com.shop.goodee.member.MemberVO;
 import com.shop.goodee.purchase.PurchaseVO;
 import com.shop.goodee.review.ReviewVO;
@@ -46,5 +47,7 @@ public interface MissionMapper {
 	
 	public int setWin(MissionVO missionVO) throws Exception;
 	
-	public MemberVO getPhone(MissionVO missionVO) throws Exception;
+	public int setReceivePoint(ItemVO itemVO) throws Exception;
+	
+	public int setEnd(ItemVO itemVO) throws Exception;
 }
