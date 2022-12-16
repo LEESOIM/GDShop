@@ -132,4 +132,7 @@ public interface MemberMapper {
    
    public String getPhone(String id)throws Exception;
    
+   public int setMemberRoleDelete1(MemberVO memberVO)throws Exception;
+   public int setMemberRoleDelete2(MemberVO memberVO)throws Exception;
+   
 }

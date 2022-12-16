@@ -329,5 +329,12 @@
    	SELECT PHONE FROM MEMBER WHERE ID =#{id}
    </select>
    
+   <delete id="setMemberRoleDelete1" parameterType="MemberVO">
+   	DELETE FROM MEMBER_ROLE WHERE ID =#{id} AND ROLENUM=2
+   </delete>
+   <delete id="setMemberRoleDelete2" parameterType="MemberVO">
+   	DELETE FROM MEMBER_ROLE WHERE ID =#{id} AND ROLENUM=3
+   </delete>
+   
     
 </mapper>

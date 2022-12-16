@@ -56,10 +56,9 @@ public class Scheduler { // 초(0-59) 분(0-59) 시(0-23) 일(1-31) 월(1-12) �
 	}
 
 
-	// 결제 회원 30일 이후 해지(판매자, VIP)
+	// 결제 회원 30일 이후 해지(판매자)
 	@Scheduled(cron = "0 0 0 * * *")
-	public void setMemberShipPay() throws Exception {
-
+	public void setMemberShipPaySeller() throws Exception {
 
 		PayVO payVO = new PayVO();
 		List<PayVO> ar = new ArrayList<>();
@@ -68,11 +67,36 @@ public class Scheduler { // 초(0-59) 분(0-59) 시(0-23) 일(1-31) 월(1-12) �
 		memberMapper.setPayAdd();
 		for (int i = 0; i < ar.size(); i++) {
 			if (ar.get(i).getPayDate2().equals(ar.get(i).getCancelDate())) {
-				log.info("===============삭제================");
-				int result = memberMapper.setPayDelete(ar.get(i));
+				if(ar.get(i).getPayName().equals("ROLE_SELLER")) {
+					log.info("===============삭제================");
+					MemberVO memberVO = new MemberVO();
+					memberVO.setId(ar.get(i).getId());
+					int result = memberMapper.setMemberRoleDelete1(memberVO);					
+				}
 			}
 		}
 	}
+	
+	// 결제 회원 30일 이후 해지(판매자, VIP)
+		@Scheduled(cron = "0 0 0 * * *")
+		public void setMemberShipPayVIP() throws Exception {
+
+			PayVO payVO = new PayVO();
+			List<PayVO> ar = new ArrayList<>();
+			ar = memberMapper.getPay(payVO);
+
+			memberMapper.setPayAdd();
+			for (int i = 0; i < ar.size(); i++) {
+				if (ar.get(i).getPayDate2().equals(ar.get(i).getCancelDate())) {
+					if(ar.get(i).getPayName().equals("ROLE_VIP")) {
+						log.info("===============삭제================");
+						MemberVO memberVO = new MemberVO();
+						memberVO.setId(ar.get(i).getId());
+						int result = memberMapper.setMemberRoleDelete2(memberVO);					
+					}
+				}
+			}
+		}
 
 	
 	//72시간마다 적립예정포인트를 -> 3일 후 적립되는 포인트로 업데이트
