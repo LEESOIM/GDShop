@@ -76,7 +76,7 @@ pageEncoding="UTF-8"%>
 
     <!-- Nav Item - Charts -->
     <li class="nav-item">
-        <a class="nav-link" href="../chat/chat">
+        <a class="nav-link" href="/chat/room">
             <i class="bi bi-chat-dots"></i>
             <span>상담</span></a>
     </li>
