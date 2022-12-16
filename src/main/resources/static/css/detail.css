@@ -18,18 +18,12 @@ html, body {
 /* 모달창 */
 .solid {
    height: 0.1px; 
-   width: 80px; 
+   width: 120px; 
    border: solid lightgray 0.1px; 
    margin: 20px 12px 0px 12px;
 }
 
 .mission_order{
    color: gray; 
-   font-size: 14px;
-}
-
-.mission_order:hover{
-   color: black;
-   font-weight: bold;
-   cursor: pointer;
+   font-size: 15px;
 }

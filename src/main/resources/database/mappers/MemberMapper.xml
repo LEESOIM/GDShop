@@ -297,9 +297,18 @@
    	SELECT * FROM POINT WHERE ID=#{id} <include refid="order2"></include> ORDER BY FINISH DESC
    </select>
    
+   <select id="getPointScheduler" parameterType="PointVO" resultType="PointVO">
+   	SELECT * FROM POINT
+   </select>
+   
+   <!-- finish +1씩 증가 -->
+   <update id="setPointAdd">
+      UPDATE PAY SET FINISH=DATE_ADD(FINISH, INTERVAL 1 DAY)
+   </update>
+   
    <!-- 멤버십 결제일,해지일 -->
    <select id="getMembershipPay" parameterType="PayVO" resultType="PayVO">
-   	SELECT PAYDATE, CANCELDATE FROM PAY WHERE ID=#{id} AND PAYNAME='ROLE_VIP'
+   	SELECT * FROM PAY WHERE ID=#{id} AND PAYNAME='ROLE_VIP'
    </select>
    
    <select id="getPay" parameterType="PayVO" resultType="PayVO">
@@ -308,10 +317,17 @@
    
    <!-- 결제일 +1씩 증가 (해지일과 같아지면 DELETE)-->
    <update id="setPayAdd">
-      UPDATE PAY SET PAYDATE=DATE_ADD(PAYDATE, INTERVAL 1 DAY)
+      UPDATE PAY SET PAYDATE2=DATE_ADD(PAYDATE2, INTERVAL 1 DAY)
    </update>
    
    <delete id="setPayDelete" parameterType="PayVO">
    	DELETE FROM PAY WHERE PAYNUM=#{payNum}
    </delete>
+   
+   <!-- 문자발신 폰번호 -->
+   <select id="getPhone" parameterType="String" resultType="String">
+   	SELECT PHONE FROM MEMBER WHERE ID =#{id}
+   </select>
+   
+    
 </mapper>

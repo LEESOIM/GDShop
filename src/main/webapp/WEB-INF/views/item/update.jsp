@@ -60,7 +60,7 @@
 						<b>상품가격</b>
 					</div>
 					<div class="d-flex" style="width: 79%;">
-						<input class="form-control" style="width: 35%;" type="text" name="price" id="price" value="${vo.price }" readonly="readonly"><p style="margin:auto 0;">&nbsp;원</p>
+						<input class="form-control" style="width: 35%; cursor: not-allowed" type="text" name="price" id="price" value="${vo.price }" readonly="readonly"><p style="margin:auto 0;">&nbsp;원</p>
 					</div>
 				</div>
 				</div>
@@ -154,10 +154,10 @@
 						<div id="pointOn">
 							<div class="mt-3">
 								<div class="d-flex mb-2"><span class="me-4" style="margin:auto 0;">판매금액</span>
-									<input type="text" class="form-control w-25" id="point1_1" readonly="readonly" value="${vo.price }"><span style="margin:auto 0;">&nbsp;원</span>
+									<input type="text" class="form-control w-25" style=" cursor: not-allowed" id="point1_1" readonly="readonly" value="${vo.price }"><span style="margin:auto 0;">&nbsp;원</span>
 								</div>
 								<div class="d-flex mb-2"><span class="me-2" style="margin:auto 0;">고객부담금</span>
-									<input type="text" class="form-control w-25" id="point1_2" ><span style="margin:auto 0;">&nbsp;원</span>
+									<input type="text" class="form-control w-25" id="point1_2" style="cursor: not-allowed" ><span style="margin:auto 0;">&nbsp;원</span>
 								</div>
 								<div><span class="me-4">보상금액</span>
 									<input type="hidden" id="point1_3" value="${vo.point }">
@@ -177,10 +177,10 @@
 						<div id="pointOff">
 							<div class="mt-3">
 								<div class="d-flex mb-2"><span class="me-4" style="margin:auto 0;">판매금액</span>
-									<input type="text" class="form-control w-25" id="point2_1" readonly="readonly" value="${vo.price }"><span style="margin:auto 0;">&nbsp;원</span>
+									<input type="text" class="form-control w-25" style="cursor: not-allowed" id="point2_1" readonly="readonly" value="${vo.price }"><span style="margin:auto 0;">&nbsp;원</span>
 								</div>
 								<div class="d-flex mb-2"><span class="me-2" style="margin:auto 0;">고객부담금</span>
-									<input type="text" class="form-control w-25" id="point2_2" readonly="readonly" value="0"><span style="margin:auto 0;">&nbsp;원</span>
+									<input type="text" class="form-control w-25" style="cursor: not-allowed" id="point2_2" readonly="readonly" value="0"><span style="margin:auto 0;">&nbsp;원</span>
 								</div>
 								<div><span class="me-4">보상금액</span>
 									<input type="hidden" id="point2_3" value="${vo.point }">
@@ -220,7 +220,7 @@
 						<b>총 제공수량</b>
 					</div>
 					<div style="width: 79%;">
-						<input class="form-control" id="stock" style="width: 35%;" type="text" name="stock"  value="${vo.stock }" readonly="readonly">
+						<input class="form-control" id="stock" style="width: 35%; cursor: not-allowed" type="text" name="stock"  value="${vo.stock }" readonly="readonly">
 					</div>
 				</div>
 				
@@ -230,7 +230,7 @@
 						<b>총 캠페인회차</b>
 					</div>
 					<div style="width: 79%;">
-						<div class="d-flex"><input class="form-control" id="count" style="width: 35%;" type="text" name="count" value="${vo.count }" readonly="readonly"><p style="margin:auto 0;">&nbsp;회</p></div>
+						<div class="d-flex"><input class="form-control" id="count" style="width: 35%; cursor: not-allowed" type="text" name="count" value="${vo.count }" readonly="readonly"><p style="margin:auto 0;">&nbsp;회</p></div>
 						<p style="color: #1ec800; font-size:13px; margin-top:3px; margin-bottom: 0px;">캠페인당 모집인원 = 총 제공수량/총 캠페인 회차</p>
 					</div>
 				</div>
@@ -253,7 +253,7 @@
 				</div>
 				<div class="d-flex mt-5 justify-content-center">
 					<a href="../member/product"><button type="button" class="btn me-2" style="width:250px; height:50px; color:white; background-color: #adb5bd; font-weight: bold;">취소</button></a>
-					<button type="submit" class="btn upBtn" style="width:250px; color:white; background-color: #75c30b; font-weight: bold;">수정 등록 요청</button>
+					<button class="btn upBtn" style="width:250px; color:white; background-color: #75c30b; font-weight: bold;">수정 등록 요청</button>
 				</div>
 			</form>
 			</div>

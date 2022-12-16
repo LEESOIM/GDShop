@@ -23,7 +23,9 @@
 			<div class="row justify-content-center col-9">
 			
 			<form action="./add" method="post" enctype="multipart/form-data">
-				<div class="d-flex pt-5">
+				<div class="pt-5">
+				<b style="color: red; font-size: 14px">*캠페인 유형을 먼저 선택해주세요</b>
+				<div class="d-flex">
 					<div>
 						<div class="btn-group">
 						  <input type="radio" class="btn-check" name="type" id="type1" value="추첨형">
@@ -37,7 +39,7 @@
 						</div>
 					</div>
 				</div>
-				
+				</div>
 				
 				<div class="mission1 pt-5">
 				<div style="border-bottom: solid;">
@@ -201,7 +203,7 @@
 				
 				<div class="d-flex py-4" style="border-bottom: solid 0.5px gainsboro;">
 					<div style="margin:auto 0; width: 20%;">
-						<b>총 제공수량<span style="color: limegreen;">*</span></b>
+						<b>한 캠페인당 모집인원<span style="color: limegreen;">*</span></b>
 					</div>
 					<div style="width: 79%;">
 						<input class="form-control" id="stock" style="width: 35%;" type="text" name="stock">
@@ -215,7 +217,6 @@
 					</div>
 					<div style="width: 79%;">
 						<div class="d-flex"><input class="form-control" id="count" style="width: 35%;" type="text" name="count"><p style="margin:auto 0;">&nbsp;회</p></div>
-						<p style="color: #1ec800; font-size:13px; margin-top:3px; margin-bottom: 0px;">캠페인당 모집인원 = 총 제공수량/총 캠페인 회차</p>
 					</div>
 				</div>
 				</div>

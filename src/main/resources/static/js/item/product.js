@@ -31,3 +31,20 @@ $(".upBtn").click(function(){
     }
 })
 
+
+//추첨형 선정
+$(".test").click(function(){
+ 	let e = $(this).data('itemnum');
+    console.log(e);
+    $.ajax({
+        type: "POST",
+        url: "/mission/win",
+        data: {
+            itemNum: e
+        },
+        success: function(data) {
+            console.log("Success");
+        }
+    })
+
+})

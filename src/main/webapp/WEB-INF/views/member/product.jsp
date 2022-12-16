@@ -80,6 +80,7 @@ prefix="c" %>
                   		</c:if>
                   	</div>
                   	</div>
+                  		<button class="test" data-itemnum="${item.items[0].itemNum}">test</button>
                   </div>
                 </div>
                </c:forEach>
