@@ -70,7 +70,6 @@ public class MissionController {
 		// 랜덤숫자 뽑기
 		Random random = new Random();
 		int [] numArray = new int[itemVO.getStock().intValue()]; //모집인원 10
-		int temp;
 		
 		for(int i=0; i<itemVO.getStock(); i++) {
 			numArray[i] = random.nextInt(ar.size())+1;
@@ -110,6 +109,7 @@ public class MissionController {
 	@PostMapping("rate")
 	@ResponseBody
 	public int getApplyRate(MissionVO missionVO) throws Exception {
+		log.info("모집률{}", missionVO);
 		return missionService.getApplyRate(missionVO);
 	}
 
