@@ -30,6 +30,8 @@ public class ItemController {
 	private NotificationService notificationService;
 	@Autowired
 	private ItemService itemService;
+	@Autowired
+	private MemberService memberService;
 	
 	@PostMapping("setRequest")
 	@ResponseBody
