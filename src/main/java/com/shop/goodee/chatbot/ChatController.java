@@ -43,8 +43,6 @@ public class ChatController {
         String message =  getReqMessage(chatMessage);
         String encodeBase64String = makeSignature(message, secretKey);
         
-        log.info("message => {}", message);
-        log.info("encode => {}", encodeBase64String);
 
         //api서버 접속 (서버 -> 서버 통신)		
         HttpURLConnection con = (HttpURLConnection)url.openConnection();

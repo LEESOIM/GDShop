@@ -9,11 +9,15 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
+
+import com.shop.goodee.member.MemberVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,6 +37,7 @@ public class SocketHandler extends TextWebSocketHandler {
 		JSONObject obj = (JSONObject)msgobj;
 		String rN = (String) obj.get("roomNumber");
 		HashMap<String, Object> temp = new HashMap<String, Object>();
+		
 		if(rls.size() > 0) {
 			for(int i=0; i<rls.size(); i++) {
 				String roomNumber = (String) rls.get(i).get("roomNumber"); //세션리스트의 저장된 방번호를 가져와서

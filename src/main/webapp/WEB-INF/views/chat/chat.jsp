@@ -20,7 +20,7 @@
 		<h1>${room.roomName}<i class="fa-regular fa-comment-dots ps-2"></i></h1>
 		<input type="hidden" id="sessionId" value="">
 		<input type="hidden" id="roomNumber" value="${room.roomNumber}">
-		
+		<input type="hidden" id="MName" value="${memberVO.name}">
 		<div id="chating" class="chating"></div>
 		
 		<div id="yourName">

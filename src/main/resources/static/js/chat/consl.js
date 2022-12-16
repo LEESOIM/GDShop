@@ -35,12 +35,12 @@ function wsEvt() {
 		}
 	}
 
-	document.addEventListener("keypress", function (e) {
-		if (e.keyCode == 13) { //enter press
-			send();
-		}
-	});
 }
+// document.addEventListener("keypress", function (e) {
+// 	if (e.keyCode == 13) { //enter press
+// 		send();
+// 	}
+// });
 
 
 function send() {
