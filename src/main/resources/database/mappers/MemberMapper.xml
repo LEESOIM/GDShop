@@ -308,7 +308,7 @@
    
    <!-- 멤버십 결제일,해지일 -->
    <select id="getMembershipPay" parameterType="PayVO" resultType="PayVO">
-   	SELECT PAYDATE, CANCELDATE FROM PAY WHERE ID=#{id} AND PAYNAME='멤버십'
+   	SELECT * FROM PAY WHERE ID=#{id} AND PAYNAME='ROLE_VIP'
    </select>
    
    <select id="getPay" parameterType="PayVO" resultType="PayVO">
@@ -317,7 +317,7 @@
    
    <!-- 결제일 +1씩 증가 (해지일과 같아지면 DELETE)-->
    <update id="setPayAdd">
-      UPDATE PAY SET PAYDATE=DATE_ADD(PAYDATE, INTERVAL 1 DAY)
+      UPDATE PAY SET PAYDATE2=DATE_ADD(PAYDATE2, INTERVAL 1 DAY)
    </update>
    
    <delete id="setPayDelete" parameterType="PayVO">
