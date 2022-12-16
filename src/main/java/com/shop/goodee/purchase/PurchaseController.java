@@ -30,6 +30,7 @@ public class PurchaseController {
 
 	@Autowired
 	private MissionService missionService;
+	
 
 	@GetMapping("purchase")
 	public void purchase() throws Exception {
@@ -42,7 +43,11 @@ public class PurchaseController {
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
 		memberVO = (MemberVO) authentication.getPrincipal();
-		purchaseVO.setId(memberVO.getId());
+		missionVO.setId(memberVO.getId());
+		
+		// 미션번호
+		missionVO = missionService.getApply(missionVO);
+		purchaseVO.setMissionNum(missionVO.getMissionNum());
 
 		// 구매사진
 		PurchaseVO finalPurchaseVO = purchaseService.getPurchase(f);
@@ -56,13 +61,13 @@ public class PurchaseController {
 		log.info("M주문번호){}", purchaseVO.getPurNumM());
 		log.info("가격){}", finalPurchaseVO.getPrice());
 		log.info("M가격){}", purchaseVO.getPriceM());
-		log.info("{}", purchaseVO);
+		log.info("purchaseVO{}", purchaseVO);
 		log.info("=============================");
 
 		ModelAndView mv = new ModelAndView();
 		if (finalPurchaseVO.getPurNum().equals(purchaseVO.getPurNumM())) {
 			if(finalPurchaseVO.getPrice().equals(purchaseVO.getPriceM())) {
-				int result = missionService.setMiStatus1(purchaseVO); // status 0->1
+				missionService.setMiStatus1(purchaseVO); // status 0->1
 			} 
 		}
 		

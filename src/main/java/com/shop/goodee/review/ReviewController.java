@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shop.goodee.item.ItemVO;
+import com.shop.goodee.member.MemberService;
 import com.shop.goodee.member.MemberVO;
 import com.shop.goodee.mission.MissionService;
 import com.shop.goodee.mission.MissionVO;
@@ -46,7 +47,7 @@ public class ReviewController {
 	@ResponseBody
 	public ModelAndView getReview(HttpSession session, MemberVO memberVO, TestVO testVO, MissionVO missionVO) throws Exception {
 		ReviewVO finalReviewVO = reviewService.getReview(testVO);
-
+		
 		log.info("=========Controller========");
 		log.info("닉네임)" + finalReviewVO.getNickName());
 		log.info("상품명)" + finalReviewVO.getTitle());
@@ -57,24 +58,29 @@ public class ReviewController {
 
 		ModelAndView mv = new ModelAndView();
 		ReviewVO reviewVO = new ReviewVO();
-		
-		if(finalReviewVO.getReviewLength() >= 50) {
-			//닉네임등록
-			SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
-			Authentication authentication = context.getAuthentication();
-			memberVO = (MemberVO) authentication.getPrincipal();
-			reviewVO.setId(memberVO.getId());
+
+		// ID
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		memberVO = (MemberVO) authentication.getPrincipal();
+		missionVO.setId(memberVO.getId());
+		reviewVO.setId(memberVO.getId());
+
+		// 미션번호
+		missionVO = missionService.getApply(missionVO);
+		reviewVO.setMissionNum(missionVO.getMissionNum());
+
+		if (finalReviewVO.getReviewLength() >= 50) {
+			// 닉네임등록
 			reviewVO.setNickName(testVO.getNickName());
-			missionService.setNicC(reviewVO);	
-			
+			missionService.setNicC(reviewVO);
+
 			// status 1->2
-//			int result = missionService.setMiStatus2(reviewVO); 
+			missionService.setMiStatus2(reviewVO);
 		}
-			
-			
-			mv.setViewName("redirect:/item/detail?itemNum=" + missionVO.getItemNum());
-			return mv;
-			
+
+		mv.setViewName("redirect:/item/detail?itemNum=" + missionVO.getItemNum());
+		return mv;
 	}
 
 	@PostMapping("getReviewNaver")

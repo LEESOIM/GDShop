@@ -78,8 +78,5 @@ public class MissionService {
 	public int setWin(MissionVO missionVO) throws Exception {
 		return missionMapper.setWin(missionVO);
 	}
-	
-	public MemberVO getPhone(MissionVO missionVO) throws Exception{
-		return missionMapper.getPhone(missionVO);
-	}
+
 }

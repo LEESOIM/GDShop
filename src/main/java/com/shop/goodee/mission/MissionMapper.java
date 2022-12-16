@@ -46,5 +46,4 @@ public interface MissionMapper {
 	
 	public int setWin(MissionVO missionVO) throws Exception;
 	
-	public MemberVO getPhone(MissionVO missionVO) throws Exception;
 }

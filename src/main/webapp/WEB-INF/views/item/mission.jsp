@@ -154,7 +154,6 @@
 				<hr />
 		<c:if test="${vo.type eq '즉석추첨형' }">
 				<form id="ocr" action="/purchase/setPurchase" method="post" enctype="multipart/form-data">
-				<input id="missionNum" name="missionNum" type="hidden">
 				<input name="itemNum" type="hidden" value="${vo.itemNum }">
 				<div class="pe-4 py-4" style="font-size: 14px">
 				<div class="d-flex pb-2">
@@ -223,7 +222,6 @@
 		</c:if>
 			<c:if test="${vo.type eq 'SNS미션' }">	
 			<form id="ocr" action="" method="post" enctype="multipart/form-data">
-				<input id="missionNum" name="missionNum" type="hidden">
 				<input name="itemNum" type="hidden" value="${vo.itemNum }">
 				<div class="pe-4 py-4" style="font-size: 15px">
 				<div class="d-flex pb-2">
@@ -342,7 +340,6 @@
 				</div>
 				<c:if test="${vo.shop eq '쿠팡' }">
 				 <form id="reviewC" action="/review/getReview" method="POST" >
-					<input id="missionNum" name="missionNum" type="hidden" value="">
 					<input name="itemNum" type="hidden" value="${vo.itemNum }">
 					<div class="d-flex pt-3">
 						<div style="margin:auto 0; width: 30%; text-align: right;">
@@ -370,6 +367,7 @@
 				
 				<c:if test="${vo.shop ne '쿠팡' }">
 				<form id="reviewN" action="/review/getReviewNaver" method="POST" >
+					<input name="itemNum" type="hidden" value="${vo.itemNum }">
 					<div class="d-flex pt-3">
 						<div style="margin:auto 0; width: 30%; text-align: right;">
 							<b><span style="color: red">*</span>아이디</b>

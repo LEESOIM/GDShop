@@ -85,14 +85,5 @@
 		UPDATE MISSION SET MYCAM=1 WHERE ID=#{id} and ITEMNUM=#{itemNum}
 	</update>
 	
-	<!-- 문자발신 폰번호 -->
-	<select id="getPhone" parameterType="MissionVO" resultType="MemberVO" >
-		SELECT PHONE
-		FROM MISSION MI
-		INNER JOIN
-		MEMBER M
-		USING(ID)
-		WHERE ID=#{id}
-	</select>
 	
 </mapper>

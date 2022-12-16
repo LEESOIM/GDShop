@@ -324,6 +324,7 @@
    	DELETE FROM PAY WHERE PAYNUM=#{payNum}
    </delete>
    
+   <!-- 문자발신 폰번호 -->
    <select id="getPhone" parameterType="String" resultType="String">
    	SELECT PHONE FROM MEMBER WHERE ID =#{id}
    </select>
