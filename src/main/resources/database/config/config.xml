@@ -7,16 +7,14 @@
 	<typeAliases>
 		<!-- 하준 -->
 		<typeAlias type="com.shop.goodee.purchase.PurchaseVO" alias="PurchaseVO"/>
+		<typeAlias type="com.shop.goodee.review.ReviewVO" alias="ReviewVO"/>
 		<typeAlias type="com.shop.goodee.purchase.PurchaseFileVO" alias="PurchaseFileVO"/>
 		<typeAlias type="com.shop.goodee.seller.SellerVO" alias="SellerVO"/>
 		<typeAlias type="com.shop.goodee.myCampaign.MyCampaignVO" alias="MyCampaignVO"/>
-		<!-- 하준 -->
 		<typeAlias type="com.shop.goodee.pay.PayVO" alias="PayVO"/>
 		<typeAlias type="com.shop.goodee.board.notice.NoticeVO" alias="NoticeVO"/>
 		<typeAlias type="com.shop.goodee.util.Pager" alias="Pager"/>
 		<typeAlias type="com.shop.goodee.board.notice.NoticeFileVO" alias="NoticeFileVO"/>
-		
-	
 		
 		<typeAlias type="com.shop.goodee.member.MemberVO" alias="MemberVO"/>
 		<typeAlias type="com.shop.goodee.member.PointVO" alias="PointVO"/>

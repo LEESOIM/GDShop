@@ -57,6 +57,7 @@ $("#applyBaro").click(function () {
     $("#roulette").delay(3500).fadeIn(2000);
     $("#rouletteF").delay(3500).fadeIn(2000);
 
+
     $.ajax({
         type: "POST",
         url: "/mission/apply",
@@ -73,5 +74,3 @@ $("#applyBaro").click(function () {
         }
     })
 })
-
-

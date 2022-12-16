@@ -31,14 +31,14 @@
 	              <div class="mt-4">
 	                <label class="mt-2 mb-2" style="font-weight: bold">
 	                <span style="color: red">＊</span>url</label>
-	                <input type="text" name="url" placeholder="url을 입력해주세요." class="join_form"/>
+	                <input type="text" name="url" placeholder="url을 입력해주세요." class="url join_form"/>
 	              </div>
 	              
 	              <!-- 닉네임 -->
 	              <div class="mt-4">
 	                <label class="mt-2 mb-2" style="font-weight: bold">
 	                <span style="color: red">＊</span>쿠팡 닉네임</label>
-	                <input type="text" name="nickName" placeholder="쿠팡 닉네임을 입력해주세요." class="join_form"/>
+	                <input type="text" name="nickName" placeholder="쿠팡 닉네임을 입력해주세요." class="nic join_form"/>
 	              </div>
 	              
 	              <button class="btn btn-success" type="submit">

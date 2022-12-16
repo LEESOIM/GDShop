@@ -3,6 +3,7 @@ package com.shop.goodee.schedule;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.shop.goodee.item.ItemMapper;
+import com.shop.goodee.item.ItemVO;
 import com.shop.goodee.member.MemberMapper;
 import com.shop.goodee.member.MemberVO;
 
@@ -29,6 +32,7 @@ public class Scheduler { // 초(0-59) 분(0-59) 시(0-23) 일(1-31) 월(1-12) �
 
 	@Autowired
 	private MissionMapper missionMapper;
+	
 
 	// 30일 이후, 탈퇴회원 삭제
 	@Scheduled(cron = "0 0 0 * * *")
@@ -89,7 +93,7 @@ public class Scheduler { // 초(0-59) 분(0-59) 시(0-23) 일(1-31) 월(1-12) �
 
 
 	// 2시간내 구매인증 안하면 자동취소
-	@Scheduled(cron = "0 * * * * *")
+	//@Scheduled(cron = "0 * * * * *")
 	public void set2hCancel() throws Exception {
 		// 구매인증미션 진행중인 회원
 		List<MissionVO> ar = new ArrayList<>();
@@ -121,4 +125,5 @@ public class Scheduler { // 초(0-59) 분(0-59) 시(0-23) 일(1-31) 월(1-12) �
 			}
 		}
 	}
+	
 }

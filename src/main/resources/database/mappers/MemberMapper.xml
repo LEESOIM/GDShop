@@ -324,5 +324,9 @@
    	DELETE FROM PAY WHERE PAYNUM=#{payNum}
    </delete>
    
+   <select id="getPhone" parameterType="String" resultType="String">
+   	SELECT PHONE FROM MEMBER WHERE ID =#{id}
+   </select>
+   
     
 </mapper>

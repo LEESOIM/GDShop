@@ -52,7 +52,7 @@ public class ReviewService {
 																																						// 설정
 		options.addArguments("--disable-blink-features=AutomationControlled");
 		options.addArguments("--disable-extensions");
-//		options.addArguments("headless");
+		options.addArguments("headless");
 
 		driver = new ChromeDriver(options);
 		System.out.println(testVO.getUrl());
