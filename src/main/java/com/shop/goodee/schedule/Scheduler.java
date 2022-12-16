@@ -67,7 +67,7 @@ public class Scheduler { // 초(0-59) 분(0-59) 시(0-23) 일(1-31) 월(1-12) �
 
 		memberMapper.setPayAdd();
 		for (int i = 0; i < ar.size(); i++) {
-			if (ar.get(i).getPayDate().equals(ar.get(i).getCancelDate())) {
+			if (ar.get(i).getPayDate2().equals(ar.get(i).getCancelDate())) {
 				log.info("===============삭제================");
 				int result = memberMapper.setPayDelete(ar.get(i));
 			}
