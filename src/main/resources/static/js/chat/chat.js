@@ -27,10 +27,10 @@ function wsEvt() {
 					$("#chating").append("<p class='me'>👨‍💻 : " + d.msg + "</p>");
 				} else {
 					console.log($("#MName").val());
-					if($("#MName").val() != null){
-						$("#chating").append("<p class='others'>" + $("#MName").val() + " : " + d.msg + "</p>");
+					if($("#MName").val() == null || $("#MName").val() == ''){
+						$("#chating").append("<p class='others'>" + '고객님' + " : " + d.msg + "</p>");
 					}else{
-						$("#chating").append("<p class='others'>" + '상담자' + " : " + d.msg + "</p>");
+						$("#chating").append("<p class='others'>" + $("#MName").val() + " : " + d.msg + "</p>");
 					}
 				}
 

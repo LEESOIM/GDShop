@@ -20,7 +20,7 @@ function ajaxMessage(message) {
     for (let i = 1; i < messages.length; i++) {
         ((x) => {
             setTimeout(() => {
-                showMessage("받은 메시지: " + messages[i]); //서버에 메시지 전달 후 리턴받는 메시지
+                showMessageRecive(messages[i]); //서버에 메시지 전달 후 리턴받는 메시지
             }, 300 * x);
         })(i);
     }
@@ -33,10 +33,13 @@ function setConnected(connected) {
 }
 
 
-function showMessage(message) {
-    $("#communicate").append("<tr><td>" + message + "</td></tr>");
+function showMessageSend(message) {
+    $("#communicate").append("<p class='me'>" + message + "</p>");
 }
 
+function showMessageRecive(message) {
+    $("#communicate").append("<p class='others'>" + message + "</p>");
+}
 
 
 $(function () {
@@ -46,6 +49,8 @@ $(function () {
     $("#sendForm").hide();
     $("#send").click(function () { sendMessage(); });
     $("#connect").click(function () {
+
+
         basicmessage();
     });
 });
@@ -57,7 +62,7 @@ $(function () {
 
 $(document).on("click", ".botcat", (e) => {
     e.stopImmediatePropagation();
-    showMessage($(e.target).text());
+    showMessageSend($(e.target).text());
     $(e.target).parent().remove();
     commonAjax("/sendMessage", $(e.target).text(), 'POST', function (message) {
         ajaxMessage(message);
@@ -79,7 +84,7 @@ $(document).on("click", ".botcat", (e) => {
 });
 
 $(document).on("click", ".botbtn", (e) => {
-    showMessage($(e.target).text());
+    showMessageSend($(e.target).text());
     $(e.target).parent().remove();
     commonAjax("/sendMessage", $(e.target).text(), 'POST', function (message) {
         ajaxMessage(message);
@@ -101,7 +106,7 @@ $(document).on("click", ".botbtn", (e) => {
 });
 
 $(document).on("click", "#chatbtn", (e) => {
-    showMessage($(e.target).text());
+    showMessageSend($(e.target).text());
     $(e.target).parent().remove();
     commonAjax("/sendMessage", $(e.target).text(), 'POST', function (message) {
         ajaxMessage(message);
@@ -113,7 +118,7 @@ $(document).on("click", "#chatbtn", (e) => {
 });
 
 $(document).on("click", "#chatConnect", (e) => {
-    showMessage($(e.target).text());
+    showMessageSend($(e.target).text());
     $(e.target).parent().remove();
     $("#sendForm").show();
     createRoom();

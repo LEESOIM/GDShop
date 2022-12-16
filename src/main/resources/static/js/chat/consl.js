@@ -24,9 +24,9 @@ function wsEvt() {
 			} else if (d.type == "message") {
                 console.log(d);
 				if (d.sessionId == $("#sessionId").val()) {
-					showMessage(d.msg);
+					chatMessageSend(d.msg);
 				} else {
-					showMessage("받은 메시지: " + d.msg);
+					chatMessageRecive(d.msg);
 				}
 
 			} else {
@@ -36,12 +36,13 @@ function wsEvt() {
 	}
 
 }
-// document.addEventListener("keypress", function (e) {
-// 	if (e.keyCode == 13) { //enter press
-// 		send();
-// 	}
-// });
+function chatMessageSend(message) {
+    $("#communicate").append("<div class='chatMe'>" + message + "</div>");
+}
 
+function chatMessageRecive(message) {
+    $("#communicate").append("<div class='chatOthers'>" + message + "</div>");
+}
 
 function send() {
 	var option = {
