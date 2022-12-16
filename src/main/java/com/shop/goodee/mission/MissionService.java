@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.shop.goodee.member.MemberVO;
 import com.shop.goodee.purchase.PurchaseVO;
+import com.shop.goodee.review.ReviewVO;
 import com.shop.goodee.seller.SellerVO;
 
 @Service
@@ -45,13 +46,13 @@ public class MissionService {
 	}
 	
 	//네이버 닉네임 등록
-	public int setNicN(PurchaseVO purchaseVO) throws Exception {
-		return missionMapper.setNicN(purchaseVO);
+	public int setNicN(ReviewVO reviewVO) throws Exception {
+		return missionMapper.setNicN(reviewVO);
 	}
 	
 	//쿠팡 닉네임 등록
-	public int setNicC(PurchaseVO purchaseVO) throws Exception {
-		return missionMapper.setNicC(purchaseVO);
+	public int setNicC(ReviewVO reviewVO) throws Exception {
+		return missionMapper.setNicC(reviewVO);
 	}
 	
 	//미션 상황 status 변경
@@ -59,8 +60,8 @@ public class MissionService {
 		return missionMapper.setMiStatus1(purchaseVO);
 	}
 	
-	public int setMiStatus2(PurchaseVO purchaseVO) throws Exception{
-		return missionMapper.setMiStatus2(purchaseVO);
+	public int setMiStatus2(ReviewVO reviewVO) throws Exception{
+		return missionMapper.setMiStatus2(reviewVO);
 	}
 	
 	//모집률

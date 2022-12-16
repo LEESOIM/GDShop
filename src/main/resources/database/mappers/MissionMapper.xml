@@ -31,13 +31,13 @@
 	</update>
 	
 	<!-- 네이버 닉네임 등록 -->
-	<update id="setNicN" parameterType="PurchaseVO">
-		UPDATE MEMBER SET NICKNAME_N=#{nickname_n} WHERE ID=#{id}
+	<update id="setNicN" parameterType="ReviewVO">
+		UPDATE MEMBER SET NICKNAME_N=#{nickName_N} WHERE ID=#{id}
 	</update>
 	
 	<!-- 쿠팡 닉네임 등록 -->
-	<update id="setNicC" parameterType="PurchaseVO">
-		UPDATE MEMBER SET NICKNAME=#{nickname} WHERE ID=#{id}
+	<update id="setNicC" parameterType="ReviewVO">
+		UPDATE MEMBER SET NICKNAME=#{nickName} WHERE ID=#{id}
 	</update>
 	
 	<!-- 미션진행 status 변경(구매하기->리뷰) -->
@@ -47,7 +47,7 @@
 	
 	<!-- 미션진행 status 변경(리뷰->포인트수령), mycam 미션완료 -->
 	<update id="setMiStatus2" parameterType="MissionVO">
-		UPDATE MISSION SET STATUS=2, MYCAM=2 WHERE MISSIONNUM=#{missionNum}
+		UPDATE MISSION SET STATUS=2 WHERE MISSIONNUM=#{missionNum}
 	</update>
 	
 	<!-- 모집률 -->

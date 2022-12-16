@@ -32,7 +32,7 @@ $(document).ready(function () {
     },
     success: function (data) {
       let stock = $("#stock").val()
-      $("#applyRate").html(data/stock*100+"%")
+      $("#applyRate").html(data / stock * 100 + "%")
     },
   });
 
@@ -128,6 +128,31 @@ $("#applyCheck").click(function () {
     },
   });
 });
+
+
+
+//지원취소버튼
+$(".applyCancel").click(function () {
+  let itemNum = $("#applyCheck").attr("data-itemNum-num")
+  let id = $("#id").val();
+  $.ajax({
+    type: "POST",
+    url: "/mission/cancel",
+    data: {
+      itemNum: itemNum,
+      id: id,
+    },
+    success: function (data) {
+
+      let check = confirm("취소 하시면 해당 캠페인은 재지원이 불가합니다. 정말로 취소 하시겠습니까?")
+      if (check) {
+        location.reload();
+      }
+    }
+  })
+})
+
+
 
 function VIPCheck() {
   $.ajax({

@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.shop.goodee.item.ItemVO;
 import com.shop.goodee.member.MemberVO;
 import com.shop.goodee.mission.MissionService;
+import com.shop.goodee.mission.MissionVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,8 +36,7 @@ public class PurchaseController {
 	}
 
 	@PostMapping("setPurchase")
-	@ResponseBody
-	public ModelAndView setPurchase(HttpSession session, ItemVO itemVO, MemberVO memberVO, PurchaseVO purchaseVO, MultipartFile f) throws Exception {
+	public ModelAndView setPurchase(HttpSession session, MemberVO memberVO, PurchaseVO purchaseVO, MultipartFile f, MissionVO missionVO) throws Exception {
 
 		// ID
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
@@ -53,26 +53,20 @@ public class PurchaseController {
 		log.info("=========Controller==========");
 		log.info("주문일){}", finalPurchaseVO.getPurDate());
 		log.info("주문번호){}", finalPurchaseVO.getPurNum());
-		log.info("가격){}", finalPurchaseVO.getPrice());
 		log.info("M주문번호){}", purchaseVO.getPurNumM());
+		log.info("가격){}", finalPurchaseVO.getPrice());
 		log.info("M가격){}", purchaseVO.getPriceM());
+		log.info("{}", purchaseVO);
 		log.info("=============================");
 
 		ModelAndView mv = new ModelAndView();
 		if (finalPurchaseVO.getPurNum().equals(purchaseVO.getPurNumM())) {
-			
-			if(finalPurchaseVO.getPrice().equals(purchaseVO.getPrice())) {
+			if(finalPurchaseVO.getPrice().equals(purchaseVO.getPriceM())) {
 				int result = missionService.setMiStatus1(purchaseVO); // status 0->1
-				
-				if (purchaseVO.getNickname() == null) { 
-					missionService.setNicN(purchaseVO); //네이버 닉네임 등록
-				} else {
-					missionService.setNicC(purchaseVO); //쿠팡 닉네임 등록
-				}
-			}
-		} 
+			} 
+		}
 		
-		mv.setViewName("redirect:/item/detail?itemNum=" + itemVO.getItemNum());
+		mv.setViewName("redirect:/item/detail?itemNum=" + missionVO.getItemNum());
 		return mv;
 	}
 }
