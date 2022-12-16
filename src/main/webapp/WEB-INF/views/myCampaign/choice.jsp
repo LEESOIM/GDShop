@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +32,7 @@
 			<h2>
 				내 캠페인
 				</h1>
-				<ul class="nav nav-tabs">
+				<ul class="nav nav-tabs mb-4">
 					<li class="nav-item"><a class="nav-link select"  href="./apply" id="apply" data-value="0">지원</a></li>
 					<li class="nav-item"><a class="nav-link select active"  href="./choice" id="choice" data-value="1">선정/미션중</a></li>
 					<li class="nav-item"><a class="nav-link select"  href="./complete" id="complete" data-value="2">미션완료</a></li>

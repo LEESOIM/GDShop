@@ -130,4 +130,6 @@ public interface MemberMapper {
    /* pay Delete */
    public int setPayDelete(PayVO payVO)throws Exception;
    
+   public String getPhone(String id)throws Exception;
+   
 }

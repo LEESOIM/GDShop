@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.shop.goodee.item.ItemFileVO;
 import com.shop.goodee.item.ItemVO;
+import com.shop.goodee.seller.SellerVO;
 
 import lombok.Data;
 
@@ -20,6 +21,7 @@ public class MyCampaignVO {
 	private Integer myCam;
 	
 	private ItemVO itemVO;
+	private SellerVO sellerVO;
 	private List<ItemFileVO> itemFileVOs;
 	
 	//포인트 변화
