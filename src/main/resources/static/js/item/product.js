@@ -31,6 +31,8 @@ $(".upBtn").click(function(){
     }
 })
 
+
+//추첨형 선정
 $(".test").click(function(){
  	let e = $(this).data('itemnum');
     console.log(e);

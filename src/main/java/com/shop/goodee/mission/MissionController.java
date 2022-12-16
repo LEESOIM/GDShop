@@ -40,6 +40,23 @@ public class MissionController {
 	@Autowired
 	private MemberMapper memberMapper;
 
+	//포인트 수령
+	@PostMapping("point")
+	@ResponseBody
+	public int setReceivePoint(HttpSession session, ItemVO itemVO) throws Exception {
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
+		itemVO.setId(memberVO.getId());
+		log.info("포인트{}",itemVO);
+		//포인트 수령
+		missionService.setReceivePoint(itemVO);
+		//status 1->2
+		int result = missionService.setEnd(itemVO);
+		return result;
+	}
+	
+	
 	// 추첨형미션 랜덤 추첨
 	@PostMapping("win")
 	@ResponseBody

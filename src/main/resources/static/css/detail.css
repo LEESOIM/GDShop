@@ -27,9 +27,3 @@ html, body {
    color: gray; 
    font-size: 15px;
 }
-
-.mission_order:hover{
-   color: black;
-   font-weight: bold;
-   cursor: pointer;
-}
