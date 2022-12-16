@@ -31,7 +31,7 @@
 
 			<h2>
 				내 캠페인
-				</h1>
+				</h2>
 				<ul class="nav nav-tabs mb-4">
 					<li class="nav-item"><a class="nav-link select active"  href="./apply" id="apply" data-value="0">지원</a></li>
 					<li class="nav-item"><a class="nav-link select"  href="./choice" id="choice" data-value="1">선정/미션중</a></li>
