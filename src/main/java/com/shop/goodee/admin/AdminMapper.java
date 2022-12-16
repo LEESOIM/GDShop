@@ -7,10 +7,12 @@ import org.apache.ibatis.annotations.Mapper;
 import com.shop.goodee.item.ItemVO;
 import com.shop.goodee.member.MemberVO;
 import com.shop.goodee.myCampaign.MyCampaignVO;
+import com.shop.goodee.pay.PayVO;
 import com.shop.goodee.util.Pager;
 
 @Mapper
 public interface AdminMapper {
+	public List<PayVO> getRevenue()throws Exception;
 	public Long getCountMi2(Pager pager)throws Exception;
 	public List<MyCampaignVO> getMission2(Pager pager)throws Exception;
 	public Long getCountMi(Pager pager)throws Exception;

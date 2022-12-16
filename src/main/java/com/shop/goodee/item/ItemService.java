@@ -24,6 +24,16 @@ public class ItemService {
 
 	@Value("${app.item}") // C:/gdshop/item/
 	private String path;
+	
+	//상품요청 승인,거절
+	public int setDelRequest(ItemVO itemVO)throws Exception{
+		return itemMapper.setDelRequest(itemVO);
+	}
+	
+	public int setRequest(ItemVO itemVO)throws Exception{
+		return itemMapper.setRequest(itemVO);
+	}
+	
 
 	// 상품등록
 	public int setAdd(ItemVO itemVO) throws Exception {

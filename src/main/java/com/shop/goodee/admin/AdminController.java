@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.shop.goodee.item.ItemVO;
 import com.shop.goodee.member.MemberVO;
 import com.shop.goodee.myCampaign.MyCampaignVO;
+import com.shop.goodee.pay.PayVO;
 import com.shop.goodee.seller.SellerService;
 import com.shop.goodee.seller.SellerVO;
 import com.shop.goodee.util.Pager;
@@ -31,6 +32,15 @@ public class AdminController {
 	private AdminService adminService;	
 	@Autowired
 	private SellerService sellerService;
+	
+	
+	@GetMapping("getRevenue")
+	@ResponseBody
+	public List<PayVO> getRevenue()throws Exception{
+		List<PayVO> list = adminService.getRevenue();
+		return list;
+	}
+	
 	
 	@GetMapping("getMission2")
 	@ResponseBody
@@ -66,6 +76,7 @@ public class AdminController {
 	@ResponseBody
 	public ModelAndView getPdList(Pager pager)throws Exception{
 		// 삭제 요청
+		log.info("=============================");
 		log.info("Delete Request => {}",pager);
 		ModelAndView mv = new ModelAndView();
 		pager.setStatus(1L);
@@ -133,9 +144,9 @@ public class AdminController {
 	@ResponseBody
 	public ModelAndView getAddRequest(Pager pager)throws Exception{
 		// 등록 요청
-		log.info("Add Request => {}",pager);
 		ModelAndView mv = new ModelAndView();
 		pager.setStatus(0L);
+		log.info("Add Request => {}",pager);
 		List<ItemVO> list = adminService.getPdRequest(pager); 
 		mv.addObject("list",list);
 		mv.addObject("pager",pager);
@@ -186,7 +197,7 @@ public class AdminController {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		List<SellerVO> ar = sellerService.getWaitList(); 
+		List<SellerVO> ar = sellerService.getWaitList(pager); 
 		
 		mv.addObject("vo", ar);
 		mv.addObject("pager",pager);
@@ -198,7 +209,7 @@ public class AdminController {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		List<SellerVO> ar = sellerService.getAcceptList(); 
+		List<SellerVO> ar = sellerService.getAcceptList(pager); 
 		
 		mv.addObject("vo", ar);
 		mv.addObject("pager",pager);
@@ -210,7 +221,7 @@ public class AdminController {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		List<SellerVO> ar = sellerService.getPayList(); 
+		List<SellerVO> ar = sellerService.getPayList(pager); 
 		
 		mv.addObject("vo", ar);
 		mv.addObject("pager",pager);

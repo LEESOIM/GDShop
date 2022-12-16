@@ -28,21 +28,35 @@ public class SellerService {
 		return result;
 	}
 	
-	public List<SellerVO> getWaitList() throws Exception{
-		List<SellerVO> ar = sellerMapper.getWaitList();
+	public List<SellerVO> getWaitList(Pager pager) throws Exception{
+		pager.setStatus(0L);
+		pager.setRoleNum(4L);
+		Long totalCount = sellerMapper.getTotalCount(pager);
+		pager.setRow();
+		pager.setNum(totalCount);
+		List<SellerVO> ar = sellerMapper.getWaitList(pager);
 		log.info("==========ㅇ=================={}",ar);
 		return ar;
 	}
 	
-	public List<SellerVO> getAcceptList() throws Exception{
-		List<SellerVO> ar = sellerMapper.getAcceptList();
+	public List<SellerVO> getAcceptList(Pager pager) throws Exception{
+		pager.setStatus(1L);
+		pager.setRoleNum(4L);
+		Long totalCount = sellerMapper.getTotalCount(pager);
+		pager.setRow();
+		pager.setNum(totalCount);
+		List<SellerVO> ar = sellerMapper.getAcceptList(pager);
 		log.info("==========ㅇ=================={}",ar);
 		return ar;
 	}
 	
-	public List<SellerVO> getPayList() throws Exception{
-		List<SellerVO> ar = sellerMapper.getPayList();
-		log.info("==========ㅇ=================={}",ar);
+	public List<SellerVO> getPayList(Pager pager) throws Exception{
+		pager.setStatus(1L);
+		pager.setRoleNum(2L);
+		Long totalCount = sellerMapper.getTotalCount(pager);
+		pager.setRow();
+		pager.setNum(totalCount);
+		List<SellerVO> ar = sellerMapper.getPayList(pager);
 		return ar;
 	}
 	

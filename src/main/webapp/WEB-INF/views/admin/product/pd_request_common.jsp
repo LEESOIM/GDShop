@@ -8,7 +8,7 @@ pageEncoding="UTF-8"%>
    
 </head>
 <body>
-    <table class="table table-striped" id="pdTable">
+    <table class="table table-hover" id="pdTable">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -18,22 +18,20 @@ pageEncoding="UTF-8"%>
                 <th scope="col">아이디</th>
                 <th scope="col">기업명</th>
                 <th scope="col">등록일</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
+
             </tr>
         </thead>
         <tbody>
             <c:forEach items="${list}" var="add">
-                <tr>
+                <tr onclick="getDetail(this)">
                     <th scope="row"></th>
-                    <td>${add.itemNum}</td>
+                    <td class="itemnum">${add.itemNum}</td>
                     <td>${add.itemName}</td>
                     <td>${add.type}</td>
                     <td>${add.id}</td>
                     <td>${add.sellerVO.company}</td>
                     <td>${add.date}</td>
-                    <td><a href="#">O</a></td>
-                    <td><a href="#">X</a></td>
+ 
                 </tr>
             </c:forEach>
         </tbody>

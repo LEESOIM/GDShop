@@ -73,15 +73,15 @@
 						<button class="btn btn-danger w-100 mt-3" disabled="disabled"><i class="fa-solid fa-ban me-2"></i>일시중지</button>
 						</c:if>
 						
-						
+					
 						<sec:authorize access="hasRole('ADMIN')">
 						<div class="mt-3">
 						<c:if test="${vo.status eq 0 }">
 							<div class="d-flex justify-content-center">
 								<b style="margin: auto 0">상품승인</b>
 								<div class="d-flex my-1">
-								<button class="btn btn-outline-success ms-2 me-1" data-itemNum-num="${vo.itemNum }"><b>O</b></button>
-								<button class="btn btn-outline-danger" data-itemNum-num="${vo.itemNum }"><b>X</b></button>
+								<button id="addO" onclick="requestOX(1,'setRequest',this)" class="btn btn-outline-success ms-2 me-1" data-itemNum-num="${vo.itemNum }"><b>O</b></button>
+								<button id="addX" onclick="requestOX(4,'setRequest',this)" class="btn btn-outline-danger" data-itemNum-num="${vo.itemNum }"><b>X</b></button>
 								</div>
 							</div>
 						</c:if>
@@ -89,8 +89,8 @@
 						<div class="d-flex justify-content-center">
 							<b style="margin: auto 0">수정승인</b>
 							<div class="d-flex my-1">
-							<button class="btn btn-outline-success ms-2 me-1" data-itemNum-num="${vo.itemNum }"><b>O</b></button>
-							<button class="btn btn-outline-danger" data-itemNum-num="${vo.itemNum }"><b>X</b></button>
+							<button id="upO"  onclick="requestOX(1,'setRequest',this)" class="btn btn-outline-success ms-2 me-1" data-itemNum-num="${vo.itemNum }"><b>O</b></button>
+							<button id="upX"  onclick="requestOX(4,'setRequest',this)" class="btn btn-outline-danger" data-itemNum-num="${vo.itemNum }"><b>X</b></button>
 							</div>
 						</div>
 						</c:if>
@@ -98,8 +98,8 @@
 							<div class="d-flex justify-content-center">
 								<b style="margin: auto 0">삭제승인</b>
 								<div class="d-flex my-1">
-								<button class="btn btn-outline-success ms-2 me-1" data-itemNum-num="${vo.itemNum }"><b>O</b></button>
-								<button class="btn btn-outline-danger" data-itemNum-num="${vo.itemNum }"><b>X</b></button>
+								<button id="delO"  onclick="requestOX(1,'setDelRequest',this)" class="btn btn-outline-success ms-2 me-1" data-itemNum-num="${vo.itemNum }"><b>O</b></button>
+								<button id="delX"  onclick="requestOX(4,'setDelRequest',this)" class="btn btn-outline-danger" data-itemNum-num="${vo.itemNum }"><b>X</b></button>
 								</div>
 							</div>
 						</c:if>

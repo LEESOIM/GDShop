@@ -9,6 +9,10 @@ import com.shop.goodee.member.MemberVO;
 @Mapper
 public interface ItemMapper {
 
+	public int setDelRequest(ItemVO itemVO)throws Exception;
+	
+	public int setRequest(ItemVO itemVO)throws Exception;
+	
 	public int setAdd(ItemVO itemVO) throws Exception;
 
 	public int setAddFile(ItemFileVO itemFileVO) throws Exception;

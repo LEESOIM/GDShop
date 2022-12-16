@@ -6,9 +6,33 @@ $("#membership_joinBtn").click(function () {
     $("#exampleModal_membership").modal("hide");
     $("#exampleModal").modal("show");
   } else {
-    requestPay($("#memberName").text(), $("#memberId").text());
+    alreadyPayCheck();
   }
 });
+
+function alreadyPayCheck(){
+  console.log("alreadyPayCheck")
+  console.log($("#memberId").text())
+  $.ajax({
+      type:"GET",
+      url:"/membership/alreadyPayCheck",
+      data:{
+          id:$("#memberId").text(),
+          payName:'ROLE_VIP'
+      },
+      success:function(data){
+          console.log(data)
+          check = data
+          if(check){
+              requestPay($("#memberName").text(), $("#memberId").text());
+          }else{
+              alert("이미 결제했습니다")
+          }
+      }
+  })
+}
+
+
 
 function requestPay(buyer_name, buyer_id) {
   var IMP = window.IMP; // 생략 가능
@@ -21,7 +45,7 @@ function requestPay(buyer_name, buyer_id) {
       pg: "html5_inicis",
       pay_method: "card",
       merchant_uid: orderNum,
-      name: "멤버십",
+      name: "ROLE_VIP",
       amount: 100,
       buyer_name: buyer_name,
       // buyer_email: "gildong@gmail.com",

@@ -1,5 +1,9 @@
 package com.shop.goodee.seller;
 
+import java.io.Console;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +46,31 @@ public class SellerController {
 	
 	@Autowired
 	private PayService payService;
+	
+	@GetMapping("alreadyPayCheck")
+	@ResponseBody
+	public boolean alreadyPayCheck(PayVO payVO)throws Exception{
+		payVO = payService.aleadyPayCheck(payVO);
+		log.info("=============== payVO -> {}",payVO);
+		if(payVO==null) {
+			return true;
+		}else {
+			
+			String nowfm = new SimpleDateFormat("yyyy-MM-dd").format(new Date(System.currentTimeMillis()));
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			
+			Date now = new Date(dateFormat.parse(nowfm).getTime());
+			
+			int compare = payVO.getCancelDate().compareTo(now);
+			
+			if(compare>0) {
+				return false;
+			}else {
+				return true;
+			}
+		}
+	}
+	
 	
 	@GetMapping("sellerCheck")
 	@ResponseBody
@@ -91,17 +120,17 @@ public class SellerController {
 		int result = sellerService.setSellerAdd(sellerVO);
 		return result;
 	}
-			
-	@GetMapping("wait")
-	public ModelAndView getWaitList() throws Exception{
-		ModelAndView mv = new ModelAndView();
-		
-		List<SellerVO> ar = sellerService.getWaitList(); 
-		
-		mv.addObject("vo", ar);
-		mv.setViewName("/seller/wait");
-		return mv;
-	}
+//			
+//	@GetMapping("wait")
+//	public ModelAndView getWaitList(Pager pager) throws Exception{
+//		ModelAndView mv = new ModelAndView();
+//		
+//		List<SellerVO> ar = sellerService.getWaitList(); 
+//		
+//		mv.addObject("vo", ar);
+//		mv.setViewName("/seller/wait");
+//		return mv;
+//	}
 	
 	@PostMapping("wait")
 	@ResponseBody
@@ -134,16 +163,16 @@ public class SellerController {
 		return result;
 	}
 	
-	@GetMapping("accept")
-	public ModelAndView getAcceptList() throws Exception{
-		ModelAndView mv = new ModelAndView();
-		
-		List<SellerVO> ar = sellerService.getAcceptList(); 
-		
-		mv.addObject("vo", ar);
-		mv.setViewName("/seller/accept");
-		return mv;
-	}
+//	@GetMapping("accept")
+//	public ModelAndView getAcceptList() throws Exception{
+//		ModelAndView mv = new ModelAndView();
+//		
+//		List<SellerVO> ar = sellerService.getAcceptList(); 
+//		
+//		mv.addObject("vo", ar);
+//		mv.setViewName("/seller/accept");
+//		return mv;
+//	}
 	@PostMapping("accept")
 	@ResponseBody
 	public int setAccept(@RequestBody SellerVO sellerVO) throws Exception{
@@ -159,16 +188,16 @@ public class SellerController {
 		return result;
 	}
 	
-	@GetMapping("pay")
-	public ModelAndView getPayList() throws Exception{
-		ModelAndView mv = new ModelAndView();
-		
-		List<SellerVO> ar = sellerService.getPayList(); 
-		
-		mv.addObject("vo", ar);
-		mv.setViewName("/seller/pay");
-		return mv;
-	}
+//	@GetMapping("pay")
+//	public ModelAndView getPayList() throws Exception{
+//		ModelAndView mv = new ModelAndView();
+//		
+//		List<SellerVO> ar = sellerService.getPayList(); 
+//		
+//		mv.addObject("vo", ar);
+//		mv.setViewName("/seller/pay");
+//		return mv;
+//	}
 	@PostMapping("payNo")
 	@ResponseBody
 	public int setPayNo(SellerVO sellerVO) throws Exception{

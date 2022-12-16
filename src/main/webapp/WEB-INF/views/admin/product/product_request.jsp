@@ -24,6 +24,7 @@ pageEncoding="UTF-8"%>
     <!-- Custom styles for this template-->
     <link href="/bootstrap/css/sb-admin-2.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/index.css" />
     <script defer src="/js/admin/product_request.js"></script>
 
 </head>
@@ -46,31 +47,31 @@ pageEncoding="UTF-8"%>
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">상품 요청</h1>
-                    </div>
-
-                    <!-- Content Row -->
-                    <c:import url="../contentrow.jsp"></c:import>
-                    <!-- Content Row -->
 
                     <div class="d-flex justify-content-center mt-4">
-                      <div style="width: 98%; margin-bottom: 50px">
-                        <span class="input-group">
-                          <select name="kind" class="form-select" id="kind">
-                              <option class="kinds" value="id">ID</option>
-                              <option class="kinds" value="company">기업명</option>
-                          </select>
-                        <input type="text" name="search" value="${param.search}" class="form-control" id="search" onKeypress="javascript:if(event.keyCode==13) {search_onclick_subm()}" >
-                        <button type="button" class="btn btn-primary" id="search_btn">검색</button>
-                       </span>
-                          <ul class="nav nav-tabs">
-                              <li class="nav-item"><a class="nav-link active" id="add" data-kind="add"  onclick="getAdd(this)" href="#">상품 등록 요청</a></li>
-                              <li class="nav-item"><a class="nav-link" id="update" data-kind="update" onclick="getUpdate(this)" href="#">상품 수정 요청</a></li>
-                              <li class="nav-item"><a class="nav-link" id="delete" data-kind="delete" onclick="getDelete(this)" href="#">상품 삭제 요청</a></li>
-                              <li class="nav-item"><a class="nav-link" id="reject" data-kind="reject" onclick="getReject(this)" href="#">상품 반려 목록</a></li>
-                          </ul>
+                      <div style="width: 98%; margin-top: 30px">
+                        <ul class="nav nav-tabs" style="display: flex; justify-content: space-between;">
+                            <div style="display: flex;">
+
+                                <li class="nav-item"><a class="nav-link active" id="add" data-kind="add"  onclick="getAdd(this)" href="#">상품 등록 요청</a></li>
+                                <li class="nav-item"><a class="nav-link" id="update" data-kind="update" onclick="getUpdate(this)" href="#">상품 수정 요청</a></li>
+                                <li class="nav-item"><a class="nav-link" id="delete" data-kind="delete" onclick="getDelete(this)" href="#">상품 삭제 요청</a></li>
+                                <li class="nav-item"><a class="nav-link" id="reject" data-kind="reject" onclick="getReject(this)" href="#">상품 반려 목록</a></li>
+                            </div>
+                            <div>
+                                <li>
+                                      <span class="input-group">
+                                        <select name="kind" class="form-select" id="kind">
+                                            <option class="kinds" value="id">ID</option>
+                                            <option class="kinds" value="company">기업명</option>
+                                        </select>
+                                        <input type="text" name="search" value="${param.search}" class="form-control" id="search" onKeypress="javascript:if(event.keyCode==13) {search_onclick_subm()}" >
+                                        <button type="button" class="btn btn-dark" id="search_btn">검색</button>
+                                     </span>
+                                    
+                                  </li>
+                            </div>
+                            </ul>
                           <div id="pdList">   
                           </div>
                       </div>

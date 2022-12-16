@@ -235,7 +235,7 @@ prefix="c" %>
             $("#toastMsg").text(message)
             const toast = new bootstrap.Toast(toastLiveExample)
             toast.show()
-            alert(message)
+            //alert(message)
           })
           eventSource.addEventListener("error", function(event) {
                   eventSource.close()

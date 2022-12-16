@@ -71,7 +71,7 @@ pageEncoding="UTF-8"%>
                 <!-- <div class="file_drag" id="file_drag" ondrop="drop(event)" ondragover="allowDrop(event)"> -->
                 <div class="file_drag" id="file_drag">
                
-	                  <div id="plz_drag"><i class="bi bi-plus-circle-dotted"></i> 파일을 마우스로 끌어 오세요</div>
+	                  <div id="plz_drag" style="font-weight: bold;"><i class="bi bi-file-plus"></i> 파일을 마우스로 끌어 오세요</div>
                  
 	                  <div class="file_list_header">
 	                    <div class="file_list_header_task">
