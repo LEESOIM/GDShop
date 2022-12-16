@@ -23,6 +23,7 @@
 
 </head>
 <body>
+	<div style="margin-bottom:500px;">
 	<c:import url="../template/top_part.jsp"></c:import>
 	<c:import url="../template/header.jsp"></c:import>
 	<section class="container" style="width: 65%">
@@ -40,7 +41,7 @@
 				</ul>
 				<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4" style="height: 380px">
 				<c:forEach items="${list }" var="vo">
-					<div>
+					<div style="margin-bottom:40px">
 						<div class="d-flex flex-column" style="width: 250px; height: 380px">
 							<div>
 							<a href="/item/detail?itemNum=${vo.itemNum }">
@@ -71,7 +72,23 @@
 										</c:otherwise>
 									</c:choose>
 									<span class="px-1" style="color: grey">|</span>
-									<div style="color: grey">${vo.sellerVO.company }</div>
+									
+									<c:choose>
+										<c:when test="${vo.itemVO.shop eq '쿠팡'}">
+											<div style="color: red">${vo.sellerVO.company }</div>
+										</c:when>
+										<c:when test="${vo.itemVO.shop eq '네이버'}">
+											<div style="color: #2DB400">${vo.sellerVO.company }</div>
+										</c:when>
+										<c:when test="${vo.itemVO.shop eq '인스타그램'}">
+											<div style="color: purple">${vo.sellerVO.company }</div>
+										</c:when>
+										<c:otherwise>
+											<div style="color: #646464">
+												<b>${vo.sellerVO.company }</b>
+											</div>
+										</c:otherwise>
+									</c:choose>
 								</div>
 							</div>
 							<div class="my-1">
@@ -130,6 +147,7 @@
 						messages</span></span></a>
 		</div>
 	</section>
+	</div>
 	<c:import url="../template/footer.jsp"></c:import>
 	<script src="/js/index.js"></script>
 	<script src="/js/timer.js"></script>
