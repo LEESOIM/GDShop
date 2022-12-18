@@ -13,3 +13,11 @@ tspan{
     font-weight: bold;
 
 }
+
+
+.focus line{
+    fill:none;
+    stroke :#67809f;
+    stroke-width: 1.5px;
+    stroke-dasharray:3 3;
+}

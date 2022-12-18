@@ -181,6 +181,11 @@ function setRevenueChart(data){
     .attr('class', 'focus')
     .style('display', 'none');
 
+    focus.append("path")
+        .attr("class", "mouse-line")
+        .style("stroke", "black")
+        .style("stroke-width", "1px")
+        .style("opacity", "0");
 
     focus.append('circle').attr('r', 5).attr('fill','blue');
     focus.append('text').attr("x", 9);
@@ -202,7 +207,16 @@ function setRevenueChart(data){
         // focus.selectAll("rect").remove();
     })
     .on('mousemove', function(event){
-        
+        var mouse = d3.pointer(event);
+
+        // move the vertical line
+        d3.select(".mouse-line")
+          .attr("d", function() {
+            var d = "M" + 0 + "," + 30;
+            d += " " + 0 + "," + -height;
+            return d;
+          });
+
         let x = new Date(xScale.invert(d3.pointer(event)[0]))
         let i = d3.bisectRight(xValue, x);
       
@@ -238,11 +252,6 @@ function setRevenueChart(data){
             .attr("y", -60)                   
     });
 
-  
-    d3.selectAll('.focus line').style('fill', 'none');
-    d3.selectAll('.focus line').style('stroke', '#67809f');
-    d3.selectAll('.focus line').style('stroke-width', '1.5px');
-    d3.selectAll('.focus line').style('stroke-dasharray', '3 3'); 
 
 }
 
