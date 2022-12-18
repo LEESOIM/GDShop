@@ -95,4 +95,9 @@
 		UPDATE MISSION SET MYCAM=2 WHERE ID=#{id} and ITEMNUM=#{itemNum}
 	</update>
 	
+	<!-- 미션 선정 탈락 -->
+	<insert id="setFail" parameterType="MissionVO">
+		INSERT INTO MISSION(MISSIONNUM, ITEMNUM, ID, APPLYDATE, STATUS, MYCAM) VALUES(NULL, #{itemNum}, #{id}, NOW(), 0, 3)
+	</insert>
+	
 </mapper>

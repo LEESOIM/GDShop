@@ -86,8 +86,16 @@
       </div>
       <div class="modal-body">
         <img style="margin-left:130px; padding-top:15px; padding-bottom:30px; width:50%" src="/images/roulette.gif">
-		<div id="roulette" style="text-align : center; margin-bottom: 10px; display: none; "><b style="color: #eb2f96">축하해요!<br>캠페인에 선정되셨습니다!</b>
-		<div style="font-size: 14px">2시간 내에 미션수행카드에서 구매하기 미션까지 인증을 완료해 주세요.<br>미완료 시 캠페인이 자동 취소되어 포인트를 받을 수 없으며, <br>동일 캠페인 재지원이 불가합니다.</div></div>
+		<div id="roulette" style="text-align : center; margin-bottom: 10px; display: none; ">
+			<div id="missionO" style="display: none">
+			<b style="color: #eb2f96">축하해요!<br>캠페인에 선정되셨습니다!</b>
+			<div style="font-size: 14px">2시간 내에 미션수행카드에서 구매하기 미션까지 인증을 완료해 주세요.<br>미완료 시 캠페인이 자동 취소되어 포인트를 받을 수 없으며, <br>동일 캠페인 재지원이 불가합니다.</div>
+			</div>
+			
+			<div id="missionX" style="display: none">
+			<b style="color: #eb2f96">아쉽지만 캠피인에 선정되지 않았습니다. 😢😭</b>
+			</div>
+		</div>
       </div>
       <div class="modal-footer" id="rouletteF" style=" display: none;">
         <button class="btn btn-success" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" class="okBtn" 

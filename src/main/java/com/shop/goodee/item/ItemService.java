@@ -118,6 +118,10 @@ public class ItemService {
 	public List<ItemVO> getListVIP() throws Exception {
 		return itemMapper.getListVIP();
 	}
+	
+	public List<ItemVO> getListSuccess() throws Exception {
+		return itemMapper.getListSuccess();
+	}
 
 	public List<ItemVO> getList1() throws Exception {
 		return itemMapper.getList1();

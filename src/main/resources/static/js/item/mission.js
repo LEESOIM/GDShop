@@ -51,13 +51,37 @@ $("#apply").click(function () {
 
 //즉석추첨형 지원하기
 $("#applyBaro").click(function () {
-    let itemNum = $(this).attr("data-itemNum-num")
 
-    //룰렛 글귀
     $("#roulette").delay(3500).fadeIn(2000);
     $("#rouletteF").delay(3500).fadeIn(2000);
+    console.log(result % 2)
+    
+   //룰렛 글귀
+   if (result % 2 == 0) {
+    //탈락
+    $("#missionX").attr("style", "display:");
+    let itemNum = $("#applyCheck").attr("data-itemNum-num")
+    let id = $("#id").val();
+    $.ajax({
+        type: "POST",
+        url: "/mission/fail",
+        data: {
+            itemNum: itemNum,
+            id: id,
+        },
+        success: function (data) {
+            if (data == 1) {
+                $(".okBtn").click(function () {
+                    $(".okBtn").attr("onclick", "location.href=item/detail?" + itemNum);
+                })
+            }
+        }
+    })
 
-
+} else {
+    //선정
+    $("#missionO").attr("style", "display:");
+    let itemNum = $(this).attr("data-itemNum-num")
     $.ajax({
         type: "POST",
         url: "/mission/apply",
@@ -73,7 +97,13 @@ $("#applyBaro").click(function () {
             }
         }
     })
+}
+
+
 })
+
+
+//미션리뷰
 
 
 

@@ -172,13 +172,27 @@ public class MissionController {
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
 		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
-		missionVO.setItemNum(itemVO.getItemNum());
 
-		missionVO.setItemNum(itemVO.getItemNum());
 		missionVO.setId(memberVO.getId());
+		missionVO.setItemNum(itemVO.getItemNum());
 
 		int result = missionService.setCancel(missionVO);
 		return "/item/detail?itemNum=" + itemVO.getItemNum();
+	}
+	
+	// 미션 선정 탈락
+	@PostMapping("fail")
+	@ResponseBody
+	public int setFail(HttpSession session, MissionVO missionVO, ItemVO itemVO) throws Exception {
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
+
+		missionVO.setId(memberVO.getId());
+		missionVO.setItemNum(itemVO.getItemNum());
+
+		int result = missionService.setFail(missionVO);
+		return result;
 	}
 
 }

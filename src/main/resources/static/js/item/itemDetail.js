@@ -150,7 +150,6 @@ $(".applyCancel").click(function () {
       id: id,
     },
     success: function (data) {
-
       let check = confirm("취소 하시면 해당 캠페인은 재지원이 불가합니다. 정말로 취소 하시겠습니까?")
       if (check) {
         location.reload();
@@ -180,6 +179,10 @@ function VIPCheck() {
 if ($("#itemRole").val() == "VIP") {
   VIPCheck();
 }
+
+
+
+//상품 등록/수정/삭제 승인
 function requestOX(status,url,event){
     itemNum = $(event).attr("data-itemNum-num")
     console.log(parseInt(itemNum))
