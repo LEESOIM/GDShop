@@ -7,10 +7,19 @@
 <mapper namespace="com.shop.goodee.admin.AdminMapper">
 	
 	<!-- 매출 차트  -->
+	<select id="getMonthRevenue" parameterType="String" resultType="PayVO">
+		SELECT DATE_FORMAT(PAYDATE,'%Y-%m') m, SUM(AMOUNT) amount
+		FROM PAY 
+		WHERE PAYDATE  LIKE CONCAT('%',#{year},'%')
+		GROUP BY m
+		LIMIT 0,12;
+	</select>
+	
+	
 	<select id="getRevenue" resultType="PayVO">
-		SELECT p.PAYDATE, SUM(AMOUNT) amount
+		SELECT p.PAYDATE, SUM(AMOUNT) amount,  p.PAYNAME
 		FROM PAY p
-		GROUP BY PAYDATE
+		GROUP BY PAYDATE, PAYNAME
 		LIMIT 0,10;
 	</select>
 	

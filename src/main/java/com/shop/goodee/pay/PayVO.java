@@ -16,4 +16,5 @@ public class PayVO {
 	private String id;
 	private String payName;
 	private Date payDate2;
+	private String m;
 }

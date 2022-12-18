@@ -1,8 +1,8 @@
 .tip{
-    background-color: gray;
-    border: 3 solid black;
-    border-width:2px;
-    border-radius:5px;
+    fill: white;
+    stroke: black;
+    stroke-width:1px;
+    stroke-radius:5px;
     padding:5px;
     width: 100px;
     height: 50px;
