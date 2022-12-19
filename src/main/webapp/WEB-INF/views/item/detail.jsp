@@ -23,12 +23,6 @@
     border-radius: 50%;
 }
 </style>
-<base target="_self" />
-<script type="text/javascript">
-	window.name = "dialogPopup";
-	form.target = "dialogPopup";
-	form.submit();
-</script>
 </head>
 <body>
 	<c:import url="../template/top_part.jsp"></c:import>

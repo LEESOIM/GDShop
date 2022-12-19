@@ -104,6 +104,9 @@ $(document).ready(function () {
       } else if (data.status == 2) {
         //포인트수령
         $("#missionCard").attr("data-bs-target", "#missionModal3");
+        if(data.myCam != 2) {
+          $("#missionCard").click();
+        }
         $(".mStatus0").hide();
         $(".mStatus1").hide();
         $(".mStatus2").show();
@@ -140,22 +143,20 @@ $("#applyCheck").click(function () {
 
 //지원취소버튼
 $(".applyCancel").click(function () {
-  let itemNum = $("#applyCheck").attr("data-itemNum-num")
-  let id = $("#id").val();
-  $.ajax({
-    type: "POST",
-    url: "/mission/cancel",
-    data: {
-      itemNum: itemNum,
-      id: id,
-    },
-    success: function (data) {
-      let check = confirm("취소 하시면 해당 캠페인은 재지원이 불가합니다. 정말로 취소 하시겠습니까?")
-      if (check) {
+  let check = confirm("취소 하시면 해당 캠페인은 재지원이 불가합니다. 정말로 취소 하시겠습니까?")
+  if (check) {
+    let itemNum = $("#applyCheck").attr("data-itemNum-num")
+    $.ajax({
+      type: "POST",
+      url: "/mission/cancel",
+      data: {
+        itemNum: itemNum,
+      },
+      success: function (data) {
         location.reload();
       }
-    }
-  })
+    })
+  }
 })
 
 

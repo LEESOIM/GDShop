@@ -117,7 +117,7 @@ public class Scheduler { // 초(0-59) 분(0-59) 시(0-23) 일(1-31) 월(1-12) �
 
 
 	// 2시간내 구매인증 안하면 자동취소
-	//@Scheduled(cron = "0 * * * * *")
+	@Scheduled(cron = "0 * * * * *")
 	public void set2hCancel() throws Exception {
 		// 구매인증미션 진행중인 회원
 		List<MissionVO> ar = new ArrayList<>();

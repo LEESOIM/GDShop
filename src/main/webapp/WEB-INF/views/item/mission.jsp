@@ -93,7 +93,7 @@
 			</div>
 			
 			<div id="missionX" style="display: none">
-			<b style="color: #eb2f96">아쉽지만 캠피인에 선정되지 않았습니다. 😢😭</b>
+			<b style="color: #eb2f96">아쉽지만 캠피인에 선정되지 않았습니다. 😭</b>
 			</div>
 		</div>
       </div>
@@ -104,7 +104,6 @@
     </div>
   </div>
 </div>
-
 
 
 <!-- 미션 -->
@@ -162,7 +161,7 @@
 				<hr />
 		<c:if test="${vo.type eq '즉석추첨형' }">
 				<form id="ocr" action="/purchase/setPurchase" method="post" enctype="multipart/form-data">
-				<input name="itemNum" type="hidden" value="${vo.itemNum }">
+				<input type="hidden" value="${vo.itemNum }" name="itemNum">
 				<div class="pe-4 py-4" style="font-size: 14px">
 				<div class="d-flex pb-2">
 					<div style="margin:auto 0; width: 30%; text-align: right;">
@@ -194,7 +193,7 @@
 						<b><span style="color: red">*</span>주문번호</b>
 					</div>
 					<div style="width: 80%; margin-left: 25px">
-						<input class="form-control p-1" type="text" id="purNumM" name="purNumM" style="width: 300px">
+						<input class="form-control p-1" type="text" name="purNumM" style="width: 300px">
 					</div>
 				</div>
 				<div class="d-flex py-2">
@@ -202,7 +201,7 @@
 						<b><span style="color: red">*</span>결제금액</b>
 					</div>
 					<div style="width: 80%; margin-left: 25px">
-						<input class="form-control p-1" type="text" id="priceM" name="priceM" style="width: 300px">
+						<input class="form-control p-1" type="text" name="priceM" style="width: 300px">
 					</div>
 				</div>
 				<div class="d-flex py-2">
@@ -224,7 +223,7 @@
 
 				<div class="modal-footer d-flex justify-content-center pb-0">
 				<button type="button" class="btn btn-success" data-bs-dismiss="modal" aria-label="Close">취소</button>
-				<button type="submit" class="btn btn-outline-success" data-bs-target="#missionModal2" data-bs-toggle="modal">전송</button> 
+				<button type="button" class="btn btn-outline-success" data-bs-target="#missionModal2" data-bs-toggle="modal" id="ocrSubmit">전송</button> 
 				</div>
 		</form>
 		</c:if>
@@ -349,6 +348,7 @@
 				<c:if test="${vo.shop eq '쿠팡' }">
 				 <form id="reviewC" action="/review/getReview" method="POST" >
 					<input name="itemNum" type="hidden" value="${vo.itemNum }">
+					<input name="url" type="hidden" value="${vo.url }">
 					<div class="d-flex pt-3">
 						<div style="margin:auto 0; width: 30%; text-align: right;">
 							<b><span style="color: red">*</span>쿠팡 닉네임</b>
@@ -365,10 +365,9 @@
 							<input class="form-control" type="date" name="date" style="width: 300px">
 						</div>
 					</div>
-					<input type="hidden" value="${vo.url }" name="url">
 					<div class="modal-footer d-flex justify-content-center pb-0">
 					<button type="button" class="btn btn-success" data-bs-dismiss="modal" aria-label="Close">취소</button>
-					<button type="submit" class="btn btn-outline-success" data-bs-target="#missionModal3" data-bs-toggle="modal" >전송</button> 
+					<button type="button" class="btn btn-outline-success" data-bs-target="#missionModal3" data-bs-toggle="modal" id="reviewSubmit">전송</button> 
 					</div>
 				</form>
 				</c:if>
