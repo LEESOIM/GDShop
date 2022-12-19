@@ -87,10 +87,6 @@
 		UPDATE ITEM SET STATUS=3 WHERE ID=#{id} and ITEMNUM=#{itemNum}
 	</update>
 	
-	<delete id="setDelete" parameterType="ItemVO">
-		DELETE FROM ITEM WHERE ITEMNUM=#{itemNum}
-	</delete>
-	
 	
 	
 	<sql id="search">
@@ -129,6 +125,15 @@
 		WHERE `ROLE` = 'VIP' AND I.STATUS!=0
 		GROUP BY(I.ITEMNUM)
 		ORDER BY I.ITEMNUM DESC
+		LIMIT 0, 4
+	</select>
+	
+	<!-- 당첨률 높은순 -->
+	<select id="getListSuccess" resultType="ItemVO" resultMap="getDetailResult">
+		<include refid="search"></include>
+		WHERE I.STATUS!=0
+		GROUP BY(I.ITEMNUM)
+		ORDER BY STOCK*COUNT DESC
 		LIMIT 0, 4
 	</select>
 	

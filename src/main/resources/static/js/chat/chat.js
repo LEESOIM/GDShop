@@ -11,7 +11,7 @@ function wsEvt() {
 	ws.onopen = function (data) {
 		console.log(data);
 	}
-
+	
 	ws.onmessage = function (data) {
 		//메시지를 받으면 동작
 		var msg = data.data;
@@ -26,7 +26,12 @@ function wsEvt() {
 				if (d.sessionId == $("#sessionId").val()) {
 					$("#chating").append("<p class='me'>👨‍💻 : " + d.msg + "</p>");
 				} else {
-					$("#chating").append("<p class='others'>" + d.userName + " : " + d.msg + "</p>");
+					console.log($("#MName").val());
+					if($("#MName").val() == null || $("#MName").val() == ''){
+						$("#chating").append("<p class='others'>" + '고객님' + " : " + d.msg + "</p>");
+					}else{
+						$("#chating").append("<p class='others'>" + $("#MName").val() + " : " + d.msg + "</p>");
+					}
 				}
 
 			} else {
@@ -34,13 +39,13 @@ function wsEvt() {
 			}
 		}
 	}
+}
 
 	document.addEventListener("keypress", function (e) {
 		if (e.keyCode == 13) { //enter press
 			send();
 		}
 	});
-}
 
 function chatName() {
 	wsOpen();

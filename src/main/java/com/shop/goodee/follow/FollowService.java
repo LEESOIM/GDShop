@@ -22,7 +22,7 @@ public class FollowService {
 	@Value("${app.follow}")
 	private String path;  //  D:/gdshop/follow/
 	
-	public void getFollow(MultipartFile f) throws Exception{
+	public FollowVO getFollow(MultipartFile f) throws Exception{
 		FollowVO followVO = new FollowVO();
 		followVO.setFollowCheck(0);
 
@@ -45,7 +45,6 @@ public class FollowService {
 			String lang = "kor+eng";
 			tesseract.setDatapath(ocrPath);
 			tesseract.setLanguage(lang);
-			
 			try {
 				String abc = path+fileName;
 				String text = tesseract.doOCR(new File(abc)); // Ocr적용
@@ -55,14 +54,16 @@ public class FollowService {
 				
 				if(text.contains("팔로잉~")||text.contains("칼로잉~")||text.contains("랄로잉~")) {
 					log.info("팔로우 O");
+					followVO.setFollowCheck(1);
+					log.info("서비스팔로우{}", followVO);
+					return followVO;
 				}else {
 					log.info("팔로우 X");
 				}
-				
 			} catch (Exception e) {
 				
 			}
-			
 		}
+		return followVO;
 	};
 }

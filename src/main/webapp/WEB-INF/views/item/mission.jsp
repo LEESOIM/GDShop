@@ -86,8 +86,16 @@
       </div>
       <div class="modal-body">
         <img style="margin-left:130px; padding-top:15px; padding-bottom:30px; width:50%" src="/images/roulette.gif">
-		<div id="roulette" style="text-align : center; margin-bottom: 10px; display: none; "><b style="color: #eb2f96">축하해요!<br>캠페인에 선정되셨습니다!</b>
-		<div style="font-size: 14px">2시간 내에 미션수행카드에서 구매하기 미션까지 인증을 완료해 주세요.<br>미완료 시 캠페인이 자동 취소되어 포인트를 받을 수 없으며, <br>동일 캠페인 재지원이 불가합니다.</div></div>
+		<div id="roulette" style="text-align : center; margin-bottom: 10px; display: none; ">
+			<div id="missionO" style="display: none">
+			<b style="color: #eb2f96">축하해요!<br>캠페인에 선정되셨습니다!</b>
+			<div style="font-size: 14px">2시간 내에 미션수행카드에서 구매하기 미션까지 인증을 완료해 주세요.<br>미완료 시 캠페인이 자동 취소되어 포인트를 받을 수 없으며, <br>동일 캠페인 재지원이 불가합니다.</div>
+			</div>
+			
+			<div id="missionX" style="display: none">
+			<b style="color: #eb2f96">아쉽지만 캠피인에 선정되지 않았습니다. 😭</b>
+			</div>
+		</div>
       </div>
       <div class="modal-footer" id="rouletteF" style=" display: none;">
         <button class="btn btn-success" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" class="okBtn" 
@@ -96,7 +104,6 @@
     </div>
   </div>
 </div>
-
 
 
 <!-- 미션 -->
@@ -110,7 +117,7 @@
 				</h1>
 			</div>
 			<div class="modal-body p-3">
-			<c:if test="${vo.type eq '즉석추첨형' }">
+			<c:if test="${vo.type ne 'SNS미션' }">
 				<div class="d-flex justify-content-center my-2" style="text-align: center">
 					<div style="font-weight: bold;">
 						<div class="mission_order">
@@ -152,9 +159,10 @@
 				</div>
 			</c:if>
 				<hr />
-		<c:if test="${vo.type eq '즉석추첨형' }">
+		<c:if test="${vo.type ne 'SNS미션' }">
 				<form id="ocr" action="/purchase/setPurchase" method="post" enctype="multipart/form-data">
-				<input name="itemNum" type="hidden" value="${vo.itemNum }">
+		<div class="spinner-border" role="status" style="display: none" id="loading"></div>
+				<input type="hidden" value="${vo.itemNum }" name="itemNum">
 				<div class="pe-4 py-4" style="font-size: 14px">
 				<div class="d-flex pb-2">
 					<div style="margin:auto 0; width: 30%; text-align: right;">
@@ -216,12 +224,12 @@
 
 				<div class="modal-footer d-flex justify-content-center pb-0">
 				<button type="button" class="btn btn-success" data-bs-dismiss="modal" aria-label="Close">취소</button>
-				<button type="submit" class="btn btn-outline-success" data-bs-target="#missionModal2" data-bs-toggle="modal">전송</button> 
+				<button type="button" class="btn btn-outline-success" data-bs-target="#missionModal2" data-bs-toggle="modal" id="ocrSubmit">전송</button> 
 				</div>
 		</form>
 		</c:if>
 			<c:if test="${vo.type eq 'SNS미션' }">	
-			<form id="ocr" action="" method="post" enctype="multipart/form-data">
+			<form id="ocrSNS" action="/follow/getFollow" method="post" enctype="multipart/form-data">
 				<input name="itemNum" type="hidden" value="${vo.itemNum }">
 				<div class="pe-4 py-4" style="font-size: 15px">
 				<div class="d-flex pb-2">
@@ -238,17 +246,9 @@
 					</div>
 					<div style="width: 80%; margin-left: 15px; ">
 					<div class="mb-2" style="color: #198754; font-weight: bold;">✅미션종류 : 인스타 팔로우<br>
-						✅구매 링크로 들어가셔서 해당 인스타 팔로우 하시고 인증해 주세요<br>
+						✅구매 링크로 들어가셔서 해당 인스타 팔로우 하고<br> 인증해 주세요<br>
 						✅${vo.sellerSNS }<br><br>
 						</div>
-					</div>
-				</div>
-				<div class="d-flex py-2">
-					<div style="margin:auto 0; width: 30%; text-align: right;">
-						<b><span style="color: red">*</span>아이디</b>
-					</div>
-					<div style="width: 80%; margin-left: 25px">
-						<input class="form-control p-1" type="text" id="nickname_n" name="nickname_n" style="width: 300px">
 					</div>
 				</div>
 				<div class="d-flex py-2">
@@ -256,16 +256,16 @@
 						<b><span style="color: red">*</span>인증샷</b>
 					</div>
 					<div style="width: 80%; margin-left: 25px">
-			  				<input type="file" class="form-control p-1" id="f" name="f" style="width: 300px">
+			  				<input type="file" class="form-control p-1" name="f" style="width: 300px">
 					</div>
 				</div>
 				</div>
 
 				<div class="modal-footer d-flex justify-content-center pb-0">
 				<button type="button" class="btn btn-success" data-bs-dismiss="modal" aria-label="Close">취소</button>
-				<button type="submit" class="btn btn-outline-success" data-bs-target="#missionModal2" data-bs-toggle="modal">전송</button> 
+				<button type="button" class="btn btn-outline-success" data-bs-target="#missionModal2" data-bs-toggle="modal" id="snsSubmit">전송</button> 
 				</div>
-		</form>
+			</form>
 			</c:if>
 		</div>
 		</div>
@@ -341,6 +341,7 @@
 				<c:if test="${vo.shop eq '쿠팡' }">
 				 <form id="reviewC" action="/review/getReview" method="POST" >
 					<input name="itemNum" type="hidden" value="${vo.itemNum }">
+					<input name="url" type="hidden" value="${vo.url }">
 					<div class="d-flex pt-3">
 						<div style="margin:auto 0; width: 30%; text-align: right;">
 							<b><span style="color: red">*</span>쿠팡 닉네임</b>
@@ -357,10 +358,9 @@
 							<input class="form-control" type="date" name="date" style="width: 300px">
 						</div>
 					</div>
-					<input type="hidden" value="${vo.url }" name="url">
 					<div class="modal-footer d-flex justify-content-center pb-0">
 					<button type="button" class="btn btn-success" data-bs-dismiss="modal" aria-label="Close">취소</button>
-					<button type="submit" class="btn btn-outline-success" data-bs-target="#missionModal3" data-bs-toggle="modal" >전송</button> 
+					<button type="button" class="btn btn-outline-success" data-bs-target="#missionModal3" data-bs-toggle="modal" id="reviewSubmit">전송</button> 
 					</div>
 				</form>
 				</c:if>
@@ -412,6 +412,7 @@
 				</h1>
 			</div>
 			<div class="modal-body p-3">
+			<c:if test="${vo.type ne 'SNS미션' }">
 				<div class="d-flex justify-content-center my-2" style="text-align: center">
 					<div>
 						<div class="mission_order">
@@ -434,14 +435,38 @@
 						<div>미완료</div>
 					</div>
 				</div>
+			</c:if>
+			<c:if test="${vo.type eq 'SNS미션' }">
+				<div class="d-flex justify-content-center my-2" style="text-align: center">
+						<div style="font-weight: bold;">
+							<div class="mission_order">
+								<i class="fa-solid fa-circle-check" style="color: green"></i> 참여하기
+							</div>
+							<div>완료</div>
+						</div>
+						<div class="solid"></div>
+						<div>
+							<div class="mission_order">
+								<i class="fa-regular fa-circle-check" style="color: green"></i> 포인트 수령
+							</div>
+							<div>미완료</div>
+						</div>
+				</div>
+			</c:if>
 				<hr />
 			<form id="getPoint" action="" method="post" >
 				<div class="p-4" style="font-size: 15px; text-align: center;">
-				<input type="hidden" id="pointResult" value="${vo.price }">
 				<input type="hidden" id="itemNumResult" value="${vo.itemNum }">
 					<img src="/images/santa.png" width="250px">
-					<div style="font-size: 30px; color: #44D62C"><b><fmt:formatNumber value="${vo.price }" pattern="###,###,###" />P</b></div>
-					<button class="btn btn-success py-2 px-3" style="background-color: #44D62C; border-radius: 20px; border:none;" type="button" id="pointBtn"><i class="fa-solid fa-check"></i> <b>포인트받기</b></button>
+					<c:if test="${vo.type ne 'SNS미션' }">
+						<div style="font-size: 30px; color: #44D62C"><b><fmt:formatNumber value="${vo.price }" pattern="###,###,###" />P</b></div>
+						<input type="hidden" class="pointResult" value="${vo.price }">
+					</c:if>
+					<c:if test="${vo.type eq 'SNS미션' }">
+						<div style="font-size: 30px; color: #44D62C"><b><fmt:formatNumber value="${vo.point }" pattern="###,###,###" />P</b></div>
+						<input type="hidden" class="pointResult" value="${vo.point }">	
+					</c:if>
+					<button class="btn btn-success py-2 px-3 my-2" style="background-color: #44D62C; border-radius: 20px; border:none;" type="button" id="pointBtn"><i class="fa-solid fa-check"></i> <b>포인트받기</b></button>
 				</div>
 			</form>
 		</div>

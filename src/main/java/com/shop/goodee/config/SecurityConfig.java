@@ -58,18 +58,19 @@ public class SecurityConfig {
 
    @Bean
    SecurityFilterChain fiterChain(HttpSecurity httpSecurity)throws Exception{
-	   httpSecurity.headers().frameOptions().sameOrigin();
       httpSecurity
                .cors()
                .and()
-               .csrf()
-               .disable()
+               .csrf().disable()
+               .headers().frameOptions().sameOrigin()
+               .and()
             .authorizeRequests()
                .antMatchers("/").permitAll()
                .antMatchers("/tab/*").permitAll()
                .antMatchers("/seller/seller").permitAll()
                .antMatchers("/board/notice").permitAll()
                .antMatchers("/chat/*").permitAll()
+               .antMatchers("/ws/*").permitAll()
                .antMatchers("/item/detail").permitAll()
                .antMatchers("/item/mission").permitAll()
                .antMatchers("/mission/*").permitAll()
@@ -87,7 +88,6 @@ public class SecurityConfig {
                .antMatchers("/admin").hasRole("ADMIN")
                .antMatchers("/member/product").hasRole("SELLER")
                .anyRequest().authenticated()
-               .and().headers().frameOptions().sameOrigin()
                .and()
             .formLogin()
                .loginPage("/")

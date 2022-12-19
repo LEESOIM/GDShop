@@ -16,9 +16,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.beust.jcommander.internal.Console;
-import com.shop.goodee.review.ReviewVO;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Service

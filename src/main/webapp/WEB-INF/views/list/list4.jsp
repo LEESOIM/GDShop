@@ -60,9 +60,10 @@
 				<c:forEach items="${list4 }" var="vo" >
 				<div>
 					<div class="d-flex flex-column" style="width: 250px; height: 380px; margin-bottom: 50px">
-						<div>
-							<a href="/item/detail?itemNum=${vo.itemNum }">
+						<div> 
+						<div style="position: relative;"><a href="/item/detail?itemNum=${vo.itemNum }">
 							<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px"></a>
+						<div style="position:absolute; top:0; right:0 "><img src="/images/vip.png" width="70px" style="padding: 5px 5px 0 0"></div></div>
 						</div>
 
 						<div class="d-flex flex-column" style="width: 250px; height: 130px">

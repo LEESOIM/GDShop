@@ -13,5 +13,4 @@ public class PurchaseVO {
 	
 	private String purNumM; //구매미션-주문번호
 	private String priceM;	//구매미션-결제금액
-	private String id;
 }
