@@ -26,12 +26,6 @@ function ajaxMessage(message) {
     }
 }
 
-function setConnected(connected) {
-    $("#connect").prop("disabled", connected);
-    $("#conversation").show();
-    $("#msg").html("");
-}
-
 
 function showMessageSend(message) {
     $("#communicate").append("<p class='me'>" + message + "</p>");
@@ -48,9 +42,12 @@ $(function () {
     });
     $("#sendForm").hide();
     $("#send").click(function () { sendMessage(); });
-    $("#connect").click(function () {
-
-
+    $("#connect").click(function (e) {
+        console.log("버튼 태그 : " + e);
+        $("#connect").prop("disabled");
+        commonAjax("/sendMessage", '상담 시작', 'POST', function (message) {
+            ajaxMessage(message);
+        })
         basicmessage();
     });
 });
@@ -61,7 +58,6 @@ $(function () {
 
 
 $(document).on("click", ".botcat", (e) => {
-    e.stopImmediatePropagation();
     showMessageSend($(e.target).text());
     $(e.target).parent().remove();
     commonAjax("/sendMessage", $(e.target).text(), 'POST', function (message) {
@@ -111,10 +107,12 @@ $(document).on("click", "#chatbtn", (e) => {
     commonAjax("/sendMessage", $(e.target).text(), 'POST', function (message) {
         ajaxMessage(message);
     })
-    $("#communicate").append('<div class="bot chat">' +
-        '<button type="button" class="btn btn-default con" id="chatConnect">상담시작</button>' +
-        '<button type="button" class="btn btn-default" id="home">이전단계</button>' +
-        '</div>')
+    setTimeout(() => {
+        $("#communicate").append('<div class="bot chat">' +
+            '<button type="button" class="btn btn-outline-success con" id="chatConnect">상담시작</button>' +
+            '<button type="button" class="btn btn-outline-success" id="home">이전단계</button>' +
+            '</div>')
+    }, 1000);
 });
 
 $(document).on("click", "#chatConnect", (e) => {
@@ -127,4 +125,11 @@ $(document).on("click", "#chatConnect", (e) => {
 $(document).on("click", "#home", (e) => {
     $(e.target).parent().remove();
     basicmessage();
+});
+
+$(document).on("click", "#discon", (e) => {
+    $(e.target).parent().remove();
+    ws.onclose() = (e) => {
+        console.log(e);
+    }
 });
