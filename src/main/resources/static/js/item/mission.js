@@ -51,25 +51,121 @@ $("#apply").click(function () {
 
 //즉석추첨형 지원하기
 $("#applyBaro").click(function () {
-    let itemNum = $(this).attr("data-itemNum-num")
 
-    //룰렛 글귀
     $("#roulette").delay(3500).fadeIn(2000);
     $("#rouletteF").delay(3500).fadeIn(2000);
+    console.log(result % 2)
 
+    //룰렛 글귀
+    if (result % 2 == 0) {
+        //탈락
+        $("#missionX").attr("style", "display:");
+        let itemNum = $("#applyCheck").attr("data-itemNum-num")
+        $.ajax({
+            type: "POST",
+            url: "/mission/fail",
+            data: {
+                itemNum: itemNum,
+            },
+            success: function (data) {
+                if (data == 1) {
+                    $(".okBtn").click(function () {
+                        $(".okBtn").attr("onclick", "location.href=item/detail?" + itemNum);
+                    })
+                }
+            }
+        })
+    } else {
+        //선정
+        $("#missionO").attr("style", "display:");
+        let itemNum = $(this).attr("data-itemNum-num")
+        $.ajax({
+            type: "POST",
+            url: "/mission/apply",
+            data: {
+                itemNum: itemNum,
+                applyCount: applyCount,
+            },
+            success: function (data) {
+                if (data == 1) {
+                    $(".okBtn").click(function () {
+                        $(".okBtn").attr("onclick", "location.href=item/detail?" + itemNum);
+                    })
+                }
+            }
+        })
+    }
+})
+
+
+
+//OCR
+$("#ocrSubmit").click(function () {
+    let form = $("form")[0];        
+    let formData = new FormData(form);
+    $("#loading").attr("style", "display:");
+    $.ajax({
+        type: "POST",
+        url: "/purchase/setPurchase",
+        cache : false,
+        processData: false,
+        contentType: false,
+        data: formData,
+        success: function (data) {
+            if(data==0) {
+                alert("주문번호를 다시 확인해주세요.")
+            }else if(data==1) {
+                $("ocrSubmit").attr("type", "submit")
+                location.reload();
+            }else if(data==2) {
+                alert("결제금액을 다시 확인해주세요.")
+            }else {
+                alert("인증을 실패하였습니다. 잠시후 다시 시도해주세요")
+            }
+        }
+    })
+})
+
+//Review
+$("#reviewSubmit").click(function () {
+    let formData = $("#reviewC").serialize();
 
     $.ajax({
         type: "POST",
-        url: "/mission/apply",
-        data: {
-            itemNum: itemNum,
-            applyCount: applyCount,
-        },
+        url: "/review/getReview",
+        cache : false,
+        data: formData,
         success: function (data) {
-            if (data == 1) {
-                $(".okBtn").click(function () {
-                    $(".okBtn").attr("onclick", "location.href=item/detail?" + itemNum);
-                })
+            if(data==0) {
+                alert("[리뷰 인증 실패] \n 계정정보, 작성일을 다시 확인해주세요.")
+            }else if(data==2) {
+                alert("리뷰 내용이 너무 짧습니다. 리뷰를 더 길게 작성해주세요.")
+            }else {
+                $("reviewSubmit").attr("type", "submit")
+                location.reload();
+            }
+        }
+    })
+})
+
+
+//SNS OCR
+$("#snsSubmit").click(function () {
+    let form = $("form")[0];        
+    let formData = new FormData(form);
+    $.ajax({
+        type: "POST",
+        url: "/follow/getFollow",
+        cache : false,
+        processData: false,
+        contentType: false,
+        data: formData,
+        success: function (data) {
+            if(data==0) {
+                alert("인증을 실패하였습니다. 잠시후 다시 시도해주세요")
+            }else if(data==1) {
+                $("ocrSubmit").attr("type", "submit")
+                location.reload();
             }
         }
     })
@@ -79,7 +175,7 @@ $("#applyBaro").click(function () {
 
 //포인트 수령
 $("#pointBtn").click(function () {
-    let point = $("#pointResult").val();
+    let point = $(".pointResult").val();
     let itemNum = $("#itemNumResult").val();
     $.ajax({
         type: "POST",
@@ -89,8 +185,10 @@ $("#pointBtn").click(function () {
             itemNum: itemNum,
         },
         success: function (data) {
-            alert("🎊 모든 미션이 완료되었습니다 🎊")
-            location.reload();
+            if(data==1) {
+                alert("🎊 모든 미션이 완료되었습니다 🎊")
+                location.reload();
+            }
         }
     })
 })

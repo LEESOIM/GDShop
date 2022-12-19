@@ -37,7 +37,8 @@ public class PurchaseController {
 	}
 
 	@PostMapping("setPurchase")
-	public ModelAndView setPurchase(HttpSession session, PurchaseVO purchaseVO, MultipartFile f, MissionVO missionVO) throws Exception {
+	@ResponseBody
+	public int setPurchase(HttpSession session, PurchaseVO purchaseVO, MultipartFile f, MissionVO missionVO) throws Exception {
 
 		// ID
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
@@ -56,22 +57,23 @@ public class PurchaseController {
 		purchaseVO.setPrice(finalPurchaseVO.getPrice());
 
 		log.info("=========Controller==========");
-		log.info("주문일){}", finalPurchaseVO.getPurDate());
-		log.info("주문번호){}", finalPurchaseVO.getPurNum());
+		log.info("주문일){}", purchaseVO.getPurDate());
+		log.info("주문번호){}", purchaseVO.getPurNum());
 		log.info("M주문번호){}", purchaseVO.getPurNumM());
-		log.info("가격){}", finalPurchaseVO.getPrice());
+		log.info("가격){}", purchaseVO.getPrice());
 		log.info("M가격){}", purchaseVO.getPriceM());
 		log.info("purchaseVO{}", purchaseVO);
+		log.info("missionVO{}", missionVO);
 		log.info("=============================");
 
-		ModelAndView mv = new ModelAndView();
 		if (finalPurchaseVO.getPurNum().equals(purchaseVO.getPurNumM())) {
 			if(finalPurchaseVO.getPrice().equals(purchaseVO.getPriceM())) {
-				missionService.setMiStatus1(purchaseVO); // status 0->1
+				int result = missionService.setMiStatus1(purchaseVO); // status 0->1
+				return result;
+				
 			} 
+			return 2;
 		}
-		
-		mv.setViewName("redirect:/item/detail?itemNum=" + missionVO.getItemNum());
-		return mv;
+		return 0;
 	}
 }

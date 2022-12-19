@@ -17,6 +17,14 @@ public class AdminService {
 	@Autowired
 	private AdminMapper adminMapper;
 	
+	public List<PayVO> getTotal()throws Exception{
+		return adminMapper.getTotal();
+	}
+	
+	public List<PayVO> getMonthRevenue(String year)throws Exception{
+		return adminMapper.getMonthRevenue(year);
+	}
+	
 	public List<PayVO> getRevenue()throws Exception{
 		return adminMapper.getRevenue();
 	}

@@ -72,23 +72,7 @@
 										</c:otherwise>
 									</c:choose>
 									<span class="px-1" style="color: grey">|</span>
-									
-									<c:choose>
-										<c:when test="${vo.itemVO.shop eq '쿠팡'}">
-											<div style="color: red">${vo.sellerVO.company }</div>
-										</c:when>
-										<c:when test="${vo.itemVO.shop eq '네이버'}">
-											<div style="color: #2DB400">${vo.sellerVO.company }</div>
-										</c:when>
-										<c:when test="${vo.itemVO.shop eq '인스타그램'}">
-											<div style="color: purple">${vo.sellerVO.company }</div>
-										</c:when>
-										<c:otherwise>
-											<div style="color: #646464">
-												<b>${vo.sellerVO.company }</b>
-											</div>
-										</c:otherwise>
-									</c:choose>
+									<div style="color: grey">${vo.sellerVO.company }</div>
 								</div>
 							</div>
 							<div class="my-1">
@@ -103,7 +87,7 @@
 
 								<c:if test="${vo.itemVO.type eq 'SNS미션'}">
 									<div class="pe-1" style="color: gray; font-size: 14px; line-height: 23px">보상금액</div>
-									<div style="font-size: 18px; line-height: 22px; color: blue">
+									<div style="font-size: 18px; line-height: 22px; color: #FA6400">
 										<b><fmt:formatNumber type="number" maxFractionDigits="3" value="${vo.itemVO.point }" />원</b>
 									</div>
 								</c:if>

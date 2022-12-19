@@ -166,9 +166,6 @@ prefix="c" %>
                   보기
                 </div>
               </div>
-              <label class="form-check-label ps-4" for="flexCheckChecked">
-                ※ 구디샵은 만 14세 이상만 가입 가능합니다.
-              </label>
               <div class="mt-5 d-flex justify-content-end">
                 <form action="join" method="get" id="frm">
                   <button

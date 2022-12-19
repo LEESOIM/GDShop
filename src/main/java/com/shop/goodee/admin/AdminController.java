@@ -1,6 +1,7 @@
 package com.shop.goodee.admin;
 
 import java.io.Console;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,11 +35,24 @@ public class AdminController {
 	private SellerService sellerService;
 	
 	
+	@GetMapping("getMonthRevenue")
+	@ResponseBody
+	public List<PayVO> getMonthRevenue(String year)throws Exception{
+		List<PayVO> list = adminService.getMonthRevenue(year);
+		log.info("==========list => {} ",list);
+		return list;
+	}
+	
 	@GetMapping("getRevenue")
 	@ResponseBody
 	public List<PayVO> getRevenue()throws Exception{
 		List<PayVO> list = adminService.getRevenue();
-		return list;
+		List<PayVO> list2 = adminService.getTotal();
+		log.info("lsit2 => {}",list2);
+		List<PayVO> join = new ArrayList<>();
+		join.addAll(list);
+		join.addAll(list2);
+		return join;
 	}
 	
 	

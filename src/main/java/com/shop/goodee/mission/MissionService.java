@@ -89,5 +89,10 @@ public class MissionService {
 	public int setEnd(ItemVO itemVO) throws Exception {
 		return missionMapper.setEnd(itemVO);
 	}
+	
+	//미션 선정 탈락
+	public int setFail(MissionVO missionVO) throws Exception {
+		return missionMapper.setFail(missionVO);
+	}
 
 }

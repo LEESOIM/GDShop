@@ -50,4 +50,6 @@ public interface MissionMapper {
 	public int setReceivePoint(ItemVO itemVO) throws Exception;
 	
 	public int setEnd(ItemVO itemVO) throws Exception;
+	
+	public int setFail(MissionVO missionVO) throws Exception;
 }

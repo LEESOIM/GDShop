@@ -23,12 +23,6 @@
     border-radius: 50%;
 }
 </style>
-<base target="_self" />
-<script type="text/javascript">
-	window.name = "dialogPopup";
-	form.target = "dialogPopup";
-	form.submit();
-</script>
 </head>
 <body>
 	<c:import url="../template/top_part.jsp"></c:import>
@@ -50,7 +44,7 @@
 						<div class="mt-1 mb-2" style="font-size: 18px"><b>${vo.title }</b></div>
 						<div style="font-size: 12px; text-align: right; color: rgb(124, 121, 132)">캠페인번호 : ${vo.itemNum }</div>
 						<hr style="margin: 0;" />
-						<div class="mt-4 mb-4">
+						<div class="my-3">
 							<div class="d-flex justify-content-center">
 								<div class="me-4" style="font-size: 14px; margin: auto 0"><b>결제금액</b></div>
 								<div style="font-size: 19px;"><b><fmt:formatNumber value="${vo.price }" pattern="###,###,###" />원</b></div>
@@ -168,7 +162,6 @@
 									<div>
 										<div>현재 모집률</div> 
 										<div id="applyRate" style="font-size: 19px; font-weight: bold;"></div>
-										<input type="hidden" id="rate">
 										<input type="hidden" value="${vo.stock }" id="stock">
 									</div>
 								</div>

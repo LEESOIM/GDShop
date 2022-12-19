@@ -19,6 +19,7 @@ import com.shop.goodee.item.ItemService;
 import com.shop.goodee.item.ItemVO;
 import com.shop.goodee.member.MemberMapper;
 import com.shop.goodee.member.MemberVO;
+import com.shop.goodee.purchase.PurchaseVO;
 import com.shop.goodee.sns.SnsService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -50,10 +51,12 @@ public class MissionController {
 		itemVO.setId(memberVO.getId());
 		log.info("포인트{}",itemVO);
 		//포인트 수령
-		missionService.setReceivePoint(itemVO);
+		int result = missionService.setReceivePoint(itemVO);
+		if(result!=1) {
+			return 0;
+		}
 		//status 1->2
-		int result = missionService.setEnd(itemVO);
-		return result;
+		return missionService.setEnd(itemVO);
 	}
 	
 	
@@ -138,12 +141,11 @@ public class MissionController {
 	// 지원내역
 	@PostMapping("applyList")
 	@ResponseBody
-	public MissionVO getApply(HttpSession session, ItemVO itemVO, MissionVO missionVO) throws Exception {
+	public MissionVO getApply(HttpSession session, MissionVO missionVO) throws Exception {
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
 		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
 
-		missionVO.setItemNum(itemVO.getItemNum());
 		missionVO.setId(memberVO.getId());
 		missionVO = missionService.getApply(missionVO);
 		log.info("미션지원내역==={} ", missionVO);
@@ -168,17 +170,29 @@ public class MissionController {
 	// 지원취소
 	@PostMapping("cancel")
 	@ResponseBody
-	public String setCancel(HttpSession session, MissionVO missionVO, ItemVO itemVO) throws Exception {
+	public String setCancel(HttpSession session, MissionVO missionVO) throws Exception {
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
 		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
-		missionVO.setItemNum(itemVO.getItemNum());
 
-		missionVO.setItemNum(itemVO.getItemNum());
+		missionVO.setId(memberVO.getId());
+		log.info("missionVO{}", missionVO);
+		int result = missionService.setCancel(missionVO);
+		return "/item/detail?itemNum=" + missionVO.getItemNum();
+	}
+	
+	// 미션 선정 탈락
+	@PostMapping("fail")
+	@ResponseBody
+	public int setFail(HttpSession session, MissionVO missionVO) throws Exception {
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
+
 		missionVO.setId(memberVO.getId());
 
-		int result = missionService.setCancel(missionVO);
-		return "/item/detail?itemNum=" + itemVO.getItemNum();
+		int result = missionService.setFail(missionVO);
+		return result;
 	}
 
 }

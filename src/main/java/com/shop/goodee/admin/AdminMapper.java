@@ -12,6 +12,8 @@ import com.shop.goodee.util.Pager;
 
 @Mapper
 public interface AdminMapper {
+	public List<PayVO> getTotal()throws Exception;
+	public List<PayVO> getMonthRevenue(String year)throws Exception;
 	public List<PayVO> getRevenue()throws Exception;
 	public Long getCountMi2(Pager pager)throws Exception;
 	public List<MyCampaignVO> getMission2(Pager pager)throws Exception;

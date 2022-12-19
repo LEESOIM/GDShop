@@ -25,10 +25,12 @@ public class HomeController {
 		List<ItemVO> list = itemService.getList();
 		List<ItemVO> listHit = itemService.getListHit();
 		List<ItemVO> listVIP = itemService.getListVIP();
+		List<ItemVO> listSuccess = itemService.getListSuccess();
 
 		mv.addObject("list", list);
 		mv.addObject("listHit", listHit);
 		mv.addObject("listVIP", listVIP);
+		mv.addObject("listSuccess", listSuccess);
 		
 		mv.setViewName("index");
 		return mv;
