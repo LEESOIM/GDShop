@@ -10,6 +10,8 @@ function wsOpen() {
 function wsEvt() {
 	ws.onopen = function (data) {
 		console.log(data);
+		$("#chatting").val('상담사가 입장하였습니다.')
+		$("#sendBtn").click();
 	}
 	
 	ws.onmessage = function (data) {
@@ -26,11 +28,15 @@ function wsEvt() {
 				if (d.sessionId == $("#sessionId").val()) {
 					$("#chating").append("<p class='me'>👨‍💻 : " + d.msg + "</p>");
 				} else {
+					console.log(d);
 					console.log($("#MName").val());
 					if($("#MName").val() == null || $("#MName").val() == ''){
 						$("#chating").append("<p class='others'>" + '고객님' + " : " + d.msg + "</p>");
-					}else{
-						$("#chating").append("<p class='others'>" + $("#MName").val() + " : " + d.msg + "</p>");
+					}else if (d.sessionId == null || d.sessionId == ""){
+						$("#chating").append("<p class='others'>입장하였습니다.</p>");
+					}
+					else{
+						$("#chating").append("<p class='others'>" + '고객님' + " : " + d.msg + "</p>");
 					}
 				}
 

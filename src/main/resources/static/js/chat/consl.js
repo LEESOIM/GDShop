@@ -8,7 +8,6 @@ function wsOpen(rn) {
 
 function wsEvt() {
 	ws.onopen = function (data) {
-		console.log(data);
 	}
 
 	ws.onmessage = function (data) {
@@ -25,7 +24,8 @@ function wsEvt() {
                 console.log(d);
 				if (d.sessionId == $("#sessionId").val()) {
 					chatMessageSend(d.msg);
-				} else {
+				}
+				else {
 					chatMessageRecive(d.msg);
 				}
 

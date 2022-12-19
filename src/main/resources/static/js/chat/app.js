@@ -121,6 +121,7 @@ $(document).on("click", "#chatConnect", (e) => {
     showMessageSend($(e.target).text());
     $(e.target).parent().remove();
     $("#sendForm").show();
+    showMessageRecive("상담사가 입장하고 있습니다. 잠시만 기다려주세요")
     createRoom();
 });
 
