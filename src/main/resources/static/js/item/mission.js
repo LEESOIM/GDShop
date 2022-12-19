@@ -98,11 +98,12 @@ $("#applyBaro").click(function () {
 })
 
 
+
 //OCR
 $("#ocrSubmit").click(function () {
     let form = $("form")[0];        
     let formData = new FormData(form);
-
+    $("#loading").attr("style", "display:");
     $.ajax({
         type: "POST",
         url: "/purchase/setPurchase",
@@ -113,11 +114,13 @@ $("#ocrSubmit").click(function () {
         success: function (data) {
             if(data==0) {
                 alert("주문번호를 다시 확인해주세요.")
+            }else if(data==1) {
+                $("ocrSubmit").attr("type", "submit")
+                location.reload();
             }else if(data==2) {
                 alert("결제금액을 다시 확인해주세요.")
             }else {
-                $("ocrSubmit").attr("type", "submit")
-                location.reload();
+                alert("인증을 실패하였습니다. 잠시후 다시 시도해주세요")
             }
         }
     })
@@ -146,9 +149,33 @@ $("#reviewSubmit").click(function () {
 })
 
 
+//SNS OCR
+$("#snsSubmit").click(function () {
+    let form = $("form")[0];        
+    let formData = new FormData(form);
+    $.ajax({
+        type: "POST",
+        url: "/follow/getFollow",
+        cache : false,
+        processData: false,
+        contentType: false,
+        data: formData,
+        success: function (data) {
+            if(data==0) {
+                alert("인증을 실패하였습니다. 잠시후 다시 시도해주세요")
+            }else if(data==1) {
+                $("ocrSubmit").attr("type", "submit")
+                location.reload();
+            }
+        }
+    })
+})
+
+
+
 //포인트 수령
 $("#pointBtn").click(function () {
-    let point = $("#pointResult").val();
+    let point = $(".pointResult").val();
     let itemNum = $("#itemNumResult").val();
     $.ajax({
         type: "POST",
