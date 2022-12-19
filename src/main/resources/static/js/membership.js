@@ -2,7 +2,7 @@ $("#membership_joinBtn").click(function () {
   if ($("#memberId").text() == "") {
     console.log("로그인필요");
     console.log($("#exampleModal"));
-    alert("로그인 필요");
+    alert("로그인이 필요합니다");
     $("#exampleModal_membership").modal("hide");
     $("#exampleModal").modal("show");
   } else {
@@ -73,7 +73,7 @@ function requestPay(buyer_name, buyer_id) {
             alert("결제 완료. 다시 로그인해주세요.");
             location.href = "/member/logout";
           } else {
-            alert("결제 실패1");
+            alert("결제 실패ㄴ");
           }
         });
       } else {

@@ -80,9 +80,9 @@ function check(event){
     let className = $(event).val()
     if(event.checked==true){
         console.log($(event).val())
-        $("."+className).animate({opacity: "1"}, 1000);
+        $("."+className).animate({opacity: "1"}, 1000).attr("visibility", "visible");;
     }else{
-        $("."+className).animate({opacity: "0"}, 1000);
+        $("."+className).animate({opacity: "0"}, 1000).attr("visibility", "hidden");;
     }
 }
 
@@ -93,34 +93,34 @@ function setRevenueChart(data){
     let yValue = []
     let xyValue = []
 
-    let total = d3.rollup(data,v => d3.sum(v,d=>d.amount), d=>d.payDate)
-    console.log(total)
+    console.log(data)
     let maxPay=0;
+    let maxDay=0
     for(i=0; i<data.length;i++){
         
         if(data[i].amount>=maxPay){
             maxPay=data[i].amount
         }
         data[i].payDate  = new Date(data[i].payDate )
-
+        if(data[i].payDate>=maxDay){
+            maxDay=data[i].payDate
+            console.log(maxDay)
+        }
+        
         xValue.push(new Date(data[i].payDate))
         yValue.push(data[i].amount)
         xyValue.push([new Date(data[i].payDate), data[i].amount])        
     }
-    data.push()
-    console.log(data)
-
 
     let dateStart = data[0].payDate
-    let dateLast = data[data.length-1].payDate
+    let dateLast = data[0].payDate
     let payStart = data[0].amount
     let payLast = maxPay
 
-    console.log(payLast)
 
 
 
-    let xScale = d3.scaleTime().domain([new Date(dateStart), new Date(dateLast)]).range([45, width]); 
+    let xScale = d3.scaleTime().domain([new Date(dateStart), new Date(maxDay)]).range([45, width]); 
     let yScale = d3.scaleLinear().domain([0, payLast]).range([height, 30]);
         
     const xAxis = d3.axisBottom(xScale).tickSizeOuter(0).ticks(12).tickFormat(d3.timeFormat("%m/%d"));
@@ -199,7 +199,7 @@ function setRevenueChart(data){
         .style("stroke-width", "2px")
         .style("opacity", "0.8");          
 
-
+    //범례
     var legend = d3.select("#svg")
         .append('g')
         .attr('class', 'legend')
@@ -224,7 +224,6 @@ function setRevenueChart(data){
             return (i * 20) + 15;
           })
         .text(function(d) {
-            console.log(d.key)
             if(d.key=="ROLE_SELLER"){
                 index = "판매자"
             }else if(d.key=="ROLE_VIP"){
@@ -255,10 +254,12 @@ function setRevenueChart(data){
         .data(data)
         .enter()
         .append("g")
+        .attr("class", function(d){return d.key})
         .attr("class", "mouse-per-line");
 
     mousePerLine.append("circle")
         .attr("r", 7)
+        .attr("class", function(d){return d.key})
         .style("stroke", function(d) {
           return color(d.key);
         })
@@ -267,6 +268,7 @@ function setRevenueChart(data){
         .style("opacity", "0");
     
     mousePerLine.append("text")
+    .attr("class", function(d){return d.key})
         .attr("transform", "translate(10,3)");
 
     

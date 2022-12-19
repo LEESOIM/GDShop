@@ -106,37 +106,6 @@ pageEncoding="UTF-8"%>
                             </div>
                         </div>
 
-                        <!-- Area Chart -->
-                        <!-- <div class="col-xl-8 col-lg-7" style="width: 90%; height: 50%; margin: auto;">
-                            <div class="card shadow mb-4">
-                              
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary"><i class="bi bi-graph-up-arrow"></i><span id="chartTitle"> 회원</span> </h6>
-                                    <select id="year" style="display: none; margin-left: 80%;"></select>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <div class="dropdown-item" onclick="getDayRevenue()" >일 매출</div>
-                                            <div class="dropdown-item" onclick="getMonthRevenue()" >월 매출</div>
-                                        </div>
-                                    </div>
-                                </div>
-                               
-                                <div class="card-body" style="width: 100%;">
-                                    <div class="chart-area" style="margin-bottom: 40px; margin: auto;">
-                                        <svg id="svg" width="100%" height="350px" style="margin-left: 10px;">
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-
                     </div>
 
                 
