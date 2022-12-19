@@ -98,7 +98,7 @@ pageEncoding="UTF-8"%>
 									<td>${dto.company}</td>
 									<td>${dto.status}</td>
 									<td class="accept"><a href="#"></a></td>
-									<td class="acceptNo"><a href="#">X</a></td>
+									<td class="acceptNo"><button href="#">거절</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>

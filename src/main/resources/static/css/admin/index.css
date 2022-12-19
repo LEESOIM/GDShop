@@ -1,12 +1,13 @@
 .tip{
-    fill: white;
-    stroke: black;
+    fill: black;
+    color: white;
+    stroke: white;
     stroke-width:1px;
     stroke-radius:5px;
     padding:5px;
-    width: 100px;
-    height: 50px;
-    opacity: 0.8;
+    width: 90px;
+    height: 25px;
+    opacity: 0.1;
 }
 
 tspan{
@@ -20,4 +21,15 @@ tspan{
     stroke :#67809f;
     stroke-width: 1.5px;
     stroke-dasharray:3 3;
+}
+
+.monthtip{
+    fill: white;
+    stroke: black;
+    stroke-width:1px;
+    stroke-radius:5px;
+    padding:5px;
+    width: 70px;
+    height: 50px;
+    opacity: 0.8;
 }

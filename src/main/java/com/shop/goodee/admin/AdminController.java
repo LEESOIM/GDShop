@@ -1,6 +1,7 @@
 package com.shop.goodee.admin;
 
 import java.io.Console;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +47,12 @@ public class AdminController {
 	@ResponseBody
 	public List<PayVO> getRevenue()throws Exception{
 		List<PayVO> list = adminService.getRevenue();
-		return list;
+		List<PayVO> list2 = adminService.getTotal();
+		log.info("lsit2 => {}",list2);
+		List<PayVO> join = new ArrayList<>();
+		join.addAll(list);
+		join.addAll(list2);
+		return join;
 	}
 	
 	

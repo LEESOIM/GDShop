@@ -16,6 +16,13 @@
 	</select>
 	
 	
+	<select id="getTotal" resultType="PayVO">
+		SELECT p.PAYDATE, SUM(AMOUNT) amount,  CASE PAYNAME WHEN 'ROLE_SELLER' THEN 'TOTAL' ELSE "TOTAL" END PAYNAME
+		FROM PAY p
+		GROUP BY PAYDATE
+		LIMIT 0,10
+	</select>
+	
 	<select id="getRevenue" resultType="PayVO">
 		SELECT p.PAYDATE, SUM(AMOUNT) amount,  p.PAYNAME
 		FROM PAY p
