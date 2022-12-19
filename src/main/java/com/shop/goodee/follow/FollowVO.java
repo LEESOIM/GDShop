@@ -4,5 +4,6 @@ import lombok.Data;
 
 @Data
 public class FollowVO {
+	private Long missionNum;
 	private Integer followCheck;
 }
