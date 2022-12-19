@@ -48,7 +48,9 @@ $(function () {
         commonAjax("/sendMessage", '상담 시작', 'POST', function (message) {
             ajaxMessage(message);
         })
-        basicmessage();
+        setTimeout(() => {
+            basicmessage();
+        }, 2000);
     });
 });
 
@@ -128,8 +130,9 @@ $(document).on("click", "#home", (e) => {
 });
 
 $(document).on("click", "#discon", (e) => {
+    showMessageSend($(e.target).text());
     $(e.target).parent().remove();
-    ws.onclose() = (e) => {
-        console.log(e);
-    }
+    commonAjax("/sendMessage", $(e.target).text(), 'POST', function (message) {
+        ajaxMessage(message);
+    })
 });
