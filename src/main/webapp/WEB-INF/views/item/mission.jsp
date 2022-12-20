@@ -161,7 +161,6 @@
 				<hr />
 		<c:if test="${vo.type ne 'SNS미션' }">
 				<form id="ocr" action="/purchase/setPurchase" method="post" enctype="multipart/form-data">
-		<div class="spinner-border" role="status" style="display: none" id="loading"></div>
 				<input type="hidden" value="${vo.itemNum }" name="itemNum">
 				<div class="pe-4 py-4" style="font-size: 14px">
 				<div class="d-flex pb-2">
@@ -234,10 +233,10 @@
 				<div class="pe-4 py-4" style="font-size: 15px">
 				<div class="d-flex pb-2">
 					<div style="margin:auto 0; width: 30%; text-align: right;">
-						<b>구매 URL</b>
+						<b>인스타그램 URL</b>
 					</div>
 					<div style="width: 80%; margin-left: 15px">
-						<a class="btn btn-success btn-sm py-0" href="${vo.url}" target="_blank">구매링크 바로가기</a>
+						<a class="btn btn-success btn-sm py-0" href="${vo.url}" target="_blank">링크 바로가기</a>
 					</div>
 				</div>
 				<div class="d-flex py-2">
@@ -246,7 +245,7 @@
 					</div>
 					<div style="width: 80%; margin-left: 15px; ">
 					<div class="mb-2" style="color: #198754; font-weight: bold;">✅미션종류 : 인스타 팔로우<br>
-						✅구매 링크로 들어가셔서 해당 인스타 팔로우 하고<br> 인증해 주세요<br>
+						✅해당 링크로 들어가셔서 해당 인스타 팔로우 하고<br> 인증해 주세요<br>
 						✅${vo.sellerSNS }<br><br>
 						</div>
 					</div>
@@ -368,12 +367,13 @@
 				<c:if test="${vo.shop ne '쿠팡' }">
 				<form id="reviewN" action="/review/getReviewNaver" method="POST" >
 					<input name="itemNum" type="hidden" value="${vo.itemNum }">
+					<input name="url" type="hidden" value="${vo.url }">
 					<div class="d-flex pt-3">
 						<div style="margin:auto 0; width: 30%; text-align: right;">
 							<b><span style="color: red">*</span>아이디</b>
 						</div>
 						<div style="width: 80%; margin-left: 25px">
-							<input type="text" id="nickName_N" name="nickName" style="width: 300px" class="form-control p-1"/>
+							<input type="text" name="nickName_N" style="width: 300px" class="form-control p-1"/>
 						</div>
 					</div>
 					<div class="d-flex py-2">
@@ -381,14 +381,12 @@
 							<b><span style="color: red">*</span>작성일</b>
 						</div>
 						<div style="width: 80%; margin-left: 25px">
-							<input class="form-control" type="date" id="dateM" name="dateM" style="width: 300px">
+							<input class="form-control" type="date" name="date" style="width: 300px">
 						</div>
 					</div>
-					<input type="hidden" value="${vo.url }" name="url">
-
 					<div class="modal-footer d-flex justify-content-center pb-0">
 					<button type="button" class="btn btn-success" data-bs-dismiss="modal" aria-label="Close">취소</button>
-					<button type="submit" class="btn btn-outline-success" data-bs-target="#missionModal3" data-bs-toggle="modal" >전송</button> 
+					<button type="button" class="btn btn-outline-success" data-bs-target="#missionModal3" data-bs-toggle="modal" id="reviewSubmit_N">전송</button> 
 					</div>
 				</form>
 				</c:if>
@@ -438,16 +436,16 @@
 			</c:if>
 			<c:if test="${vo.type eq 'SNS미션' }">
 				<div class="d-flex justify-content-center my-2" style="text-align: center">
-						<div style="font-weight: bold;">
+						<div>
 							<div class="mission_order">
-								<i class="fa-solid fa-circle-check" style="color: green"></i> 참여하기
+								<i class="fa-regular fa-circle-check" style="color: green"></i> 참여하기
 							</div>
 							<div>완료</div>
 						</div>
 						<div class="solid"></div>
-						<div>
+						<div style="font-weight: bold;">
 							<div class="mission_order">
-								<i class="fa-regular fa-circle-check" style="color: green"></i> 포인트 수령
+								<i class="fa-solid fa-circle-check" style="color: green"></i> 포인트 수령
 							</div>
 							<div>미완료</div>
 						</div>
@@ -474,6 +472,5 @@
 	</div>
 </div>
 </div>
-
 
 <script src="/js/item/mission.js"></script>
