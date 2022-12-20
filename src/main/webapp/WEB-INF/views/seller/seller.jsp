@@ -84,7 +84,6 @@
 						<footer class="my-3 text-center text-small">
 							<p class="mb-1">&copy; 2022 GDShop</p>
 						</footer>
-						<a href="./wait">입점신청 리스트</a>
 					</div>
 				</div>
 			</div>
