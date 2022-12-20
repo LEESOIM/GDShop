@@ -409,10 +409,7 @@
 				src="/images/16208041651620804165203.png"/>
 				<div class="pt-2">
 					<b>구디 챗봇</b>
-				</div> <span
-				class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-				style="font-size: 13px;">+0 <span class="visually-hidden">unread
-						messages</span></span></a>
+				</div></a>
 		</div>
 	
 		<c:import url="./template/footer.jsp"></c:import>

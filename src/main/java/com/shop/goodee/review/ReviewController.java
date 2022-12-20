@@ -1,6 +1,5 @@
 package com.shop.goodee.review;
 
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +43,7 @@ public class ReviewController {
 	@PostMapping("getReview")
 	@ResponseBody
 	public int getReview(HttpSession session, TestVO testVO, MissionVO missionVO) throws Exception {
-		
+
 		ReviewVO reviewVO = reviewService.getReview(testVO);
 		log.info("=========Controller========");
 		log.info("닉네임)" + reviewVO.getNickName());
@@ -67,31 +66,72 @@ public class ReviewController {
 
 		log.info("reviewVO{}" + reviewVO);
 		log.info("testVO{}" + testVO);
-		
-		if(reviewVO.getNickName().equals(testVO.getNickName())) {
-			if (reviewVO.getReviewLength() >= 50) {
-				// 닉네임등록
-				missionService.setNicC(reviewVO);
-				// status 1->2
-				reviewVO.setMissionNum(testVO.getMissionNum());
-				int result = missionService.setMiStatus2(reviewVO);
-				return result;
+
+		try {
+			if (reviewVO.getNickName().equals(testVO.getNickName())) {
+				try {
+					if (reviewVO.getReviewLength() >= 50) {
+						// 쿠팡닉네임등록
+						missionService.setNicC(reviewVO);
+						// status 1->2
+						reviewVO.setMissionNum(testVO.getMissionNum());
+						int result = missionService.setMiStatus2(reviewVO);
+						return result;
+					} else {
+						return 2;
+					}
+				} catch (Exception e) {
+					return 2;
+				}
 			}
-			return 2;
+		} catch (Exception e) {
+			return 0;
 		}
 		return 0;
 	}
 
 	@PostMapping("getReviewNaver")
 	@ResponseBody
-	public ReviewVO getReviewNaver(ReviewVO reviewVO) throws Exception {
+	public int getReviewNaver(HttpSession session, TestVO testVO, MissionVO missionVO) throws Exception {
 
-		reviewVO = reviewService.getReviewNaver(reviewVO);
+		ReviewVO reviewVO = new ReviewVO();
+		reviewVO = reviewService.getReviewNaver(testVO);
+
+		// ID
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
+		missionVO.setId(memberVO.getId());
+		reviewVO.setId(memberVO.getId());
+
+		// 미션번호
+		missionVO = missionService.getApply(missionVO);
+		testVO.setMissionNum(missionVO.getMissionNum());
+
 		log.info("===============Controller===============");
 		log.info("리뷰내용) {}", reviewVO.getReview());
 		log.info("리뷰글자수) {}", reviewVO.getReviewLength());
+		log.info("reviewVO) {}", reviewVO);
+		log.info("testVO) {}", testVO);
 
-		return reviewVO;
+		if (!reviewVO.getReview().equals(null)) {
+			try {
+				if (reviewVO.getReviewLength() >= 50) {
+					// 네이버아이디등록
+					missionService.setNicN(reviewVO);
+					// status 1->2
+					reviewVO.setMissionNum(testVO.getMissionNum());
+					int result = missionService.setMiStatus2(reviewVO);
+					return result;
+				} else {
+					return 2;
+				}
+			} catch (Exception e) {
+				return 2;
+			}
+		}
+
+		return 0;
 	}
 
 }
