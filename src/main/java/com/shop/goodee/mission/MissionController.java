@@ -1,6 +1,5 @@
 package com.shop.goodee.mission;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -44,16 +43,27 @@ public class MissionController {
 	@PostMapping("point")
 	@ResponseBody
 	public int setReceivePoint(HttpSession session, ItemVO itemVO) throws Exception {
+		itemVO = itemService.getDetail(itemVO);
+		
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
 		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
 		itemVO.setId(memberVO.getId());
-		log.info("포인트{}",itemVO);
+		
+		log.info("itemVO{}",itemVO);
+		
 		//포인트 수령
-		int result = missionService.setReceivePoint(itemVO);
+		int result = missionService.setPoitnAfter(itemVO);
+		log.info("result1{}",result);
+		
 		if(result==1) {
-			//status 1->2
-			return missionService.setEnd(itemVO);
+			result = missionService.setReceivePoint(itemVO);
+			log.info("result2{}",result);
+			
+			if(result==1) {
+				//status 1->2
+				return missionService.setEnd(itemVO);
+			}
 		}
 		return 0;
 	}
@@ -119,20 +129,22 @@ public class MissionController {
 	@PostMapping("apply")
 	@ResponseBody
 	public int setApply(HttpSession session, MissionVO missionVO, ItemVO itemVO) throws Exception {
+		itemVO = itemService.getDetail(itemVO);
+		
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
 		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
+		itemVO.setId(memberVO.getId());
 		missionVO.setId(memberVO.getId());
-
-		// 상품테이블에 있는 값을 미션테이블로 담기
-		// missionVO.setItemNum(itemVO.getItemNum());
-		// missionVO.setApplyCount(itemVO.getCount());
-		itemVO = itemService.getDetail(itemVO);
-
+		
+		//미션참여시 적립포인트 세팅
+		missionService.setPointBefore(itemVO);
+		
 		// 지원하기
 		if (itemVO.getType().equals("추첨형")) {
 			return missionService.setApply(missionVO);
 		} else {
+			
 			return missionService.setApply_baro(missionVO);
 		}
 	}

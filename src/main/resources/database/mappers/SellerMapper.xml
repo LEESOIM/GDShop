@@ -23,7 +23,7 @@
 
 	<select id="getApproveSeller" resultType="SellerVO">
 		SELECT *
-		FROM seller s
+		FROM SELLER s
 		LEFT JOIN MEMBER_ROLE mr
 		ON s.id=mr.id
 		INNER JOIN MEMBER m
@@ -35,11 +35,11 @@
 
 	<select id="getTotalCount" parameterType="Pager" resultType="Long">
 		SELECT COUNT(*)
-		FROM seller s
-		LEFT JOIN MEMBER_ROLE mr
-		ON s.id=mr.id
-		INNER JOIN MEMBER m
-		ON mr.id=m.id
+		FROM SELLER S
+		LEFT JOIN MEMBER_ROLE MR
+		ON S.id=MR.id
+		INNER JOIN MEMBER M
+		ON MR.id=M.id
 		WHERE S.STATUS=#{status} AND MR.ROLENUM=#{roleNum}
 	</select>
 

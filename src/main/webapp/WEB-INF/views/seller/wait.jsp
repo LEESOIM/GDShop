@@ -97,8 +97,8 @@ pageEncoding="UTF-8"%>
 									<td>${dto.phone}</td>
 									<td>${dto.company}</td>
 									<td>${dto.status}</td>
-									<td class="wait"><button href="#">승인</button></td>
-									<td class="waitNo"><button href="#">거절</button></td>
+									<td class="wait"><button href="#" class="btn btn-dark btn-sm">승인</button></td>
+									<td class="waitNo"><button href="#" class="btn btn-dark btn-sm">거절</button></td>
 								</tr>
 							</c:forEach>
 						</tbody>

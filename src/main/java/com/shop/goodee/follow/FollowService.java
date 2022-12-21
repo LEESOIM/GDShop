@@ -52,7 +52,7 @@ public class FollowService {
 				log.info("===========Service===========");
 				log.info("OCR){}",text);
 				
-				if(text.contains("팔로잉")||text.contains("칼로잉")||text.contains("랄로잉")) {
+				if(text.contains("팔로잉")||text.contains("칼로잉")||text.contains("랄로잉")||text.contains("팔롱잉")) {
 					log.info("팔로우 O");
 					followVO.setFollowCheck(1);
 					return followVO;

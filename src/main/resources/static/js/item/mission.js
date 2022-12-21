@@ -210,13 +210,11 @@ $("#snsSubmit").click(function () {
 
 //포인트 수령
 $("#pointBtn").click(function () {
-    let point = $(".pointResult").val();
     let itemNum = $("#itemNumResult").val();
     $.ajax({
         type: "POST",
         url: "/mission/point",
         data: {
-            point: point,
             itemNum: itemNum,
         },
         success: function (data) {
@@ -227,7 +225,7 @@ $("#pointBtn").click(function () {
                     reAction()
                     setTimeout(function () {
                         location.reload();
-                    }, 6000);
+                    }, 5000);
                 }
             }
         }
@@ -239,5 +237,5 @@ function reAction() {
     $("#startButton").trigger("click");
     setTimeout(function () {
         $("#stopButton").trigger("click");
-    }, 5000);
+    }, 4000);
 }  

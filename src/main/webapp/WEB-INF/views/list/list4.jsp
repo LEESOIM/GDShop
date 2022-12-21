@@ -30,41 +30,26 @@
 <body>
 		<c:import url="../template/top_part.jsp"></c:import>
 		<c:import url="../template/header.jsp"></c:import>
-	<section class="container" style="width: 65%">
+	<section class="container" style="width: 70%">
 
 		<div style="margin-top: 3em; padding-bottom: 70px">
-			<div class="campaign">
+			<div class="campaign" style="margin-bottom: 50px">
 				<div class="campaign-title">프리미엄</div>
 				<div class="campaign-content">프리미엄 회원을 위한 스페셜한 캠페인</div>
 			</div>
 			
-			<div class="search mb-5" style="border-bottom: 1px solid #d8d8d8;">
-				<div class="available">
-					
-				</div>
-				<div class="order">
-					<button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">최신순
-					<img src="/images/borrom-arrow.svg">
-					</button>
-					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="#">인기순</a></li>
-						<li><a class="dropdown-item" href="#">마감순</a></li>
-					</ul>
-				</div>
-			</div>
-
 		
 			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4">
 				<c:forEach items="${list4 }" var="vo" >
 				<div>
-					<div class="d-flex flex-column" style="width: 250px; height: 380px; margin-bottom: 50px">
+					<div class="d-flex flex-column" style="width: 260px; height: 380px; margin-bottom: 50px">
 						<div> 
 						<div style="position: relative;"><a href="/item/detail?itemNum=${vo.itemNum }">
-							<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px"></a>
+							<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 260px; height: 250px; border-radius: 15px"></a>
 						<div style="position:absolute; top:0; right:0 "><img src="/images/vip.png" width="70px" style="padding: 5px 5px 0 0"></div></div>
 						</div>
 
-						<div class="d-flex flex-column" style="width: 250px; height: 130px">
+						<div class="d-flex flex-column" style="width: 260px; height: 130px">
 							<div class="d-flex justify-content-start pt-1" style="font-size: 14px">
 								<c:choose>
 									<c:when test="${vo.shop eq '쿠팡'}"><div style="color: red"><b>${vo.shop }</b></div></c:when>

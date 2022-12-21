@@ -463,14 +463,8 @@
 				<div class="p-4" style="font-size: 15px; text-align: center;">
 				<input type="hidden" id="itemNumResult" value="${vo.itemNum }">
 					<img src="/images/point.png" width="300px" class="pb-3">
-					<c:if test="${vo.type ne 'SNS미션' }">
-						<div style="font-size: 30px; color: #44D62C"><b><fmt:formatNumber value="${vo.price }" pattern="###,###,###" />P</b></div>
-						<input type="hidden" class="pointResult" value="${vo.price }">
-					</c:if>
-					<c:if test="${vo.type eq 'SNS미션' }">
 						<div style="font-size: 30px; color: #44D62C"><b><fmt:formatNumber value="${vo.point }" pattern="###,###,###" />P</b></div>
 						<input type="hidden" class="pointResult" value="${vo.point }">	
-					</c:if>
 					<button class="btn btn-success py-2 px-3 my-2" style="background-color: #44D62C; border-radius: 20px; border:none;" type="button" id="pointBtn"><i class="fa-solid fa-check"></i> <b>포인트받기</b></button>
 				</div>
 			</form>

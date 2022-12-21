@@ -26,7 +26,7 @@
 	<div style="margin-bottom:500px;">
 	<c:import url="../template/top_part.jsp"></c:import>
 	<c:import url="../template/header.jsp"></c:import>
-	<section class="container" style="width: 65%">
+	<section class="container" style="width: 70%">
 
 		<div style="margin-top: 3em; padding-bottom: 70px">
 
@@ -42,13 +42,13 @@
 				<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4" style="height: 380px">
 				<c:forEach items="${list }" var="vo">
 					<div style="margin-bottom:40px">
-						<div class="d-flex flex-column" style="width: 250px; height: 380px">
+						<div class="d-flex flex-column" style="width: 260px; height: 380px">
 							
 							<div>
 							 <a href="/item/detail?itemNum=${vo.itemNum }">
-							 <img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px"></a> </div>
+							 <img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 260px; height: 250px; border-radius: 15px"></a> </div>
 
-							<div class="d-flex flex-column" style="width: 250px; height: 130px">
+							<div class="d-flex flex-column" style="width: 260px; height: 130px">
 								<div class="d-flex justify-content-start pt-1" style="font-size: 14px">
 									<c:choose>
 										<c:when test="${vo.itemVO.shop eq '쿠팡'}">

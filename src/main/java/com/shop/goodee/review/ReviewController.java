@@ -64,7 +64,7 @@ public class ReviewController {
 		missionVO = missionService.getApply(missionVO);
 		testVO.setMissionNum(missionVO.getMissionNum());
 		reviewVO.setMissionNum(testVO.getMissionNum());
-		
+
 		log.info("reviewVO{}" + reviewVO);
 		log.info("testVO{}" + testVO);
 
@@ -73,7 +73,7 @@ public class ReviewController {
 				if (reviewVO.getReviewLength() >= 50) {
 					// 쿠팡닉네임등록
 					int result = missionService.setNicC(reviewVO);
-					if(result==1) {
+					if (result == 1) {
 						// status 1->2
 						result = missionService.setMiStatus2(reviewVO);
 						return result;
@@ -82,7 +82,7 @@ public class ReviewController {
 					return 2;
 				}
 			} catch (Exception e) {
-				return 2;
+				return 0;
 			}
 		}
 		return 0;
@@ -105,22 +105,22 @@ public class ReviewController {
 		// 미션번호
 		missionVO = missionService.getApply(missionVO);
 		reviewVO.setMissionNum(missionVO.getMissionNum());
-		
-		//닉네임
+
+		// 닉네임
 		reviewVO.setNickName_N(testVO.getNickName());
-		
+
 		log.info("===============Controller===============");
 		log.info("리뷰내용) {}", reviewVO.getReview());
 		log.info("리뷰글자수) {}", reviewVO.getReviewLength());
 		log.info("reviewVO) {}", reviewVO);
 		log.info("testVO) {}", testVO);
 
-		try {
-			if (reviewVO.getNickName() != "") {
+		if (reviewVO.getNickName() != "") {
+			try {
 				if (reviewVO.getReviewLength() >= 50) {
 					// 네이버아이디등록
 					int result = missionService.setNicN(reviewVO);
-					if(result==1) {
+					if (result == 1) {
 						// status 1->2
 						result = missionService.setMiStatus2(reviewVO);
 						return result;
@@ -128,11 +128,12 @@ public class ReviewController {
 				} else {
 					return 2;
 				}
+			} catch (Exception e) {
+				return 0;
 			}
-			return 0;
-		} catch (Exception e) {
-			return 0;
 		}
+		return 0;
+
 	}
 
 }
