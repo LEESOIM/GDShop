@@ -60,19 +60,3 @@ $("#point1_2").change(function () {
     $("#point1Text").text(result);
   }
 })
-
-
-//제공수량 > 회차
-$("#count").change(function () {
-  if ($("#stock").val() < $("#count").val()) {
-    alert("캠페인회차는 상품 제공수량보다 클 수 없습니다.");
-    $("#count").val("");
-  }
-})
-
-$("#stock").change(function () {
-  if ($("#stock").val() < $("#count").val()) {
-    alert("총 제공수량은 캠페인 회차보다 적을 수 없습니다.");
-    $("#count").val("");
-  }
-})

@@ -55,7 +55,6 @@ public class FollowService {
 				if(text.contains("팔로잉")||text.contains("칼로잉")||text.contains("랄로잉")) {
 					log.info("팔로우 O");
 					followVO.setFollowCheck(1);
-					log.info("서비스팔로우{}", followVO);
 					return followVO;
 				}else {
 					log.info("팔로우 X");

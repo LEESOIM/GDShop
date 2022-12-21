@@ -73,7 +73,7 @@
 							<i class="fa-solid fa-x me-2"></i>지원취소</button>
 						</c:if>
 						<c:if test="${vo.status ne 1}">
-						<button class="btn btn-danger w-100 mt-3" disabled="disabled"><i class="fa-solid fa-ban me-2"></i>일시중지</button>
+						<button class="btn btn-danger w-100 mt-3" disabled="disabled" id="stop"><i class="fa-solid fa-ban me-2"></i>일시중지</button>
 						</c:if>
 						
 					
@@ -102,7 +102,7 @@
 								<b style="margin: auto 0">삭제승인</b>
 								<div class="d-flex my-1">
 								<button id="delO"  onclick="requestOX(1,'setDelRequest',this)" class="btn btn-outline-success ms-2 me-1" data-itemNum-num="${vo.itemNum }"><b>O</b></button>
-								<button id="delX"  onclick="requestOX(4,'setDelRequest',this)" class="btn btn-outline-danger" data-itemNum-num="${vo.itemNum }"><b>X</b></button>
+								<button id="delX"  onclick="requestOX(4,'setRequest',this)" class="btn btn-outline-danger" data-itemNum-num="${vo.itemNum }"><b>X</b></button>
 								</div>
 							</div>
 						</c:if>

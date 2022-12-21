@@ -41,12 +41,12 @@
 	</update>
 	
 	<!-- 미션진행 status 변경(구매하기->리뷰) -->
-	<update id="setMiStatus1" parameterType="MissionVO">
+	<update id="setMiStatus1" parameterType="PurchaseVO">
 		UPDATE MISSION SET FINISH=DATE_ADD(APPLYDATE, INTERVAL 14 DAY), STATUS=1 WHERE MISSIONNUM=#{missionNum}
 	</update>
 	
 	<!-- 미션진행 status 변경(리뷰->포인트수령) -->
-	<update id="setMiStatus2" parameterType="MissionVO">
+	<update id="setMiStatus2" parameterType="ReviewVO">
 		UPDATE MISSION SET STATUS=2 WHERE MISSIONNUM=#{missionNum}
 	</update>
 	

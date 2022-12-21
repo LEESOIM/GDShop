@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <!-- 모달창 -->
 <div class="modal fade" data-bs-backdrop="static" id="exampleModal_item" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1" >
   <div class="modal-dialog" >
@@ -222,8 +221,8 @@
 				</div>
 
 				<div class="modal-footer d-flex justify-content-center pb-0">
-				<button type="button" class="btn btn-success" data-bs-dismiss="modal" aria-label="Close">취소</button>
-				<button type="button" class="btn btn-outline-success" data-bs-target="#missionModal2" data-bs-toggle="modal" id="ocrSubmit">전송</button> 
+				<button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" aria-label="Close">취소</button>
+				<button type="button" class="btn btn-success" data-bs-target="#missionModal2" data-bs-toggle="modal" id="ocrSubmit">전송</button> 
 				</div>
 		</form>
 		</c:if>
@@ -258,11 +257,19 @@
 			  				<input type="file" class="form-control p-1" name="f" style="width: 300px">
 					</div>
 				</div>
+				<div class="d-flex py-2">
+					<div style="margin:auto 0; width: 30%; text-align: right;">
+						<b><span style="color: red">*</span>인스타 아이디</b>
+					</div>
+					<div style="width: 80%; margin-left: 25px">
+			  				<input type="text" class="form-control p-1" id="insta" style="width: 300px">
+					</div>
+				</div>
 				</div>
 
 				<div class="modal-footer d-flex justify-content-center pb-0">
-				<button type="button" class="btn btn-success" data-bs-dismiss="modal" aria-label="Close">취소</button>
-				<button type="button" class="btn btn-outline-success" data-bs-target="#missionModal2" data-bs-toggle="modal" id="snsSubmit">전송</button> 
+				<button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" aria-label="Close">취소</button>
+				<button type="button" class="btn btn-success" data-bs-target="#missionModal2" data-bs-toggle="modal" id="snsSubmit">전송</button> 
 				</div>
 			</form>
 			</c:if>
@@ -346,7 +353,7 @@
 							<b><span style="color: red">*</span>쿠팡 닉네임</b>
 						</div>
 						<div style="width: 80%; margin-left: 25px">
-							<input type="text" name="nickName" style="width: 300px" class="form-control p-1"/>	
+							<input type="text" name="nickName" style="width: 300px" class="reNickName form-control p-1"/>	
 						</div>
 					</div>
 					<div class="d-flex pt-2 pb-4">
@@ -354,12 +361,12 @@
 							<b><span style="color: red">*</span>작성일</b>
 						</div>
 						<div style="width: 80%; margin-left: 25px">
-							<input class="form-control" type="date" name="date" style="width: 300px">
+							<input class="reDate form-control" type="date" name="date" style="width: 300px">
 						</div>
 					</div>
 					<div class="modal-footer d-flex justify-content-center pb-0">
-					<button type="button" class="btn btn-success" data-bs-dismiss="modal" aria-label="Close">취소</button>
-					<button type="button" class="btn btn-outline-success" data-bs-target="#missionModal3" data-bs-toggle="modal" id="reviewSubmit">전송</button> 
+					<button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" aria-label="Close">취소</button>
+					<button type="button" class="btn btn-success" data-bs-target="#missionModal3" data-bs-toggle="modal" id="reviewSubmit">전송</button> 
 					</div>
 				</form>
 				</c:if>
@@ -370,10 +377,10 @@
 					<input name="url" type="hidden" value="${vo.url }">
 					<div class="d-flex pt-3">
 						<div style="margin:auto 0; width: 30%; text-align: right;">
-							<b><span style="color: red">*</span>아이디</b>
+							<b><span style="color: red">*</span>네이버 아이디</b>
 						</div>
 						<div style="width: 80%; margin-left: 25px">
-							<input type="text" name="nickName_N" style="width: 300px" class="form-control p-1"/>
+							<input type="text" name="nickName" style="width: 300px" class="reNickName form-control p-1"/>
 						</div>
 					</div>
 					<div class="d-flex py-2">
@@ -381,12 +388,12 @@
 							<b><span style="color: red">*</span>작성일</b>
 						</div>
 						<div style="width: 80%; margin-left: 25px">
-							<input class="form-control" type="date" name="date" style="width: 300px">
+							<input class="reDate form-control" type="date" name="date" style="width: 300px">
 						</div>
 					</div>
 					<div class="modal-footer d-flex justify-content-center pb-0">
-					<button type="button" class="btn btn-success" data-bs-dismiss="modal" aria-label="Close">취소</button>
-					<button type="button" class="btn btn-outline-success" data-bs-target="#missionModal3" data-bs-toggle="modal" id="reviewSubmit_N">전송</button> 
+					<button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" aria-label="Close">취소</button>
+					<button type="button" class="btn btn-success" data-bs-target="#missionModal3" data-bs-toggle="modal" id="reviewSubmit_N">전송</button> 
 					</div>
 				</form>
 				</c:if>

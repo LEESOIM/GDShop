@@ -63,29 +63,27 @@ public class ReviewController {
 		// 미션번호
 		missionVO = missionService.getApply(missionVO);
 		testVO.setMissionNum(missionVO.getMissionNum());
-
+		reviewVO.setMissionNum(testVO.getMissionNum());
+		
 		log.info("reviewVO{}" + reviewVO);
 		log.info("testVO{}" + testVO);
 
-		try {
-			if (reviewVO.getNickName().equals(testVO.getNickName())) {
-				try {
-					if (reviewVO.getReviewLength() >= 50) {
-						// 쿠팡닉네임등록
-						missionService.setNicC(reviewVO);
+		if (reviewVO.getNickName().equals(testVO.getNickName())) {
+			try {
+				if (reviewVO.getReviewLength() >= 50) {
+					// 쿠팡닉네임등록
+					int result = missionService.setNicC(reviewVO);
+					if(result==1) {
 						// status 1->2
-						reviewVO.setMissionNum(testVO.getMissionNum());
-						int result = missionService.setMiStatus2(reviewVO);
+						result = missionService.setMiStatus2(reviewVO);
 						return result;
-					} else {
-						return 2;
 					}
-				} catch (Exception e) {
+				} else {
 					return 2;
 				}
+			} catch (Exception e) {
+				return 2;
 			}
-		} catch (Exception e) {
-			return 0;
 		}
 		return 0;
 	}
@@ -106,32 +104,35 @@ public class ReviewController {
 
 		// 미션번호
 		missionVO = missionService.getApply(missionVO);
-		testVO.setMissionNum(missionVO.getMissionNum());
-
+		reviewVO.setMissionNum(missionVO.getMissionNum());
+		
+		//닉네임
+		reviewVO.setNickName_N(testVO.getNickName());
+		
 		log.info("===============Controller===============");
 		log.info("리뷰내용) {}", reviewVO.getReview());
 		log.info("리뷰글자수) {}", reviewVO.getReviewLength());
 		log.info("reviewVO) {}", reviewVO);
 		log.info("testVO) {}", testVO);
 
-		if (!reviewVO.getReview().equals(null)) {
-			try {
+		try {
+			if (reviewVO.getNickName() != "") {
 				if (reviewVO.getReviewLength() >= 50) {
 					// 네이버아이디등록
-					missionService.setNicN(reviewVO);
-					// status 1->2
-					reviewVO.setMissionNum(testVO.getMissionNum());
-					int result = missionService.setMiStatus2(reviewVO);
-					return result;
+					int result = missionService.setNicN(reviewVO);
+					if(result==1) {
+						// status 1->2
+						result = missionService.setMiStatus2(reviewVO);
+						return result;
+					}
 				} else {
 					return 2;
 				}
-			} catch (Exception e) {
-				return 2;
 			}
+			return 0;
+		} catch (Exception e) {
+			return 0;
 		}
-
-		return 0;
 	}
 
 }

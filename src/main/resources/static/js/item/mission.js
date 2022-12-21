@@ -54,10 +54,10 @@ $("#applyBaro").click(function () {
 
     $("#roulette").delay(3500).fadeIn(2000);
     $("#rouletteF").delay(3500).fadeIn(2000);
-    console.log(result % 2)
+    console.log(now.getTime() % 5)
 
     //룰렛 글귀
-    if (result % 5 == 0) {
+    if (now.getTime() % 5 == 0) {
         //탈락
         $("#missionX").attr("style", "display:");
         let itemNum = $("#applyCheck").attr("data-itemNum-num")
@@ -103,7 +103,6 @@ $("#applyBaro").click(function () {
 $("#ocrSubmit").click(function () {
     let form = $("form")[0];
     let formData = new FormData(form);
-    $("#loading").attr("style", "display:");
     $.ajax({
         type: "POST",
         url: "/purchase/setPurchase",
@@ -115,13 +114,13 @@ $("#ocrSubmit").click(function () {
             if (data == 0) {
                 alert("주문번호를 다시 확인해주세요.")
             } else if (data == 1) {
-                alert("구매내역이 확인되었습니다.")
+                alert("✅구매내역이 확인되었습니다.")
                 $("ocrSubmit").attr("type", "submit")
                 location.reload();
             } else if (data == 2) {
                 alert("결제금액을 다시 확인해주세요.")
             } else {
-                alert("인증을 실패하였습니다. 다시 시도해주세요")
+                alert("인증에 실패하였습니다. 다시 시도해주세요")
             }
         }
     })
@@ -130,47 +129,53 @@ $("#ocrSubmit").click(function () {
 //쿠팡Review
 $("#reviewSubmit").click(function () {
     let formData = $("#reviewC").serialize();
-
-    $.ajax({
-        type: "POST",
-        url: "/review/getReview",
-        cache: false,
-        data: formData,
-        success: function (data) {
-            if (data == 0) {
-                alert("[리뷰 인증 실패] \n 계정정보, 작성일을 다시 확인해주세요.")
-            } else if (data == 2) {
-                alert("리뷰 내용이 너무 짧습니다. 리뷰를 더 길게 작성해주세요.")
-            } else {
-                alert("리뷰가 확인되었습니다.")
-                $("#reviewSubmit").attr("type", "submit")
-                location.reload();
+    if ($(".reNickName").val() == "" || $(".reDate").val() == "") {
+        alert("[리뷰 인증 실패] \n 계정정보, 작성일을 다시 확인해주세요.")
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "/review/getReview",
+            cache: false,
+            data: formData,
+            success: function (data) {
+                if (data == 0) {
+                    alert("[리뷰 인증 실패] \n 계정정보, 작성일을 다시 확인해주세요.")
+                } else if (data == 2) {
+                    alert("리뷰 내용이 너무 짧습니다. 리뷰를 더 길게 작성해주세요.")
+                } else {
+                    alert("✅리뷰가 확인되었습니다.")
+                    $("#reviewSubmit").attr("type", "submit")
+                    location.reload();
+                }
             }
-        }
-    })
+        })
+    }
 })
 
 //네이버Review
 $("#reviewSubmit_N").click(function () {
     let formData = $("#reviewN").serialize();
-
-    $.ajax({
-        type: "POST",
-        url: "/review/getReviewNaver",
-        cache: false,
-        data: formData,
-        success: function (data) {
-            if (data == 0) {
-                alert("[리뷰 인증 실패] \n 계정정보, 작성일을 다시 확인해주세요.")
-            } else if (data == 2) {
-                alert("리뷰 내용이 너무 짧습니다. 리뷰를 더 길게 작성해주세요.")
-            } else {
-                alert("리뷰가 확인되었습니다.")
-                $("#reviewSubmit_N").attr("type", "submit")
-                location.reload();
+    if ($(".reNickName").val() == "" || $(".reDate").val() == "") {
+        alert("[리뷰 인증 실패] \n 계정정보, 작성일을 다시 확인해주세요.")
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "/review/getReviewNaver",
+            cache: false,
+            data: formData,
+            success: function (data) {
+                if (data == 0) {
+                    alert("[리뷰 인증 실패] \n 계정정보, 작성일을 다시 확인해주세요.")
+                } else if (data == 2) {
+                    alert("리뷰 내용이 너무 짧습니다. 리뷰를 더 길게 작성해주세요.")
+                } else {
+                    alert("✅리뷰가 확인되었습니다.")
+                    $("#reviewSubmit_N").attr("type", "submit")
+                    location.reload();
+                }
             }
-        }
-    })
+        })
+    }
 })
 
 
@@ -178,23 +183,27 @@ $("#reviewSubmit_N").click(function () {
 $("#snsSubmit").click(function () {
     let form = $("form")[0];
     let formData = new FormData(form);
-    $.ajax({
-        type: "POST",
-        url: "/follow/getFollow",
-        cache: false,
-        processData: false,
-        contentType: false,
-        data: formData,
-        success: function (data) {
-            if (data == 0) {
-                alert("인증을 실패하였습니다. 다시 시도해주세요")
-            } else if (data == 1) {
-                alert("게시물이 확인되었습니다.")
-                $("ocrSubmit").attr("type", "submit")
-                location.reload();
+    if($("#insta").val() == ""){
+        alert("인스타그램 아이디를 입력해주세요.")
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "/follow/getFollow",
+            cache: false,
+            processData: false,
+            contentType: false,
+            data: formData,
+            success: function (data) {
+                if (data == 0) {
+                    alert("인증에 실패하였습니다. 다시 시도해주세요")
+                } else if (data == 1) {
+                    alert("게시물이 확인되었습니다.")
+                    $("ocrSubmit").attr("type", "submit")
+                    location.reload();
+                }
             }
-        }
-    })
+        })
+    }
 })
 
 
@@ -214,7 +223,7 @@ $("#pointBtn").click(function () {
             if (data == 1) {
                 $("#pointBtn").attr("disabled", true)
                 alert("✅모든 미션이 완료되었습니다.")
-                if(alert) {
+                if (alert) {
                     reAction()
                     setTimeout(function () {
                         location.reload();

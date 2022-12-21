@@ -5,7 +5,7 @@
    
 <mapper namespace="com.shop.goodee.item.ItemMapper">
 	
-	<!-- 상품요청 승인,거절  -->
+	<!-- 상품요청 승인,거절,종료  -->
 	<update id="setRequest" parameterType="ItemVO">
 		UPDATE ITEM SET STATUS=#{status} WHERE ITEMNUM=#{itemNum}   
 	</update>
