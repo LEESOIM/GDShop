@@ -25,6 +25,15 @@
 </style>
 </head>
 <body>
+<script src="https://tistory4.daumcdn.net/tistory/3134841/skin/images/confetti_v2.js"></script>
+<style>
+	canvas{z-index:10;pointer-events: none;position: fixed;top: 0;transform: scale(1.1);}
+</style>
+<div class="buttonContainer" style="display: none">
+	<button class="canvasBtn" id="stopButton"></button>
+	<button class="canvasBtn" id="startButton"></button>	
+</div>
+<canvas id="canvas"></canvas>
 	<c:import url="../template/top_part.jsp"></c:import>
 	<c:import url="../template/header.jsp"></c:import>
 	<section class="container" style="width: 65%">

@@ -30,7 +30,7 @@
 		UPDATE MISSION SET MYCAM=3 WHERE ID=#{id} and ITEMNUM=#{itemNum}
 	</update>
 	
-	<!-- 네이버 닉네임 등록 -->
+	<!-- 네이버 아이디 등록 -->
 	<update id="setNicN" parameterType="ReviewVO">
 		UPDATE MEMBER SET NICKNAME_N=#{nickName_N} WHERE ID=#{id}
 	</update>

@@ -66,13 +66,17 @@ public class PurchaseController {
 		log.info("missionVO{}", missionVO);
 		log.info("=============================");
 
-		if (finalPurchaseVO.getPurNum().equals(purchaseVO.getPurNumM())) {
-			if(finalPurchaseVO.getPrice().equals(purchaseVO.getPriceM())) {
-				int result = missionService.setMiStatus1(purchaseVO); // status 0->1
-				return result;
-				
-			} 
-			return 2;
+		try {
+			if (finalPurchaseVO.getPurNum().equals(purchaseVO.getPurNumM())) {
+				if(finalPurchaseVO.getPrice().equals(purchaseVO.getPriceM())) {
+					int result = missionService.setMiStatus1(purchaseVO); // status 0->1
+					return result;
+					
+				} 
+				return 2;
+			}
+		} catch (Exception e) {
+			return 3;
 		}
 		return 0;
 	}

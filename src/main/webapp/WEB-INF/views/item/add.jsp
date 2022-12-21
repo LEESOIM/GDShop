@@ -203,7 +203,7 @@
 				
 				<div class="d-flex py-4" style="border-bottom: solid 0.5px gainsboro;">
 					<div style="margin:auto 0; width: 20%;">
-						<b>한 캠페인당 모집인원<span style="color: limegreen;">*</span></b>
+						<b>캠페인당 모집인원<span style="color: limegreen;">*</span></b>
 					</div>
 					<div style="width: 79%;">
 						<input class="form-control" id="stock" style="width: 35%;" type="text" name="stock">

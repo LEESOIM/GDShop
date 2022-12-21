@@ -35,9 +35,9 @@ pageEncoding="UTF-8"%>
     </style>
   </head>
   <body>
+    <c:import url="../template/top_part.jsp"></c:import>
+    <c:import url="../template/header.jsp"></c:import>
     <section class="container" style="width: 75%">
-      <c:import url="../template/top_part.jsp"></c:import>
-      <c:import url="../template/header.jsp"></c:import>
       
       <div class="container">
         <div class="content d-flex">
