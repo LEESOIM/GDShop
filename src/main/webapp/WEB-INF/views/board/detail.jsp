@@ -40,7 +40,7 @@ pageEncoding="UTF-8"%>
                 <li class="list-group-item" id="notice_tab" onclick="location.href='/board/notice'">
                   <i class="fa-solid fa-headphones ps-2 pe-3"></i>공지사항
                 </li>
-                <li class="list-group-item">
+                <li class="list-group-item" onclick="new_window();">
                   <i class="fa-solid fa-circle-info ps-2 pe-3"></i>1대 1문의
                 </li>
               </ol>
@@ -120,6 +120,14 @@ pageEncoding="UTF-8"%>
       </div>
       <c:import url="../template/footer.jsp"></c:import>
     </section>
-
+<script>
+      function new_window() {
+        window.open(
+          "/chat/chatbot",
+          "Child",
+          "width=450, height=550, top=100, left=1000"
+        );
+      }
+    </script>
   </body>
 </html>

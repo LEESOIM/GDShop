@@ -8,3 +8,7 @@ chat.addEventListener("mouseout", function () {
   chat_ev.setAttribute("style", "display:none;");
 });
 
+
+$(document).ready(function(){
+        $(document).snowfall();
+});

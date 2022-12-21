@@ -123,7 +123,7 @@ prefix="c" %>
                 </div>
               </div>
               <div class="d-flex form-check justify-content-between">
-                <div>
+                <div style="width: 85%;">
                   <input
                     class="agree_check form-check-input"
                     type="checkbox"
@@ -145,7 +145,7 @@ prefix="c" %>
                 </div>
               </div>
               <div class="d-flex form-check justify-content-between">
-                <div>
+                <div style="width: 85%;">
                   <input
                     class="agree_check form-check-input"
                     type="checkbox"
@@ -154,7 +154,7 @@ prefix="c" %>
                   />
                   <label class="form-check-label" for="flexCheckChecked">
                     <b>(선택)</b>광고성 정보
-                    수신동의(앱알림,이메일,카카오알림톡,SMS/MMS)
+                    수신동의(앱알림, 이메일, 카카오알림톡, SMS/MMS)
                   </label>
                 </div>
                 <div
