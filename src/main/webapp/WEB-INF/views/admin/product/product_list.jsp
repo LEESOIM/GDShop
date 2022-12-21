@@ -44,9 +44,9 @@ pageEncoding="UTF-8"%>
             <!-- Main Content -->
             <div id="content">
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container-fluid" style="width: 94%;">
 
-                    <div class="input-group" style="margin-top: 30px; display: flex; justify-content: right;">
+                    <div class="input-group" style="margin-top: 50px; display: flex; justify-content: right;">
                         <div style="display: flex;">
                             <select name="kind" class="form-select" id="kind" style="width: 30%; height: 40px;">
                                 <option class="kinds" value="id">ID</option>

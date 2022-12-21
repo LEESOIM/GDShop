@@ -8,11 +8,11 @@ prefix="c" %>
       <div class="container-fluid" style="padding: 0px; width: 68%">
         <a class="navbar-brand" href="/" style="margin-right: 1.2em"
           ><img
-            src="/images/h.png"
+            src="/images/hh.png"
             alt="Logo"
             width="169"
-            height="62"
-            class="d-inline-block align-text-top"/></a>
+            height="70"
+            class="d-inline-block align-text-top pb-2"/></a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item tab0  ps-3 pe-3"><a href="/">홈</a></li>

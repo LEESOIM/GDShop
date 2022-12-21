@@ -75,8 +75,6 @@
     </style>
 </head>
 <body>
-	  <c:import url="../template/top_part.jsp"></c:import>
-      <c:import url="../template/header.jsp"></c:import>
     <noscript>
         <h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on
             Javascript being
@@ -94,8 +92,8 @@
                 </form>
             </div>
         </div>
-        <div class="row pt-3 pb-4 px-5" style="background-color:white; width:700px; margin:40px auto 0 auto; border-radius:20px; box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;">
-            <div class="pb-3 d-flex" style="font-size: 32px;"><img alt="" src="/images/mm.png" style="width: 80px; margin-right: 15px; margin-left: 108px"><div style="padding-top: 23px; color: green;"><b>구디샵 문의하기</b></div></div>
+        <div class="pt-3 pb-4" style="background-color:white;">
+            <div class="pb-3 d-flex" style="font-size: 25px; border-bottom-style: double; border-color: green"><img alt="" src="/images/mm.png" style="width: 60px; margin-left: 85px; margin-right: 10px"><div style="padding-top: 23px; color: green;"><b>구디샵 문의하기</b></div></div>
             <div class="col-md-12 mb-5">
                 <table id="conversation" class="table">
                     <tbody id="communicate">
@@ -109,9 +107,9 @@
                 <form class="form-inline" id="sendForm">
                     <div class="form-group">
                         <label for="msg" style="font-weight: bold;" class="mb-3">문의사항</label>
-                        <div class="d-flex" style="width: 600px;">
+                        <div class="d-flex" style="width: 400px;">
                             <input type="text" id="chatting" class="form-control"
-                            style="width: 480px;" placeholder="내용을 입력하세요....">
+                            style="width: 280px;" placeholder="내용을 입력하세요....">
                             <button class="btn btn-success ms-3"  onclick="send()" id="sendBtn">보내기</button>
                         </div>
                     </div>
@@ -119,7 +117,6 @@
             </div>
         </div>
     </div>
-    <c:import url="../template/footer.jsp"></c:import>
 </body>
 
 </html>

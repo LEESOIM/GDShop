@@ -57,7 +57,7 @@ pageEncoding="UTF-8"%>
                         <div class="row row-cols-lg-auto g-3 align-items-center" id="form">
                             <div class="btn-group">
                                 <input class="btn-check" type="radio" id="radio_all" name="roleName" value="" checked>
-                                <label class="btn btn-outline-dark" for="radio_all">전체</label>
+                                <label class="btn btn-outline-dark radioLibel" for="radio_all">전체</label>
 
                                 <input class="btn-check" type="radio" id="radio_admin" name="roleName" value="ROLE_ADMIN">
                                 <label class="btn btn-outline-dark" for="radio_admin">관리자</label>

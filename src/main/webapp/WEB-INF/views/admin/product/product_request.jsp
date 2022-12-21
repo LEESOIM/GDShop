@@ -49,7 +49,7 @@ pageEncoding="UTF-8"%>
 
 
                     <div class="d-flex justify-content-center mt-4">
-                      <div style="width: 98%; margin-top: 30px">
+                      <div style="width: 90%; margin-top: 50px">
                         <ul class="nav nav-tabs" style="display: flex; justify-content: space-between;">
                             <div style="display: flex;">
 

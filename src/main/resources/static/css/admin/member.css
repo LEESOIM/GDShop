@@ -14,9 +14,10 @@
 #form{
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    padding-left: 55px;
+    padding-right: 55px;
 }
-
 
 .memberRole{
     color: gray;
