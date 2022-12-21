@@ -38,7 +38,7 @@ prefix="c" %>
             <!-- 여기부터 내정보 상세보기 -->
             <div class="info_top p-2 mt-4 mb-3 d-flex">
               <div><span style="color: rgb(10, 154, 10)">${memberVO.name}</span>님의 상품목록</div>
-              <button id="product" onclick="location.href='/item/add'" style="font-size: 18px"><b>상품등록</b></button>
+              <button id="product" onclick="" style="font-size: 18px"><b>상품등록</b></button>
             </div>
               <!-- 목록보기 -->
               <div class="row mb-5">

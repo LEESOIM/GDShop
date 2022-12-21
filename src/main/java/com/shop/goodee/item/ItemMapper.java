@@ -5,9 +5,12 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.shop.goodee.member.MemberVO;
+import com.shop.goodee.seller.SellerVO;
 
 @Mapper
 public interface ItemMapper {
+	
+	public int getItemAddRole(SellerVO sellerVO) throws Exception;
 
 	public int setDelRequest(ItemVO itemVO)throws Exception;
 	

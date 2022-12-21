@@ -197,7 +197,7 @@ $("#snsSubmit").click(function () {
                 if (data == 0) {
                     alert("인증에 실패하였습니다. 다시 시도해주세요")
                 } else if (data == 1) {
-                    alert("게시물이 확인되었습니다.")
+                    alert("✅게시물이 확인되었습니다.")
                     $("ocrSubmit").attr("type", "submit")
                     location.reload();
                 }

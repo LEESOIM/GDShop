@@ -5,6 +5,20 @@
    
 <mapper namespace="com.shop.goodee.item.ItemMapper">
 	
+	<!-- 상품등록 가능한 판매자 -->
+	<select id="getItemAddRole" parameterType="SellerVO" resultType="Integer">
+		SELECT COUNT(ID)
+		FROM SELLER S
+		INNER JOIN
+		MEMBER_ROLE MR
+		USING(ID)
+		INNER JOIN
+		ROLE R
+		USING(ROLENUM)
+		WHERE S.STATUS=1 AND R.ROLENUM=2 AND S.id=#{id}
+	</select>
+
+	
 	<!-- 상품요청 승인,거절,종료  -->
 	<update id="setRequest" parameterType="ItemVO">
 		UPDATE ITEM SET STATUS=#{status} WHERE ITEMNUM=#{itemNum}   

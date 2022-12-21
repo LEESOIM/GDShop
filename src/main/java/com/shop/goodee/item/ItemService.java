@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shop.goodee.member.MemberVO;
+import com.shop.goodee.seller.SellerMapper;
+import com.shop.goodee.seller.SellerVO;
 import com.shop.goodee.util.FileManager;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +26,12 @@ public class ItemService {
 
 	@Value("${app.item}") // C:/gdshop/item/
 	private String path;
+	
+	
+	//상품등록 가능한 판매자
+	public int getItemAddRole(SellerVO sellerVO) throws Exception {
+		return itemMapper.getItemAddRole(sellerVO);
+	}
 	
 	//상품요청 승인,거절
 	public int setDelRequest(ItemVO itemVO)throws Exception{

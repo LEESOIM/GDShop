@@ -1,6 +1,9 @@
 package com.shop.goodee.seller;
 
+import java.util.List;
+
 import com.shop.goodee.member.MemberVO;
+import com.shop.goodee.member.RoleVO;
 
 import lombok.Data;
 
@@ -14,4 +17,6 @@ public class SellerVO extends MemberVO{
 	public boolean getStatus() {
 		return this.status;
 	}
+	
+	private List<RoleVO> roleVOs;
 }

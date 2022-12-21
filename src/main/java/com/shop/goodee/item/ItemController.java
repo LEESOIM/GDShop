@@ -18,6 +18,7 @@ import com.shop.goodee.member.MemberService;
 import com.shop.goodee.member.MemberVO;
 import com.shop.goodee.mission.MissionService;
 import com.shop.goodee.mission.MissionVO;
+import com.shop.goodee.seller.SellerVO;
 import com.shop.goodee.sse.NotificationService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,25 @@ public class ItemController {
 	private ItemService itemService;
 	@Autowired
 	private MemberService memberService;
+	
+	
+	//상품등록 가능한 판매자
+	@PostMapping("itemAddRole")
+	@ResponseBody
+	public int getItemAddRole(HttpSession session, SellerVO sellerVO) throws Exception {
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
+		sellerVO.setId(memberVO.getId());
+		
+		log.info("상품등록가능한가요 {}",sellerVO);
+		int result = itemService.getItemAddRole(sellerVO);
+		if(result>0) {
+			return 1;
+		}
+		return 0;
+	}
+	
 	
 	@PostMapping("setRequest")
 	@ResponseBody
