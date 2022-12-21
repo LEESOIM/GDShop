@@ -52,7 +52,7 @@ prefix="c" %>
                   		<c:when test="${item.items[0].status eq 1}">승인완료</c:when>
                   		<c:when test="${item.items[0].status eq 2}"><div style="color: blue">수정요청</div></c:when>
                   		<c:when test="${item.items[0].status eq 3}"><div style="color: blue">삭제요청</div></c:when>
-                  		<c:when test="${item.items[0].status eq 4}"><div style="color: red">수정반려</div></c:when>
+                  		<c:when test="${item.items[0].status eq 4}"><div style="color: red">반려</div></c:when>
                   		<c:when test="${item.items[0].status eq 5}"><div style="color: black">캠페인 종료</div></c:when>
                   		<c:otherwise><div style="color: blue">승인요청</div></c:otherwise>
                   	</c:choose>

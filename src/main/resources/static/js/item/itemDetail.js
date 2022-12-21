@@ -8,6 +8,7 @@ $(document).ready(function () {
   let result = now.getTime() - start.getTime();
   let day = Math.abs(result / (1000 * 60 * 60 * 24)); //abs() 절대값
   console.log("경과시간", day);
+  let itemNum = $("#applyCheck").attr("data-itemNum-num");
 
   //캠페인회차
   let count = $(".count").val();
@@ -16,12 +17,25 @@ $(document).ready(function () {
     $("#applyCheck").attr("disabled", "disabled");
     $("#applyCheck").html("지원마감");
     $("#mycam").attr("style", "display: none");
+    //상품종료
+    $.ajax({
+      type: "POST",
+      url: "/item/setRequest",
+      data: {
+        itemNum: itemNum,
+        status: 5,
+      },
+      success: function (data) {
+        if (data == 1) {
+          location.href = "/"
+        }
+      }
+    })
   } else {
     $("#nowCount").html(Math.ceil(day)); //올림
   }
 
   //캠페인모집률
-  let itemNum = $("#applyCheck").attr("data-itemNum-num");
   let applyCount = Math.ceil(day);
   $.ajax({
     type: "POST",
@@ -36,9 +50,10 @@ $(document).ready(function () {
       $("#applyRate").html(rate + "%")
 
       //모집률 100%되면 지원마감
-      if(rate>=100) {
+      if (rate >= 100) {
         $("#applyCheck").html("지원마감");
         $("#applyCheck").attr("disabled", "disabled");
+        location.href = "javascript:history.back();"
       }
     },
   });
@@ -55,6 +70,11 @@ $(document).ready(function () {
   //강제클릭
   if ($("#memberId").text() != "") {
     $("#applyCheck").click();
+  } else {
+    $("#applyCheck").click(function () {
+      alert("로그인 후 이용해주세요 💚");
+      $("#exampleModal").modal("show");
+    })
   }
 
   $.ajax({
@@ -104,7 +124,7 @@ $(document).ready(function () {
       } else if (data.status == 2) {
         //포인트수령
         $("#missionCard").attr("data-bs-target", "#missionModal3");
-        if(data.myCam != 2) {
+        if (data.myCam != 2) {
           $("#missionCard").click();
         }
         $(".mStatus0").hide();
@@ -128,15 +148,10 @@ $("#applyCheck").click(function () {
       if (data > 0) {
         $("#applyCheck").attr("disabled", "disabled");
       } else {
-        if ($("#memberId").text() == "") {
-          alert("로그인 후 이용해주세요 💚");
-          $("#exampleModal").modal("show");
-        } else {
-          $("#applyCheck").attr("data-bs-toggle", "modal");
-        }
+        $("#applyCheck").attr("data-bs-toggle", "modal");
       }
-    },
-  });
+    }
+  })
 });
 
 
