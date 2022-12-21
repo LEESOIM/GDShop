@@ -63,7 +63,7 @@ pageEncoding="UTF-8"%>
                  	<div style="margin-top: 3em; padding-bottom: 70px">
 
 			<div class="d-flex justify-content-center mt-4">
-				<div style="width: 100%; margin-bottom: 50px">
+				<div style="width: 90%; margin-bottom: 50px">
 					<h4>입점신청 현황</h4>
 
                                 <ul class="nav nav-tabs">

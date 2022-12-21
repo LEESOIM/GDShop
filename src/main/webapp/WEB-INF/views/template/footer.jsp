@@ -8,7 +8,7 @@
       >
         <!-- Left -->
         <div class="me-5 d-none d-lg-block">
-          <span>Get connected with us on social networks:</span>
+          <span>happy GOODEE day and happy new year</span>
         </div>
         <!-- Left -->
 

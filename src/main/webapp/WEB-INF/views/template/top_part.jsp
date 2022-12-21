@@ -28,7 +28,7 @@ prefix="c" %>
       <a href="#" type="button">고객센터</a>
       <div class="dropdown-content">
         <a href="/board/notice">공지사항</a>
-        <a href="#">1대 1문의</a>
+        <a onclick="new_window();">1대 1문의</a>
       </div>
     </div>
   </div>

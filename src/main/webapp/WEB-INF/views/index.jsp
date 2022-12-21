@@ -24,6 +24,8 @@
 }
 </style>
 </head>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/snowfall.jquery.js"></script>
 <body>
 		<c:import url="./template/top_part.jsp"></c:import>
 		<c:import url="./template/header.jsp"></c:import>
@@ -31,13 +33,13 @@
 		<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
 		  <div class="carousel-inner">
 		    <div class="carousel-item active">
-		      <img src="/images/pc_crop.jpg" class="d-block w-100" alt="...">
+		      <img src="/images/C1_PC1 (1).jpg" class="d-block w-100" alt="...">
+		    </div>
+		    <div class="carousel-item">
+		      <img src="/images/221221_C1_빅시즌_크리스마스_SMD-23928_PC.jpg" class="d-block w-100" alt="...">
 		    </div>
 		    <div class="carousel-item">
 		      <img src="/images/C1_PC1.jpg" class="d-block w-100" alt="...">
-		    </div>
-		    <div class="carousel-item">
-		      <img src="/images/co.jpg" class="d-block w-100" alt="...">
 		    </div>
 		  </div>
 		  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -405,8 +407,8 @@
 		<!-- 챗봇 -->
 		<div>
 			<div id="chat_ev" style="display: none">궁금한 부분 질문주세요!</div>
-			<a class="btn" id="chat_bot" href="/chat/chatbot"> <img id="chat_img"
-				src="/images/16208041651620804165203.png"/>
+			<a class="btn" id="chat_bot" onclick="new_window();"> <img id="chat_img"
+				src="/images/산타_구원이_(1).png"/>
 				<div class="pt-2">
 					<b>구디 챗봇</b>
 				</div></a>
@@ -415,5 +417,24 @@
 		<c:import url="./template/footer.jsp"></c:import>
 	<script src="/js/index.js"></script>
 	<script src="/js/timer.js"></script>
+	<script type='text/javascript'>     
+    $(document).ready(function(){
+        $(document).snowfall({
+        	image : "images/flake.png", 
+        	minSize: 10,
+        	maxSize:32,
+        	flakeCount : 200
+         })
+    });
+ 	</script>
+ 	<script>
+      function new_window() {
+        window.open(
+          "/chat/chatbot",
+          "Child",
+          "width=450, height=550, top=100, left=1000"
+        );
+      }
+    </script>
 </body>
 </html>

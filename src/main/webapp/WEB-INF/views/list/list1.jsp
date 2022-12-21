@@ -47,9 +47,7 @@
 					<img src="/images/borrom-arrow.svg">
 					</button>
 					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="#">추천순</a></li>
 						<li><a class="dropdown-item" href="#">인기순</a></li>
-						<li><a class="dropdown-item" href="#">당첨률순</a></li>
 						<li><a class="dropdown-item" href="#">마감순</a></li>
 					</ul>
 				</div>
@@ -120,19 +118,25 @@
 		<!-- 챗봇 -->
 		<div>
 			<div id="chat_ev" style="display: none">궁금한 부분 질문주세요!</div>
-			<a class="btn" id="chat_bot"> <img id="chat_img"
-				src="/images/16208041651620804165203.png" />
+			<a class="btn" id="chat_bot" onclick="new_window();"> <img id="chat_img"
+				src="/images/산타_구원이_(1).png"/>
 				<div class="pt-2">
 					<b>구디 챗봇</b>
-				</div> <span
-				class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-				style="font-size: 13px;">+0 <span class="visually-hidden">unread
-						messages</span></span></a>
+				</div></a>
 		</div>
 	</section>
 		<c:import url="../template/footer.jsp"></c:import>
 	<script src="/js/index.js"></script>
 	<script src="/js/timer.js"></script>
+	<script>
+      function new_window() {
+        window.open(
+          "/chat/chatbot",
+          "Child",
+          "width=450, height=550, top=100, left=1000"
+        );
+      }
+    </script>
 </body>
 </html>
 

@@ -193,7 +193,7 @@ prefix="c" %>
                        <button class="qick col-4" onclick="location.href='/myCampaign/apply'"><i class="fa-solid fa-users"  style="font-size: 25px;padding: 6px 0px 2px 0px; color: green"></i><div style="font-size: 10px;">캠페인</div></button>
                        <button class="qick col-4" onclick="location.href='/member/set'"><i class="fa-solid fa-gear" style="font-size: 25px;padding: 6px 0px 2px 0px; color: grey"></i><div style="font-size: 10px;">설정</div></button>
                        <button class="qick col-4" onclick="location.href='/member/grade'"><i class="fa-regular fa-credit-card" style="font-size: 25px;padding: 6px 0px 2px 0px; color: #f4c430"></i><div style="font-size: 10px;">멤버십</div></button>
-                       <button class="qick col-4" onclick="location.href='/chat/chatbot'"><i class="fa-solid fa-headset" style="font-size: 25px;padding: 6px 0px 2px 0px; color: #323232"></i><div style="font-size: 10px;">1대1문의</div></button>
+                       <button class="qick col-4" onclick="new_window();"><i class="fa-solid fa-headset" style="font-size: 25px;padding: 6px 0px 2px 0px; color: #323232"></i><div style="font-size: 10px;">1대1문의</div></button>
                     </div>
                   </div>
                 </div>
@@ -213,5 +213,14 @@ prefix="c" %>
      });
    </script>
     <script src="/js/info.js"></script>
+    <script>
+      function new_window() {
+        window.open(
+          "/chat/chatbot",
+          "Child",
+          "width=450, height=550, top=100, left=1000"
+        );
+      }
+    </script>
   </body>
 </html>
