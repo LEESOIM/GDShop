@@ -133,6 +133,7 @@ prefix="c" %>
               <!-- 캠페인 번호가 있으면 보이기 ${not empty missionVO.missionNum}-->
               <c:if test="${count ne 0}">
               <c:forEach items="${pointList}" var="list">
+              <c:if test="${list.point ne null}">
                  <tr>
                   <td>${list.finish}</td>
                   <td>${list.title}</td>
@@ -146,6 +147,7 @@ prefix="c" %>
                   </c:choose>
                   <td>${list.finish_3}</td>
                 </tr> 
+           	 </c:if>
            	 </c:forEach>
               </c:if>
               </tbody>
