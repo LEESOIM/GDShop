@@ -372,9 +372,7 @@ public class MemberService {
    
    /* 내 포인트 - 포인트 변화 */
    public List<PointVO> getPointList(MemberVO memberVO)throws Exception{
-	   List<PointVO> ar = memberMapper.getPointList(memberVO);
-	  
-	   return ar;
+	   return memberMapper.getPointList(memberVO);
    }
    
    /* 내 포인트 - 미션수 */
