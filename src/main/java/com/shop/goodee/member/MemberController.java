@@ -298,11 +298,12 @@ public class MemberController {
    public ModelAndView getPoint(HttpSession session, MemberVO memberVO, ModelAndView mv, String order)throws Exception {
       SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
       Authentication authentication = context.getAuthentication();
-      memberVO = (MemberVO) authentication.getPrincipal();
+      MemberVO sessionMemberVO = (MemberVO) authentication.getPrincipal();
+      memberVO.setId(sessionMemberVO.getId());
       memberVO = memberService.getMypage(memberVO);
       memberVO.setOrder(order);
       //포인트 변화
-      List<PointVO> ar = memberService.getPointList(memberVO);
+      List<PointVO> ar = memberService.getPointList(sessionMemberVO);
       int count = memberService.getMissionNum(memberVO);
       mv.addObject("count", count);
       mv.addObject("pointList", ar);

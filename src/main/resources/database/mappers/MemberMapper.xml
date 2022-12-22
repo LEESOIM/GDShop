@@ -289,7 +289,6 @@
    		<when test="order == '2020'">AND YEAR(FINISH)='2020'</when>
    		<when test="order == '2021'">AND YEAR(FINISH)='2021'</when>
    		<when test="order == '2022'">AND YEAR(FINISH)='2022'</when>
-   		<otherwise>'a'='a'</otherwise>
    	</choose>
    </sql>
    
