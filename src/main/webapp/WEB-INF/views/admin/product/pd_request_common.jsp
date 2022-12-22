@@ -26,7 +26,7 @@ pageEncoding="UTF-8"%>
                 <tr onclick="getDetail(this)">
                     <th scope="row"></th>
                     <td class="itemnum">${add.itemNum}</td>
-                    <td>${add.itemName}</td>
+                    <td>${add.title}</td>
                     <td>${add.type}</td>
                     <td>${add.id}</td>
                     <td>${add.sellerVO.company}</td>

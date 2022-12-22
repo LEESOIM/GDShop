@@ -44,7 +44,6 @@ public class ItemController {
 		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
 		sellerVO.setId(memberVO.getId());
 		
-		log.info("상품등록가능한가요 {}",sellerVO);
 		int result = itemService.getItemAddRole(sellerVO);
 		if(result>0) {
 			return 1;

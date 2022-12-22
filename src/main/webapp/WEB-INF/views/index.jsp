@@ -53,23 +53,23 @@
 		</div>
 
 		<!-- 최신순 -->
-		<div class="container" style="width: 65%; margin-top: 4em; padding-bottom: 70px">
+		<div class="container" style="width: 70%; margin-top: 4em; padding-bottom: 70px">
 			<div style="height: 40px; font-size: 22px; font-weight: 600; letter-spacing: -0.03em; margin-bottom: 20px;">따끈따끈~ 방금 오픈한 캠페인</div>
 			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4" style="height: 380px">
 				<c:forEach items="${list }" var="vo">
 					<div>
-						<div class="d-flex flex-column" style="width: 250px; height: 380px">
+						<div class="d-flex flex-column" style="width: 260px; height: 380px">
 						<c:if test="${vo.role eq 'VIP' }">
 							<div> <div style="position: relative;"><a href="/item/detail?itemNum=${vo.itemNum }">
-								<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px;"></a> 
+								<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 260px; height: 250px; border-radius: 15px;"></a> 
 								<div style="position:absolute; top:0; right:0 "><img src="/images/vip.png" width="70px" style="padding: 5px 5px 0 0"></div></div>
 							</div>
 						</c:if>
 						<c:if test="${vo.role eq '모두' }">
 						<div><a href="/item/detail?itemNum=${vo.itemNum }">
-							<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px"></a></div>
+							<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 260px; height: 250px; border-radius: 15px"></a></div>
 						</c:if>
-							<div class="d-flex flex-column" style="width: 250px; height: 130px">
+							<div class="d-flex flex-column" style="width: 260px; height: 130px">
 								<div class="d-flex justify-content-start pt-1" style="font-size: 14px">
 									<c:choose>
 										<c:when test="${vo.shop eq '쿠팡'}">
@@ -140,7 +140,7 @@
 
 	<!-- VIP전용 -->
 		<div style="background-color: #eef0f8;">
-			<div class="container" style=" width:65%; padding-top: 4em; padding-bottom: 70px;">
+			<div class="container" style=" width:70%; padding-top: 4em; padding-bottom: 70px;">
 				<div class="d-flex justify-content-between">
 					<div style="height: 40px; font-size: 22px; font-weight: 600; letter-spacing: -0.03em; margin-bottom: 20px;">프리미엄 상품을 만나보세요</div>
 					<div class="more"><a href="./tab/tab4" style="text-decoration: none; color: black;"> 더보기 <i class="fa-solid fa-circle-chevron-right" style="color: rgb(130, 203, 41);"></i></a>
@@ -150,12 +150,12 @@
 					style="height: 380px">
 					<c:forEach items="${listVIP }" var="vo">
 						<div>
-							<div class="d-flex flex-column" style="width: 250px; height: 380px">
+							<div class="d-flex flex-column" style="width: 260px; height: 380px">
 								<div> <div style="position: relative;"><a href="/item/detail?itemNum=${vo.itemNum }">
-								<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px;"></a> 
+								<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 260px; height: 250px; border-radius: 15px;"></a> 
 								<div style="position:absolute; top:0; right:0 "><img src="/images/vip.png" width="70px" style="padding: 5px 5px 0 0"></div></div>
 								</div>
-								<div class="d-flex flex-column" style="width: 250px; height: 130px">
+								<div class="d-flex flex-column" style="width: 260px; height: 130px">
 									<div class="d-flex justify-content-start pt-1" style="font-size: 14px">
 										<c:choose>
 											<c:when test="${vo.shop eq '쿠팡'}">
@@ -226,7 +226,7 @@
 		</div>
 		
 		<!-- 인기순 -->
-		<div class="container" style=" width:65%; padding-top: 4em; padding-bottom: 70px;">
+		<div class="container" style=" width:70%; padding-top: 4em; padding-bottom: 70px;">
 			<div class="d-flex justify-content-between">
 				<div style="height: 40px; font-size: 22px; font-weight: 600; letter-spacing: -0.03em; margin-bottom: 20px;">실시간 인기 캠페인!</div>
 			</div>
@@ -234,18 +234,18 @@
 				style="height: 380px">
 				<c:forEach items="${listHit }" var="vo">
 					<div>
-						<div class="d-flex flex-column" style="width: 250px; height: 380px">
+						<div class="d-flex flex-column" style="width: 260px; height: 380px">
 						<c:if test="${vo.role eq 'VIP' }">
 							<div> <div style="position: relative;"><a href="/item/detail?itemNum=${vo.itemNum }">
-								<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px;"></a> 
+								<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 260px; height: 250px; border-radius: 15px;"></a> 
 								<div style="position:absolute; top:0; right:0 "><img src="/images/vip.png" width="70px" style="padding: 5px 5px 0 0"></div></div>
 							</div>
 						</c:if>
 						<c:if test="${vo.role eq '모두' }">
 						<div><a href="/item/detail?itemNum=${vo.itemNum }">
-							<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px"></a></div>
+							<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 260px; height: 250px; border-radius: 15px"></a></div>
 						</c:if>
-							<div class="d-flex flex-column" style="width: 250px; height: 130px">
+							<div class="d-flex flex-column" style="width: 260px; height: 130px">
 								<div class="d-flex justify-content-start pt-1" style="font-size: 14px">
 									<c:choose>
 										<c:when test="${vo.shop eq '쿠팡'}">
@@ -315,7 +315,7 @@
 		</div>
 		
 		<!-- 당첨확률순 -->
-		<div class="container" style=" width:65%; padding-top: 4em; padding-bottom: 70px;">
+		<div class="container" style=" width:70%; padding-top: 4em; padding-bottom: 70px;">
 			<div class="d-flex justify-content-between">
 				<div style="height: 40px; font-size: 22px; font-weight: 600; letter-spacing: -0.03em; margin-bottom: 20px;">
 				당첨 확률 높은 캠페인</div>
@@ -324,18 +324,18 @@
 				style="height: 380px">
 				<c:forEach items="${listSuccess }" var="vo">
 					<div>
-						<div class="d-flex flex-column" style="width: 250px; height: 380px">
+						<div class="d-flex flex-column" style="width: 260px; height: 380px">
 						<c:if test="${vo.role eq 'VIP' }">
 							<div> <div style="position: relative;"><a href="/item/detail?itemNum=${vo.itemNum }">
-								<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px;"></a> 
+								<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 260px; height: 250px; border-radius: 15px;"></a> 
 								<div style="position:absolute; top:0; right:0 "><img src="/images/vip.png" width="70px" style="padding: 5px 5px 0 0"></div></div>
 							</div>
 						</c:if>
 						<c:if test="${vo.role eq '모두' }">
 						<div><a href="/item/detail?itemNum=${vo.itemNum }">
-							<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 250px; height: 250px; border-radius: 15px"></a></div>
+							<img src="/file/item/${vo.itemFileVOs[0].fileName}" style="width: 260px; height: 250px; border-radius: 15px"></a></div>
 						</c:if>
-							<div class="d-flex flex-column" style="width: 250px; height: 130px">
+							<div class="d-flex flex-column" style="width: 260px; height: 130px">
 								<div class="d-flex justify-content-start pt-1" style="font-size: 14px">
 									<c:choose>
 										<c:when test="${vo.shop eq '쿠팡'}">

@@ -21,6 +21,16 @@ public class MissionService {
 	@Autowired
 	private MissionMapper missionMapper;
 	
+	
+	public int setPointBefore(ItemVO itemVO) throws Exception {
+		return missionMapper.setPointBefore(itemVO);
+	}
+	
+	public int setPoitnAfter(ItemVO itemVO) throws Exception {
+		return missionMapper.setPoitnAfter(itemVO);
+	}
+	
+	
 	//지원하기-추첨형
 	public int setApply(MissionVO missionVO) throws Exception{
 		return missionMapper.setApply(missionVO);

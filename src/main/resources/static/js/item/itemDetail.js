@@ -46,14 +46,13 @@ $(document).ready(function () {
     },
     success: function (data) {
       let stock = $("#stock").val()
-      let rate = data / stock * 100;
+      let rate = Math.ceil(data / stock * 100);
       $("#applyRate").html(rate + "%")
 
       //모집률 100%되면 지원마감
       if (rate >= 100) {
         $("#applyCheck").html("지원마감");
         $("#applyCheck").attr("disabled", "disabled");
-        location.href = "javascript:history.back();"
       }
     },
   });

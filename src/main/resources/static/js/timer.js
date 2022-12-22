@@ -15,8 +15,8 @@ function getTimer() {
         let endTime = end.getTime(); //종료날짜 ms
         let nowTime = now.getTime(); //현재날짜 ms
 
-        console.log('시작시간', start)
-        console.log('종료시간', end)
+        //console.log('시작시간', start)
+        //console.log('종료시간', end)
 
         if (now < endTime) {
             let sec = parseInt(endTime - now) / 1000;
@@ -31,7 +31,7 @@ function getTimer() {
             if (min < 10) { min = "0" + min; }
             if (sec < 10) { sec = "0" + sec; }
 
-            console.log('****', hour, min, sec);
+            //console.log('****', hour, min, sec);
 
             // $(".hours")[index].innerHTML = hour;
             // $(".minutes")[index].innerHTML = min;

@@ -55,6 +55,7 @@ public class SecurityConfig {
             .antMatchers("/ws/*")
             .antMatchers("/chating/*")
             .antMatchers("/favicon.ico", "/resources/**", "/error");
+      
    }
 
    @Bean

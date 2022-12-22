@@ -91,13 +91,23 @@
 	</update>
 	
 	<!-- 미션완료(MYCAM1->2) -->
-	<update id="setEnd" parameterType="MissionVO">
-		UPDATE MISSION SET MYCAM=2 WHERE ID=#{id} and ITEMNUM=#{itemNum}
+	<update id="setEnd" parameterType="ItemVO">
+		UPDATE MISSION SET MYCAM=2 WHERE ID=#{id} AND ITEMNUM=#{itemNum}
 	</update>
 	
 	<!-- 미션 선정 탈락 -->
 	<insert id="setFail" parameterType="MissionVO">
 		INSERT INTO MISSION(MISSIONNUM, ITEMNUM, ID, APPLYDATE, STATUS, MYCAM) VALUES(NULL, #{itemNum}, #{id}, NOW(), 0, 3)
 	</insert>
+	
+	<!-- 미션참여시 적립포인트 세팅 -->
+	<insert id="setPointBefore" parameterType="ItemVO">
+		INSERT INTO POINT VALUES (NULL, #{id}, #{itemNum}, NOW(), NULL, NULL, DATE_ADD(FINISH, INTERVAL 3 DAY), 1)
+	</insert>
+	
+	<!-- 미션완료시 적립포인트 추가 -->
+	<update id="setPoitnAfter"  parameterType="ItemVO">
+		UPDATE POINT SET TITLE=#{title}, POINT=#{point} WHERE ITEMNUM=#{itemNum} AND ID=#{id}
+	</update>
 	
 </mapper>

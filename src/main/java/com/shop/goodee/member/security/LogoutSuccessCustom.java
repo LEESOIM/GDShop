@@ -47,7 +47,7 @@ public class LogoutSuccessCustom implements LogoutSuccessHandler{
             sb.append("https://kauth.kakao.com/oauth/logout?");
             sb.append("client_id=");
             sb.append(clientId);
-            sb.append("&logout_redirect_uri=http://localhost:81/member/logoutResult");
+            sb.append("&logout_redirect_uri=http://192.168.1.115:81/member/logoutResult");
             
             response.sendRedirect(sb.toString());
 

@@ -52,4 +52,8 @@ public interface MissionMapper {
 	public int setEnd(ItemVO itemVO) throws Exception;
 	
 	public int setFail(MissionVO missionVO) throws Exception;
+	
+	public int setPointBefore(ItemVO itemVO) throws Exception;
+	
+	public int setPoitnAfter(ItemVO itemVO) throws Exception;
 }

@@ -46,7 +46,7 @@ prefix="c" %>
                  <div class="d-flex product_box col-6 m-2">
                   <div><a href="/item/detail?itemNum=${item.items[0].itemNum }">
                   <img src="/file/item/${item.itemFileVOs[0].fileName}" style="width: 170px; height: 100%; border-radius: 5px"/></a></div>
-                  <div class="ps-4" style="width:60%">
+                  <div class="ps-3" style="width:65%">
                   	<div class="pb-2 pt-1" style="font-size: 22px; color: green;"><b>
                   	<c:choose>
                   		<c:when test="${item.items[0].status eq 1}">승인완료</c:when>
@@ -59,8 +59,8 @@ prefix="c" %>
                   	</b></div>
                   	<div class="pb-1" style="font-size: 18px;overflow-wrap: anywhere;"><b>
                   	<c:choose>
-			           <c:when test="${fn:length(item.items[0].title) > 40}">
-			            <c:out value="${fn:substring(item.items[0].title,0,29)}"/>....
+			           <c:when test="${fn:length(item.items[0].title) > 10}">
+			            <c:out value="${fn:substring(item.items[0].title,0,14)}"/>....
 			           </c:when>
 			           <c:otherwise>
 			            <c:out value="${item.items[0].title}"/>
@@ -73,12 +73,12 @@ prefix="c" %>
                   		<div class="pe-1"><span style="font-size: 19px"><b><fmt:formatNumber value="${item.items[0].price}" pattern="###,###,###" /></b></span></div>
                   		<div style="line-height: 32px"><i class="fa-brands fa-product-hunt mx-1" style="color: blue"></i><fmt:formatNumber value="${item.items[0].point}" pattern="###,###,###" /></div>
                   	</div>
-                  	<div>
-                  		<c:if test="${item.items[0].status eq 1 or item.items[0].status eq 4}">
-                  		<button class="upBtn product_request me-1 mt-2 me-1" data-itemNum-num="${item.items[0].itemNum}" type="button"><b>수정</b></button>
-                  		<button class="delBtn product_request mt-2" data-itemNum-num="${item.items[0].itemNum}" type="button"><b>삭제</b></button>
-                  		</c:if>
                   	</div>
+                  	<div class="d-flex justify-content-end">
+                  		<c:if test="${item.items[0].status eq 1 or item.items[0].status eq 4}">
+                  		<button class="upBtn product_request me-1" data-itemNum-num="${item.items[0].itemNum}" type="button"><b>수정</b></button>
+                  		<button class="delBtn product_request" data-itemNum-num="${item.items[0].itemNum}" type="button"><b>삭제</b></button>
+                  		</c:if>
                   	</div>
                   		<button class="test" data-itemnum="${item.items[0].itemNum}" style="display:none">test</button>
                   </div>
