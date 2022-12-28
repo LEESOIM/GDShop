@@ -88,5 +88,27 @@ public class MailService {
       //메일 발송
       javaMailSender.send(simpleMessage);
    }
+ 
+   public void sendMission(MemberVO memberVO)throws Exception {
+	   //수신 대상을 담을 ArrayList
+	   ArrayList<String> toUserList = new ArrayList<>();      
+	   String email = memberVO.getEmail();
+	   //수신 대상 추가
+	   toUserList.add(email);      
+	   //수신 대상 개수
+	   int toUserSize = toUserList.size();      
+	   //단순 텍스트 구성 메일 메시지 생성 할때 사용
+	   SimpleMailMessage simpleMessage = new SimpleMailMessage();      
+	   //수신자 설정
+	   simpleMessage.setTo((String[]) toUserList.toArray(new String[toUserSize])); 
+	   //이름
+	   String name = memberVO.getName();
+	   //메일 제목
+	   simpleMessage.setSubject("[구디샵] " + name + "님, 지원하신 추첨형 캠페인에 당첨되셨습니다!");
+	   //메일 내용
+	   simpleMessage.setText("[구디샵] " + name + "님, 지원하신 추첨형 캠페인에 당첨되셨습니다! 2시간 내에 구매하기 미션을 완료해주세요");      
+	   //메일 발송
+	   javaMailSender.send(simpleMessage);
+   }
    
 }

@@ -74,13 +74,21 @@ prefix="c" %>
                   		<div style="line-height: 32px"><i class="fa-brands fa-product-hunt mx-1" style="color: blue"></i><fmt:formatNumber value="${item.items[0].point}" pattern="###,###,###" /></div>
                   	</div>
                   	</div>
-                  	<div class="d-flex justify-content-end">
+                  	<div>
                   		<c:if test="${item.items[0].status eq 1 or item.items[0].status eq 4}">
-                  		<button class="upBtn product_request me-1" data-itemNum-num="${item.items[0].itemNum}" type="button"><b>수정</b></button>
-                  		<button class="delBtn product_request" data-itemNum-num="${item.items[0].itemNum}" type="button"><b>삭제</b></button>
+                  			<div style="float: left">
+	                  		<c:if test="${item.items[0].type eq '추첨형'}">
+	                  		<c:forEach items="${count }" var="count" >
+	                  		<button class="winBtn product_request" data-itemnum="${item.items[0].itemNum}" >추첨형미션선정${count[0] }</button>
+	                  		</c:forEach>
+	                  		</c:if>
+	                  		</div>
+                  		<div style="float: right;">
+	                  		<button class="upBtn product_request me-1" data-itemNum-num="${item.items[0].itemNum}" type="button"><b>수정</b></button>
+	                  		<button class="delBtn product_request" data-itemNum-num="${item.items[0].itemNum}" type="button"><b>삭제</b></button>
+                  		</div>
                   		</c:if>
                   	</div>
-                  		<button class="test" data-itemnum="${item.items[0].itemNum}" style="display:none">test</button>
                   </div>
                 </div>
                </c:forEach>
@@ -90,7 +98,10 @@ prefix="c" %>
         </div>
       </div>
     </section>
-      <c:import url="../template/footer.jsp"></c:import>
-      <script src="/js/item/product.js"></script>
+    <c:import url="../template/footer.jsp"></c:import>
+    <script src="/js/item/product.js"></script>
+    <script type="text/javascript">
+    getApplyCount();
+    </script>
   </body>
 </html>

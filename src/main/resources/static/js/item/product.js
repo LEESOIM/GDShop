@@ -1,4 +1,3 @@
-
 //판매자 캠페인 삭제요청
 $(".delBtn").click(function () {
     let check = confirm("삭제 요청 하시겠습니까? 삭제 요청 후 취소할 수 없습니다.")
@@ -33,9 +32,8 @@ $(".upBtn").click(function () {
 
 
 //추첨형 선정
-$(".test").click(function () {
+$(".winBtn").click(function () {
     let e = $(this).data('itemnum');
-    console.log(e);
     $.ajax({
         type: "POST",
         url: "/mission/win",
@@ -43,11 +41,32 @@ $(".test").click(function () {
             itemNum: e
         },
         success: function (data) {
-            console.log("Success");
+            if(data==1) {
+                alert('지원자가 선정되었습니다.')
+            }
+            if(data==0) {
+                alert('현재 지원자가 없습니다.')
+            }
         }
     })
-
 })
+
+
+
+function getApplyCount() {
+    let e = $(".winBtn").data('itemnum');
+    console.log('아이템넘',e)
+    $.ajax({
+        type: "POST",
+        url: "/mission/waite",
+        data: {
+            itemNum: e,
+        },
+        success: function (data) {
+            $(".winBtn").append(data)
+        }
+    })
+}
 
 
 //상품등록 가능한 판매자

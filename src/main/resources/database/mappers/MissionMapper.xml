@@ -7,7 +7,7 @@
 
 	<!-- 추첨형 -->
 	<insert id="setApply" parameterType="MissionVO">
-		INSERT INTO MISSION(MISSIONNUM, ITEMNUM, ID, APPLYDATE, STATUS, MYCAM) VALUES(NULL, #{itemNum}, #{id}, NOW(), 0, 0)
+		INSERT INTO MISSION(MISSIONNUM, ITEMNUM, ID, APPLYDATE, STATUS, MYCAM, APPLYCOUNT) VALUES(NULL, #{itemNum}, #{id}, NOW(), 0, 0, #{applyCount})
 	</insert>
 	
 	<!-- 즉석추첨형 -->
@@ -52,7 +52,7 @@
 	
 	<!-- 모집률 -->
 	<select id="getApplyRate" parameterType="MissionVO" resultType="Integer">
-		SELECT COUNT(MISSIONNUM) FROM MISSION WHERE ITEMNUM=#{itemNum} AND APPLYCOUNT=#{applyCount}
+		SELECT COUNT(MISSIONNUM) FROM MISSION WHERE ITEMNUM=#{itemNum} AND APPLYCOUNT=#{applyCount} AND MYCAM=1
 	</select>
 	
 	<!-- 구매인증미션 진행중인 회원 -->
@@ -76,13 +76,18 @@
 	</update>
 	
 	<!-- 미션 선정 대기 중인 회원 -->
-	<select id="getWaiting" parameterType="MissionVO" resultType="MissionVO">
+	<select id="getWaiting" parameterType="ItemVO" resultType="MissionVO">
 		SELECT * FROM MISSION WHERE STATUS=0 AND MYCAM=0 AND ITEMNUM=#{itemNum}
+	</select>
+	
+	<!-- 미션 선정 대기 중인 회원수 -->
+	<select id="getWaitingCount" parameterType="ItemVO" resultType="Integer">
+		SELECT COUNT(id) FROM MISSION WHERE STATUS=0 AND MYCAM=0 AND ITEMNUM=#{itemNum}
 	</select>
 	
 	<!-- 추첨형미션 당첨 -->
 	<update id="setWin" parameterType="MissionVO">
-		UPDATE MISSION SET MYCAM=1 WHERE ID=#{id} and ITEMNUM=#{itemNum}
+		UPDATE MISSION SET APPLYDATE=NOW(), FINISH=DATE_ADD(NOW(), INTERVAL 2 HOUR), MYCAM=1, TIME=NOW(), APPLYCOUNT=#{applyCount} WHERE ID=#{id} AND ITEMNUM=#{itemNum}
 	</update>
 	
 	<!-- 포인트 수령 -->
@@ -100,14 +105,9 @@
 		INSERT INTO MISSION(MISSIONNUM, ITEMNUM, ID, APPLYDATE, STATUS, MYCAM) VALUES(NULL, #{itemNum}, #{id}, NOW(), 0, 3)
 	</insert>
 	
-	<!-- 미션참여시 적립포인트 세팅 -->
-	<insert id="setPointBefore" parameterType="ItemVO">
-		INSERT INTO POINT VALUES (NULL, #{id}, #{itemNum}, NOW(), NULL, NULL, DATE_ADD(FINISH, INTERVAL 3 DAY), 1)
+	<!-- 미션완료시 포인트추가 -->
+	<insert id="setPoint" parameterType="ItemVO">
+		INSERT INTO POINT VALUES (NULL, #{id}, #{itemNum}, NOW(), #{title}, #{point}, DATE_ADD(FINISH, INTERVAL 3 DAY), 1)
 	</insert>
-	
-	<!-- 미션완료시 적립포인트 추가 -->
-	<update id="setPoitnAfter"  parameterType="ItemVO">
-		UPDATE POINT SET TITLE=#{title}, POINT=#{point} WHERE ITEMNUM=#{itemNum} AND ID=#{id}
-	</update>
 	
 </mapper>

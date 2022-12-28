@@ -38,7 +38,6 @@ $("#apply").click(function () {
             applyCount: applyCount,
         },
         success: function (data) {
-            alert(count)
             if (data == 1) {
                 $(".okBtn").click(function () {
                     $(".okBtn").attr("onclick", "location.href=item/detail?" + itemNum);

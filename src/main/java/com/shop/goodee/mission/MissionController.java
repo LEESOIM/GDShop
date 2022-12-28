@@ -1,8 +1,6 @@
 package com.shop.goodee.mission;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,10 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.shop.goodee.item.ItemService;
 import com.shop.goodee.item.ItemVO;
-import com.shop.goodee.member.MemberMapper;
+import com.shop.goodee.member.MailService;
+import com.shop.goodee.member.MemberService;
 import com.shop.goodee.member.MemberVO;
 import com.shop.goodee.sns.SnsService;
 
@@ -32,90 +32,97 @@ public class MissionController {
 
 	@Autowired
 	private ItemService itemService;
+	
+	@Autowired
+	private MemberService memberService;
 
 	@Autowired
 	private SnsService snsService;
 	
 	@Autowired
-	private MemberMapper memberMapper;
+	private MailService mailService;
 
-	//포인트 수령
+
+	// 포인트 수령
 	@PostMapping("point")
 	@ResponseBody
 	public int setReceivePoint(HttpSession session, ItemVO itemVO) throws Exception {
 		itemVO = itemService.getDetail(itemVO);
-		
+
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
 		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
 		itemVO.setId(memberVO.getId());
-		
-		log.info("itemVO{}",itemVO);
-		
-		//포인트 수령
-		int result = missionService.setPoitnAfter(itemVO);
-		log.info("result1{}",result);
-		
-		if(result==1) {
+
+		log.info("itemVO{}", itemVO);
+
+		// 포인트 수령
+		int result = missionService.setPoint(itemVO);
+		log.info("result1{}", result);
+
+		if (result == 1) {
 			result = missionService.setReceivePoint(itemVO);
-			log.info("result2{}",result);
-			
-			if(result==1) {
-				//status 1->2
+			log.info("result2{}", result);
+
+			if (result == 1) {
+				// status 1->2
 				return missionService.setEnd(itemVO);
 			}
 		}
 		return 0;
 	}
-	
-	
+
 	// 추첨형미션 랜덤 추첨
 	@PostMapping("win")
 	@ResponseBody
-	public int setWin(MissionVO missionVO, ItemVO itemVO) throws Exception {
-		// 추첨대기중 회원리스트
-		log.info("========1====={}",missionVO.getItemNum());
-		log.info("========2====={}",itemVO.getItemNum());
-		List<MissionVO> ar = new ArrayList<>();
-		ar = missionService.getWaiting(missionVO);//지원인원 100
-		itemVO = itemService.getDetail(itemVO);
-		// 랜덤숫자 뽑기
-		Random random = new Random();
-		int [] numArray = new int[itemVO.getStock().intValue()]; //모집인원 10
-		
-		for(int i=0; i<itemVO.getStock(); i++) {
-			numArray[i] = random.nextInt(ar.size())+1;
-//			for(int j=0; j<i; j++) { //중복제거
-//				if(numArray[i]==numArray[j]) {
-//					i--;
-//					break;
-//				}
-//				
-//			}
-			log.info("ar.get(i){}", ar.get(i).getId());
-			MemberVO memberVO = new MemberVO();
-			memberVO.setId(ar.get(i).getId());		
-			log.info("==================id{}", memberVO.getId());
-			
-			String phone = memberMapper.getPhone(ar.get(i).getId());
-			log.info("==================phone{}", phone);
-			
-			// 당첨된 회원 MYCAM 0->1 UPDATE
-			int result = missionService.setWin(ar.get(numArray[i]));
-			
-			if(result>0) {
-				//알람문자
-				String id= missionVO.getId();
-				String text = "[구디샵] "+"지원하신 추첨형 캠페인에 당첨되셨습니다! 2시간 내에 구매하기 미션을 완료해주세요";//o
+	public int setWin(ItemVO itemVO) throws Exception {
 
-				snsService.goMessage(phone,text);//x
+		itemVO = itemService.getDetail(itemVO); // 상품상세정보
+
+		List<MissionVO> list = missionService.getWaiting(itemVO);
+		int count = list.size(); // 미션대기중인 회원수
+
+		MissionVO[] success = new MissionVO[itemVO.getStatus().intValue()]; // 모집인원만큼 배열 생성
+
+		if (count > 0) {
+			for (int i = 0; i < itemVO.getStatus(); i++) { // 모집인원만큼 반복문을 돌려서
+				int num = (int) (Math.random() * count); // 지원한 회원수 범위 중에 랜덤번호를 뽑아라
+				success[i] = list.get(num);
+				log.info("==============축당첨{}", success[i]);
+
+				// 당첨된 회원 MYCAM 0->1 UPDATE
+				int result = missionService.setWin(success[i]);
+
+				if (result > 0) {
+					// 이메일
+//					MemberVO memberVO = new MemberVO();
+//					memberVO.setId(success[i].getId());
+//					memberVO = memberService.getMypage(memberVO);
+//					mailService.sendMission(memberVO);
+					
+					// 알람문자
+//					String name = memberVO.getName();
+//					String phone = memberVO.getPhone();
+//					String text = "[구디샵] " + name + "님, 지원하신 추첨형 캠페인에 당첨되셨습니다! 2시간 내에 구매하기 미션을 완료해주세요";
+//					snsService.goMessage(phone, text);
+//					return result;
+				}
 			}
-			}
-			
+		}
 		return 0;
 	}
-
 	
+	//미션 선정 대기 중인 회원수
+	@PostMapping("waite")
+	public ModelAndView getWaitingCount(ItemVO itemVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		List<Integer> count = missionService.getWaitingCount(itemVO);
+		log.info("00000000000{}",itemVO.getId());
+		
+		mv.addObject(count);
+		mv.setViewName("/member/product");
+		return mv;
+	}
 
 	// 모집률
 	@PostMapping("rate")
@@ -130,21 +137,18 @@ public class MissionController {
 	@ResponseBody
 	public int setApply(HttpSession session, MissionVO missionVO, ItemVO itemVO) throws Exception {
 		itemVO = itemService.getDetail(itemVO);
-		
+
 		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = context.getAuthentication();
 		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
 		itemVO.setId(memberVO.getId());
 		missionVO.setId(memberVO.getId());
-		
-		//미션참여시 적립포인트 세팅
-		missionService.setPointBefore(itemVO);
-		
+
 		// 지원하기
 		if (itemVO.getType().equals("추첨형")) {
 			return missionService.setApply(missionVO);
 		} else {
-			
+
 			return missionService.setApply_baro(missionVO);
 		}
 	}
@@ -191,7 +195,7 @@ public class MissionController {
 		int result = missionService.setCancel(missionVO);
 		return "/item/detail?itemNum=" + missionVO.getItemNum();
 	}
-	
+
 	// 미션 선정 탈락
 	@PostMapping("fail")
 	@ResponseBody
